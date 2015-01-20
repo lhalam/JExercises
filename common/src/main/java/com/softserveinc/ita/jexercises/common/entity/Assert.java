@@ -1,7 +1,6 @@
 package com.softserveinc.ita.jexercises.common.entity;
 
 import javax.persistence.*;
-
 @Entity
 @Table(name = "ASSERT")
 public class Assert extends BaseEntity {
