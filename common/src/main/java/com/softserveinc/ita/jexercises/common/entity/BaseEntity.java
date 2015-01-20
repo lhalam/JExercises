@@ -3,12 +3,12 @@ package com.softserveinc.ita.jexercises.common.entity;
 import java.util.Date;
 
 public class BaseEntity {
-	private Long id;
-	private Long createdUser;
-	private Long modifiedUser;
-	private Date createdDate;
-	private Date modifiedDate;
-	private Double version;
+	protected Long id;
+	protected Long createdUser;
+	protected Long modifiedUser;
+	protected Date createdDate;
+	protected Date modifiedDate;
+	protected Double version;
 	
 	public Long getId() {
 		return this.id;
