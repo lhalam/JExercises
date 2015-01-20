@@ -5,17 +5,23 @@ import java.util.HashSet;
 import javax.persistence.*;
 
 @Entity
-@Table
+@Table(name = "ATTEMPT")
 public class Attempt extends BaseEntity {
 	@Id
     @GeneratedValue
+    @Column(name = "ATTEMPT_ID")
+	@Basic(optional = false)
 	private Long id;
 	
 	@ManyToOne
+	@Column(name = "USER_ID")
 	private User user;
+	
+	@Column(name = "TEST_ID")
 	private Test test;
 	
-	@OneToMany(mappedBy="attempt",cascade=CascadeType.PERSIST)
+	@OneToMany(mappedBy="attempt")
+	@Column(name = "USER_ANSWER_ID")
 	private HashSet<UserAnswer> userAnswer = new HashSet<UserAnswer>();
 	
 	public Attempt() {}

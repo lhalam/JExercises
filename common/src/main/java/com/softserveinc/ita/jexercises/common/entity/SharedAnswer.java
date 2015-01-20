@@ -3,15 +3,21 @@ package com.softserveinc.ita.jexercises.common.entity;
 import javax.persistence.*;
 
 @Entity
-@Table
+@Table(name = "SHARED_ANSWER")
 public class SharedAnswer extends BaseEntity {
 	@Id
     @GeneratedValue
+    @Column(name = "SHARED_ANSWER_ID")
 	private Long id;
+	
+	@Column(name = "COMMENT")
 	private String comment;
+	
+	@Column(name = "PARENT_ID")
 	private Long parentId;
 	
 	@ManyToOne
+	@Column(name = "QUESTION_ID")
 	private Question question;
 	
 	public SharedAnswer() {}
