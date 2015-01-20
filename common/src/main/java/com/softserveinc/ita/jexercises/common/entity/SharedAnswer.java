@@ -14,6 +14,13 @@ public class SharedAnswer extends BaseEntity {
 	@ManyToOne
 	private Question question;
 	
+	public SharedAnswer() {}
+	
+	public SharedAnswer(String comment, Long parentId) {
+		this.comment = comment;
+		this.parentId = parentId;
+	}
+	
 	public Long getId() {
 		return id;
 	}
