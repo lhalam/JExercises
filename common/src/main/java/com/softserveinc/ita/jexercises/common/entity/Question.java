@@ -1,7 +1,6 @@
 package com.softserveinc.ita.jexercises.common.entity;
 
 import javax.persistence.*;
-import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -9,10 +8,6 @@ import java.util.Set;
 public class Question extends BaseEntity {
 
 
-@Id
-@GeneratedValue
-@Column (name="QUESTION_ID")
-    private Long id;
 @Column (name="DESCRIPTION")
     private String description;
 
@@ -21,18 +16,16 @@ public class Question extends BaseEntity {
             @JoinColumn(name = "QUESTION_ID", nullable = false, updatable = false) },
             inverseJoinColumns = { @JoinColumn(name = "TEST_ID",
                     nullable = false, updatable = false) })
-    private Set<Test> tests = new HashSet<Test>();
+    private Set<Test> tests ;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "question")
-    private Set<SharedAnswer> sharedAnswers = new HashSet<SharedAnswer>();
+    private Set<SharedAnswer> sharedAnswers;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "question")
-    private Set<Assert> asserts = new HashSet<Asset>();
+    private Set<Assert> asserts ;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "question")
-    private Set<UserAnswer> userAnswers = new HashSet<UserAnswer>();
-
-
+    private Set<UserAnswer> userAnswers ;
 
 
     public void setId(Long id) {
