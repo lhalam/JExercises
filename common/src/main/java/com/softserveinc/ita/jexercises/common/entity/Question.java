@@ -1,13 +1,19 @@
 package com.softserveinc.ita.jexercises.common.entity;
 
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-
+@Entity
+@Table(name="QUESTION")
 public class Question extends BaseEntity {
 
-    private Long id;
 
+@Id
+@GeneratedValue
+@Column (name="QUESTION_ID")
+    private Long id;
+@Column (name="DESCRIPTION")
     private String description;
 
     private Set<Test> tsetsSet = new HashSet<Test>();
