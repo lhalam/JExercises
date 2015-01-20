@@ -16,16 +16,20 @@ public class Question extends BaseEntity {
 @Column (name="DESCRIPTION")
     private String description;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "question_test",  joinColumns = {
+            @JoinColumn(name = "QUESTION_ID", nullable = false, updatable = false) },
+            inverseJoinColumns = { @JoinColumn(name = "TEST_ID",
+                    nullable = false, updatable = false) })
     private Set<Test> tests = new HashSet<Test>();
 
-    @OneToMany(mappedBy="attempt",cascade=CascadeType.PERSIST)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "question")
     private Set<SharedAnswer> sharedAnswers = new HashSet<SharedAnswer>();
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "question")
     private Set<Assert> asserts = new HashSet<Asset>();
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "question")
     private Set<UserAnswer> userAnswers = new HashSet<UserAnswer>();
 
 
