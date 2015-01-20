@@ -2,12 +2,37 @@ package com.softserveinc.ita.jexercises.common.entity;
 
 import java.util.Date;
 
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.Version;
+
+@MappedSuperclass
 public class BaseEntity {
+	
+	@Id
+	@GeneratedValue
 	protected Long id;
+	
+	@Column(name = "CREATED_USER")
+	@Basic(optional = false)
 	protected Long createdUser;
+	
+	@Column(name = "MODIFIED_USER")
+	@Basic(optional = false)
 	protected Long modifiedUser;
+	
+	@Column(name = "CREATED_DATE")
+	@Basic(optional = false)
 	protected Date createdDate;
+	
+	@Column(name = "MODIFIED_DATE")
+	@Basic(optional = false)
 	protected Date modifiedDate;
+	
+	@Version
 	protected Double version;
 	
 	public Long getId() {
