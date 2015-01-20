@@ -14,6 +14,8 @@ public class BaseEntity {
 	
 	@Id
 	@GeneratedValue
+	@Column(name = "ID")
+	@Basic(optional = false)
 	protected Long id;
 	
 	@Column(name = "CREATED_USER")

@@ -4,22 +4,16 @@ import java.util.HashSet;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Basic;
 
 
 @Entity
 @Table(name = "ATTEMPT")
 public class Attempt extends BaseEntity {
-	@Id
-    @GeneratedValue
-    @Column(name = "ATTEMPT_ID")
-	@Basic(optional = false)
-	private Long id;
 	
 	@ManyToOne
 	@Column(name = "USER_ID")
@@ -28,7 +22,7 @@ public class Attempt extends BaseEntity {
 	@Column(name = "TEST_ID")
 	private Test test;
 	
-	@OneToMany(mappedBy="attempt")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy="attempt")
 	@Column(name = "USER_ANSWER_ID")
 	private HashSet<UserAnswer> userAnswer = new HashSet<UserAnswer>();
 	
@@ -39,12 +33,6 @@ public class Attempt extends BaseEntity {
 		this.test = test;
 	}
 	
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
 	public User getUser() {
 		return user;
 	}
