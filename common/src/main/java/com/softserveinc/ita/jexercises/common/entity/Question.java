@@ -33,4 +33,11 @@ public class Question extends BaseEntity {
     public String getDescription() {
         return description;
     }
+
+    public Question() {}
+
+    public Question(Long id, String description){
+        this.id=id;
+        this.description=description;
+    }
 }
