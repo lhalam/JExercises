@@ -11,27 +11,27 @@ public class BaseEntity {
 	protected Double version;
 	
 	public Long getId() {
-		return this.id;
+		return id;
 	}
 	
 	public Long getCreatedUser() {
-		return this.createdUser;
+		return createdUser;
 	}
 	
 	public Long getModifiedUser() {
-		return this.modifiedUser;
+		return modifiedUser;
 	}
 	
 	public Date getCreatedDate() {
-		return this.createdDate;
+		return createdDate;
 	}
 	
 	public Date getModifiedDate() {
-		return this.modifiedDate;
+		return modifiedDate;
 	}
 	
 	public Double getVersion() {
-		return this.version;
+		return version;
 	}
 	
 	public void setId(Long id) {
