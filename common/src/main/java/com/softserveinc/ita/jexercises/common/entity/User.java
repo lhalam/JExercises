@@ -4,34 +4,35 @@ import java.util.HashSet;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "USER")
 public class User extends BaseEntity {
-	@Id
-	@GeneratedValue
-	@Column(name = "USER_ID")
-	private Long id;
 
-	@Column(name = "FIRST_NAME")
+	@Column(name = "FIRST_NAME", nullable = false)
 	private String firstName;
 
-	@Column(name = "LAST_NAME")
+	@Column(name = "LAST_NAME", nullable = false)
 	private String lastName;
 
-	@Column(name = "EMAIL")
+	@Column(name = "EMAIL", unique = true, nullable = false)
 	private String email;
 
 	@Column(name = "AVATAR")
 	private byte[] avatar;
 
-	@Column(name = "FIRST_NAME")
-	@OneToMany(mappedBy = "USER")
+	@Column(name = "PASSWORD", nullable = false)
+	private String password;
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "USER")
 	private HashSet<Attempt> attempts;
+
+	public User() {
+
+	}
 
 	public String getFirstName() {
 		return firstName;
@@ -63,6 +64,14 @@ public class User extends BaseEntity {
 
 	public void setAvatar(byte[] avatar) {
 		this.avatar = avatar;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public HashSet<Attempt> getAttempts() {
