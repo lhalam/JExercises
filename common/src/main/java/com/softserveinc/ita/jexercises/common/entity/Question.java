@@ -16,13 +16,20 @@ public class Question extends BaseEntity {
 @Column (name="DESCRIPTION")
     private String description;
 
-    private Set<Test> tsetsSet = new HashSet<Test>();
+    @ManyToMany
+    private Set<Test> tests = new HashSet<Test>();
 
-    private Set<SharedAnswer> sharedAnswersSet = new HashSet<SharedAnswer>();
+    @OneToMany(mappedBy="attempt",cascade=CascadeType.PERSIST)
+    private Set<SharedAnswer> sharedAnswers = new HashSet<SharedAnswer>();
 
-    private Set<Assert> assertSet = new HashSet<Asset>();
+    @OneToMany
+    private Set<Assert> asserts = new HashSet<Asset>();
 
-    private Set<UserAnswer> userAnswersSet = new HashSet<UserAnswer>();
+    @OneToMany
+    private Set<UserAnswer> userAnswers = new HashSet<UserAnswer>();
+
+
+
 
     public void setId(Long id) {
         this.id = id;
