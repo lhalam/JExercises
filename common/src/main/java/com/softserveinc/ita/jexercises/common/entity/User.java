@@ -1,7 +1,6 @@
 package com.softserveinc.ita.jexercises.common.entity;
 
-import java.util.HashSet;
-
+import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -32,7 +31,7 @@ public class User extends BaseEntity {
 	private String password;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
-	private HashSet<Attempt> attempts;
+	private Set<Attempt> attempts;
 
 	public User() {
 
@@ -78,11 +77,11 @@ public class User extends BaseEntity {
 		this.password = password;
 	}
 
-	public HashSet<Attempt> getAttempts() {
+	public Set<Attempt> getAttempts() {
 		return attempts;
 	}
 
-	public void setAttempts(HashSet<Attempt> attempts) {
+	public void setAttempts(Set<Attempt> attempts) {
 		this.attempts = attempts;
 	}
 
