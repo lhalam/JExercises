@@ -5,40 +5,39 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Entity;
 import javax.persistence.Version;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 
+
 @Entity
-@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class BaseEntity {
 	
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.TABLE)
 	@Column(name = "ID")
 	@Basic(optional = false)
 	protected Long id;
 	
 	@Column(name = "CREATED_USER")
-	@Basic(optional = false)
 	protected Long createdByUser;
 	
 	@Column(name = "MODIFIED_USER")
-	@Basic(optional = false)
 	protected Long modifiedByUser;
 	
 	@Column(name = "CREATED_DATE")
-	@Basic(optional = false)
 	protected Date createdDate;
 	
 	@Column(name = "MODIFIED_DATE")
-	@Basic(optional = false)
 	protected Date modifiedDate;
 	
+	@Column(name = "VERSION")
 	@Version
-	protected Double version;
+	protected Long version;
 
 	public Long getId() {
 		return id;
@@ -80,11 +79,11 @@ public abstract class BaseEntity {
 		this.modifiedDate = modifiedDate;
 	}
 
-	public Double getVersion() {
+	public Long getVersion() {
 		return version;
 	}
 
-	public void setVersion(Double version) {
+	public void setVersion(Long version) {
 		this.version = version;
 	}
 	
