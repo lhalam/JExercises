@@ -31,7 +31,7 @@ public class User extends BaseEntity {
 	@Column(name = "PASSWORD", nullable = false)
 	private String password;
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "USER")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
 	private HashSet<Attempt> attempts;
 
 	public User() {
