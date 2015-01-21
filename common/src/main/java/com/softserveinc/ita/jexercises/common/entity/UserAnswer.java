@@ -2,18 +2,24 @@ package com.softserveinc.ita.jexercises.common.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 
 @Entity
 @Table(name = "USER_ANSWER")
 public class UserAnswer extends BaseEntity {
-	@Column(name = "ATTEMPT")
+	
+	@ManyToOne
+	@Column(name = "ATTEMPT_ID")
 	private Attempt attempt;
+	
 	@Column(name = "ANSWER")
 	private String answer;
+	
 	@Column(name = "IS_CORRECT")
 	private boolean isCorrect;
+	
 	@Column(name = "QUESTION_ID")
 	private Question question;
 

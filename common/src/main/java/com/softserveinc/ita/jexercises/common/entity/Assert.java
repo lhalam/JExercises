@@ -1,13 +1,18 @@
 package com.softserveinc.ita.jexercises.common.entity;
 
 import javax.persistence.*;
+
 @Entity
 @Table(name = "ASSERT")
 public class Assert extends BaseEntity {
+	
+	@ManyToOne
 	@Column(name = "QUESTION_ID")
 	private Question question;
+	
 	@Column(name = "EXPECTED_ANSWER")
 	private String expectedAnswer;
+	
 	@Column(name = "INPUT_DATA")
 	private String inputData;
 
