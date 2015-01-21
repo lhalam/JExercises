@@ -6,11 +6,14 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.Entity;
 import javax.persistence.Version;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 
-@MappedSuperclass
-public class BaseEntity {
+@Entity
+@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
+public abstract class BaseEntity {
 	
 	@Id
 	@GeneratedValue
@@ -20,11 +23,11 @@ public class BaseEntity {
 	
 	@Column(name = "CREATED_USER")
 	@Basic(optional = false)
-	protected Long createdUser;
+	protected Long createdByUser;
 	
 	@Column(name = "MODIFIED_USER")
 	@Basic(optional = false)
-	protected Long modifiedUser;
+	protected Long modifiedByUser;
 	
 	@Column(name = "CREATED_DATE")
 	@Basic(optional = false)
@@ -36,52 +39,53 @@ public class BaseEntity {
 	
 	@Version
 	protected Double version;
-	
+
 	public Long getId() {
 		return id;
 	}
-	
-	public Long getCreatedUser() {
-		return createdUser;
-	}
-	
-	public Long getModifiedUser() {
-		return modifiedUser;
-	}
-	
-	public Date getCreatedDate() {
-		return createdDate;
-	}
-	
-	public Date getModifiedDate() {
-		return modifiedDate;
-	}
-	
-	public Double getVersion() {
-		return version;
-	}
-	
+
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
-	public void setCreatedUser(Long createdUser) {
-		this.createdUser = createdUser;
+
+	public Long getCreatedByUser() {
+		return createdByUser;
 	}
-	
-	public void setModifiedUser(Long modifiedUser) {
-		this.modifiedUser = modifiedUser;
+
+	public void setCreatedByUser(Long createdByUser) {
+		this.createdByUser = createdByUser;
 	}
-	
+
+	public Long getModifiedByUser() {
+		return modifiedByUser;
+	}
+
+	public void setModifiedByUser(Long modifiedByUser) {
+		this.modifiedByUser = modifiedByUser;
+	}
+
+	public Date getCreatedDate() {
+		return createdDate;
+	}
+
 	public void setCreatedDate(Date createdDate) {
 		this.createdDate = createdDate;
 	}
-	
+
+	public Date getModifiedDate() {
+		return modifiedDate;
+	}
+
 	public void setModifiedDate(Date modifiedDate) {
 		this.modifiedDate = modifiedDate;
 	}
-	
+
+	public Double getVersion() {
+		return version;
+	}
+
 	public void setVersion(Double version) {
 		this.version = version;
 	}
+	
 }
