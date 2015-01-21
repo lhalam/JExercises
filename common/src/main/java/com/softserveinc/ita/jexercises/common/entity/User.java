@@ -2,9 +2,11 @@ package com.softserveinc.ita.jexercises.common.entity;
 
 import java.util.HashSet;
 
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -21,6 +23,8 @@ public class User extends BaseEntity {
 	@Column(name = "EMAIL", unique = true, nullable = false)
 	private String email;
 
+	@Lob
+	@Basic(fetch = FetchType.LAZY)
 	@Column(name = "AVATAR")
 	private byte[] avatar;
 
