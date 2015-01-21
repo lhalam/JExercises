@@ -5,6 +5,7 @@ import java.util.HashSet;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -18,7 +19,8 @@ public class Attempt extends BaseEntity {
 	@Column(name = "USER_ID")
 	private User user;
 	
-	@Column(name = "TEST_ID")
+	@ManyToOne (fetch = FetchType.LAZY, targetEntity = Test.class)
+    @JoinColumn(name = "attempts")
 	private Test test;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy="attempt")
