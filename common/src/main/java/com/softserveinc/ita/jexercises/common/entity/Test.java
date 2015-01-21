@@ -13,19 +13,16 @@ public class Test extends BaseEntity {
     @Column(name = "IS_PUBLIC")
     private Boolean isPublic;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "TEST")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "question")
     private Set<Attempt> attempts;
 
-    @ManyToMany(fetch = FetchType.LAZY, targetEntity = Question.class)
+    @ManyToMany(fetch = FetchType.LAZY, targetEntity = Question.class ,cascade = CascadeType.ALL)
     @JoinTable(name = "QUESTION_TEST", joinColumns = {
-            @JoinColumn(name = "QUESTION_ID", nullable = false, updatable = false)},
-            inverseJoinColumns = {@JoinColumn(name = "TEST_ID",
+            @JoinColumn(name = "TEST_ID", nullable = false, updatable = false)},
+            inverseJoinColumns = {@JoinColumn(name = "QUESTION_ID",
                     nullable = false, updatable = false)})
     private Set<Question> questions;
 
-    public Long getId() {
-        return id;
-    }
 
     public String getDescription() {
         return description;
@@ -52,7 +49,7 @@ public class Test extends BaseEntity {
     }
 
     public Set<Question> getQuestions() {
-        return questions;
+        return this.questions;
     }
 
     public void setQuestions(Set<Question> questions) {
@@ -64,7 +61,6 @@ public class Test extends BaseEntity {
     }
 
     public Test(String description, Boolean isPublic) {
-        super();
         this.description = description;
         this.isPublic = isPublic;
 
