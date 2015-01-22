@@ -1,7 +1,9 @@
 package com.softserveinc.ita.jexercises.common.entity;
 
 import java.util.Set;
+
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -30,7 +32,7 @@ public class User extends BaseEntity {
 	@Column(name = "PASSWORD", nullable = false)
 	private String password;
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "user")
 	private Set<Attempt> attempts;
 
 	public User() {
