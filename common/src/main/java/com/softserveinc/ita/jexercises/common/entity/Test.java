@@ -31,7 +31,6 @@ public class Test extends BaseEntity {
                     nullable = false, updatable = false)})
     private Set<Question> questions;
 
-    
     public Test() {
     }
 
