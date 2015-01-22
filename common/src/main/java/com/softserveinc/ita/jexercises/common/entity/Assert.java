@@ -1,18 +1,23 @@
 package com.softserveinc.ita.jexercises.common.entity;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "ASSERT")
 public class Assert extends BaseEntity {
-	
-	@ManyToOne
-	@Column(name = "QUESTION_ID")
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "QUESTION_ID")
 	private Question question;
-	
+
 	@Column(name = "EXPECTED_ANSWER")
 	private String expectedAnswer;
-	
+
 	@Column(name = "INPUT_DATA")
 	private String inputData;
 

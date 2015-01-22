@@ -2,25 +2,27 @@ package com.softserveinc.ita.jexercises.common.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
 
 @Entity
 @Table(name = "USER_ANSWER")
 public class UserAnswer extends BaseEntity {
-	
-	@ManyToOne
-	@Column(name = "ATTEMPT_ID")
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "ATTEMPT_ID")
 	private Attempt attempt;
-	
+
 	@Column(name = "ANSWER")
 	private String answer;
-	
+
 	@Column(name = "IS_CORRECT")
 	private boolean isCorrect;
-	
-	@Column(name = "QUESTION_ID")
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "QUESTION_ID")
 	private Question question;
 
 	public Attempt getAttempt() {
