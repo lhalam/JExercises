@@ -1,10 +1,8 @@
 package com.softserveinc.ita.jexercises.common.entity;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -25,15 +23,10 @@ public class Attempt extends BaseEntity {
 	private Test test;
 
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "attempt")
-	@Column(name = "USER_ANSWER_ID")
+	
 	private Set<UserAnswer> userAnswers;
 
 	public Attempt() {
-	}
-
-	public Attempt(User user, Test test) {
-		this.user = user;
-		this.test = test;
 	}
 
 	public User getUser() {
