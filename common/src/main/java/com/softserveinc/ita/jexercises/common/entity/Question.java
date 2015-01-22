@@ -1,7 +1,6 @@
 package com.softserveinc.ita.jexercises.common.entity;
 
 import javax.persistence.*;
-
 import java.util.Set;
 
 @Entity
@@ -18,16 +17,21 @@ public class Question extends BaseEntity {
                     nullable = false, updatable = false)})
     private Set<Test> tests;
 
-    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL, mappedBy = "question")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "question", cascade = CascadeType.ALL)
     private Set<SharedAnswer> sharedAnswers;
 
-    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "question")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "question")
     private Set<Assert> asserts;
 
-    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "question")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "question")
     private Set<UserAnswer> userAnswers;
 
+    public Question() {
+    }
 
+    public Question(String description) {
+        this.description = description;
+    }
 
     public void setDescription(String description) {
         this.description = description;
@@ -38,7 +42,7 @@ public class Question extends BaseEntity {
     }
 
     public Set<Test> getTests() {
-        return tests ;
+        return tests;
     }
 
     public void setTests(Set<Test> tests) {
@@ -68,13 +72,5 @@ public class Question extends BaseEntity {
     public void setUserAnswers(Set<UserAnswer> userAnswers) {
         this.userAnswers = userAnswers;
     }
-    public Question() {
-    }
-
-    public Question(Long id, String description) {
-
-        this.id = id;
-        this.description = description;
-    }
-
 }
+
