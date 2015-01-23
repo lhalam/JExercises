@@ -16,23 +16,23 @@ public abstract class BaseEntity {
 	@GeneratedValue
 	@Column(name = "ID")
 	@Basic(optional = false)
-	protected Long id;
+	private Long id;
 	
 	@Column(name = "CREATED_BY_USER")
-	protected Long createdByUser;
+	private Long createdByUser;
 	
 	@Column(name = "MODIFIED_BY_USER")
-	protected Long modifiedByUser;
+	private Long modifiedByUser;
 	
 	@Column(name = "CREATED_DATE")
-	protected Date createdDate;
+	private Date createdDate;
 	
 	@Column(name = "MODIFIED_DATE")
-	protected Date modifiedDate;
+	private Date modifiedDate;
 	
 	@Column(name = "VERSION")
 	@Version
-	protected Long version;
+	private Long version;
 
 	public Long getId() {
 		return id;
