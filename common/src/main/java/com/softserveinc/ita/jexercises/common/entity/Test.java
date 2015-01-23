@@ -10,6 +10,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.util.Set;
+import java.util.HashSet;
 
 @Entity
 @Table(name = "TEST")
@@ -21,23 +22,17 @@ public class Test extends BaseEntity {
     @Column(name = "IS_PUBLIC")
     private Boolean isPublic;
 
+    @Column(name = "ATTEMPT_ID")
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "test")
-    private Set<Attempt> attempts;
+    private Set<Attempt> attempts = new HashSet<Attempt>(0);
 
-    @ManyToMany(fetch = FetchType.LAZY, targetEntity = Question.class, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY, targetEntity = Question.class)
     @JoinTable(name = "QUESTION_TEST", joinColumns = {
             @JoinColumn(name = "TEST_ID", nullable = false, updatable = false)},
             inverseJoinColumns = {@JoinColumn(name = "QUESTION_ID",
                     nullable = false, updatable = false)})
     private Set<Question> questions;
 
-    public Test() {
-    }
-
-    public Test(String description, Boolean isPublic) {
-        this.description = description;
-        this.isPublic = isPublic;
-    }
 
     public String getDescription() {
         return description;
@@ -70,4 +65,15 @@ public class Test extends BaseEntity {
     public void setQuestions(Set<Question> questions) {
         this.questions = questions;
     }
+
+    public Test() {
+
+    }
+
+    public Test(String description, Boolean isPublic) {
+        this.description = description;
+        this.isPublic = isPublic;
+
+    }
+
 }
