@@ -5,28 +5,23 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Entity;
 import javax.persistence.Version;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
+import javax.persistence.MappedSuperclass;
 
-
-@Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@MappedSuperclass
 public abstract class BaseEntity {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.TABLE)
+	@GeneratedValue
 	@Column(name = "ID")
 	@Basic(optional = false)
 	protected Long id;
 	
-	@Column(name = "CREATED_USER")
+	@Column(name = "CREATED_BY_USER")
 	protected Long createdByUser;
 	
-	@Column(name = "MODIFIED_USER")
+	@Column(name = "MODIFIED_BY_USER")
 	protected Long modifiedByUser;
 	
 	@Column(name = "CREATED_DATE")
