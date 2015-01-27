@@ -6,6 +6,7 @@
     	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     	<meta name="description" content="JExercises UI">
     	<meta name="author" content="Lv-137.|Java">
+    	<script src="_/js/script.js"></script>
 	    <link href="css/bootstrap.css" rel="stylesheet">
 		<style>
       		body {
@@ -17,7 +18,8 @@
     	<link rel="shortcut icon" href="ss-logo.png">
 	</head>
     <body>
-    	<div href="autorization.html">
+    	<div id="autorization"></div>
     	<script src="_/js/bootstrap.js"></script>
+    	
     </body>
 </html>
