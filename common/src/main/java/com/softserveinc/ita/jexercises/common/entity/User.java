@@ -11,80 +11,108 @@ import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+/**
+ * Represents User Entity.
+ * 
+ * @author Oksana Senchuk
+ * @version 1.0
+ */
 @Entity
 @Table(name = "USER")
 public class User extends BaseEntity {
 
-	@Column(name = "FIRST_NAME", nullable = false)
-	private String firstName;
+    /**
+     * The first name of the user.
+     */
+    @Column(name = "FIRST_NAME", nullable = false)
+    private String firstName;
 
-	@Column(name = "LAST_NAME", nullable = false)
-	private String lastName;
+    /**
+     * The last name of the user.
+     */
+    @Column(name = "LAST_NAME", nullable = false)
+    private String lastName;
 
-	@Column(name = "EMAIL", unique = true, nullable = false)
-	private String email;
+    /**
+     * The email of the user.
+     */
+    @Column(name = "EMAIL", unique = true, nullable = false)
+    private String email;
 
-	@Lob
-	@Basic(fetch = FetchType.LAZY)
-	@Column(name = "AVATAR")
-	private byte[] avatar;
+    /**
+     * The avatar picture of the user.
+     */
+    @Lob
+    @Basic(fetch = FetchType.LAZY)
+    @Column(name = "AVATAR")
+    private byte[] avatar;
 
-	@Column(name = "PASSWORD", nullable = false)
-	private String password;
+    /**
+     * The password of the user.
+     */
+    @Column(name = "PASSWORD", nullable = false)
+    private String password;
 
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "user")
-	private Set<Attempt> attempts;
+    /**
+     * The set of user attempts.
+     */
+    @OneToMany(fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL, mappedBy = "user")
+    private Set<Attempt> attempts;
 
-	public User() {
+    /**
+     * Creates a new User.
+     */
+    public User() {
 
-	}
+    }
 
-	public String getFirstName() {
-		return firstName;
-	}
+    public String getFirstName() {
+        return firstName;
+    }
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
 
-	public String getLastName() {
-		return lastName;
-	}
+    public String getLastName() {
+        return lastName;
+    }
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public byte[] getAvatar() {
-		return avatar;
-	}
+    public byte[] getAvatar() {
+        return avatar;
+    }
 
-	public void setAvatar(byte[] avatar) {
-		this.avatar = avatar;
-	}
+    public void setAvatar(byte[] avatar) {
+        this.avatar = avatar;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    public String getPassword() {
+        return password;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-	public Set<Attempt> getAttempts() {
-		return attempts;
-	}
+    public Set<Attempt> getAttempts() {
+        return attempts;
+    }
 
-	public void setAttempts(Set<Attempt> attempts) {
-		this.attempts = attempts;
-	}
+    public void setAttempts(Set<Attempt> attempts) {
+        this.attempts = attempts;
+    }
 
 }
