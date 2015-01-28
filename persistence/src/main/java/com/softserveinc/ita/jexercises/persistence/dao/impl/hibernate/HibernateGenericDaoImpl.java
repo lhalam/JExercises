@@ -4,11 +4,14 @@ import javax.persistence.Query;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+
 import java.util.List;
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
+
 import com.softserveinc.ita.jexercises.persistence.dao.impl.GenericDao;
 
+@Repository
 public class HibernateGenericDaoImpl<T, PK extends Serializable> implements
 		GenericDao<T, PK> {
 
