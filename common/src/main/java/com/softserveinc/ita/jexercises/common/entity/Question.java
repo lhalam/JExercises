@@ -11,32 +11,66 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.util.Set;
 
+/**
+ * Represents Question Entity.
+ *
+ * @author Volodymyr Yakymiv
+ * @version 1.0
+ */
 @Entity
 @Table(name = "QUESTION")
 public class Question extends BaseEntity {
 
-    @Column(name = "DESCRIPTION")
+    /**
+     * Description of the question.
+     */
+    @Column(name = "DESCRIPTION", nullable = false)
     private String description;
 
-    @ManyToMany(fetch = FetchType.LAZY, targetEntity = Test.class, cascade = CascadeType.ALL)
+    /**
+     * The set of tests.
+     */
+    @ManyToMany(fetch = FetchType.LAZY, targetEntity = Test.class,
+            cascade = CascadeType.ALL)
     @JoinTable(name = "QUESTION_TEST", joinColumns = {
-            @JoinColumn(name = "QUESTION_ID", nullable = false, updatable = false)},
+            @JoinColumn(name = "QUESTION_ID", nullable = false,
+                    updatable = false)},
             inverseJoinColumns = {@JoinColumn(name = "TEST_ID",
                     nullable = false, updatable = false)})
-    private Set<Test> tests;
+        private Set<Test> tests;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "question", cascade = CascadeType.ALL)
+    /**
+     * The set of shared answers.
+     */
+    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,
+            mappedBy = "question")
     private Set<SharedAnswer> sharedAnswers;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "question")
+    /**
+     * The set of asserts.
+     */
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL,
+            mappedBy = "question")
     private Set<Assert> asserts;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "question")
+    /**
+     * The set of user answers.
+     */
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL,
+            mappedBy = "question")
     private Set<UserAnswer> userAnswers;
 
+    /**
+     * Default constructor which provides creating of new question.
+     */
     public Question() {
     }
 
+    /**
+     * Constructor which provides creating of new question.
+     *
+     * @param description of question.
+     */
     public Question(String description) {
         this.description = description;
     }
