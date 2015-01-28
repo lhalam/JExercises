@@ -1,4 +1,4 @@
-package com.softserveinc.ita.jexercises.persistence.dao;
+package com.softserveinc.ita.jexercises.persistence.dao.impl;
 
 import java.util.List;
 import java.io.Serializable;

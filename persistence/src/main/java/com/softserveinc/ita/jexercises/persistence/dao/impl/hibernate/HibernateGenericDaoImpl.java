@@ -7,21 +7,21 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
-import com.softserveinc.ita.jexercises.persistence.dao.GenericDao;
+import com.softserveinc.ita.jexercises.persistence.dao.impl.GenericDao;
 
-public class GenericDaoImpl<T, PK extends Serializable> implements
+public class HibernateGenericDaoImpl<T, PK extends Serializable> implements
 		GenericDao<T, PK> {
 
 	private Class<T> entityClass;
 
 	@PersistenceContext
-	protected EntityManager entityManager;
-	protected String entity;
+	private EntityManager entityManager;
+	private String entity;
 
-	public GenericDaoImpl() {
+	public HibernateGenericDaoImpl() {
 		ParameterizedType genericSuperclass = (ParameterizedType) getClass()
 				.getGenericSuperclass();
-		this.entityClass = (Class) genericSuperclass.getActualTypeArguments()[0];
+		entityClass = (Class) genericSuperclass.getActualTypeArguments()[0];
 	}
 
 	@Override
@@ -72,6 +72,14 @@ public class GenericDaoImpl<T, PK extends Serializable> implements
 		}
 
 		return entity;
+	}
+
+	public EntityManager getEntityManager() {
+		return entityManager;
+	}
+
+	public void setEntityManager(EntityManager entityManager) {
+		this.entityManager = entityManager;
 	}
 
 }
