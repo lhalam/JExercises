@@ -4,8 +4,9 @@ import java.util.List;
 
 import org.springframework.Service;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import com.softserveinc.ita.jexercises.common.entity.Assert;
-import com.softserveinc.ita.jexercises.persistence.dao.AssertDao;
+import com.softserveinc.ita.jexercises.persistence.dao.impl.AssertDao;
 
 @Service
 public class AssertServiceImpl implements AssertService {

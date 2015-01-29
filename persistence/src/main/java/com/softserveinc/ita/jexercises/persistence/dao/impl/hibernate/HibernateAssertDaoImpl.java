@@ -8,7 +8,7 @@ import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 import com.softserveinc.ita.jexercises.common.entity.Assert;
-import com.softserveinc.ita.jexercises.persistence.dao.AssertDao;
+import com.softserveinc.ita.jexercises.persistence.dao.impl.AssertDao;
 
 @Repository
 public class HibernateAssertDaoImpl extends
