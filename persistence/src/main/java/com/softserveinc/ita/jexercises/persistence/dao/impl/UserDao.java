@@ -1,6 +1,7 @@
 package com.softserveinc.ita.jexercises.persistence.dao.impl;
 
 import com.softserveinc.ita.jexercises.common.entity.User;
+import com.softserveinc.ita.jexercises.persistence.dao.GenericDao;
 
 /**
  * DAO of user.
