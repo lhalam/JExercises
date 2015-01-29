@@ -2,7 +2,6 @@ package com.softserveinc.ita.jexercises.business.services;
 
 import com.softserveinc.ita.jexercises.common.entity.Test;
 import com.softserveinc.ita.jexercises.persistence.dao.TestDao;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,15 +14,10 @@ public class TestServiceImpl implements TestService {
 	@Autowired
     private TestDao testDao;
 
-    public TestServiceImpl(TestDao testDao) {
-        this.testDao = testDao;
-    }
-
     @Override
     @Transactional
     public void createTest(Test test) {
         testDao.create(test);
-
     }
 
     @Override
