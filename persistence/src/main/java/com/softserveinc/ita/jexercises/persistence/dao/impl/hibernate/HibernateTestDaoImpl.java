@@ -1,14 +1,14 @@
 package com.softserveinc.ita.jexercises.persistence.dao.impl.hibernate;
 
-import com.softserveinc.ita.jexercises.common.entity.Test;
-import com.softserveinc.ita.jexercises.persistence.dao.impl.TestDao;
-
-import org.springframework.stereotype.Repository;
+import java.util.List;
 
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
-import java.util.List;
+import org.springframework.stereotype.Repository;
+
+import com.softserveinc.ita.jexercises.common.entity.Test;
+import com.softserveinc.ita.jexercises.persistence.dao.impl.TestDao;
 
 /**
  * Represents Hibernate Test DAO implementation.
@@ -26,9 +26,10 @@ public class HibernateTestDaoImpl extends
         try {
             String squerty = "select distinct t from Test t " +
                     "INNER JOIN t.question t where t.id=:questionId";
-            Query t = getEntityManager().createQuery(squerty);
-            t.setParameter("questionId", questionId);
-            List<Test> tests = (List<Test>) t.getResultList();
+            Query q = getEntityManager().createQuery(squerty);
+            q.setParameter("questionId", questionId);
+            @SuppressWarnings("unchecked")
+            List<Test> tests = (List<Test>) q.getResultList();
             return tests;
         } catch (NoResultException e) {
             return null;
