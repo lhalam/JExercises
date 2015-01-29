@@ -3,6 +3,10 @@ package com.softserveinc.ita.jexercises.business.services;
 import com.softserveinc.ita.jexercises.common.entity.Question;
 import com.softserveinc.ita.jexercises.persistence.dao.impl.QuestionDao;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 
 /**
@@ -19,10 +23,6 @@ public class QuestionServiceImpl implements QuestionService {
      */
     @Autowired
     private QuestionDao questionDao;
-
-    /*public QuestionServiceImpl(QuestionDao questionDao) {
-        this.questionDao = questionDao;
-    }*/
 
     @Override
     @Transactional
