@@ -1,5 +1,7 @@
 package com.softserveinc.ita.jexercises.persistence.dao.impl.hibernate;
 
+import org.springframework.stereotype.Repository;
+
 import java.util.List;
 
 import javax.persistence.NoResultException;
@@ -9,8 +11,8 @@ import com.softserveinc.ita.jexercises.common.entity.Assert;
 import com.softserveinc.ita.jexercises.persistence.dao.AssertDao;
 
 @Repository
-public class HibernateAssertDaoImpl extends HibernateGenericDaoImpl<Assert, Long> implements
-		AssertDao {
+public class HibernateAssertDaoImpl extends
+		HibernateGenericDaoImpl<Assert, Long> implements AssertDao {
 
 	@Override
 	public List<Assert> findAllByQuestion(Long questionId) {
