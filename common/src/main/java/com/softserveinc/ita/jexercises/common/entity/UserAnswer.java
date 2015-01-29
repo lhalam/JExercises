@@ -2,58 +2,75 @@ package com.softserveinc.ita.jexercises.common.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.JoinColumn;
 
-
+/**
+ * Represents UserAnswer Entity
+ * 
+ * @author Oleg Pavlish
+ * @version 1.0
+ */
 @Entity
 @Table(name = "USER_ANSWER")
 public class UserAnswer extends BaseEntity {
-	
-	@ManyToOne
-	@JoinColumn(name = "ATTEMPT_ID")
-	private Attempt attempt;
-	
-	@Column(name = "ANSWER")
-	private String answer;
-	
-	@Column(name = "IS_CORRECT")
-	private boolean isCorrect;
-	
-	@ManyToOne
-	@JoinColumn(name = "QUESTION_ID")
-	private Question question;
 
-	public Attempt getAttempt() {
-		return attempt;
-	}
+    /**
+     * Attempt of the answer
+     */
+    @ManyToOne
+    @JoinColumn(name = "ATTEMPT_ID")
+    private Attempt attempt;
 
-	public void setAttempt(Attempt attempt) {
-		this.attempt = attempt;
-	}
+    /**
+     * String containing user answer
+     */
+    @Column(name = "ANSWER")
+    private String answer;
 
-	public String getAnswer() {
-		return answer;
-	}
+    /**
+     * Represents if the answer is correct
+     */
+    @Column(name = "IS_CORRECT")
+    private boolean isCorrect;
 
-	public void setAnswer(String answer) {
-		this.answer = answer;
-	}
+    /**
+     * Answered question
+     */
+    @ManyToOne
+    @JoinColumn(name = "QUESTION_ID")
+    private Question question;
 
-	public boolean isCorrect() {
-		return isCorrect;
-	}
+    public Attempt getAttempt() {
+        return attempt;
+    }
 
-	public void setCorrect(boolean isCorrect) {
-		this.isCorrect = isCorrect;
-	}
+    public void setAttempt(Attempt attempt) {
+        this.attempt = attempt;
+    }
 
-	public Question getQuestion() {
-		return question;
-	}
+    public String getAnswer() {
+        return answer;
+    }
 
-	public void setQuestion(Question question) {
-		this.question = question;
-	}
+    public void setAnswer(String answer) {
+        this.answer = answer;
+    }
+
+    public boolean isCorrect() {
+        return isCorrect;
+    }
+
+    public void setCorrect(boolean isCorrect) {
+        this.isCorrect = isCorrect;
+    }
+
+    public Question getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(Question question) {
+        this.question = question;
+    }
 }
