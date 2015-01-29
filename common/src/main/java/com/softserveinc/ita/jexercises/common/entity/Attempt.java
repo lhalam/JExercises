@@ -10,46 +10,62 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+/**
+ * Represents Attempt Entity.
+ * 
+ * @author Volodymyr Lishchynskiy
+ * @version 1.0
+ */
 @Entity
 @Table(name = "ATTEMPT")
 public class Attempt extends BaseEntity {
+    /**
+     * User id.
+     */
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "USER_ID")
+    private User user;
+    /**
+     * Test id.
+     */
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "TEST_ID")
+    private Test test;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "USER_ID")
-	private User user;
+    /**
+     * Set of user answers.
+     */
+    @OneToMany(fetch = FetchType.LAZY, 
+            cascade = CascadeType.ALL, mappedBy = "attempt")
+    private Set<UserAnswer> userAnswers;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "TEST_ID")
-	private Test test;
+    /**
+     * Create a new attempt.
+     */
+    public Attempt() {
+    }
 
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "attempt")
-	
-	private Set<UserAnswer> userAnswers;
+    public User getUser() {
+        return user;
+    }
 
-	public Attempt() {
-	}
+    public void setUser(User user) {
+        this.user = user;
+    }
 
-	public User getUser() {
-		return user;
-	}
+    public Test getTest() {
+        return test;
+    }
 
-	public void setUser(User user) {
-		this.user = user;
-	}
+    public void setTest(Test test) {
+        this.test = test;
+    }
 
-	public Test getTest() {
-		return test;
-	}
+    public Set<UserAnswer> getUserAnswers() {
+        return userAnswers;
+    }
 
-	public void setTest(Test test) {
-		this.test = test;
-	}
-
-	public Set<UserAnswer> getUserAnswers() {
-		return userAnswers;
-	}
-
-	public void setUserAnswer(Set<UserAnswer> userAnswers) {
-		this.userAnswers = userAnswers;
-	}
+    public void setUserAnswer(Set<UserAnswer> userAnswers) {
+        this.userAnswers = userAnswers;
+    }
 }
