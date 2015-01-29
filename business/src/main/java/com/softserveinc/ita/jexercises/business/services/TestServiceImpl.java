@@ -1,17 +1,27 @@
 package com.softserveinc.ita.jexercises.business.services;
 
 import com.softserveinc.ita.jexercises.common.entity.Test;
-import com.softserveinc.ita.jexercises.persistence.dao.TestDao;
+import com.softserveinc.ita.jexercises.persistence.dao.impl.TestDao;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+/**
+ * Represent TestService interface implementation.
+ *
+ * @author Ihor demkovych
+ * @version 1.0
+ */
 @Service
 public class TestServiceImpl implements TestService {
 
-	@Autowired
+    /**
+     * TestDao instance.
+     */
+    @Autowired
     private TestDao testDao;
 
     @Override
