@@ -63,7 +63,8 @@ public class SharedAnswerServiceImpl implements SharedAnswerService {
 
     @Override
     @Transactional(propagation = Propagation.SUPPORTS)
-    public List<SharedAnswer> findAllSharedAnswersByQuestionId(Long questionId) {
+    public List<SharedAnswer> findAllSharedAnswersByQuestionId(
+            Long questionId) {
         return sharedAnswerDao.findAllByQuestionId(questionId);
     }
 }
