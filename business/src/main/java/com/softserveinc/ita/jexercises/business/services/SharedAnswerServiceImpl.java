@@ -2,6 +2,11 @@ package com.softserveinc.ita.jexercises.business.services;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.softserveinc.ita.jexercises.common.entity.SharedAnswer;
 import com.softserveinc.ita.jexercises.persistence.dao.impl.SharedAnswerDao;
 
@@ -45,18 +50,20 @@ public class SharedAnswerServiceImpl implements SharedAnswerService {
     }
 
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS)
     public SharedAnswer findSharedAnswerById(Long id) {
         return sharedAnswerDao.findById(id);
     }
 
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS)
     public List<SharedAnswer> findAllSharedAnswers() {
         return sharedAnswerDao.findAll();
     }
 
     @Override
-    public List<SharedAnswer> findAllSharedAnswersByQuestionId(
-            Long questionId) {
+    @Transactional(propagation = Propagation.SUPPORTS)
+    public List<SharedAnswer> findAllSharedAnswersByQuestionId(Long questionId) {
         return sharedAnswerDao.findAllByQuestionId(questionId);
     }
 }
