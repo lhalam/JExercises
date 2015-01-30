@@ -34,10 +34,10 @@ public class Question extends BaseEntity {
             cascade = CascadeType.ALL)
     @JoinTable(name = "QUESTION_TEST", joinColumns = {
             @JoinColumn(name = "QUESTION_ID", nullable = false,
-                    updatable = false)},
+                    updatable = false) },
             inverseJoinColumns = {@JoinColumn(name = "TEST_ID",
-                    nullable = false, updatable = false)})
-        private Set<Test> tests;
+                    nullable = false, updatable = false) })
+    private Set<Test> tests;
 
     /**
      * The set of shared answers.
