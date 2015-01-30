@@ -40,7 +40,7 @@
                     <violationSeverity>warning</violationSeverity>
                     <failOnViolation>true</failOnViolation>
                     <failsOnError>true</failsOnError>
-                    <configLocation>dev/checkstyle.xml</configLocation>
+                    <configLocation>dev\checkstyle.xml</configLocation>
                     <consoleOutput>true</consoleOutput>
                 </configuration>
                 <executions>
@@ -63,23 +63,4 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-    <reporting>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>2.10</version>
-                <configuration>
-                    <configLocation>dev/checkstyle.xml</configLocation>
-                </configuration>
-                <reportSets>
-                    <reportSet>
-                        <reports>
-                            <report>checkstyle</report>
-                        </reports>
-                    </reportSet>
-                </reportSets>
-            </plugin>
-        </plugins>
-    </reporting>
 </project>
