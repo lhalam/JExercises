@@ -10,21 +10,29 @@ import javax.persistence.Query;
 import com.softserveinc.ita.jexercises.common.entity.Assert;
 import com.softserveinc.ita.jexercises.persistence.dao.impl.AssertDao;
 
+/**
+ * Represents Hibernate Attempt Dao implementation
+ * 
+ * @author Kucheryavenko Dmytro
+ *
+ * @version 1.0
+ */
 @Repository
 public class HibernateAssertDaoImpl extends
-		HibernateGenericDaoImpl<Assert, Long> implements AssertDao {
+        HibernateGenericDaoImpl<Assert, Long> implements AssertDao {
 
-	@Override
-	public List<Assert> findAllByQuestion(Long questionId) {
-		try {
-			String squerty = "select distinct as from Assert as INNER JOIN as.question q where q.id=:questionId";
-			Query q = getEntityManager().createQuery(squerty);
-			q.setParameter("questionId", questionId);
-			List<Assert> asserts = (List<Assert>) q.getResultList();
-			return asserts;
-		} catch (NoResultException e) {
-			return null;
-		}
+    @Override
+    public List<Assert> findAllByQuestion(Long questionId) {
+        try {
+            String squerty = "select distinct as from Assert "
+                    + "as INNER JOIN as.question q where q.id=:questionId";
+            Query q = getEntityManager().createQuery(squerty);
+            q.setParameter("questionId", questionId);
+            List<Assert> asserts = (List<Assert>) q.getResultList();
+            return asserts;
+        } catch (NoResultException e) {
+            return null;
+        }
 
-	}
+    }
 }
