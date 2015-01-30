@@ -2,8 +2,9 @@ package com.softserveinc.ita.jexercises.business.services;
 
 import java.util.List;
 
-import org.springframework.Service;
+import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.softserveinc.ita.jexercises.common.entity.Assert;
 import com.softserveinc.ita.jexercises.persistence.dao.impl.AssertDao;
