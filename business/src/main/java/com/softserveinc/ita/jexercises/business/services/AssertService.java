@@ -4,20 +4,66 @@ import java.util.List;
 
 import com.softserveinc.ita.jexercises.common.entity.Assert;
 
+/**
+ * 
+ * @author Kucheyavenko Dmytro
+ *
+ * @version 1.0
+ */
 public interface AssertService {
 
-	void createAssert(Assert assertVar);
+    /**
+     * Create new assert.
+     * 
+     * @param assertVar
+     *            New assert.
+     */
+    void createAssert(Assert assertVar);
 
-	void deleteAssert(Assert assertVar);
+    /**
+     * Delete
+     * 
+     * @param assertVar
+     *            Unnecessary assert.
+     */
+    void deleteAssert(Assert assertVar);
 
-	void deleteAssertById(Long id);
+    /**
+     * Delete Assert by id.
+     * 
+     * @param id
+     *            Id of unnecessary assert.
+     */
+    void deleteAssertById(Long id);
 
-	Assert updateAssert(Assert assertVar);
+    /**
+     * 
+     * @param assertVar
+     *            Modified assert.
+     * @return updates Assert.
+     */
+    Assert updateAssert(Assert assertVar);
 
-	Assert findAssertById(Long id); 
+    /**
+     * 
+     * @param id
+     *            Find assert by id.
+     * @return Assert instance.
+     */
+    Assert findAssertById(Long id);
 
-	List<Assert> findAllAsserts();
+    /**
+     * 
+     * @return List of asserts.
+     */
+    List<Assert> findAllAsserts();
 
-	List<Assert> findAllByQuestionId(Long questionId);
+    /**
+     * 
+     * @param questionId
+     *            Get all asserts by question id.
+     * @return List of asserts.
+     */
+    List<Assert> findAllByQuestionId(Long questionId);
 
 }
