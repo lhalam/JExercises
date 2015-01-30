@@ -38,18 +38,19 @@ public class Test extends BaseEntity {
      * The set of attempts.
      */
     @Column(name = "ATTEMPT_ID")
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, 
-        mappedBy = "test")
+    @OneToMany(fetch = FetchType.LAZY, 
+        cascade = CascadeType.ALL, mappedBy = "test")
     private Set<Attempt> attempts = new HashSet<Attempt>(0);
 
     /**
      * The set of questions.
      */
     @ManyToMany(fetch = FetchType.LAZY, targetEntity = Question.class)
-    @JoinTable(name = "QUESTION_TEST", joinColumns = {
-            @JoinColumn(name = "TEST_ID", nullable = false, updatable = false)},
-            inverseJoinColumns = {@JoinColumn(name = "QUESTION_ID",
-                    nullable = false, updatable = false)})
+    @JoinTable(name = "QUESTION_TEST", 
+        joinColumns = { @JoinColumn(name = "TEST_ID", 
+        nullable = false, updatable = false) }, 
+        inverseJoinColumns = { @JoinColumn(name = "QUESTION_ID", 
+            nullable = false, updatable = false) })
     private Set<Question> questions;
 
     /**
@@ -58,18 +59,20 @@ public class Test extends BaseEntity {
     public Test() {
 
     }
-    
+
     /**
      * Constructor which provides creating of new test.
      * 
-     * @param description of test
-     * @param isPublic status of test
+     * @param description
+     *            of test
+     * @param isPublic
+     *            status of test
      */
     public Test(String description, Boolean isPublic) {
         this.description = description;
         this.isPublic = isPublic;
     }
-    
+
     public String getDescription() {
         return description;
     }
