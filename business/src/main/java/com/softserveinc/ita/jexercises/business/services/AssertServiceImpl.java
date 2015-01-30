@@ -9,7 +9,7 @@ import com.softserveinc.ita.jexercises.common.entity.Assert;
 import com.softserveinc.ita.jexercises.persistence.dao.impl.AssertDao;
 
 /**
- * Represents AssertService interface implemetation.
+ * Represent AssertService interface implemetation.
  * 
  * @author Kucheryavenko Dmytro
  *
