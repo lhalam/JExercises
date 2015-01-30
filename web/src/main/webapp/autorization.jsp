@@ -6,14 +6,10 @@
     	<meta name="description" content="JExercises UI">
     	<meta name="author" content="Lv-137.|Java">
 	    <link href="css/bootstrap.css" rel="stylesheet">
-		<style>
-      		body {
-        	padding-top: 60px;
-        	background-image: url(background.jpg);
-      		}
-    	</style>
     	<link href="css/bootstrap-responsive.css" rel="stylesheet">
     	<link rel="shortcut icon" href="ss-logo.png">
+    	<script src="_/js/bootstrap.js"></script>
+ 		<script src="_/js/jquery-2.1.3.js"></script>
 	</head>
 <body id="container">
     <div class="row">
