@@ -61,21 +61,4 @@ public interface UserAnswerService {
      */
     List<UserAnswer> findAllUserAnswers();
 
-    /**
-     * Gets all userAnswers by test id
-     * 
-     * @param testId
-     *            Id of test
-     * @return Set of userAnswers
-     */
-    List<UserAnswer> findAllUserAnswersByAttemptId(Long testId);
-
-    /**
-     * Gets all userAnswers by question id
-     * 
-     * @param questionId
-     *            Id of question
-     * @return Set of userAnswers
-     */
-    List<UserAnswer> findAllUserAnswersByQuestionId(Long questionId);
 }

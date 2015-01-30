@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.softserveinc.ita.jexercises.common.entity.UserAnswer;
@@ -50,23 +51,15 @@ public class UserAnswerServiceImpl implements UserAnswerService {
     }
 
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS)
     public UserAnswer findUserAnswerById(Long id) {
         return userAnswerDao.findById(id);
     }
 
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS)
     public List<UserAnswer> findAllUserAnswers() {
         return userAnswerDao.findAll();
-    }
-
-    @Override
-    public List<UserAnswer> findAllUserAnswersByAttemptId(Long testId) {
-        return userAnswerDao.findAllByAttemptId(testId);
-    }
-
-    @Override
-    public List<UserAnswer> findAllUserAnswersByQuestionId(Long questionId) {
-        return userAnswerDao.findAllByQuestionId(questionId);
     }
 
 }

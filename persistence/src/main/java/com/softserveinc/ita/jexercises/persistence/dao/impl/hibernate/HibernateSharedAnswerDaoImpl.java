@@ -2,7 +2,6 @@ package com.softserveinc.ita.jexercises.persistence.dao.impl.hibernate;
 
 import java.util.List;
 
-import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
