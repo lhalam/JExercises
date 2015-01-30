@@ -4,7 +4,6 @@
         "http://www.puppycrawl.com/dtds/configuration_1_3.dtd">
 
 <module name="Checker">
-    <module name="NewlineAtEndOfFile"/>
     <module name="FileTabCharacter">
         <property name="eachLine" value="false"/>
     </module>
