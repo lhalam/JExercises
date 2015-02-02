@@ -60,10 +60,10 @@
 		<dependencies>
 			<dependency>
 				<groupId>org.springframework</groupId>
-				<artifactId>spring-framework-bom</artifactId>
-				<version>4.0.1.RELEASE</version>
-				<type>pom</type>
-				<scope>import</scope>
+			    <artifactId>spring-framework-bom</artifactId>
+			    <version>4.0.1.RELEASE</version>
+			    <type>pom</type>
+			    <scope>import</scope>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
