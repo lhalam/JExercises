@@ -20,6 +20,22 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "USER")
 public class User extends BaseEntity {
+    /**
+     * Represents role variants.
+     * 
+     * @author Oksana Senchuk
+     *
+     */
+    public enum Role {
+        /**
+         * User role.
+         */
+        ROLE_USER,
+        /**
+         * Admin role.
+         */
+        ROLE_ADMIN
+    }
 
     /**
      * The first name of the user.
@@ -61,10 +77,24 @@ public class User extends BaseEntity {
     private Set<Attempt> attempts;
 
     /**
+     * The role of user.
+     */
+    @Column(name = "ROLE", nullable = false)
+    private Role role;
+
+    /**
      * Creates a new User.
      */
     public User() {
 
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     public String getFirstName() {
@@ -114,5 +144,4 @@ public class User extends BaseEntity {
     public void setAttempts(Set<Attempt> attempts) {
         this.attempts = attempts;
     }
-
 }
