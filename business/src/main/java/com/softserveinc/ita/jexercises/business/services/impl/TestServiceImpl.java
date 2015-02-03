@@ -1,5 +1,6 @@
-package com.softserveinc.ita.jexercises.business.services;
+package com.softserveinc.ita.jexercises.business.services.impl;
 
+import com.softserveinc.ita.jexercises.business.services.TestService;
 import com.softserveinc.ita.jexercises.common.entity.Test;
 import com.softserveinc.ita.jexercises.persistence.dao.impl.TestDao;
 

@@ -1,4 +1,4 @@
-package com.softserveinc.ita.jexercises.business.services;
+package com.softserveinc.ita.jexercises.business.services.impl;
 
 import java.util.List;
 
@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.softserveinc.ita.jexercises.business.services.AttemptService;
 import com.softserveinc.ita.jexercises.common.entity.Attempt;
 import com.softserveinc.ita.jexercises.persistence.dao.impl.AttemptDao;
 

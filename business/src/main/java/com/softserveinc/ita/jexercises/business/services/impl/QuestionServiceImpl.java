@@ -1,5 +1,6 @@
-package com.softserveinc.ita.jexercises.business.services;
+package com.softserveinc.ita.jexercises.business.services.impl;
 
+import com.softserveinc.ita.jexercises.business.services.QuestionService;
 import com.softserveinc.ita.jexercises.common.entity.Question;
 import com.softserveinc.ita.jexercises.persistence.dao.impl.QuestionDao;
 
