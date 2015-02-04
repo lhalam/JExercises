@@ -1,5 +1,6 @@
 package com.softserveinc.ita.jexercises.persistence.dao.impl.hibernate;
 
+import java.beans.Introspector;
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
@@ -9,6 +10,13 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+import com.mysema.query.types.path.PathBuilder;
+import com.mysema.query.types.path.StringPath;
+import com.mysema.query.jpa.impl.JPAQuery;
 import com.softserveinc.ita.jexercises.persistence.dao.GenericDao;
 
 /**
@@ -39,7 +47,7 @@ public class HibernateGenericDaoImpl<T, PK extends Serializable> implements
      */
     @PersistenceContext
     private EntityManager entityManager;
-    
+
     /**
      * Service variable for getEntityName() method.
      */
@@ -48,6 +56,7 @@ public class HibernateGenericDaoImpl<T, PK extends Serializable> implements
     /**
      * Constructor. Assigns class of entity.
      */
+    @SuppressWarnings("unchecked")
     public HibernateGenericDaoImpl() {
         ParameterizedType genericSuperclass = (ParameterizedType) getClass()
                 .getGenericSuperclass();
@@ -115,6 +124,42 @@ public class HibernateGenericDaoImpl<T, PK extends Serializable> implements
 
     protected void setEntityManager(EntityManager entityManager) {
         this.entityManager = entityManager;
+    }
+
+    // /////////////////////////////////////////////////////////////////
+
+    PathBuilder<T> qObject = new PathBuilder<>(entityClass,
+            Introspector.decapitalize(getEntityName()));
+
+    JPAQuery jpaQuery = new JPAQuery(entityManager);
+
+    public Iterable<T> findAllByPage(String jsonText) {
+
+        JSONParser parser = new JSONParser();
+        JSONObject jsonObject;
+        try {
+            jsonObject = (JSONObject) parser.parse(jsonText);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        int pageNumber = (Integer) jsonObject.get("pageNumber");
+        int pageSize = (Integer) jsonObject.get("pageSize");
+        String sortDirection = (String) jsonObject.get("sortDirection");
+        String sortField = (String) jsonObject.get("sortField");
+
+        StringPath sortFieldPath = qObject.getString(sortField);
+
+        if (sortDirection.equals("desc"))
+            return jpaQuery.offset(pageNumber * pageSize).limit(pageSize)
+                    .from(qObject).orderBy(sortFieldPath.desc()).list(qObject);
+        else if (sortDirection.equals("asc")) {
+            return jpaQuery.offset(pageNumber * pageSize).limit(pageSize)
+                    .from(qObject).orderBy(sortFieldPath.asc()).list(qObject);
+        } else
+            return jpaQuery.offset(pageNumber * pageSize).limit(pageSize)
+                    .from(qObject).list(qObject);
     }
 
 }
