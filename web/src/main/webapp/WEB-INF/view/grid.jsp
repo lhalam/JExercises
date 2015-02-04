@@ -43,7 +43,7 @@
         <div class="form-group">
           <input type="text" class="form-control" placeholder="Type to search">
         </div>
-        <button type="btn" class="btn btn-default">Search</button>
+        <button type="button" class="btn btn-default">Search</button>
       </form>
       <ul class="nav navbar-nav navbar-right">
       <li class="dropdown">
@@ -70,7 +70,7 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="btn" aria-expanded="false">Sirb by <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
             <li><a href="#"> Up </a></li>
-            <li><a href="#">Down</a></li>\
+            <li><a href="#">Down</a></li>
           </ul>
         </li>
       </ul>
