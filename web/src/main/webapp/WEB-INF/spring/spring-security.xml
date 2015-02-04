@@ -11,25 +11,11 @@
 		<form-login login-page="/login" authentication-failure-url="/login?error" />
 	</http>
 
-	<beans:bean id="authenticationManager"
-		class="org.springframework.security.authentication.ProviderManager">
-		<beans:property name="providers">
-			<beans:list>
-				<beans:ref local="daoAuthenticationProvider" />
-			</beans:list>
-		</beans:property>
-	</beans:bean>
-
 	<authentication-manager alias="authenticationManager">
 		<authentication-provider user-service-ref="userDetailsService">
+			<password-encoder ref="encoder" />
 		</authentication-provider>
 	</authentication-manager>
-
-	<beans:bean id="daoAuthenticationProvider"
-		class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
-		<beans:property name="userDetailsService" ref="userDetailsService" />
-		<beans:property name="passwordEncoder" ref="encoder" />
-	</beans:bean>
 
 	<beans:bean id="encoder"
 		class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
