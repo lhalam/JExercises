@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf8"
 	pageEncoding="utf8"%>
-<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
 <meta charset="utf-8">
@@ -22,20 +21,20 @@
 
 		<div class="row" style="margin-top: 60px;">
 			<div class="col-md-4 col-md-offset-4">
-				<form method="POST" action="login" accept-charset="UTF-8"
+				<c:url var="postUrl" value="j_spring_security_check" />
+				<form method="POST" action="${postUrl}" accept-charset="UTF-8"
 					role="form" id="loginform" class="form-signin">
 					<input name="_token" type="hidden"
 						value="AopTenvrFiopz5xcgvEmi7rwrSirQ24TWVf8OdJn">
 					<fieldset>
 						<h3 class="sign-up-title"
-							style="color: dimgray; text-align: center">JEexercises
-							Please sign in</h3>
+							style="color: dimgray; text-align: center">JExercises Please
+							sign in</h3>
 						<hr class="colorgraph">
 						<input class="form-control email-title" placeholder="E-mail"
-							name="email" type="text"/>
-						<input class="form-control" placeholder="Password" name="password"
-							type="password" /> <a class="pull-right"
-							href="forgotpassword.jsp">Forgot password?</a>
+							name="j_username" type="text" /> <input class="form-control"
+							placeholder="Password" name="j_password" type="password" /> <a
+							class="pull-right" href="forgotpassword.jsp">Forgot password?</a>
 						<div class="checkbox" style="width: 140px;">
 							<label><input name="remember" type="checkbox"
 								value="Remember Me"> Remember Me</label>

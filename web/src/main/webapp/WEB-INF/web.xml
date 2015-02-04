@@ -23,7 +23,7 @@
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>/WEB-INF/mvc-dispatcher-servlet.xml
-					/WEB-INF/spring/spring-security.xml
+					/WEB-INF/spring/application-context.xml
 		</param-value>
 	</context-param>
 

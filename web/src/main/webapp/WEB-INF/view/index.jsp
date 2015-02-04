@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<jsp:include page="login.jsp"></jsp:include>
+<jsp:include page="welcome.jsp"></jsp:include>
 <body>
 	
 </body>

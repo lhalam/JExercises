@@ -8,8 +8,7 @@
 
 	<http auto-config="true">
 		<intercept-url pattern="/welcome" access="ROLE_USER" />
-		<form-login login-page="/login" authentication-failure-url="/login?error"
-			username-parameter="email" password-parameter="password" />
+		<form-login login-page="/login" authentication-failure-url="/login?error" />
 	</http>
 
 	<beans:bean id="authenticationManager"
