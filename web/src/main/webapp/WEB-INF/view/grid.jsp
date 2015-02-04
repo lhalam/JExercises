@@ -11,7 +11,7 @@
 <meta name="author" content="Lv-137.|Java">
 <link href="../../resources/css/bootstrap.css" rel="stylesheet"
 	type="text/css">
-<link href="../../resources/css/bootstrap-theme.css" rel="stylesheet"
+<link href="../../resources/css/bootstrap-theme.css" rel="stylesheet" type="text/css">
 <link href="../../resources/css/style.css" rel="stylesheet"
 	type="text/css">
 <link href="../resources/css/bootstrap-responsive.css" rel="stylesheet"
