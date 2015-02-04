@@ -16,23 +16,5 @@ public class HelloController {
         return "index";
 
     }
-    //here we are gathering parameters from input 
-    //that came from our jsp inputs and are marked like <input ... name=""
-    //you rather must mark them like <form:input ... path="your_param_name"
-    //also u must provide automatical binding, though u must at first
-    //send your model to your page and name params identifically to their 
-    //names in class
-    //F.E: in class User we have name, though we must write path="name"
-    //to binding be involved
-    
-
-//    @RequestMapping(value = "/login", method = RequestMethod.POST)
-//    public String processLogin(@RequestParam("email") String email,
-//            @RequestParam("password") String password, ModelMap model) {
-//     //   System.out.println(password);
-//        model.addAttribute("name",email);
-//        return "success";
-//    }
-    
 
 }
