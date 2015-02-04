@@ -3,6 +3,8 @@ package com.softserveinc.ita.jexercises.persistence.dao;
 import java.util.List;
 import java.io.Serializable;
 
+import com.softserveinc.ita.jexercises.common.dto.SearchCondition;
+
 /**
  * Represents interface for generic DAO. Parent interface for all DAO
  * interfaces.
@@ -64,4 +66,6 @@ public interface GenericDao<T, PK extends Serializable> {
      * @return List of entity objects.
      */
     List<T> findAll();
+    
+    Iterable<T> findAllByCriteria(SearchCondition searchCondition);
 }

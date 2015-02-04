@@ -10,14 +10,13 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
-
 import com.mysema.query.types.path.PathBuilder;
 import com.mysema.query.types.path.StringPath;
 import com.mysema.query.jpa.impl.JPAQuery;
+import com.mysema.query.types.OrderSpecifier;
+
 import com.softserveinc.ita.jexercises.persistence.dao.GenericDao;
+import com.softserveinc.ita.jexercises.common.dto.SearchCondition;
 
 /**
  * Represents implementation of GenericDao interface.
@@ -126,40 +125,26 @@ public class HibernateGenericDaoImpl<T, PK extends Serializable> implements
         this.entityManager = entityManager;
     }
 
-    // /////////////////////////////////////////////////////////////////
+    public Iterable<T> findAllByCriteria(SearchCondition searchCondition) {
 
-    PathBuilder<T> qObject = new PathBuilder<>(entityClass,
-            Introspector.decapitalize(getEntityName()));
+        PathBuilder<T> qObject = new PathBuilder<>(entityClass,
+                Introspector.decapitalize(getEntityName()));
 
-    JPAQuery jpaQuery = new JPAQuery(entityManager);
+        JPAQuery jpaQuery = new JPAQuery(entityManager);
 
-    public Iterable<T> findAllByPage(String jsonText) {
+        StringPath sortFieldPath = qObject.getString(searchCondition
+                .getSortField());
 
-        JSONParser parser = new JSONParser();
-        JSONObject jsonObject;
-        try {
-            jsonObject = (JSONObject) parser.parse(jsonText);
-        } catch (ParseException e) {
-            e.printStackTrace();
-            return null;
-        }
+        OrderSpecifier<String> orderSpecifier = sortFieldPath.asc();
 
-        int pageNumber = (Integer) jsonObject.get("pageNumber");
-        int pageSize = (Integer) jsonObject.get("pageSize");
-        String sortDirection = (String) jsonObject.get("sortDirection");
-        String sortField = (String) jsonObject.get("sortField");
+        if (searchCondition.getSortDirection().equals("desc"))
+            orderSpecifier = sortFieldPath.desc();
 
-        StringPath sortFieldPath = qObject.getString(sortField);
-
-        if (sortDirection.equals("desc"))
-            return jpaQuery.offset(pageNumber * pageSize).limit(pageSize)
-                    .from(qObject).orderBy(sortFieldPath.desc()).list(qObject);
-        else if (sortDirection.equals("asc")) {
-            return jpaQuery.offset(pageNumber * pageSize).limit(pageSize)
-                    .from(qObject).orderBy(sortFieldPath.asc()).list(qObject);
-        } else
-            return jpaQuery.offset(pageNumber * pageSize).limit(pageSize)
-                    .from(qObject).list(qObject);
+        return jpaQuery
+                .offset(searchCondition.getPageNumber()
+                        * searchCondition.getPageSize())
+                .limit(searchCondition.getPageSize()).from(qObject)
+                .orderBy(orderSpecifier).list(qObject);
     }
 
 }
