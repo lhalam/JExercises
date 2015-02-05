@@ -125,6 +125,9 @@ public class HibernateGenericDaoImpl<T, PK extends Serializable> implements
 
         JPAQuery jpaQuery = new JPAQuery(entityManager);
 
+        jpaQuery.offset(searchCondition.getPageNumber()
+                * searchCondition.getPageSize())
+                .limit(searchCondition.getPageSize()).from(qObject);
 
         for (Map.Entry<String, String> filter :
                 searchCondition.getFilterMap().entrySet())
@@ -133,10 +136,6 @@ public class HibernateGenericDaoImpl<T, PK extends Serializable> implements
 
             jpaQuery.where(filterFieldPath.like(filter.getValue()));
         }
-
-        jpaQuery.offset(searchCondition.getPageNumber()
-                * searchCondition.getPageSize())
-                .limit(searchCondition.getPageSize()).from(qObject);
 
         for (Map.Entry<String, String> order :
                 searchCondition.getOrderByMap().entrySet())
