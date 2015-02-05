@@ -67,5 +67,5 @@ public interface GenericDao<T, PK extends Serializable> {
      */
     List<T> findAll();
     
-    Iterable<T> findAllByCriteria(SearchCondition searchCondition);
+    List<T> findAllByCriteria(SearchCondition searchCondition);
 }
