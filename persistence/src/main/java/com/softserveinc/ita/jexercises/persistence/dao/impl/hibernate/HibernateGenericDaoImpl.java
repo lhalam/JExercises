@@ -1,32 +1,27 @@
 package com.softserveinc.ita.jexercises.persistence.dao.impl.hibernate;
 
-import java.beans.Introspector;
-import java.io.Serializable;
-import java.lang.reflect.ParameterizedType;
-import java.util.List;
+import com.mysema.query.jpa.impl.JPAQuery;
+import com.mysema.query.types.OrderSpecifier;
+import com.mysema.query.types.path.PathBuilder;
+import com.mysema.query.types.path.StringPath;
+import com.softserveinc.ita.jexercises.common.dto.SearchCondition;
+import com.softserveinc.ita.jexercises.persistence.dao.GenericDao;
 
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-
-import com.mysema.query.types.path.PathBuilder;
-import com.mysema.query.types.path.StringPath;
-import com.mysema.query.jpa.impl.JPAQuery;
-import com.mysema.query.types.OrderSpecifier;
-
-import com.softserveinc.ita.jexercises.persistence.dao.GenericDao;
-import com.softserveinc.ita.jexercises.common.dto.SearchCondition;
+import java.beans.Introspector;
+import java.io.Serializable;
+import java.lang.reflect.ParameterizedType;
+import java.util.List;
 
 /**
  * Represents implementation of GenericDao interface.
- * 
- * @author Taras Vuyiv
  *
- * @param <T>
- *            Entity class.
- * @param <PK>
- *            ID key type.
+ * @param <T>  Entity class.
+ * @param <PK> ID key type.
+ * @author Taras Vuyiv
  */
 
 public class HibernateGenericDaoImpl<T, PK extends Serializable> implements
@@ -35,18 +30,15 @@ public class HibernateGenericDaoImpl<T, PK extends Serializable> implements
      * Service final variable for getEntityName() method.
      */
     private static final String EMPTY = "";
-
     /**
      * Represents entity class.
      */
     private Class<T> entityClass;
-
     /**
      * Entity manager variable.
      */
     @PersistenceContext
     private EntityManager entityManager;
-
     /**
      * Service variable for getEntityName() method.
      */
@@ -100,7 +92,7 @@ public class HibernateGenericDaoImpl<T, PK extends Serializable> implements
 
     /**
      * Get name of entity class.
-     * 
+     *
      * @return String with the name of entity class.
      */
     private String getEntityName() {
@@ -125,7 +117,13 @@ public class HibernateGenericDaoImpl<T, PK extends Serializable> implements
         this.entityManager = entityManager;
     }
 
-    public Iterable<T> findAllByCriteria(SearchCondition searchCondition) {
+    /**
+     * Method for sorting, filtering and paging.
+     *
+     * @param searchCondition Object with search parameters.
+     * @return List of entity objects.
+     */
+    public List<T> findAllByCriteria(SearchCondition searchCondition) {
 
         PathBuilder<T> qObject = new PathBuilder<>(entityClass,
                 Introspector.decapitalize(getEntityName()));
@@ -137,8 +135,9 @@ public class HibernateGenericDaoImpl<T, PK extends Serializable> implements
 
         OrderSpecifier<String> orderSpecifier = sortFieldPath.asc();
 
-        if (searchCondition.getSortDirection().equals("desc"))
+        if ("desc".equals(searchCondition.getSortDirection())) {
             orderSpecifier = sortFieldPath.desc();
+        }
 
         return jpaQuery
                 .offset(searchCondition.getPageNumber()
