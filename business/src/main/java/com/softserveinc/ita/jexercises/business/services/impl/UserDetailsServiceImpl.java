@@ -62,10 +62,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 .getRole().toString());
         List<GrantedAuthority> authList = new ArrayList<GrantedAuthority>(1);
         authList.add(authority);
-        UserDetails userDetails = 
-                new org.springframework.security.core.userdetails.User(
-                userEmail, password, enabled, accountNonExpired,
-                credentialsNonExpired, accountNonLocked, authList);
+        UserDetails userDetails
+            = new org.springframework.security.core.userdetails.User(
+                    userEmail, password, enabled, accountNonExpired,
+                    credentialsNonExpired, accountNonLocked, authList);
         return userDetails;
     }
 }
