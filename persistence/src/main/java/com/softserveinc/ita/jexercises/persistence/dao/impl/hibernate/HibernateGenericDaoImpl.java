@@ -127,7 +127,8 @@ public class HibernateGenericDaoImpl<T, PK extends Serializable> implements
 
 
         for (Map.Entry<String, String> filter :
-                searchCondition.getFilterMap().entrySet()) {
+                searchCondition.getFilterMap().entrySet())
+        {
             StringPath filterFieldPath = qObject.getString(filter.getKey());
 
             jpaQuery.where(filterFieldPath.like(filter.getValue()));
@@ -138,7 +139,8 @@ public class HibernateGenericDaoImpl<T, PK extends Serializable> implements
                 .limit(searchCondition.getPageSize()).from(qObject);
 
         for (Map.Entry<String, String> order :
-                searchCondition.getOrderByMap().entrySet()) {
+                searchCondition.getOrderByMap().entrySet())
+        {
             StringPath sortFieldPath = qObject.getString(order.getKey());
             OrderSpecifier<String> orderSpecifier = sortFieldPath.asc();
 
