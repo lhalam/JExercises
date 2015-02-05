@@ -6,7 +6,7 @@
 	http://www.springframework.org/schema/security
 	http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
-	<http auto-config="true">
+	<http auto-config="true" disable-url-rewriting="true">
 		<intercept-url pattern="/welcome" access="ROLE_USER, ROLE_ADMIN" />
 		<form-login login-page="/login" authentication-failure-url="/login?error" />
 		<logout logout-success-url="/logout" />

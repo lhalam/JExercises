@@ -7,6 +7,6 @@
 <title>Logout</title>
 </head>
 <body>
-<h1>User logout</h1>
+<h1>Logged out</h1>
 </body>
 </html>
