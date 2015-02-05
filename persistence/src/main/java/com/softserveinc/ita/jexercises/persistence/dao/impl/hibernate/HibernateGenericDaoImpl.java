@@ -15,6 +15,7 @@ import java.beans.Introspector;
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Represents implementation of GenericDao interface.
@@ -30,6 +31,10 @@ public class HibernateGenericDaoImpl<T, PK extends Serializable> implements
      * Service final variable for getEntityName() method.
      */
     private static final String EMPTY = "";
+    /**
+     * Service decrescent final variable for getAllByCriteria method.
+     */
+    private static final String DESC = "desc";
     /**
      * Represents entity class.
      */
@@ -47,7 +52,6 @@ public class HibernateGenericDaoImpl<T, PK extends Serializable> implements
     /**
      * Constructor. Assigns class of entity.
      */
-    @SuppressWarnings("unchecked")
     public HibernateGenericDaoImpl() {
         ParameterizedType genericSuperclass = (ParameterizedType) getClass()
                 .getGenericSuperclass();
@@ -109,14 +113,6 @@ public class HibernateGenericDaoImpl<T, PK extends Serializable> implements
         return entity;
     }
 
-    protected EntityManager getEntityManager() {
-        return entityManager;
-    }
-
-    protected void setEntityManager(EntityManager entityManager) {
-        this.entityManager = entityManager;
-    }
-
     /**
      * Method for sorting, filtering and paging.
      *
@@ -124,26 +120,44 @@ public class HibernateGenericDaoImpl<T, PK extends Serializable> implements
      * @return List of entity objects.
      */
     public List<T> findAllByCriteria(SearchCondition searchCondition) {
-
         PathBuilder<T> qObject = new PathBuilder<>(entityClass,
                 Introspector.decapitalize(getEntityName()));
 
         JPAQuery jpaQuery = new JPAQuery(entityManager);
 
-        StringPath sortFieldPath = qObject.getString(searchCondition
-                .getSortField());
+        jpaQuery.offset(searchCondition.getPageNumber()
+                * searchCondition.getPageSize())
+                .limit(searchCondition.getPageSize()).from(qObject);
 
-        OrderSpecifier<String> orderSpecifier = sortFieldPath.asc();
+        for (Map.Entry<String, String> filter :
+                searchCondition.getFilterMap().entrySet())
+        {
+            StringPath filterFieldPath = qObject.getString(filter.getKey());
 
-        if ("desc".equals(searchCondition.getSortDirection())) {
-            orderSpecifier = sortFieldPath.desc();
+            jpaQuery.where(filterFieldPath.like(filter.getValue()));
         }
 
-        return jpaQuery
-                .offset(searchCondition.getPageNumber()
-                        * searchCondition.getPageSize())
-                .limit(searchCondition.getPageSize()).from(qObject)
-                .orderBy(orderSpecifier).list(qObject);
+        for (Map.Entry<String, String> order :
+                searchCondition.getOrderByMap().entrySet())
+        {
+            StringPath sortFieldPath = qObject.getString(order.getKey());
+            OrderSpecifier<String> orderSpecifier = sortFieldPath.asc();
+
+            if (DESC.equals(order.getValue())) {
+                orderSpecifier = sortFieldPath.desc();
+            }
+
+            jpaQuery.orderBy(orderSpecifier);
+        }
+
+        return jpaQuery.list(qObject);
     }
 
+    protected EntityManager getEntityManager() {
+        return entityManager;
+    }
+
+    protected void setEntityManager(EntityManager entityManager) {
+        this.entityManager = entityManager;
+    }
 }
