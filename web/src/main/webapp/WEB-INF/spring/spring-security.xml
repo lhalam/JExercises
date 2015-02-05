@@ -7,11 +7,13 @@
 	http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
 	<http auto-config="true">
-		<intercept-url pattern="/welcome" access="ROLE_USER" />
+		<intercept-url pattern="/welcome" access="ROLE_USER, ROLE_ADMIN" />
 		<form-login login-page="/login" authentication-failure-url="/login?error" />
+		<logout logout-success-url="/logout" />
+
 	</http>
 
-	<authentication-manager alias="authenticationManager">
+	<authentication-manager>
 		<authentication-provider user-service-ref="userDetailsService">
 			<password-encoder ref="encoder" />
 		</authentication-provider>
