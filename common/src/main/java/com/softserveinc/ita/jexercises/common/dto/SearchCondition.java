@@ -1,5 +1,8 @@
 package com.softserveinc.ita.jexercises.common.dto;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 /**
  * Represents class used for findAllByCriteria method (pagination).
  *
@@ -15,17 +18,14 @@ public class SearchCondition {
      */
     private int pageSize;
     /**
-     * Field for sorting.
+     * Map for ordering. Contains sortField as key and sortDirection as value.
      */
-    private String sortField;
+    private Map<String, String> orderByMap = new
+            LinkedHashMap<String, String>();
     /**
-     * Direction of sorting (asc or desc).
+     * Map for filtering. Contains filterField as key and filterValue as value.
      */
-    private String sortDirection;
-    /**
-     * Filter text.
-     */
-    private String filter;
+    private Map<String, String> filterMap = new LinkedHashMap<String, String>();
 
     public int getPageNumber() {
         return pageNumber;
@@ -43,27 +43,20 @@ public class SearchCondition {
         this.pageSize = pageSize;
     }
 
-    public String getSortField() {
-        return sortField;
+    public Map<String, String> getFilterMap() {
+        return filterMap;
     }
 
-    public void setSortField(String sortField) {
-        this.sortField = sortField;
+    public void setFilterMap(Map<String, String> filterMap) {
+        this.filterMap = filterMap;
     }
 
-    public String getSortDirection() {
-        return sortDirection;
+    public Map<String, String> getOrderByMap() {
+        return orderByMap;
     }
 
-    public void setSortDirection(String sortDirection) {
-        this.sortDirection = sortDirection;
+    public void setOrderByMap(Map<String, String> orderByMap) {
+        this.orderByMap = orderByMap;
     }
 
-    public String getFilter() {
-        return filter;
-    }
-
-    public void setFilter(String filter) {
-        this.filter = filter;
-    }
 }
