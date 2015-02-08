@@ -13,8 +13,8 @@
 <link href="resources/css/bootstrap-responsive.css" rel="stylesheet"
 	type="text/css">
 <link rel="shortcut icon" href="ss-logo.png">
-<script src="resources/js/bootstrap.js" type="text/javascript"></script>
 <script src="resources/js/jquery-2.1.3.js" type="text/javascript"></script>
+<script src="resources/js/bootstrap.js" type="text/javascript"></script>
 </head>
 <body id="container">
 	<div class="container">
