@@ -1,8 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=utf8"
-	pageEncoding="utf8"%>
-<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<html>
 <head>
 <meta charset="utf-8">
 <title>JExercises</title>
@@ -20,4 +15,3 @@
 <script src="../../resources/js/jquery-2.1.3.js" type="text/javascript"></script>
 <script src="../../resources/js/bootstrap.js" type="text/javascript"></script>
 </head>
-</html>
