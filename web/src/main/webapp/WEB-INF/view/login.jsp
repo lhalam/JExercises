@@ -1,4 +1,4 @@
-<%@include file="base.jsp" %>
+<jsp:include page="base.jsp"/>
 <body id="container">
 	<div class="container">
 
