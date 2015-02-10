@@ -21,8 +21,8 @@
 						<hr class="colorgraph">
 						<input class="form-control email-title" placeholder="E-mail"
 							name="j_username" type="text" /> <input class="form-control"
-							placeholder="Password" name="j_password" type="password" /> <a
-							class="pull-right" href="forgotpassword.jsp">Forgot password?</a>
+							placeholder="Password" name="j_password" type="password" />
+                            <a class="pull-right" href="forgotpassword.jsp">Forgot password?</a>
 						<div class="checkbox" style="width: 140px;">
 							<label><input name="_spring_security_remember_me"
 								type="checkbox" value="true"> Remember Me</label>
