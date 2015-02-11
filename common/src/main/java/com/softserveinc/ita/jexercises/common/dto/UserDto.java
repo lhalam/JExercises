@@ -8,9 +8,13 @@ package com.softserveinc.ita.jexercises.common.dto;
  */
 public class UserDto {
     /**
-     * Name of the new user.
+     * First name of the new user.
      */
-    private String username;
+    private String firstName;
+    /**
+     * Last name of the new user.
+     */
+    private String lastName;
     /**
      * User email.
      */
@@ -24,12 +28,20 @@ public class UserDto {
      */
     private String matchingPassword;
 
-    public String getUsername() {
-        return username;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getEmail() {
@@ -55,4 +67,5 @@ public class UserDto {
     public void setMatchingPassword(String matchingPassword) {
         this.matchingPassword = matchingPassword;
     }
+
 }

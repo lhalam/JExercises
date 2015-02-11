@@ -18,8 +18,10 @@
 								style="color: dimgray; text-align: center">JExercises
 								Please Register</h3>
 							<hr class="colorgraph">
-							<form:input cssClass="form-control" placeholder="Username"
-								path="username" type="text" />
+							<form:input cssClass="form-control" placeholder="First name"
+								path="firstName" type="text" />
+								<form:input cssClass="form-control" placeholder="Last name"
+								path="lastName" type="text" />
 							<form:input cssClass="form-control" placeholder="E-mail"
 								path="email" type="text" />
 							<form:input cssClass="form-control" placeholder="Password"

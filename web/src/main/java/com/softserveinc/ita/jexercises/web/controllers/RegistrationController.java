@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import com.softserveinc.ita.jexercises.business.services.
        UserRegistrationService;
+import com.softserveinc.ita.jexercises.business.utils.EmailExistsException;
 import com.softserveinc.ita.jexercises.common.dto.UserDto;
 
 /**
@@ -50,7 +51,11 @@ public class RegistrationController {
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public ModelAndView registerUserAccount(
             @ModelAttribute("user") UserDto userDto) {
-        userRegistrationService.registerNewUserAccount(userDto);
+        try {
+            userRegistrationService.registerNewUserAccount(userDto);
+        } catch (EmailExistsException e) {
+            e.printStackTrace();
+        }
         return new ModelAndView("login");
     }
 }
