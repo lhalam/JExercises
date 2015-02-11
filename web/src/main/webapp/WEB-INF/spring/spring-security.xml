@@ -6,19 +6,21 @@
 	http://www.springframework.org/schema/security
 	http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
+	<http pattern="/resources/**" security="none" />
 	<http auto-config="true" use-expressions="true"
 		disable-url-rewriting="true">
+		<intercept-url pattern="/registration" access="permitAll" />
 		<intercept-url pattern="/login" access="permitAll" />
-		<intercept-url pattern="/welcome" access="isAuthenticated()" />
+		<intercept-url pattern="/**" access="isAuthenticated()" />
 		<form-login login-page="/login" authentication-failure-url="/login?error" />
 		<logout logout-success-url="/logout" delete-cookies="JSESSIONID" />
-		<remember-me key="uniqueAndSecret" user-service-ref="userDetailsService"/>
+		<remember-me key="uniqueAndSecret" user-service-ref="userDetailsService" />
 	</http>
 
 
 	<authentication-manager>
 		<authentication-provider user-service-ref="userDetailsService">
-			<password-encoder ref="encoder"/>
+			<password-encoder ref="encoder" />
 		</authentication-provider>
 	</authentication-manager>
 
