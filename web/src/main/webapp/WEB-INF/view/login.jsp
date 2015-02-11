@@ -3,10 +3,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <%@    include file="base.jsp" %>
+    <%@ include file="base.jsp" %>
 </head>
 <body id="container">
 <div class="container">
+    <%@ include file="navigation.jsp" %>
     <div class="row" style="margin-top: 60px;">
         <div class="col-md-4 col-md-offset-4">
             <c:url var="loginUrl" value="j_spring_security_check"/>
@@ -33,7 +34,7 @@
                                value="Login"> <br>
 
                         <p class="text-center">
-                            <a href="forgotpassword.jsp">Forgot password?</a>
+                            <a href="forgotpassword">Forgot password?</a>
                         </p>
                     </fieldset>
                 </div>
