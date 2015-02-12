@@ -5,9 +5,10 @@
 <head>
     <%@ include file="base.jsp" %>
 </head>
+<%@ include file="navigation.jsp" %>
 <body id="container">
 <div class="container">
-    <%@ include file="navigation.jsp" %>
+
     <div class="row" style="margin-top: 60px;">
         <div class="col-md-4 col-md-offset-4">
             <c:url var="loginUrl" value="j_spring_security_check"/>
@@ -31,7 +32,7 @@
                                           type="checkbox" value="true"> Remember Me</label>
                         </div>
                         <input class="btn btn-lg btn-success btn-block" type="submit"
-                               value="Login"> <br>
+                               value="Login" id = "btnsub"> <br>
 
                         <p class="text-center">
                             <a href="forgotpassword">Forgot password?</a>
@@ -44,3 +45,4 @@
 </div>
 </body>
 </html>
+

@@ -35,6 +35,8 @@ public class LoginController {
         return new ModelAndView("login");
     }
 
+
+
     /**
      * Method provides mapping on "logout" input
      * 
@@ -46,4 +48,14 @@ public class LoginController {
         return new ModelAndView("logout");
     }
 
+    /**
+     * Method provides mapping on "logout" input
+     *
+     * @return ModelAndView object,in current case that actually means returning
+     *         logout.jsp
+     */
+    @RequestMapping(value = "/forgotpassword", method = RequestMethod.GET)
+    public ModelAndView forgotpassword() {
+        return new ModelAndView("forgotpassword");
+    }
 }
