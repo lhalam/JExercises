@@ -48,6 +48,7 @@ public class LoginController {
         return new ModelAndView("logout");
     }
 
+
     /**
      * Method provides mapping on "forgotpassword" input
      *

@@ -8,6 +8,7 @@
 </head>
 <body id="container">
 <div class="container">
+
     <div class="row" style="margin-top: 60px;">
         <div class="col-md-4 col-md-offset-4">
             <form:form method="POST" modelAttribute="user" id="registrationform"

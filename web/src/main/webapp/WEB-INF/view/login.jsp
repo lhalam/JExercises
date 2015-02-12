@@ -8,7 +8,6 @@
 <%@ include file="navigation.jsp" %>
 <body id="container">
 <div class="container">
-
     <div class="row" style="margin-top: 60px;">
         <div class="col-md-4 col-md-offset-4">
             <c:url var="loginUrl" value="j_spring_security_check"/>
