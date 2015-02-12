@@ -1,5 +1,5 @@
 <%--
-  User: rphysicist
+  User: Volodymyr Lishchynskiy
   Date: 12.02.15
   Time: 12:37
   To change this template use File | Settings | File Templates.
@@ -15,13 +15,13 @@
     <div class="col-md-4 col-md-offset-4">
         <form class="panel panel-primary">
             <div class="container-fluid">
-                <c:if test="${3000 > 2000}">
+                
                     <h3> User: </h3>
 
                     <h3> Test: </h3>
 
                     <h3> Date: </h3>
-                </c:if>
+                
                 <hr class="colorgraph">
 
                 <h3> Test result is </h3>
