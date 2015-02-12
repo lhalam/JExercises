@@ -6,6 +6,8 @@
 <head>
     <jsp:include page="base.jsp"/>
 </head>
+
+<%@include file="navigation.jsp" %>
 <body id="container">
 <div class="container">
 
