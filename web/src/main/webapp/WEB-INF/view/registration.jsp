@@ -5,6 +5,9 @@
 <html>
 <head>
 <jsp:include page="base.jsp" />
+<jsp:include page="navigation.jsp" />
+<script src="resources/js/password_confirmation.js"
+	type="text/javascript"></script>
 </head>
 <body id="container">
 	<div class="container">
@@ -19,18 +22,20 @@
 								Please Register</h3>
 							<hr class="colorgraph">
 							<form:input cssClass="form-control" placeholder="First name"
-								path="firstName" type="text" />
-								<form:input cssClass="form-control" placeholder="Last name"
-								path="lastName" type="text" />
+								path="firstName" type="text" required="required" />
+							<form:input cssClass="form-control" placeholder="Last name"
+								path="lastName" type="text" required="required" />
 							<form:input cssClass="form-control" placeholder="E-mail"
-								path="email" type="text" />
-							<form:input cssClass="form-control" placeholder="Password"
-								path="password" type="password" />
-							<form:input cssClass="form-control"
+								path="email" type="email" required="required" />
+							<form:input id="password" cssClass="form-control"
+								placeholder="Password" path="password" type="password"
+								required="required" />
+							<form:input id="matchingPassword" cssClass="form-control"
 								placeholder="Confirm Password" path="matchingPassword"
-								type="password" />
-							<br> <input class="btn btn-lg btn-success btn-block"
-								type="submit" value="Register"> <br>
+								type="password" required="required" />
+							<br> <input id="registrationSubmit"
+								class="btn btn-lg btn-success btn-block" type="submit"
+								value="Register"> <br>
 						</fieldset>
 					</div>
 				</form:form>
