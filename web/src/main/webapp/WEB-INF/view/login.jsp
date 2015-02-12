@@ -13,7 +13,7 @@
         <div class="col-md-4 col-md-offset-4">
             <c:url var="loginUrl" value="j_spring_security_check"/>
             <form method="POST" action="${loginUrl}" accept-charset="UTF-8" role="form" id="loginform"
-                  class="panel panel-default">
+                  class="panel panel-primary">
 
                 <div class="container-fluid">
                     <input name="_token" type="hidden">
@@ -32,7 +32,7 @@
                                           type="checkbox" value="true"> Remember Me</label>
                         </div>
                         <input class="btn btn-lg btn-success btn-block" type="submit"
-                               value="Login" id = "btnsub"> <br>
+                               value="Login" id="btnsub"> <br>
 
                         <p class="text-center">
                             <a href="forgotpassword">Forgot password?</a>
