@@ -8,9 +8,11 @@
          pageEncoding="utf8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="en">
+<head>
 <%@include file="base.jsp" %>
-<%@include file="navigation.jsp" %>
+</head>
 <body>
+<%@include file="navigation.jsp" %>
 <div class="row-fluid" style="margin-top: 60px;">
     <div class="col-md-4 col-md-offset-4">
         <form class="panel panel-primary">
