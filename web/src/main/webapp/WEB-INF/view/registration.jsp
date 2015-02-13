@@ -6,14 +6,15 @@
 <head>
 <jsp:include page="base.jsp" />
 <jsp:include page="navigation.jsp" />
-<script src="resources/js/password_confirmation.js"
+<script src="resources/js/registration_data_validation.js"
 	type="text/javascript"></script>
+<script	src="resources/js/jquery.validate.min.js"></script>
 </head>
 <body id="container">
 	<div class="container">
 		<div class="row" style="margin-top: 60px;">
 			<div class="col-md-4 col-md-offset-4">
-				<form:form method="POST" modelAttribute="user" id="registrationform"
+				<form:form method="POST" modelAttribute="user" id="registrationForm"
 					cssClass="panel panel-default">
 					<div class="container-fluid">
 						<fieldset>
@@ -22,17 +23,16 @@
 								Please Register</h3>
 							<hr class="colorgraph">
 							<form:input cssClass="form-control" placeholder="First name"
-								path="firstName" type="text" required="required" />
+								path="firstName" type="text" />
 							<form:input cssClass="form-control" placeholder="Last name"
-								path="lastName" type="text" required="required" />
+								path="lastName" type="text" />
 							<form:input cssClass="form-control" placeholder="E-mail"
-								path="email" type="email" required="required" />
+								path="email" type="email" />
 							<form:input id="password" cssClass="form-control"
-								placeholder="Password" path="password" type="password"
-								required="required" />
+								placeholder="Password" path="password" type="password"/>
 							<form:input id="matchingPassword" cssClass="form-control"
 								placeholder="Confirm Password" path="matchingPassword"
-								type="password" required="required" />
+								type="password" />
 							<br> <input id="registrationSubmit"
 								class="btn btn-lg btn-success btn-block" type="submit"
 								value="Register"> <br>
