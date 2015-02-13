@@ -1,14 +1,3 @@
-/**
- * 
- */
-// $(function() {
-// $("#registrationSubmit").click(function(event) {
-// if ($('#password').val() != $('#matchingPassword').val()) {
-// alert("Password and Confirm Password don't match");
-// event.preventDefault();
-// }
-// });
-// })
 $(document).ready(function() {
 	$("#registrationForm").validate({
 		rules : {
@@ -27,7 +16,7 @@ $(document).ready(function() {
 			},
 			"matchingPassword" : {
 				required : true,
-				equalTo: "#password"
+				equalTo : "#password"
 			}
 		}
 	})
