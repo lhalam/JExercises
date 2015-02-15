@@ -60,17 +60,7 @@ public class LoginController {
         return new ModelAndView("forgotpassword");
     }
 
-    /**
-     * Method provides mapping on "testresult" input
-     *
-     * @return ModelAndView object,in current case that actually means returning
-     *         testresult.jsp
-     */
-    @RequestMapping(value = "/testresult", method = RequestMethod.GET)
-    public ModelAndView testresult() {
-        return new ModelAndView("testresult");
-    }
-
+ 
     /**
      * Method provides mapping on "testgrid" input
      *
