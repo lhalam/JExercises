@@ -18,7 +18,7 @@
             <ul class="nav navbar-nav">
                 <li><a href="welcome">General </a></li>
                 <li><a href="about">About</a></li>
-                <li><a href="tests">Tests</a></li>
+                <li><a href="testgrid">Tests</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="registration">Registration</a></li>
