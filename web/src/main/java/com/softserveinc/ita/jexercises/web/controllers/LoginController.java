@@ -15,16 +15,6 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class LoginController {
     /**
-     * Method provides mapping on "welcome" input
-     * 
-     * @return index.jsp
-     */
-    @RequestMapping(value = "/welcome", method = RequestMethod.GET)
-    public String printWelcome() {
-        return "index";
-    }
-
-    /**
      * Method provides mapping on "login" input
      * 
      * @return ModelAndView object,in current case that actually means returning
@@ -34,8 +24,6 @@ public class LoginController {
     public ModelAndView login() {
         return new ModelAndView("login");
     }
-
-
 
     /**
      * Method provides mapping on "logout" input
@@ -48,7 +36,6 @@ public class LoginController {
         return new ModelAndView("logout");
     }
 
-
     /**
      * Method provides mapping on "forgotpassword" input
      *
@@ -60,7 +47,6 @@ public class LoginController {
         return new ModelAndView("forgotpassword");
     }
 
- 
     /**
      * Method provides mapping on "testgrid" input
      *
