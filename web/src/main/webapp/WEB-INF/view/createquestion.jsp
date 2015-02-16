@@ -18,24 +18,18 @@
 				<div class="row">
 					<div class="col-md-offset-2 col-md-8">
 
+						<div class="form-group">
+							<label for="comment">Description:</label>
+							<textarea class="form-control" rows="5" id="comment"
+								placeholder="Input question description..."></textarea>
+						</div>
 
-						<form role="form">
-							<div class="form-group">
-								<label for="comment">Description:</label>
-								<textarea class="form-control" rows="5" id="comment"
-									placeholder="Input question description..."></textarea>
-							</div>
-						</form>
+						<div class="form-group">
+							<label for="comment">Answer:</label>
+							<textarea class="form-control" rows="5" id="comment"
+								placeholder="Input expected answer..."></textarea>
+						</div>
 
-
-
-						<form role="form">
-							<div class="form-group">
-								<label for="comment">Answer:</label>
-								<textarea class="form-control" rows="5" id="comment"
-									placeholder="Input expected answer..."></textarea>
-							</div>
-						</form>
 						<div class="row">
 							<div class="col-md-offset-4 col-md-4">
 								<input class="btn btn-lg btn-success btn-block" type="submit"
