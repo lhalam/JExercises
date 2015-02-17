@@ -23,11 +23,7 @@ public class TestGridDto {
     /**
      * Number of elements in test data table.
      */
-    private int allElementsNumber;
 
-    /**
-     * Word in search field to obtained necessary test data table.
-     */
     private String searchKey;
 
     /**
@@ -49,14 +45,6 @@ public class TestGridDto {
 
     public void setPageSize(int pageSize) {
         this.pageSize = pageSize;
-    }
-
-    public int getAllElementsNumber() {
-        return allElementsNumber;
-    }
-
-    public void setAllElementsNumber(int allElementsNumber) {
-        this.allElementsNumber = allElementsNumber;
     }
 
     public String getSearchKey() {

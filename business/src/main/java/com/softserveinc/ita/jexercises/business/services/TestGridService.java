@@ -10,15 +10,19 @@ import com.softserveinc.ita.jexercises.common.dto.TestGridParametersDto;
  * @version 1.0
  */
 public interface TestGridService {
+
     /**
      * Make TestGrid.
      *
      * @return TestGridDto object.
      */
-    public TestGridDto buildTestGrid();
+    TestGridDto buildTestGrid();
 
     /**
      * Make Parameters for TestGrid.
+     *
+     * @param testGridParametersDto object.
      */
-    public void parametriseTestGrid(TestGridParametersDto testGridParametersDto);
+    void parametriseTestGrid(TestGridParametersDto testGridParametersDto);
+
 }
