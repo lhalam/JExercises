@@ -4,62 +4,54 @@
   Time: 22:40
 --%>
 <%@ page language="java" contentType="text/html; charset=utf8"
-         pageEncoding="utf8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+         pageEncoding="utf8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
-    <jsp:include page="base.jsp" />
-    <jsp:include page="navigation.jsp" />
+    <jsp:include page="base.jsp"/>
+    <jsp:include page="navigation.jsp"/>
 </head>
 <body id="container">
-    <div class="container">
-        <div class="row-fluid" id="testgrid">
-                <form class="panel panel-primary">
+<div class="container">
+    <div class="row-fluid" id="testgrid">
+        <form class="panel panel-primary">
 
 
-                    <div class="table-responsive">
+            <div class="table-responsive">
 
 
+                <table class="table table-bordered">
+                    <tr class="row">
+                        <td class="field-label col-md-10 active">
+                            <label><strong>Description</strong></label>
+                        </td>
+                        <td class="col-md-2 active">
+                            <label><strong>Availability</strong></label>
+                        </td>
+                    </tr>
+                    <% for (Test test : DataRepository.GetTests()) { %>
+                    <tr class="row">
+                        <td class="field-label col-md-10 ">
 
-
-
-                        <table class="table table-bordered">
-                            <tr class="row">
-                                <td class="field-label col-md-10 active">
-                                    <label><strong>Description</strong></label>
-                                </td>
-                                <td class="col-md-2 active">
-                                    <label><strong>Availability</strong></label>
-                                </td>
-                            </tr>
-                            <tr class="row">
-                                <td class="field-label col-md-10 ">
-                                    Tudutrudututsduu oapdfpaj hds sd shfiowe awifdi aaoiejpoa doAkoF SKofskeafpoSA eoaf
-                                </td>
-                                <td class="col-md-2">
-                                    Question bla-bla-bla
-                                </td>
-                            </tr>
-                            <tr class="row">
-                                <td class="col-md-10">
-                                    Bla-bla-bla question
-                                </td>
-                                <td class="col-md-2">
-                                    Incorrect
-                                </td>
-                            </tr>
-                        </table>
-                    <div class="col-md-6">
-                        <ul class="pagination pagination-control">
-                            <li><a>Show entries:</a></li>
-                            <li><a href="#">10</a></li>
-                            <li><a href="#">25</a></li>
-                            <li><a href="#">50</a></li>
-                            <li><a href="#">100</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-md-offset-3">
+                            <%=test.getTestDescription()%>
+                        </td>
+                        <td class="col-md-2">
+                            <%=test.getTestIsPublic()%>
+                        </td>
+                    </tr>
+                    <% } %>
+                </table>
+                <div class="col-md-6">
+                    <ul class="pagination pagination-control">
+                        <li><a>Show entries:</a></li>
+                        <li><a href="#">10</a></li>
+                        <li><a href="#">25</a></li>
+                        <li><a href="#">50</a></li>
+                        <li><a href="#">100</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-offset-3">
                     <ul class="pagination pagination-control">
                         <li><a href="#">&laquo;</a></li>
                         <li><a href="#">1</a></li>
@@ -69,11 +61,11 @@
                         <li><a href="#">5</a></li>
                         <li><a href="#">&raquo;</a></li>
                     </ul>
-                        </div>
+                </div>
 
-                    </div>
-                </form>
             </div>
-        </div>
+        </form>
+    </div>
+</div>
 </body>
 </html>
