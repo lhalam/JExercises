@@ -47,15 +47,6 @@ public class LoginController {
         return new ModelAndView("forgotpassword");
     }
 
-    /**
-     * Method provides mapping on "testgrid" input
-     *
-     * @return ModelAndView object,in current case that actually means returning
-     *         testgrid.jsp
-     */
-    @RequestMapping(value = "/testgrid", method = RequestMethod.GET)
-    public ModelAndView testgrid() {
-        return new ModelAndView("testgrid");
-    }
+
 
 }
