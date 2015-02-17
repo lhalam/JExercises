@@ -51,13 +51,13 @@ public class TestGridServiceImpl implements TestGridService {
         TestGridDto testGridDto = new TestGridDto();
         SearchCondition searchCondition = new SearchCondition();
 
-        searchCondition.setPageNumber(pageNumber);
-        searchCondition.setPageSize(pageSize);
+        searchCondition.setPageNumber(1);
+        searchCondition.setPageSize(1);
 
         Map<String, String> filter = new LinkedHashMap<String, String>();
         Map<String, String> order = new LinkedHashMap<String, String>();
 
-        filter.put("description", "%word%");
+        filter.put("description", "");
         order.put("id", "asc"); //desc - по спаданню
 
         searchCondition.setFilterMap(filter);
@@ -65,9 +65,9 @@ public class TestGridServiceImpl implements TestGridService {
 
         List<TestGridRowDto> testgridrows = new ArrayList<TestGridRowDto>();
         List<Test> tests = testDao.findAllByCriteria(searchCondition);
-        testGridDto.setPageNumber(pageNumber);
-        testGridDto.setPageSize(pageSize);
-        testGridDto.setSearchKey(searchWord);
+        testGridDto.setPageNumber(1);
+        testGridDto.setPageSize(1);
+        testGridDto.setSearchKey("");
 
         for (Test test: tests ) {
             TestGridRowDto testGridRowDto = new TestGridRowDto();

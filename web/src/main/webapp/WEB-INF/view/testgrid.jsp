@@ -30,17 +30,16 @@
                             <label><strong>Availability</strong></label>
                         </td>
                     </tr>
-                    <%--<% for (Test test : DataRepository.GetTests()) { %>
+                    <c:forEach var="test" items="${tests}">
                     <tr class="row">
                         <td class="field-label col-md-10 ">
-
-                            <%=test.getTestDescription()%>
+                            ${test.description}
                         </td>
                         <td class="col-md-2">
-                            <%=test.getTestIsPublic()%>
+                            ${test.isPublic}
                         </td>
                     </tr>
-                    <% } %>--%>
+                    </c:forEach>
                 </table>
                 <div class="col-md-6">
                     <ul class="pagination pagination-control">
