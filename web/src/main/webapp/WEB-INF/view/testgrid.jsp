@@ -30,7 +30,7 @@
                             <label><strong>Availability</strong></label>
                         </td>
                     </tr>
-                    <% for (Test test : DataRepository.GetTests()) { %>
+                    <%--<% for (Test test : DataRepository.GetTests()) { %>
                     <tr class="row">
                         <td class="field-label col-md-10 ">
 
@@ -40,7 +40,7 @@
                             <%=test.getTestIsPublic()%>
                         </td>
                     </tr>
-                    <% } %>
+                    <% } %>--%>
                 </table>
                 <div class="col-md-6">
                     <ul class="pagination pagination-control">
