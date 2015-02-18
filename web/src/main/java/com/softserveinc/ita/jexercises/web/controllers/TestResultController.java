@@ -18,23 +18,23 @@ import com.softserveinc.ita.jexercises.common.dto.TestResultDto;
  */
 @Controller
 public class TestResultController {
-	/**
+    /**
      * Service which work with DTO.
      */
-	@Autowired
-    TestResultService testResultService;
+    @Autowired
+    private TestResultService testResultService;
 
     /**
      * Method provides mapping on "testresult" input
      *
-	 * @param model Model.
+     * @param model Model.
      * @return ModelAndView object,in current case that actually means returning
      *         testresult.jsp
      */   
    @RequestMapping(value = "/testresult", method = RequestMethod.GET)
     public ModelAndView showTestResultPage(Model model) {
-        TestResultDto testResultDto = testResultService.getTestResultInfo(1L) ;
-        model.addAttribute("attempt",testResultDto);        
+        TestResultDto testResultDto = testResultService.getTestResultInfo(1L);
+        model.addAttribute("attempt", testResultDto);        
         return new ModelAndView("testresult");
     }
 }
