@@ -25,8 +25,11 @@ import com.softserveinc.ita.jexercises.persistence.dao.impl.AttemptDao;
 @Service
 public class TestResultServiceImpl implements TestResultService {
 
+    /**
+     * Attempt DAO instance.
+     */
     @Autowired
-    AttemptDao attemptDao;
+    private AttemptDao attemptDao;
 
     @SuppressWarnings("unchecked")
     @Transactional

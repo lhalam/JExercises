@@ -47,8 +47,7 @@ public class TestResultDto {
     /**
      * Role of user.
      */
-    private Role role;
-    
+    private Role role;    
     
     public boolean isPublic() {
         return isPublic;

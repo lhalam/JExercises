@@ -1,6 +1,5 @@
 package com.softserveinc.ita.jexercises.web.controllers;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,13 +18,16 @@ import com.softserveinc.ita.jexercises.common.dto.TestResultDto;
  */
 @Controller
 public class TestResultController {
-	
+	/**
+     * Service which work with DTO.
+     */
 	@Autowired
     TestResultService testResultService;
 
     /**
      * Method provides mapping on "testresult" input
      *
+	 * @param model Model.
      * @return ModelAndView object,in current case that actually means returning
      *         testresult.jsp
      */   

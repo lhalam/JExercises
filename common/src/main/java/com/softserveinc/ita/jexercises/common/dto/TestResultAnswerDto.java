@@ -18,13 +18,6 @@ public class TestResultAnswerDto {
      */
     private boolean isCorrect;
 
-    /**
-     * Default constructor.
-     */
-    public TestResultAnswerDto() {
-        
-    }
-
     public String getQuestionDescription() {
         return questionDescription;
     }

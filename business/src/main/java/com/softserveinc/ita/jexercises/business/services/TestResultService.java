@@ -1,6 +1,5 @@
 package com.softserveinc.ita.jexercises.business.services;
 
-import com.softserveinc.ita.jexercises.common.dto.TestResultAnswerDto;
 import com.softserveinc.ita.jexercises.common.dto.TestResultDto;
 
 /**
