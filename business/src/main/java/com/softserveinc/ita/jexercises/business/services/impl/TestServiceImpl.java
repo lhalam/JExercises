@@ -3,7 +3,6 @@ package com.softserveinc.ita.jexercises.business.services.impl;
 import com.softserveinc.ita.jexercises.business.services.TestService;
 import com.softserveinc.ita.jexercises.common.entity.Test;
 import com.softserveinc.ita.jexercises.persistence.dao.impl.TestDao;
-import com.softserveinc.ita.jexercises.common.dto.TestGridDto;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

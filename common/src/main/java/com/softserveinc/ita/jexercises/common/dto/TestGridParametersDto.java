@@ -1,14 +1,12 @@
 package com.softserveinc.ita.jexercises.common.dto;
 
-import java.util.List;
-
 /**
- * Represents TestGrid DTO.
+ * Represents TestGridParameters DTO.
  *
  * @author Ihor Demkovych
  * @version 1.0
  */
-public class TestGridDto {
+public class TestGridParametersDto {
 
     /**
      * Number of page in test data table.
@@ -21,15 +19,9 @@ public class TestGridDto {
     private int pageSize;
 
     /**
-     * Number of elements in test data table.
+     * Word in search field to obtained necessary test data table.
      */
-
     private String searchKey;
-
-    /**
-     * List of rows from data table.
-     */
-    private List<TestGridRowDto> testGridRows;
 
     public int getPageNumber() {
         return pageNumber;
@@ -55,11 +47,4 @@ public class TestGridDto {
         this.searchKey = searchKey;
     }
 
-    public List<TestGridRowDto> getTestGridRows() {
-        return testGridRows;
-    }
-
-    public void setTestRows(List<TestGridRowDto> testGridRows) {
-        this.testGridRows = testGridRows;
-    }
 }
