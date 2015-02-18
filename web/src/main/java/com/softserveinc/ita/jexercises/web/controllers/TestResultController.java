@@ -31,7 +31,7 @@ public class TestResultController {
      * @return ModelAndView object,in current case that actually means returning
      *         testresult.jsp
      */   
-   @RequestMapping(value = "/testresult", method = RequestMethod.GET)
+    @RequestMapping(value = "/testresult", method = RequestMethod.GET)
     public ModelAndView showTestResultPage(Model model) {
         TestResultDto testResultDto = testResultService.getTestResultInfo(1L);
         model.addAttribute("attempt", testResultDto);        
