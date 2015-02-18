@@ -9,8 +9,8 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
-    <jsp:include page="base.jsp"/>
-    <jsp:include page="navigation.jsp"/>
+    <jsp:include page="../base.jsp"/>
+    <jsp:include page="../navigation.jsp"/>
 </head>
 <body id="container">
 <div class="container">

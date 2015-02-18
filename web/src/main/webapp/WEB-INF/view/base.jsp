@@ -9,9 +9,7 @@
 <link href="resources/css/bootstrap-theme.css" rel="stylesheet" type="text/css">
 <link href="resources/css/style.css" rel="stylesheet"
 	type="text/css">
-<link href="resources/css/bootstrap-responsive.css" rel="stylesheet"
-	type="text/css">
-<link rel="shortcut icon" href="ss-logo.png">
-<script src="resources/js/jquery-2.1.3.js" type="text/javascript"></script>
-<script src="resources/js/bootstrap.js" type="text/javascript"></script>
+<link rel="shortcut icon" href="resources/ss-logo.png">
+<script src="resources/lib/js/jquery-2.1.3.js" type="text/javascript"></script>
+<script src="resources/lib/js/bootstrap.js" type="text/javascript"></script>
 </head>
