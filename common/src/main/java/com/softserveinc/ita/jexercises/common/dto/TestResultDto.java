@@ -66,10 +66,6 @@ public class TestResultDto {
         this.role = role;
     }
 
-    public TestResultDto(){
-        
-    }
-
     public int getTotalAnswersCount() {
         return totalAnswersCount;
     }
