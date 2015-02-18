@@ -14,7 +14,8 @@
         <intercept-url pattern="/testgrid" access="permitAll" />
         <intercept-url pattern="/testresult" access="permitAll" />
 		<intercept-url pattern="/login" access="permitAll" />
-		<intercept-url pattern="/createquestion" access="permitAll" />
+		<intercept-url pattern="/success" access="permitAll" />
+		<intercept-url pattern="/questioncreating" access="permitAll" />
 		<intercept-url pattern="/**" access="isAuthenticated()" />
 		<form-login login-page="/login" authentication-failure-url="/login?error" />
 		<logout logout-success-url="/logout" delete-cookies="JSESSIONID" />

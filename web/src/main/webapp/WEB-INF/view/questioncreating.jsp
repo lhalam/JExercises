@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf8"
 	pageEncoding="utf8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <html>
 <head>
 <%@ include file="base.jsp"%>
@@ -9,7 +10,8 @@
 <body>
 	<div class="row">
 		<div class="col-md-offset-2 col-md-8">
-			<form class="panel panel-default">
+			<form:form method="POST" modelAttribute="qc" id="registrationForm"
+			class="panel panel-default">
 				<div class="row">
 					<div class="col-md-offset-4 col-md-6">
 						<h1>Create new question</h1>
@@ -20,14 +22,14 @@
 
 						<div class="form-group">
 							<label for="comment">Description:</label>
-							<textarea class="form-control" rows="5" id="comment"
-								placeholder="Input question description..."></textarea>
+							<form:textarea class="form-control" rows="5" id="comment"
+								placeholder="Input question description..." path="questionDescription" type="text"></form:textarea>
 						</div>
 
 						<div class="form-group">
 							<label for="comment">Answer:</label>
-							<textarea class="form-control" rows="5" id="comment"
-								placeholder="Input expected answer..."></textarea>
+							<form:textarea class="form-control" rows="5" id="comment"
+								placeholder="Input expected answer..." path="expectedAnswer" type="text"></form:textarea>
 						</div>
 
 						<div class="row">
@@ -39,7 +41,7 @@
 						<br></br>
 					</div>
 				</div>
-			</form>
+			</form:form>
 		</div>
 	</div>
 </body>
