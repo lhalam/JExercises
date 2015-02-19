@@ -31,33 +31,25 @@ public class TestGridServiceImpl implements TestGridService {
     private TestDao testDao;
 
     /**
-     * Number of page in data table.
+     * Constant symbol.
      */
-    private int pageNumber;
-
-    /**
-     * Number of rows in data table.
-     */
-    private int pageSize;
-
-    /**
-     * The string value witch are sorted test in data table.
-     */
-    private String searchWord;
+    private String proword = "%";
 
     @Override
-    public TestGridDto buildTestGrid() {
+    public TestGridDto buildTestGrid(TestGridParametersDto
+                                                 testGridParametersDto) {
 
         TestGridDto testGridDto = new TestGridDto();
         SearchCondition searchCondition = new SearchCondition();
 
-        searchCondition.setPageNumber(1);
-        searchCondition.setPageSize(1);
+        searchCondition.setPageNumber(testGridParametersDto.getPageNumber());
+        searchCondition.setPageSize(testGridParametersDto.getPageSize());
 
         Map<String, String> filter = new LinkedHashMap<String, String>();
         Map<String, String> order = new LinkedHashMap<String, String>();
 
-        filter.put("description", "");
+        filter.put("description", proword +
+                testGridParametersDto.getSearchKey() + proword);
         order.put("id", "asc"); //desc - по спаданню
 
         searchCondition.setFilterMap(filter);
@@ -68,8 +60,10 @@ public class TestGridServiceImpl implements TestGridService {
         testGridDto.setPageNumber(1);
         testGridDto.setPageSize(1);
         testGridDto.setSearchKey("");
+        testGridDto.setPagesNumber(1);
+        testGridDto.setElementsNumber(1);
 
-        for (Test test: tests ) {
+        for (Test test : tests) {
             TestGridRowDto testGridRowDto = new TestGridRowDto();
             testGridRowDto.setDescription(test.getDescription());
             testGridRowDto.setIsPublic(test.getIsPublic());
@@ -80,13 +74,4 @@ public class TestGridServiceImpl implements TestGridService {
 
         return testGridDto;
     }
-
-    @Override
-    public void parametriseTestGrid(TestGridParametersDto
-                                                testGridParametersDto) {
-        this.pageNumber = testGridParametersDto.getPageNumber();
-        this.pageSize = testGridParametersDto.getPageSize();
-        this.searchWord = testGridParametersDto.getSearchKey();
-    }
-
 }

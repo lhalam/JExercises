@@ -14,15 +14,9 @@ public interface TestGridService {
     /**
      * Make TestGrid.
      *
+     * @param testGridParametersDto to set search conditions
      * @return TestGridDto object.
      */
-    TestGridDto buildTestGrid();
-
-    /**
-     * Make Parameters for TestGrid.
-     *
-     * @param testGridParametersDto object.
-     */
-    void parametriseTestGrid(TestGridParametersDto testGridParametersDto);
+    TestGridDto buildTestGrid(TestGridParametersDto testGridParametersDto);
 
 }
