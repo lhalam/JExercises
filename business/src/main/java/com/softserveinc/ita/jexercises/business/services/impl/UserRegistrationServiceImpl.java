@@ -4,12 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import com.softserveinc.ita.jexercises.business.services.
        UserRegistrationService;
 import com.softserveinc.ita.jexercises.business.utils.EmailExistsException;
 import com.softserveinc.ita.jexercises.common.dto.UserDto;
 import com.softserveinc.ita.jexercises.common.entity.User;
 import com.softserveinc.ita.jexercises.common.entity.User.Role;
+import com.softserveinc.ita.jexercises.common.mapper.UserMapper;
 import com.softserveinc.ita.jexercises.persistence.dao.impl.UserDao;
 
 /**
@@ -72,15 +74,10 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
      * @return User with registered account.
      */
     private User createNewUserAccount(UserDto userDto) {
-        User user = new User();
-        String firstName = userDto.getFirstName();
-        String lastName = userDto.getLastName();
-        String email = userDto.getEmail();
-        String password = userDto.getPassword();
-        user.setFirstName(firstName);
-        user.setLastName(lastName);
-        user.setEmail(email);
-        user.setPassword(getHashPassword(password));
+        UserMapper userMapper = new UserMapper();
+        User user = userMapper.toEntity(userDto);
+        String hashedPassword = hashPassword(user.getPassword());
+        user.setPassword(hashedPassword);
         user.setRole(Role.ROLE_USER);
         userDao.create(user);
         return user;
@@ -93,7 +90,7 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
      *            User password.
      * @return Hashed password.
      */
-    private String getHashPassword(String password) {
+    private String hashPassword(String password) {
         return encoder.encode(password);
     }
 

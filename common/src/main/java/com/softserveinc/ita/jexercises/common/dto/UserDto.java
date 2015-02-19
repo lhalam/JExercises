@@ -28,6 +28,19 @@ public class UserDto {
      */
     private String matchingPassword;
 
+    /**
+     * User date of birth.
+     */
+    private String birthDate;
+
+    public String getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(String birthDate) {
+        this.birthDate = birthDate;
+    }
+
     public String getFirstName() {
         return firstName;
     }

@@ -17,7 +17,11 @@ $(document).ready(function() {
 			"matchingPassword" : {
 				required : true,
 				equalTo : "#password"
+			},
+			"birthDate" : {
+				required : true
 			}
 		}
 	})
+
 });
