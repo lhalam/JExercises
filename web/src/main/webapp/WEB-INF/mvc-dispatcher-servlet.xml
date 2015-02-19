@@ -16,6 +16,8 @@
 		<property name="suffix">
 			<value>.jsp</value>
 		</property>
+        <property name="order">
+            <value>1</value>
+        </property>
 	</bean>
-
 </beans>

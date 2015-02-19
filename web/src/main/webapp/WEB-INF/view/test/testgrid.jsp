@@ -30,7 +30,7 @@
                             <label><strong>Availability</strong></label>
                         </td>
                     </tr>
-                    <c:forEach var="test" items="${tests}">
+                    <%--<c:forEach var="test" items="${tests}">
                     <tr class="row">
                         <td class="field-label col-md-10 ">
                             ${test.description}
@@ -39,7 +39,7 @@
                             ${test.isPublic}
                         </td>
                     </tr>
-                    </c:forEach>
+                    </c:forEach>--%>
                 </table>
                 <div class="col-md-6">
                     <ul class="pagination pagination-control">

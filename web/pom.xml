@@ -10,6 +10,12 @@
 	</parent>
 	<artifactId>web</artifactId>
 	<packaging>war</packaging>
+    <repositories>
+        <repository>
+            <id>codehaus</id>
+            <url>http://repository.codehaus.org/org/codehaus</url>
+        </repository>
+    </repositories>
 	<dependencies>
 
 		<dependency>
@@ -80,6 +86,12 @@
 			<version>3.1.0</version>
 			<scope>provided</scope>
 		</dependency>
+            <dependency>
+                <groupId>org.codehaus.jackson</groupId>
+                <artifactId>jackson-mapper-asl</artifactId>
+                <version>1.8.5</version>
+            </dependency>
+
 
 	</dependencies>
 	<build>

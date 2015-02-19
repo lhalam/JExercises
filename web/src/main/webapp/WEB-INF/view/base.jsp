@@ -7,9 +7,9 @@
 <link href="resources/css/lib/bootstrap.css" rel="stylesheet"
 	type="text/css">
 <link href="resources/css/lib/bootstrap-theme.css" rel="stylesheet" type="text/css">
-<link href="resources/css/lib/style.css" rel="stylesheet"
+<link href="resources/css/lib/styles.css" rel="stylesheet"
 	type="text/css">
 <link rel="shortcut icon" href="resources/ss-logo.png">
-<script src="resources/lib/js/jquery-2.1.3.js" type="text/javascript"></script>
-<script src="resources/lib/js/bootstrap.js" type="text/javascript"></script>
+<script src="resources/js/lib/jquery-2.1.3.js" type="text/javascript"></script>
+<script src="resources/js/lib/bootstrap.js" type="text/javascript"></script>
 </head>

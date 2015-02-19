@@ -8,7 +8,7 @@
 <jsp:include page="navigation.jsp" />
 <script src="resources/js/registration_data_validation.js"
 	type="text/javascript"></script>
-<script	src="resources/js/jquery.validate.min.js"></script>
+<script	src="resources/js/lib/jquery.validate.min.js"></script>
 </head>
 <body id="container">
 	<div class="container">
