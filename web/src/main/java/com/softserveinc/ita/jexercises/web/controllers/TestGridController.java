@@ -2,17 +2,15 @@ package com.softserveinc.ita.jexercises.web.controllers;
 
 import com.google.gson.Gson;
 import com.softserveinc.ita.jexercises.business.services.TestGridService;
-
 import com.softserveinc.ita.jexercises.common.dto.TestGridDto;
 import com.softserveinc.ita.jexercises.common.dto.TestGridParametersDto;
 import com.softserveinc.ita.jexercises.common.dto.TestGridRowDto;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import org.springframework.web.servlet.ModelAndView;
 
 
@@ -52,14 +50,14 @@ public class TestGridController {
     @ResponseBody
     String testGrid(@RequestBody String jsoNRequest) {
         Gson gson = new Gson();
-        /*TestGridParametersDto testGridParametersDto
+        TestGridParametersDto testGridParametersDto
             = gson.fromJson(jsoNRequest, TestGridParametersDto.class);
-        TestGridDto testGridDto
-            = testGridService.buildTestGrid(testGridParametersDto);*/
-        TestGridRowDto testGridDto = new TestGridRowDto();
-        testGridDto.setDescription("Test me");
-        testGridDto.setIsPublic(true);
-        return gson.toJson(testGridDto);
+        /*TestGridDto testGridDto                            // <- problem is here
+            = testGridService.buildAllTestGrid();*/
+        TestGridRowDto testGridRowDto = new TestGridRowDto();//
+        testGridRowDto.setDescription("Test me");            // Just for test controller
+        testGridRowDto.setIsPublic(true);                    //
+        return gson.toJson(testGridRowDto);
     }
 
 }

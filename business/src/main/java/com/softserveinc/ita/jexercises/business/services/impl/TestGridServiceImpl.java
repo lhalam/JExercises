@@ -74,4 +74,27 @@ public class TestGridServiceImpl implements TestGridService {
 
         return testGridDto;
     }
+
+    @Override
+    public TestGridDto buildAllTestGrid() {
+        TestGridDto testGridDto = new TestGridDto();
+        List<TestGridRowDto> testgridrows = new ArrayList<TestGridRowDto>();
+        List<Test> tests = testDao.findAll();
+        testGridDto.setPageNumber(1);
+        testGridDto.setPageSize(1);
+        testGridDto.setSearchKey("");
+        testGridDto.setPagesNumber(1);
+        testGridDto.setElementsNumber(1);
+
+        for (Test test : tests) {
+            TestGridRowDto testGridRowDto = new TestGridRowDto();
+            testGridRowDto.setDescription(test.getDescription());
+            testGridRowDto.setIsPublic(test.getIsPublic());
+            testgridrows.add(testGridRowDto);
+        }
+
+        testGridDto.setTestRows(testgridrows);
+
+        return testGridDto;
+    }
 }
