@@ -70,6 +70,7 @@ public class TestResultDto {
     }
 
     public void setTotalAnswersCount(int totalAnswersCount) {
+
         this.totalAnswersCount = totalAnswersCount;
     }
 
@@ -78,6 +79,7 @@ public class TestResultDto {
     }
 
     public void setCorrectAnswersCount(int correctAnswersCount) {
+
         this.correctAnswersCount = correctAnswersCount;
     }
 

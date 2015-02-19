@@ -11,6 +11,7 @@
 <head>
     <jsp:include page="../base.jsp"/>
     <jsp:include page="../navigation.jsp"/>
+    <script src="resources/js/testgrid.js"></script>
 </head>
 <body id="container">
 <div class="container">
@@ -52,8 +53,8 @@
                 </div>
                 <div class="col-md-offset-3">
                     <ul class="pagination pagination-control">
-                        <li><a href="#">&laquo;</a></li>
-                        <li><a href="#">1</a></li>
+                        <li><a id="button" >&laquo;</a></li>
+                        <li><a href="testgrid">1</a></li>
                         <li><a href="#">2</a></li>
                         <li><a href="#">3</a></li>
                         <li><a href="#">4</a></li>

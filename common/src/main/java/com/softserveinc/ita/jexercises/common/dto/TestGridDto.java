@@ -21,15 +21,40 @@ public class TestGridDto {
     private int pageSize;
 
     /**
+     * Number of pages in test data table.
+     */
+    private int pagesNumber;
+
+    /**
      * Number of elements in test data table.
      */
+    private int elementsNumber;
 
+    /**
+     * Number of elements in test data table.
+     */
     private String searchKey;
 
     /**
      * List of rows from data table.
      */
     private List<TestGridRowDto> testGridRows;
+
+    public int getElementsNumber() {
+        return elementsNumber;
+    }
+
+    public void setElementsNumber(int elementsNumber) {
+        this.elementsNumber = elementsNumber;
+    }
+
+    public int getPagesNumber() {
+        return pagesNumber;
+    }
+
+    public void setPagesNumber(int pagesNumber) {
+        this.pagesNumber = pagesNumber;
+    }
 
     public int getPageNumber() {
         return pageNumber;
