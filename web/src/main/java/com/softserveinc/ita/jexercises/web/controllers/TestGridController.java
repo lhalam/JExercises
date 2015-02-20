@@ -6,6 +6,7 @@ import com.softserveinc.ita.jexercises.common.dto.TestGridParametersDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -48,7 +49,7 @@ public class TestGridController {
      */
     @RequestMapping(value = "/testgrid", method = RequestMethod.POST)
     @ResponseBody
-    public TestGridDto showTestGridPage(TestGridParametersDto
+    public TestGridDto showTestGridPage(@RequestBody TestGridParametersDto
                                                     testGridParametersDto) {
         TestGridDto testGridDto
             = testGridService.buildTestGrid(testGridParametersDto);
