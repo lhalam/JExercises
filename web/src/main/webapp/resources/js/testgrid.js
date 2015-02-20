@@ -8,7 +8,7 @@ $(document).ready(function(){
             url: "/testgrid",
             type: 'POST',
             dataType: 'json',
-            data: "{'pageNumber':1,'pageSize':10,'searchKey':''}",
+            data: '{"pageNumber":10,"pageSize":20,"searchKey":"hello"}',
             contentType: 'application/json',
             mimeType: 'application/json',
             success: function(data) {
