@@ -16,7 +16,9 @@ public class QuestionCreatingDto {
      * Expected question answer.
      */
     private String expectedAnswer;
-
+    
+    private String inputData;
+    
     public String getQuestionDescription() {
         return questionDescription;
     }
@@ -31,5 +33,13 @@ public class QuestionCreatingDto {
 
     public void setExpectedAnswer(String expectedAnswer) {
         this.expectedAnswer = expectedAnswer;
+    }
+
+    public String getInputData() {
+        return inputData;
+    }
+
+    public void setInputData(String inputData) {
+        this.inputData = inputData;
     }
 }

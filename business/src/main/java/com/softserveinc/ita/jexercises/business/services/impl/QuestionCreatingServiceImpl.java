@@ -1,18 +1,23 @@
 package com.softserveinc.ita.jexercises.business.services.impl;
 
+import java.util.HashSet;
+
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import com.softserveinc.ita.jexercises.business.services.
         QuestionCreatingService;
+import com.softserveinc.ita.jexercises.business.services.QuestionService;
 import com.softserveinc.ita.jexercises.common.dto.QuestionCreatingDto;
 import com.softserveinc.ita.jexercises.common.entity.Assert;
 import com.softserveinc.ita.jexercises.common.entity.Question;
-import com.softserveinc.ita.jexercises.persistence.dao.impl.AssertDao;
-import com.softserveinc.ita.jexercises.persistence.dao.impl.QuestionDao;
+
 
 /**
- * Represents QuestionCreatingService inplementation.
+ * Represents QuestionCreatingService implementation.
  * 
  * @author Kucheryavenko Dmytro
  *
@@ -21,38 +26,31 @@ import com.softserveinc.ita.jexercises.persistence.dao.impl.QuestionDao;
 @Service
 public class QuestionCreatingServiceImpl implements QuestionCreatingService {
     /**
-     * QuestionDao instance.
+     * Service provides using dao.
      */
     @Autowired
-    private QuestionDao questionDao;
-    /**
-     * AssertDao instance.
-     */
-    @Autowired
-    private AssertDao assertDao;
+    private QuestionService questionService;
 
     @Transactional
     @Override
-    public Question createQuestionDescription(
+    public void createQuestionDescription(
             QuestionCreatingDto questionCreatingDto) {
         Question question = new Question();
         String questionDescription = questionCreatingDto
                 .getQuestionDescription();
         question.setDescription(questionDescription);
-        questionDao.create(question);
-        return question;
-    }
 
-    @Transactional
-    @Override
-    public Assert createExpectedAnswer(QuestionCreatingDto 
-            questionCreatingDto) {
         Assert assertVar = new Assert();
+        Set<Assert> assertSet = new HashSet<Assert>();
         String expectedAnswer = questionCreatingDto.getExpectedAnswer();
+        String inputData = questionCreatingDto.getInputData();
         assertVar.setExpectedAnswer(expectedAnswer);
-        ;
-        assertDao.create(assertVar);
-        return assertVar;
+        assertVar.setInputData(inputData);
+        assertSet.add(assertVar);
+        question.setAsserts(assertSet);
+
+        questionService.createQuestion(question);
+
     }
 
 }

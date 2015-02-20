@@ -22,16 +22,22 @@
 
 						<div class="form-group">
 							<label for="comment">Description:</label>
-							<form:textarea class="form-control" rows="5" id="comment"
+							<form:textarea class="form-control" rows="4" id="comment"
 								placeholder="Input question description..." path="questionDescription" type="text"></form:textarea>
 						</div>
 
 						<div class="form-group">
 							<label for="comment">Answer:</label>
-							<form:textarea class="form-control" rows="5" id="comment"
+							<form:textarea class="form-control" rows="4" id="comment"
 								placeholder="Input expected answer..." path="expectedAnswer" type="text"></form:textarea>
 						</div>
-
+						
+						<div class="form-group">
+							<label for="comment">Input Data:</label>
+							<form:textarea class="form-control" rows="4" id="comment"
+								placeholder="Input data..." path="inputData" type="text"></form:textarea>
+						</div>
+						
 						<div class="row">
 							<div class="col-md-offset-4 col-md-4">
 								<input class="btn btn-lg btn-success btn-block" type="submit"

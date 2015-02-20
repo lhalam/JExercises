@@ -19,15 +19,6 @@ public interface QuestionCreatingService {
      *            QuestionCreatingDto object.
      * @return Question object.
      */
-    Question createQuestionDescription(QuestionCreatingDto questionCreatingDto);
-
-    /**
-     * Creating expected answer for question.
-     * 
-     * @param questionCreatingDto
-     *            QuestionCreatingDto object.
-     * @return Assert object.
-     */
-    Assert createExpectedAnswer(QuestionCreatingDto questionCreatingDto);
+    void createQuestionDescription(QuestionCreatingDto questionCreatingDto);
 
 }
