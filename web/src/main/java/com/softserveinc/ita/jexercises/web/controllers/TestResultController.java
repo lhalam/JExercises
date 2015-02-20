@@ -27,14 +27,25 @@ public class TestResultController {
     /**
      * Method provides mapping on "testresult" input
      *
-     * @param model Model.
+     * @param model
+     *            Model.
      * @return ModelAndView object,in current case that actually means returning
      *         testresult.jsp
-     */   
+     */
     @RequestMapping(value = "/testresult", method = RequestMethod.GET)
     public ModelAndView showTestResultPage(Model model) {
-        TestResultDto testResultDto = testResultService.getTestResultInfo(1L);
-        model.addAttribute("attempt", testResultDto);        
         return new ModelAndView("testresult");
+    }
+
+    /**
+     * Method provides mapping on "testresult" input.
+     * 
+     * @return TestResultDto object with all parameters.
+     */
+    @RequestMapping(value = "/testresult", method = RequestMethod.POST)
+    @ResponseBody
+    public TestResultDto showTestResultInfo() {
+        TestResultDto testResultDto = testResultService.getTestResultInfo(1L);
+        return testResultDto;
     }
 }
