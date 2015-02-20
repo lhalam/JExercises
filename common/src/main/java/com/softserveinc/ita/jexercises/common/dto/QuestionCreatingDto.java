@@ -16,7 +16,10 @@ public class QuestionCreatingDto {
      * Expected question answer.
      */
     private String expectedAnswer;
-    
+
+    /**
+     * Question input data.
+     */
     private String inputData;
     
     public String getQuestionDescription() {

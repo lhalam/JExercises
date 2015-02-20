@@ -1,8 +1,6 @@
 package com.softserveinc.ita.jexercises.business.services;
 
 import com.softserveinc.ita.jexercises.common.dto.QuestionCreatingDto;
-import com.softserveinc.ita.jexercises.common.entity.Assert;
-import com.softserveinc.ita.jexercises.common.entity.Question;
 
 /**
  * Service that handles question creating process.
@@ -17,7 +15,6 @@ public interface QuestionCreatingService {
      * 
      * @param questionCreatingDto
      *            QuestionCreatingDto object.
-     * @return Question object.
      */
     void createQuestionDescription(QuestionCreatingDto questionCreatingDto);
 
