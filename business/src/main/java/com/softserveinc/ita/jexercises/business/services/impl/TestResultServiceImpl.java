@@ -36,7 +36,8 @@ public class TestResultServiceImpl implements TestResultService {
     @Override
     public TestResultDto getTestResultInfo(long attemptId) {
         TestResultDto testResultDto = new TestResultDto();
-        List<TestResultAnswerDto> testResultAnswerDtos = new ArrayList<TestResultAnswerDto>();
+        List<TestResultAnswerDto> testResultAnswerDtos
+            = new ArrayList<TestResultAnswerDto>();
         Attempt attempt = attemptDao.findById(attemptId);
         User user = attempt.getUser();
         Test test = attempt.getTest();

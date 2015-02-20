@@ -22,7 +22,7 @@ public interface TestResultService {
      * 
      * @param attemptId
      *            Id of concrete attempt.
-     * @return Number of correct unswers.
+     * @return Number of correct answers.
      */
     int countCorrect(long attemptId);
 }
