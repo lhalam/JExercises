@@ -16,4 +16,13 @@ public interface TestResultService {
      * @return Object of TestResultDto class.
      */
     TestResultDto getTestResultInfo(long attemptId);
+
+    /**
+     * Take number of correct answers.
+     * 
+     * @param attemptId
+     *            Id of concrete attempt.
+     * @return Number of correct unswers.
+     */
+    int countCorrect(long attemptId);
 }
