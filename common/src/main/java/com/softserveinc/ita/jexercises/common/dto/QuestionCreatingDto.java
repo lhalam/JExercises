@@ -16,9 +16,8 @@ public class QuestionCreatingDto {
      * Expected question answer.
      */
     private String expectedAnswer;
-
     /**
-     * Question input data.
+     * Signature of the test method
      */
     private String inputData;
     
