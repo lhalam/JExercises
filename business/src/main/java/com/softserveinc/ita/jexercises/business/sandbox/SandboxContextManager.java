@@ -45,6 +45,8 @@ public class SandboxContextManager {
         instance.addClassPermission(SandboxContext.AccessType.PERMIT,
                 "java.lang.String");
         instance.addClassPermission(SandboxContext.AccessType.PERMIT,
+                "java.util.Iterator");
+        instance.addClassPermission(SandboxContext.AccessType.PERMIT,
                 "java.lang.Math");
         instance.addClassPermission(SandboxContext.AccessType.PERMIT,
                 "com.softserveinc.ita.jexercises.common.entity.Assert");

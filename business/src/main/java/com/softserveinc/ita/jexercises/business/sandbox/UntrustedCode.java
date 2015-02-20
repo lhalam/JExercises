@@ -5,7 +5,7 @@ import bsh.Interpreter;
 import com.softserveinc.ita.jexercises.common.entity.Assert;
 import net.datenwerke.sandbox.SandboxedEnvironment;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Represents SandboxedEnvironment<T> interface implementation.
@@ -29,7 +29,7 @@ public class UntrustedCode implements SandboxedEnvironment<Object> {
     /**
      * List of asserts.
      */
-    private ArrayList<Assert> asserts;
+    private List<Assert> asserts;
 
     /**
      * Creates a new object.
@@ -37,7 +37,7 @@ public class UntrustedCode implements SandboxedEnvironment<Object> {
      * @param userUntrustedCode User input answer.
      * @param asserts           List of asserts.
      */
-    public UntrustedCode(String userUntrustedCode, ArrayList<Assert> asserts) {
+    public UntrustedCode(String userUntrustedCode, List<Assert> asserts) {
         this.userUntrustedCode = userUntrustedCode;
         this.asserts = asserts;
     }
@@ -58,14 +58,11 @@ public class UntrustedCode implements SandboxedEnvironment<Object> {
      * @return is answer correct or incorrect.
      */
     private boolean runAssert() {
-        boolean result = false;
-    outer:
-        for (int count = 0; count < asserts.size(); count++) {
-            if (runInBeanShell(asserts.get(count))) {
-                result = true;
-            } else {
+        boolean result = true;
+        for (Assert instance : asserts) {
+            if (!runInBeanShell(instance)) {
                 result = false;
-                break outer;
+                break;
             }
         }
         return result;
