@@ -68,15 +68,6 @@
 			<artifactId>spring-webmvc</artifactId>
 		</dependency>
 
-<<<<<<< Updated upstream
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-core</artifactId>
-			<version>2.5.1</version>
-		</dependency>
-
-=======
->>>>>>> Stashed changes
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
@@ -84,18 +75,6 @@
 			<scope>provided</scope>
 		</dependency>
 
-<<<<<<< Updated upstream
-		<dependency>
-			<groupId>com.google.code.gson</groupId>
-			<artifactId>gson</artifactId>
-			<version>1.7.1</version>
-		</dependency>
-		<dependency>
-			<groupId>org.codehaus.jackson</groupId>
-			<artifactId>jackson-mapper-asl</artifactId>
-			<version>1.9.13</version>
-		</dependency>
-=======
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-core</artifactId>
@@ -107,7 +86,6 @@
             <artifactId>jackson-databind</artifactId>
             <version>2.2.2</version>
         </dependency>
->>>>>>> Stashed changes
 
     </dependencies>
 	<build>
