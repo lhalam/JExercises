@@ -50,7 +50,7 @@ public class TestGridController {
     @RequestMapping(value = "/testgrid", method = RequestMethod.POST)
     @ResponseBody
     public TestGridDto showTestGridPage(@RequestBody TestGridParametersDto
-                                                    testGridParametersDto) {
+                                                testGridParametersDto) {
         TestGridDto testGridDto
             = testGridService.buildTestGrid(testGridParametersDto);
         return testGridDto;
