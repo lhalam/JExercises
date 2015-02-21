@@ -19,11 +19,5 @@ public interface TestGridService {
      */
     TestGridDto buildTestGrid(TestGridParametersDto testGridParametersDto);
 
-    /**
-     * Make TestGrid.
-     *
-     * @return TestGridDto object.
-     */
-    TestGridDto buildAllTestGrid();
 
 }
