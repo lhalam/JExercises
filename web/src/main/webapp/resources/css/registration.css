@@ -1,0 +1,18 @@
+@CHARSET "UTF-8";
+
+.combodate select {
+	padding: 6px 12px;
+	font-size: 14px;
+	text-transform: capitalize;
+	border: 1px solid #cccccc;
+	border-radius: 4px;
+	height: 34px;
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+
+.combodate select:focus {
+	border-color: #66afe9;
+	outline: 0;
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px
+		rgba(102, 175, 233, 0.6);
+}

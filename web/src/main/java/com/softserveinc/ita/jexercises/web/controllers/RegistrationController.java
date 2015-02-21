@@ -33,7 +33,7 @@ public class RegistrationController {
      */
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public ModelAndView showRegistrationForm() {
-        return new ModelAndView("registration");
+        return new ModelAndView("user/registration");
     }
 
     /**

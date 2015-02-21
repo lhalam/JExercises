@@ -17,9 +17,8 @@ $(document).ready(function() {
 		}
 	});
 
-	$("#birthDate").focus(function() {
-		this.type = "date";
-	}).blur(function() {
-		this.type = "text";
+	$("#birthDate").combodate({
+		minYear : 1905,
+		firstItem : "name"
 	});
 });

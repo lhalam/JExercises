@@ -1,4 +1,8 @@
+<%@ page language="java" contentType="text/html; charset=utf8"
+	pageEncoding="utf8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <head>
+<c:set var="basedir" value="${pageContext.request.contextPath}" />
 <meta charset="utf-8">
 <title>JExercises</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">

@@ -1,5 +1,7 @@
 package com.softserveinc.ita.jexercises.common.dto;
 
+import java.util.Date;
+
 /**
  * Represents User DTO.
  * 
@@ -31,13 +33,13 @@ public class UserDto {
     /**
      * User date of birth.
      */
-    private String birthDate;
+    private Date birthDate;
 
-    public String getBirthDate() {
+    public Date getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(String birthDate) {
+    public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
     }
 

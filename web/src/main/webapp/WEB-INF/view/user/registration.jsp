@@ -1,12 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=utf8"
 	pageEncoding="utf8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-<jsp:include page="base.jsp" />
-<jsp:include page="navigation.jsp" />
-<script src="resources/js/registration_data_validation.js"></script>
-<script src="resources/js/register.js"></script>
-<script src="resources/js/lib/jquery.validate.min.js"></script>
+<c:set var="basedir" value="${pageContext.request.contextPath}" />
+<jsp:include page="../base.jsp" />
+<jsp:include page="../navigation.jsp" />
+<link href="${basedir}/resources/css/registration.css" rel="stylesheet"
+	type="text/css">
+<script src="${basedir}/resources/js/lib/moment.js"></script>
+<script src="${basedir}/resources/js/lib/combodate.js"></script>
+<script src="${basedir}/resources/js/registration_data_validation.js"></script>
+<script src="${basedir}/resources/js/register.js"></script>
+<script src="${basedir}/resources/js/lib/jquery.validate.min.js"></script>
 </head>
 <body id="container">
 	<div class="container">
@@ -27,11 +33,13 @@
 							id="password" class="form-control" placeholder="Password"
 							name="password" type="password" /> <input id="matchingPassword"
 							class="form-control" placeholder="Confirm Password"
-							name="matchingPassword" type="password" /> <input id="birthDate"
-							class="form-control" placeholder="Date Of Birth" name="birthDate"/>
-						<br> <input id="submitButton"
-							class="btn btn-lg btn-success btn-block" type="button"
-							value="Register"> <br>
+							name="matchingPassword" type="password" /><br>
+							<label>Birthday</label>
+							<br> <input id="birthDate"
+							class="combodate" type="text" data-format="MM/DD/YYYY"
+							data-template="D MMM YYYY" name="birthDate" /> <br> <br> <input
+							id="submitButton" class="btn btn-lg btn-success btn-block"
+							type="button" value="Sign up"> <br>
 					</div>
 				</form>
 			</div>

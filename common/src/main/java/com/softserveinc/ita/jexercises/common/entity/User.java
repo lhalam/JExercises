@@ -1,6 +1,8 @@
 package com.softserveinc.ita.jexercises.common.entity;
 
+import java.util.Date;
 import java.util.Set;
+
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -85,7 +87,7 @@ public class User extends BaseEntity {
      * User date of birth.
      */
     @Column(name = "BIRTH_DATE", nullable = false)
-    private String birthDate;
+    private Date birthDate;
 
     /**
      * Creates a new User.
@@ -150,11 +152,11 @@ public class User extends BaseEntity {
         this.attempts = attempts;
     }
 
-    public String getBirthDate() {
+    public Date getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(String birthDate) {
+    public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
     }
 }
