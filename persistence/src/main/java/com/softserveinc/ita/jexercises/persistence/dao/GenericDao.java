@@ -66,4 +66,20 @@ public interface GenericDao<T, PK extends Serializable> {
      * @return List of entity objects.
      */
     List<T> findAllByCriteria(SearchCondition searchCondition);
+
+    /**
+     * Get number of all results in pagination.
+     *
+     * @param searchCondition Object with search parameters.
+     * @return Number of all results.
+     */
+    int getNumberOfAllResults(SearchCondition searchCondition);
+
+    /**
+     * Get number of pages in pagination.
+     *
+     * @param searchCondition Object with search parameters.
+     * @return Number of pages.
+     */
+    int getNumberOfPages(SearchCondition searchCondition);
 }

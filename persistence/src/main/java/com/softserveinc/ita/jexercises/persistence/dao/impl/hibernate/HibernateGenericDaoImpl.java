@@ -10,7 +10,6 @@ import com.softserveinc.ita.jexercises.persistence.dao.GenericDao;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import java.beans.Introspector;
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
@@ -86,39 +85,16 @@ public class HibernateGenericDaoImpl<T, PK extends Serializable> implements
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public List<T> findAll() {
-        Query query = entityManager.createQuery("select x from "
-                + getEntityName() + " x");
+        PathBuilder<T> qObject = new PathBuilder<>(entityClass,
+                Introspector.decapitalize(getEntityName()));
 
-        return (List<T>) query.getResultList();
+        JPAQuery jpaQuery = new JPAQuery(entityManager);
+
+        return jpaQuery.from(qObject).list(qObject);
     }
 
-    /**
-     * Get name of entity class.
-     *
-     * @return String with the name of entity class.
-     */
-    private String getEntityName() {
-        if (entity == null) {
-            Entity entityAnn = (Entity) entityClass.getAnnotation(Entity.class);
-
-            if (entityAnn != null && !entityAnn.name().equals(EMPTY)) {
-                entity = entityAnn.name();
-            } else {
-                entity = entityClass.getSimpleName();
-            }
-        }
-
-        return entity;
-    }
-
-    /**
-     * Method for sorting, filtering and paging.
-     *
-     * @param searchCondition Object with search parameters.
-     * @return List of entity objects.
-     */
+    @Override
     public List<T> findAllByCriteria(SearchCondition searchCondition) {
         PathBuilder<T> qObject = new PathBuilder<>(entityClass,
                 Introspector.decapitalize(getEntityName()));
@@ -151,6 +127,51 @@ public class HibernateGenericDaoImpl<T, PK extends Serializable> implements
         }
 
         return jpaQuery.list(qObject);
+    }
+
+    @Override
+    public int getNumberOfAllResults(SearchCondition searchCondition) {
+        PathBuilder<T> qObject = new PathBuilder<>(entityClass,
+                Introspector.decapitalize(getEntityName()));
+
+        JPAQuery jpaQuery = new JPAQuery(entityManager);
+
+        jpaQuery.from(qObject);
+
+        for (Map.Entry<String, String> filter :
+                searchCondition.getFilterMap().entrySet())
+        {
+            StringPath filterFieldPath = qObject.getString(filter.getKey());
+
+            jpaQuery.where(filterFieldPath.like(filter.getValue()));
+        }
+
+        return jpaQuery.list(qObject).size();
+    }
+
+    @Override
+    public int getNumberOfPages(SearchCondition searchCondition) {
+        return (int) Math.ceil((double)(getNumberOfAllResults(searchCondition) /
+                searchCondition.getPageSize()));
+    }
+
+    /**
+     * Get name of entity class.
+     *
+     * @return String with the name of entity class.
+     */
+    private String getEntityName() {
+        if (entity == null) {
+            Entity entityAnn = (Entity) entityClass.getAnnotation(Entity.class);
+
+            if (entityAnn != null && !entityAnn.name().equals(EMPTY)) {
+                entity = entityAnn.name();
+            } else {
+                entity = entityClass.getSimpleName();
+            }
+        }
+
+        return entity;
     }
 
     protected EntityManager getEntityManager() {
