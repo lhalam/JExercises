@@ -23,24 +23,21 @@
 
 
                 <table class="table table-bordered">
-                    <tr class="row">
+                    <tr id="testgrid" class="row">
                         <td class="field-label col-md-10 active">
                             <label><strong>Description</strong></label>
                         </td>
                         <td class="col-md-2 active">
                             <label><strong>Availability</strong></label>
                         </td>
-                    </tr>
-                    <%--<c:forEach var="test" items="${tests}">
                     <tr class="row">
                         <td class="field-label col-md-10 ">
-                            ${test.description}
+                            <p id="description"></p>
                         </td>
                         <td class="col-md-2">
-                            ${test.isPublic}
+                            <p id="isPublic"></p>
                         </td>
                     </tr>
-                    </c:forEach>--%>
                 </table>
                 <div class="col-md-6">
                     <ul class="pagination pagination-control">
@@ -54,7 +51,7 @@
                 <div class="col-md-offset-3">
                     <ul class="pagination pagination-control">
                         <li><a id="button" >&laquo;</a></li>
-                        <li><a href="testgrid">1</a></li>
+                        <li><a href="testgrid12">1</a></li>
                         <li><a href="#">2</a></li>
                         <li><a href="#">3</a></li>
                         <li><a href="#">4</a></li>
@@ -62,7 +59,6 @@
                         <li><a href="#">&raquo;</a></li>
                     </ul>
                 </div>
-
             </div>
         </form>
     </div>
