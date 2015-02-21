@@ -36,7 +36,7 @@ public class TestResultServiceImpl implements TestResultService {
     @Override
     public TestResultDto getTestResultInfo(long attemptId) {
         TestResultDto testResultDto = new TestResultDto();
-        List<TestResultAnswerDto> testResultAnswerDtos 
+        List<TestResultAnswerDto> testResultAnswerDtos
             = new ArrayList<TestResultAnswerDto>();
         Attempt attempt = attemptDao.findById(attemptId);
         User user = attempt.getUser();
@@ -46,6 +46,7 @@ public class TestResultServiceImpl implements TestResultService {
         testResultDto.setEmail(user.getEmail());
         testResultDto.setCreateDate(attempt.getCreatedDate());
         testResultDto.setTotalAnswersCount(attempt.getUserAnswers().size());
+        testResultDto.setCorrectAnswersCount(countCorrect(attemptId));
         testResultDto.setRole(user.getRole());
         testResultDto.setPublic(test.getIsPublic());
         List<UserAnswer> userAnswers = (List<UserAnswer>) attempt
@@ -53,7 +54,7 @@ public class TestResultServiceImpl implements TestResultService {
         for (UserAnswer userAnswer : userAnswers) {
             TestResultAnswerDto testResultAnswerDto = new TestResultAnswerDto();
             testResultAnswerDto.setCorrect(userAnswer.isCorrect());
-            
+
             testResultAnswerDto.setQuestionDescription(userAnswer.getQuestion()
                     .getDescription());
             testResultAnswerDtos.add(testResultAnswerDto);
@@ -62,5 +63,19 @@ public class TestResultServiceImpl implements TestResultService {
         testResultDto.setAnswers(testResultAnswerDtos);
 
         return testResultDto;
+    }
+
+    @Override
+    public int countCorrect(long attemptId) {
+        int count = 0;
+        Attempt attempt = attemptDao.findById(attemptId);
+        List<UserAnswer> answers = new ArrayList<UserAnswer>(
+                attempt.getUserAnswers());
+        for (UserAnswer ua : answers) {
+            if (ua.isCorrect()) {
+                count++;
+            }
+        }
+        return count;
     }
 }

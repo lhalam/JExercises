@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.softserveinc.ita.jexercises.business.services.TestResultService;
@@ -27,14 +28,25 @@ public class TestResultController {
     /**
      * Method provides mapping on "testresult" input
      *
-     * @param model Model.
+     * @param model
+     *            Model.
      * @return ModelAndView object,in current case that actually means returning
      *         testresult.jsp
-     */   
+     */
     @RequestMapping(value = "/testresult", method = RequestMethod.GET)
     public ModelAndView showTestResultPage(Model model) {
-        TestResultDto testResultDto = testResultService.getTestResultInfo(1L);
-        model.addAttribute("attempt", testResultDto);        
         return new ModelAndView("testresult");
+    }
+
+    /**
+     * Method provides mapping on "testresult" input.
+     * 
+     * @return TestResultDto object with all parameters.
+     */
+    @RequestMapping(value = "/testresult", method = RequestMethod.POST)
+    @ResponseBody
+    public TestResultDto showTestResultInfo() {
+        TestResultDto testResultDto = testResultService.getTestResultInfo(1L);
+        return testResultDto;
     }
 }
