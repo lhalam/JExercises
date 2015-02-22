@@ -14,6 +14,15 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
+
+    <repositories>
+        <repository>
+            <id>business.local.repo</id>
+            <name>business</name>
+            <url>file:${project.basedir}/src/main/resources/repo</url>
+        </repository>
+    </repositories>
+
 	<dependencies>
 
 		<dependency>
@@ -78,28 +87,6 @@
 						<testFailureIgnore>true</testFailureIgnore>
 					</configuration>
 				</plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-install-plugin</artifactId>
-                    <version>2.4</version>
-                    <executions>
-                        <execution>
-                            <id>install-java-sandbox</id>
-                            <phase>validate</phase>
-                            <goals>
-                                <goal>install-file</goal>
-                            </goals>
-                            <configuration>
-                                <file>${project.basedir}/src/main/resources/sandbox/java-sandbox-0.3.jar</file>
-                                <groupId>net.datenwerke</groupId>
-                                <artifactId>sandbox</artifactId>
-                                <version>0.3</version>
-                                <packaging>jar</packaging>
-                                <generatePom>true</generatePom>
-                            </configuration>
-                        </execution>
-                    </executions>
-                </plugin>
 			</plugins>
 		</pluginManagement>
 	</build>
