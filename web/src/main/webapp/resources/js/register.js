@@ -4,6 +4,7 @@
 $(document).ready(function() {
 	$("#submitButton").click(function(e) {
 		var form = $('#registrationForm');
+		var email = $("#email");
 		if (form.valid()) {
 			$.ajax({
 				type : "POST",
@@ -12,7 +13,14 @@ $(document).ready(function() {
 				data : form.serialize(),
 				success : function(data) {
 					if (data.hasErrors) {
-						//error handling;
+						var error = data.errors[0];
+						email.popover({
+							placement : "right",
+							content : error
+						}).popover("show");
+						email.on("change", function() {
+							email.popover("destroy");
+						});
 					} else {
 						window.location.href = "/web/login";
 					}
@@ -25,4 +33,5 @@ $(document).ready(function() {
 		minYear : 1905,
 		firstItem : "name"
 	});
+
 });

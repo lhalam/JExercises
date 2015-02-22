@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf8"
 	pageEncoding="utf8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
 <c:set var="basedir" value="${pageContext.request.contextPath}" />
@@ -29,16 +29,16 @@
 							id="firstName" name="firstName" type="text" /> <input
 							class="form-control" placeholder="Last name" id="lastName"
 							name="lastName" type="text" /> <input class="form-control"
-							placeholder="E-mail" id="email" name="email" type="email" /> <input
+							placeholder="E-mail" id="email" name="email" type="email"
+							data-toggle="popover" /> <input
 							id="password" class="form-control" placeholder="Password"
 							name="password" type="password" /> <input id="matchingPassword"
 							class="form-control" placeholder="Confirm Password"
-							name="matchingPassword" type="password" /><br>
-							<label class="label">Birthday</label>
-							<br> <input id="birthDate"
+							name="matchingPassword" type="password" /><br> <label
+							class="label">Birthday</label> <br> <input id="birthDate"
 							class="combodate" type="text" data-format="MM/DD/YYYY"
-							data-template="D MMM YYYY" name="birthDate" /> <br> <br> <input
-							id="submitButton" class="btn btn-lg btn-success btn-block"
+							data-template="D MMM YYYY" name="birthDate" /> <br> <br>
+						<input id="submitButton" class="btn btn-lg btn-success btn-block"
 							type="button" value="Sign up"> <br>
 					</div>
 				</form>
