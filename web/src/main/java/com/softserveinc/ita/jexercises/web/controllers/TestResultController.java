@@ -35,7 +35,7 @@ public class TestResultController {
      */
     @RequestMapping(value = "/testresult", method = RequestMethod.GET)
     public ModelAndView showTestResultPage(Model model) {
-        return new ModelAndView("testresult");
+        return new ModelAndView("test/testresult");
     }
 
     /**
