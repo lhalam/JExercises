@@ -12,40 +12,21 @@
     <jsp:include page="../base.jsp"/>
     <jsp:include page="../navigation.jsp"/>
     <script src="resources/js/testgrid.js"></script>
+    <script src="resources/js/lib/bootstrap-paginator.min.js"></script>
 </head>
 <body id="container">
-<div class="container">
-    <div class="row-fluid" id="testgrid">
+ ​<div class="container">
+    <div class="row-fluid">
         <form class="panel panel-primary">
-
-
             <div class="table-responsive">
-
-
-                <table class="table table-bordered">
-                    <tr id="testgrid" class="row">
-                        <td class="field-label col-md-10 active">
-                            <label><strong>Description</strong></label>
-                        </td>
-                        <td class="col-md-2 active">
-                            <label><strong>Availability</strong></label>
-                        </td>
-                    <tr class="row">
-                        <td class="field-label col-md-10 ">
-                            <p id="description"></p>
-                        </td>
-                        <td class="col-md-2">
-                            <p id="isPublic"></p>
-                        </td>
-                    </tr>
-                </table>
+                <div id="testgrid"></div>
                 <div class="col-md-6">
                     <ul class="pagination pagination-control">
-                        <li><a>Show entries:</a></li>
-                        <li><a href="#">10</a></li>
-                        <li><a href="#">25</a></li>
-                        <li><a href="#">50</a></li>
-                        <li><a href="#">100</a></li>
+                        <li id="showEntries" class="active"><a>Show entries:</a></li>
+                        <li id="button5" class=""><a>5</a></li>
+                        <li id="button10"><a>10</a></li>
+                        <li id="button25"><a>25</a></li>
+                        <li id="button50"><a>50</a></li>
                     </ul>
                 </div>
                 <div class="col-md-offset-3">
