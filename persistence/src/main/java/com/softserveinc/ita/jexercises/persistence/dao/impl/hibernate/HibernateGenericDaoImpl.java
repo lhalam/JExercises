@@ -151,8 +151,8 @@ public class HibernateGenericDaoImpl<T, PK extends Serializable> implements
 
     @Override
     public int getNumberOfPages(SearchCondition searchCondition) {
-        return (int) Math.ceil((double)(getNumberOfAllResults(searchCondition) /
-                searchCondition.getPageSize()));
+        return (int) Math.ceil((double) getNumberOfAllResults(searchCondition) /
+                (double) searchCondition.getPageSize());
     }
 
     /**
