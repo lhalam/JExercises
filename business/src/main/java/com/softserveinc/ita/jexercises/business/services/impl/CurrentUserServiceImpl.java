@@ -5,6 +5,7 @@ import com.softserveinc.ita.jexercises.common.entity.User;
 import com.softserveinc.ita.jexercises.persistence.dao.impl.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,10 @@ import org.springframework.stereotype.Service;
 public class CurrentUserServiceImpl implements CurrentUserService {
 
     /**
+     * Final anonymous user string.
+     */
+    private static final String ANONYMOUS_USER = "anonymous";
+    /**
      * User DAO instance.
      */
     @Autowired
@@ -24,14 +29,30 @@ public class CurrentUserServiceImpl implements CurrentUserService {
 
     @Override
     public User getCurrentUser() {
+        String userEmail = getCurrentUserEmail();
 
+        if (ANONYMOUS_USER.equals(userEmail)) {
+            return null;
+        }
+
+        return userDao.findByEmail(userEmail);
+    }
+
+    @Override
+    public String getCurrentUserEmail() {
         Authentication authentication = SecurityContextHolder.getContext()
                 .getAuthentication();
 
         if (authentication == null || !authentication.isAuthenticated()) {
-            return null;
+            return ANONYMOUS_USER;
         }
 
-        return userDao.findByEmail(authentication.getName());
+        for (GrantedAuthority auth : authentication.getAuthorities()) {
+            if ("ROLE_ANONYMOUS".equals(auth.getAuthority())) {
+                return ANONYMOUS_USER;
+            }
+        }
+
+        return authentication.getName();
     }
 }

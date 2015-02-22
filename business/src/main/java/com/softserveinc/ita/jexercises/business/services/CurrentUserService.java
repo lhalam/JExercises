@@ -14,4 +14,11 @@ public interface CurrentUserService {
      * @return Current user.
      */
     User getCurrentUser();
+
+    /**
+     * Getting current user email from SecurityContextHolder.
+     *
+     * @return Current user email.
+     */
+    String getCurrentUserEmail();
 }
