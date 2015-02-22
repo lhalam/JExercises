@@ -31,7 +31,7 @@ public class RegistrationController {
      * 
      * @return Registration page.
      */
-    @RequestMapping(value = "/registration", method = RequestMethod.GET)
+    @RequestMapping(value = "/user/registration", method = RequestMethod.GET)
     public ModelAndView showRegistrationForm() {
         return new ModelAndView("user/registration");
     }
@@ -43,13 +43,13 @@ public class RegistrationController {
      *            UserDto object.
      * @return UserDto object.
      */
-    @RequestMapping(value = "/registration", method = RequestMethod.POST)
+    @RequestMapping(value = "/user/registration", method = RequestMethod.POST)
     @ResponseBody
     public UserDto registerUserAccount(UserDto model) {
         try {
             userRegistrationService.registerNewUserAccount(model);
-        } catch (EmailExistsException e) {
-            e.printStackTrace();
+        } catch (EmailExistsException exeption) {
+            model.addError(exeption.getMessage());
         }
         return model;
     }

@@ -2,7 +2,6 @@ package com.softserveinc.ita.jexercises.business.services;
 
 import com.softserveinc.ita.jexercises.business.utils.EmailExistsException;
 import com.softserveinc.ita.jexercises.common.dto.UserDto;
-import com.softserveinc.ita.jexercises.common.entity.User;
 
 /**
  * Service that handles user registration process.
@@ -21,5 +20,5 @@ public interface UserRegistrationService {
      * @throws EmailExistsException
      *             if user with current email already exists.
      */
-    User registerNewUserAccount(UserDto userDto) throws EmailExistsException;
+    UserDto registerNewUserAccount(UserDto userDto) throws EmailExistsException;
 }

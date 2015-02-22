@@ -21,7 +21,7 @@
                 <li><a href="testgrid">Tests</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="registration">Registration</a></li>
+                <li><a href="user/registration">Registration</a></li>
                 <li><a href="login">Login</a></li>
             </ul>
         </div><!--/.nav-collapse -->

@@ -28,4 +28,20 @@ public class UserMapper {
         return user;
     }
 
+    /**
+     * Transforms User entity object into User DTO object.
+     * 
+     * @param user
+     *            User entity.
+     * @return User DTO.
+     */
+    public UserDto toDto(User user) {
+        UserDto userDto = new UserDto();
+        userDto.setFirstName(user.getFirstName());
+        userDto.setLastName(user.getLastName());
+        userDto.setEmail(user.getEmail());
+        userDto.setBirthDate(user.getBirthDate());
+        userDto.setPassword(user.getPassword());
+        return userDto;
+    }
 }

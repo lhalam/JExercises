@@ -1,6 +1,7 @@
 package com.softserveinc.ita.jexercises.common.dto;
 
 import java.util.Date;
+import java.util.HashSet;
 
 /**
  * Represents User DTO.
@@ -34,6 +35,37 @@ public class UserDto {
      * User date of birth.
      */
     private Date birthDate;
+
+    /**
+     * Collection of errors.
+     */
+    private HashSet<String> errors = new HashSet<String>();
+
+    /**
+     * Error flag.
+     */
+    private boolean hasErrors;
+
+    public HashSet<String> getErrors() {
+        return errors;
+    }
+
+    /**
+     * Adds errors to collection.
+     * 
+     * @param error
+     *            Error string.
+     */
+    public void addError(String error) {
+        errors.add(error);
+        if (!hasErrors) {
+            hasErrors = true;
+        }
+    }
+
+    public boolean getHasErrors() {
+        return hasErrors;
+    }
 
     public Date getBirthDate() {
         return birthDate;

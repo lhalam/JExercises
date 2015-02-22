@@ -34,7 +34,7 @@
 							name="password" type="password" /> <input id="matchingPassword"
 							class="form-control" placeholder="Confirm Password"
 							name="matchingPassword" type="password" /><br>
-							<label>Birthday</label>
+							<label class="label">Birthday</label>
 							<br> <input id="birthDate"
 							class="combodate" type="text" data-format="MM/DD/YYYY"
 							data-template="D MMM YYYY" name="birthDate" /> <br> <br> <input

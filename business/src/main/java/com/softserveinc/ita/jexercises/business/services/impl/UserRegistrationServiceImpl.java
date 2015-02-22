@@ -41,17 +41,19 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
 
     @Transactional
     @Override
-    public User registerNewUserAccount(UserDto userDto)
+    public UserDto registerNewUserAccount(UserDto userDto)
         throws EmailExistsException {
         User user = null;
+        UserMapper userMapper = new UserMapper();
         String email = userDto.getEmail();
         if (emailExist(email)) {
             throw new EmailExistsException(String.format(EMAIL_EXISTS_MESSAGE,
                     email));
         } else {
-            user = createNewUserAccount(userDto);
+            user = userMapper.toEntity(userDto);
+            user = createNewUserAccount(user);
         }
-        return user;
+        return userMapper.toDto(user);
     }
 
     /**
@@ -69,13 +71,11 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
     /**
      * Creates new user account.
      * 
-     * @param userDto
-     *            User DTO object.
+     * @param user
+     *            User Entity object.
      * @return User with registered account.
      */
-    private User createNewUserAccount(UserDto userDto) {
-        UserMapper userMapper = new UserMapper();
-        User user = userMapper.toEntity(userDto);
+    private User createNewUserAccount(User user) {
         String hashedPassword = hashPassword(user.getPassword());
         user.setPassword(hashedPassword);
         user.setRole(Role.ROLE_USER);

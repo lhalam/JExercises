@@ -7,11 +7,15 @@ $(document).ready(function() {
 		if (form.valid()) {
 			$.ajax({
 				type : "POST",
-				url : "/web/registration",
+				url : "/web/user/registration",
 				dataType : "json",
 				data : form.serialize(),
 				success : function(data) {
-					form.trigger("reset");
+					if (data.hasErrors) {
+						//error handling;
+					} else {
+						window.location.href = "/web/login";
+					}
 				}
 			});
 		}
