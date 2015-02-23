@@ -9,19 +9,26 @@
     <%@ include file="../navigation.jsp" %>
     <link href="${basedir}/resources/css/profile.css" rel="stylesheet"
           type="text/css">
+    <link href="${basedir}/resources/css/loading-icon.css" rel="stylesheet"
+          type="text/css">
     <script src="${basedir}/resources/js/profile.js"></script>
 </head>
 
-<body id="container" onload="load()">
+<body id="container">
 <div class="container">
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad">
             <div class="panel panel-info">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Username</h3>
+                    <h3 class="panel-title">Profile</h3>
                 </div>
                 <div class="panel-body">
-                    <div class="row">
+                    <div id="loadingIcon" class="form-group">
+                        <div class="col-md-12 text-center">
+                            <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span>
+                        </div>
+                    </div>
+                    <div id="profileForm" class="row">
                         <div class="col-md-3 col-lg-3 " align="center"><img
                                 alt="User Pic"
                                 src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=100"
@@ -65,7 +72,7 @@
                        class="btn btn-sm btn-primary"><i
                             class="glyphicon glyphicon-envelope"></i></a>
                         <span class="pull-right">
-                            <a href="/user/profile/edit"
+                            <a href="/web/user/profile/edit"
                                data-original-title="Edit this user"
                                data-toggle="tooltip" type="button"
                                class="btn btn-sm btn-warning"><i

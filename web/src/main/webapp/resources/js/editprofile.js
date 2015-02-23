@@ -1,10 +1,15 @@
 $(document).ready(function() {
-    $("#updateButton").click(function(e) {
+    $("#submitButton").click(function() {
+        var form = $('#editProfileForm');
 
             $.ajax({
                 type : "POST",
-                url : "/user/profile/edit",
-                dataType : "json"
+                url : "/web/user/profile/edit",
+                dataType : "json",
+                data : form.serialize(),
+                success : function() {
+                        window.location.href = "/web/user/profile";
+                }
             });
 
     });

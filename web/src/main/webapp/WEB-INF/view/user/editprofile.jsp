@@ -9,7 +9,6 @@
     <script src="${basedir}/resources/js/editprofile.js"></script>
 </head>
 
-
 <body id="container">
 <div class="container">
     <div class="row" style="margin-top:20px;">
@@ -37,7 +36,8 @@
                                     <input class="form-control"
                                            placeholder="First Name"
                                            value="${userFirstName}"
-                                           path="firstName" type="text">
+                                           name="firstName"
+                                           type="text">
                                 </div>
                             </div>
 
@@ -51,7 +51,8 @@
                                     <input class="form-control"
                                            placeholder="Last Name"
                                            value="${userLastName}"
-                                           path="lastName" type="text">
+                                           name="lastName"
+                                          type="text">
                                 </div>
                             </div>
 
@@ -63,7 +64,8 @@
                                     <input class="form-control"
                                            placeholder="${userEmail}"
                                            disabled="true"
-                                           path="email" type="text"
+                                           name="email"
+                                           type="text"
                                            id="email">
                                 </div>
                             </div>
@@ -76,7 +78,7 @@
                                     <input class="form-control"
                                            id="password"
                                            placeholder="New Password"
-                                           path="password"
+                                           name="password"
                                            type="password">
                                 </div>
                             </div>
@@ -90,7 +92,7 @@
                                     <input class="form-control"
                                            id="matchingPassword"
                                            placeholder="Confirm Password"
-                                           path="matchingPassword"
+
                                            type="password"/>
                                 </div>
                             </div>
@@ -99,15 +101,12 @@
                                 <div class="col-lg-offset-7 col-lg-12">
                                     <input class="btn btn-sm" type="reset"
                                            value="Reset form">
-                                    <input class="btn btn-info" id="updateButton"
+                                    <input class="btn btn-info" id="submitButton"
                                            type="button"
                                            value="Update">
                                 </div>
                             </div>
-
-
                         </fieldset>
-
                     </form>
                 </div>
             </div>

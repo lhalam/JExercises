@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
- * Controls process of viewing and editing users profile.
+ * Controls process of viewing and editing user profiles.
  *
  * @author Taras Vuyiv
  * @version 1.0
@@ -78,8 +78,7 @@ public class ProfileController {
      * @param model User Profile DTO Object.
      * @return Profile page.
      */
-    @RequestMapping(value = "/user/profile/edit", method = RequestMethod.POST,
-            headers = "Accept=application/json")
+    @RequestMapping(value = "/user/profile/edit", method = RequestMethod.POST)
     @ResponseBody
     public UserProfileDto postEditProfileDataJSON(UserProfileDto model) {
         userProfileService.updateUserProfile(model);
