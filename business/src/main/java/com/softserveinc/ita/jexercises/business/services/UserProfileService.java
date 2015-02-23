@@ -1,6 +1,5 @@
 package com.softserveinc.ita.jexercises.business.services;
 
-import com.softserveinc.ita.jexercises.common.dto.UserDto;
 import com.softserveinc.ita.jexercises.common.dto.UserProfileDto;
 import com.softserveinc.ita.jexercises.common.entity.User;
 
@@ -11,21 +10,21 @@ import com.softserveinc.ita.jexercises.common.entity.User;
  * @author Taras Vuyiv
  * @version 1.0
  */
-public interface ProfileService {
+public interface UserProfileService {
 
     /**
      * Getting profile fields of selected user.
      *
-     * @param email Email of user to get info.
+     * @param user User to get info about.
      * @return User Profile DTO.
      */
-    UserProfileDto getUserInfo(String email);
+    UserProfileDto getUserInfo(User user);
 
     /**
      * Update user after profile edit form submitting .
      *
-     * @param userDto Contains new user fields.
+     * @param userProfileDto Contains user fields.
      * @return Updated user.
      */
-    User updateUserProfile(UserDto userDto);
+    User updateUserProfile(UserProfileDto userProfileDto);
 }
