@@ -80,7 +80,7 @@ function paging(page_namber){
         $("#previouspage").hide();
     };
     $("#nextpage").show();
-    if (nextpage>numberOfPages+1) {
+    if (nextpage>numberOfPages) {
         $("#nextpage").hide();
     };
     $("#previouspage").val(previouspage.toString());
