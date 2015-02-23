@@ -23,11 +23,12 @@ public class HibernateAssertDaoImpl extends
     @SuppressWarnings("unchecked")
     @Override
     public List<Assert> findAllByQuestion(Long questionId) {
-        String queryString = "select distinct as from Assert as"
-                + " where as.question_id=:question_id";
-        Query query = getEntityManager().createQuery(queryString).setParameter(
-                "question_id", questionId);
-        return query.getResultList();
+        String queryString = "select distinct a  from Assert a" +
+                " INNER JOIN a.question q where q.id=:questionId";
+        Query query = getEntityManager().createQuery(queryString);
+        query.setParameter("questionId", questionId);
+        List<Assert> asserts = (List<Assert>) query.getResultList();
+        return asserts;
     }
 
 }
