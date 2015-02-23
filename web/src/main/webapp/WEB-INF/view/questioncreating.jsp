@@ -19,7 +19,13 @@
 				</div>
 				<div class="row">
 					<div class="col-md-offset-2 col-md-8">
-
+						
+						<div class="form-group">
+							<label for="comment">Question name:</label>
+							<form:textarea class="form-control" rows="4" id="comment"
+								placeholder="Input question name..." path="questionName" type="text"></form:textarea>
+						</div>
+						
 						<div class="form-group">
 							<label for="comment">Description:</label>
 							<form:textarea class="form-control" rows="4" id="comment"

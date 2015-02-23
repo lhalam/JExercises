@@ -9,6 +9,10 @@ package com.softserveinc.ita.jexercises.common.dto;
  */
 public class QuestionCreatingDto {
     /**
+     * Name of the question.
+     */
+    private String questionName;
+    /**
      * Description of the question.
      */
     private String questionDescription;
@@ -43,5 +47,13 @@ public class QuestionCreatingDto {
 
     public void setInputData(String inputData) {
         this.inputData = inputData;
+    }
+
+    public String getQuestionName() {
+        return questionName;
+    }
+
+    public void setQuestionName(String questionName) {
+        this.questionName = questionName;
     }
 }
