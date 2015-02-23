@@ -12,6 +12,8 @@ import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.softserveinc.ita.jexercises.common.utils.Role;
+
 /**
  * Represents User Entity.
  * 
@@ -21,23 +23,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "USER")
 public class User extends BaseEntity {
-    /**
-     * Represents role variants.
-     * 
-     * @author Oksana Senchuk
-     *
-     */
-    public enum Role {
-        /**
-         * User role.
-         */
-        ROLE_USER,
-        /**
-         * Admin role.
-         */
-        ROLE_ADMIN
-    }
-
+   
     /**
      * The first name of the user.
      */

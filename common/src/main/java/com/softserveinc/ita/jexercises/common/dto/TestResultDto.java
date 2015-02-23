@@ -3,7 +3,9 @@ package com.softserveinc.ita.jexercises.common.dto;
 import java.util.Date;
 import java.util.List;
 
-import com.softserveinc.ita.jexercises.common.entity.User.Role;
+import com.softserveinc.ita.jexercises.common.utils.Role;
+
+
 
 /**
  * Represents TestResult DTO.

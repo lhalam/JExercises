@@ -1,6 +1,8 @@
 package com.softserveinc.ita.jexercises.common.dto;
 
-import com.softserveinc.ita.jexercises.common.entity.User;
+
+import com.softserveinc.ita.jexercises.common.utils.Role;
+
 import java.util.Date;
 
 /**
@@ -37,7 +39,7 @@ public class UserProfileDto {
     /**
      * User role.
      */
-    private User.Role role;
+    private Role role;
     /**
      * Avatar.
      */
@@ -51,11 +53,11 @@ public class UserProfileDto {
         this.registrationDate = registrationDate;
     }
 
-    public User.Role getRole() {
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(User.Role role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 

@@ -1,5 +1,7 @@
 package com.softserveinc.ita.jexercises.common.mapper;
 
+import org.springframework.stereotype.Component;
+
 import com.softserveinc.ita.jexercises.common.dto.UserDto;
 import com.softserveinc.ita.jexercises.common.entity.User;
 
@@ -9,6 +11,7 @@ import com.softserveinc.ita.jexercises.common.entity.User;
  * @author Oksana Senchuk
  * @version 1.0
  */
+@Component
 public class UserMapper {
 
     /**

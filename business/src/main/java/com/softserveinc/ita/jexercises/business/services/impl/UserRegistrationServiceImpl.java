@@ -4,14 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.softserveinc.ita.jexercises.business.services.
        UserRegistrationService;
 import com.softserveinc.ita.jexercises.business.utils.EmailExistsException;
 import com.softserveinc.ita.jexercises.common.dto.UserDto;
 import com.softserveinc.ita.jexercises.common.entity.User;
-import com.softserveinc.ita.jexercises.common.entity.User.Role;
 import com.softserveinc.ita.jexercises.common.mapper.UserMapper;
+import com.softserveinc.ita.jexercises.common.utils.Role;
 import com.softserveinc.ita.jexercises.persistence.dao.impl.UserDao;
 
 /**
@@ -32,6 +31,12 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
      */
     @Autowired
     private UserDao userDao;
+    
+    /**
+     * User mapper instance.
+     */
+    @Autowired
+    private UserMapper userMapper;
 
     /**
      * Instance of BCryptPasswordEncoder.
@@ -44,7 +49,6 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
     public UserDto registerNewUserAccount(UserDto userDto)
         throws EmailExistsException {
         User user = null;
-        UserMapper userMapper = new UserMapper();
         String email = userDto.getEmail();
         if (emailExist(email)) {
             throw new EmailExistsException(String.format(EMAIL_EXISTS_MESSAGE,
