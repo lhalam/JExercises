@@ -15,7 +15,6 @@ import com.softserveinc.ita.jexercises.common.dto.QuestionCreatingDto;
 import com.softserveinc.ita.jexercises.common.entity.Assert;
 import com.softserveinc.ita.jexercises.common.entity.Question;
 
-
 /**
  * Represents QuestionCreatingService implementation.
  * 
@@ -38,7 +37,9 @@ public class QuestionCreatingServiceImpl implements QuestionCreatingService {
         Question question = new Question();
         String questionDescription = questionCreatingDto
                 .getQuestionDescription();
+        String questionName = questionCreatingDto.getQuestionName();
         question.setDescription(questionDescription);
+        question.setName(questionName);
 
         Assert assertVar = new Assert();
         Set<Assert> assertSet = new HashSet<Assert>();
