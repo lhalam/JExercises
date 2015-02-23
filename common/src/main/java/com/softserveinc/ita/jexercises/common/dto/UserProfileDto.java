@@ -1,5 +1,6 @@
 package com.softserveinc.ita.jexercises.common.dto;
 
+import com.softserveinc.ita.jexercises.common.entity.User;
 import java.util.Date;
 
 /**
@@ -25,17 +26,18 @@ public class UserProfileDto {
      * User password.
      */
     private String password;
-
     /**
      * User registration date.
      */
     private Date registrationDate;
-
+    /**
+     * User birth date.
+     */
+    private Date birthDate;
     /**
      * User role.
      */
-    private String role;
-
+    private User.Role role;
     /**
      * Avatar.
      */
@@ -49,11 +51,11 @@ public class UserProfileDto {
         this.registrationDate = registrationDate;
     }
 
-    public String getRole() {
+    public User.Role getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(User.Role role) {
         this.role = role;
     }
 
@@ -97,4 +99,11 @@ public class UserProfileDto {
         this.password = password;
     }
 
+    public Date getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
+    }
 }
