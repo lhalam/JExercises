@@ -1,7 +1,10 @@
 package com.softserveinc.ita.jexercises.business.sandbox;
 
+import bsh.EvalError;
+import bsh.Interpreter;
+import com.softserveinc.ita.jexercises.business.utils.SecurityException;
 import com.softserveinc.ita.jexercises.common.entity.Assert;
-import net.datenwerke.sandbox.SandboxedCallResult;
+import org.apache.log4j.Logger;
 
 import java.util.List;
 
@@ -14,7 +17,23 @@ import java.util.List;
 public class Sandbox {
 
     /**
-     * Private Sandbox constructor
+     * The result of executing untrusted code.
+     */
+    private static boolean result;
+
+    /**
+     * Log4j logger instance.
+     */
+    private static Logger logger = Logger.getLogger(Sandbox.class);
+
+    /**
+     * The beanshell script interpreter instance.
+     * Can be used to evaluate statements or expressions.
+     */
+    private static Interpreter interpreter = new Interpreter();
+
+    /**
+     * Private constructor.
      */
     private Sandbox() {
     }
@@ -23,17 +42,39 @@ public class Sandbox {
      * Checks untrusted code and return is user input answer correct or
      * incorrect.
      *
-     * @param userUntrustedCode User input answer.
-     * @param asserts           List of asserts.
+     * @param untrustedCode User input answer.
+     * @param asserts       List of asserts.
      * @return True if user answer is correct and false is incorrect.
+     * @throws Exception .
      */
-    public static Object checkUserAnswer(String userUntrustedCode,
-                                         List<Assert> asserts) {
-        SandboxedCallResult<Object> result = SandboxServiceManager
-                .getInstance().runSandboxed(UntrustedCode.class,
-                        SandboxContextManager.getInstance(), userUntrustedCode,
-                        asserts);
-        SandboxServiceManager.getInstance().shutdown();
-        return result.get();
+    public static boolean checkUserAnswer(String untrustedCode,
+                                          List<Assert> asserts)
+        throws Exception {
+        String pw = SandboxServiceManager.getInstance()
+                .restrict(SandboxContextManager.getInstance());
+        try {
+            for (Assert instance : asserts) {
+                try {
+                    if (interpreter.eval(untrustedCode + instance
+                            .getInputData()).toString().equals(instance
+                            .getExpectedAnswer()))
+                    {
+                        result = true;
+                    } else {
+                        result = false;
+                        break;
+                    }
+                } catch (EvalError evalError) {
+                    logger.error(evalError.getStackTrace());
+                    throw new SecurityException("Security exception");
+                } catch (Exception e) {
+                    logger.error(e.getStackTrace());
+                    throw new Exception();
+                }
+            }
+        } finally {
+            SandboxServiceManager.getInstance().releaseRestriction(pw);
+        }
+        return result;
     }
 }
