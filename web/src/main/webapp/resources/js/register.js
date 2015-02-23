@@ -2,6 +2,8 @@
  * 
  */
 $(document).ready(function() {
+	var errorHolder = $("#errorMessageHolder");
+	errorHolder.hide();
 	$("#submitButton").click(function(e) {
 		var form = $('#registrationForm');
 		var email = $("#email");
@@ -14,12 +16,10 @@ $(document).ready(function() {
 				success : function(data) {
 					if (data.hasErrors) {
 						var error = data.errors[0];
-						email.popover({
-							placement : "right",
-							content : error
-						}).popover("show");
+						errorHolder.text(error);
+						errorHolder.show();
 						email.on("change", function() {
-							email.popover("destroy");
+							errorHolder.hide();
 						});
 					} else {
 						window.location.href = "/web/login";

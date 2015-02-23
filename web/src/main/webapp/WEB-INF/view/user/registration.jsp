@@ -3,9 +3,8 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
-<c:set var="basedir" value="${pageContext.request.contextPath}" />
-<jsp:include page="../base.jsp" />
-<jsp:include page="../navigation.jsp" />
+<%@ include file="../base.jsp"%>
+<%@ include file="../navigation.jsp"%>
 <link href="${basedir}/resources/css/registration.css" rel="stylesheet"
 	type="text/css">
 <script src="${basedir}/resources/js/lib/moment.js"></script>
@@ -25,14 +24,15 @@
 							style="color: dimgray; text-align: center">JExercises Please
 							Register</h3>
 						<hr class="colorgraph">
+						<div id="errorMessageHolder" class="alert alert-danger"></div>
 						<input class="form-control" placeholder="First name"
 							id="firstName" name="firstName" type="text" /> <input
 							class="form-control" placeholder="Last name" id="lastName"
 							name="lastName" type="text" /> <input class="form-control"
 							placeholder="E-mail" id="email" name="email" type="email"
-							data-toggle="popover" /> <input
-							id="password" class="form-control" placeholder="Password"
-							name="password" type="password" /> <input id="matchingPassword"
+							data-toggle="popover" /> <input id="password"
+							class="form-control" placeholder="Password" name="password"
+							type="password" /> <input id="matchingPassword"
 							class="form-control" placeholder="Confirm Password"
 							name="matchingPassword" type="password" /><br> <label
 							class="label">Birthday</label> <br> <input id="birthDate"
