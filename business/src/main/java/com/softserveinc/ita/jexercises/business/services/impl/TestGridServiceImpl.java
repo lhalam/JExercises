@@ -24,11 +24,6 @@ import java.util.Map;
 @Service
 public class TestGridServiceImpl implements TestGridService {
 
-
-    /**
-     * Constant symbol for testing while needed methods are not present.
-     */
-    public static final int TESTNUM = 10;
     /**
      * Test DAO instance.
      */
@@ -65,13 +60,15 @@ public class TestGridServiceImpl implements TestGridService {
         testGridDto.setPageNumber(testGridParametersDto.getPageNumber());
         testGridDto.setPageSize(testGridParametersDto.getPageSize());
         testGridDto.setSearchKey(testGridParametersDto.getSearchKey());
-        testGridDto.setPagesNumber(TESTNUM);//   in waiting for right methods
-        testGridDto.setElementsNumber(TESTNUM);//
+        testGridDto.setPagesNumber(testDao.getNumberOfPages(searchCondition));
+        testGridDto.setElementsNumber(
+            testDao.getNumberOfAllResults(searchCondition));
 
         for (Test test : tests) {
             TestGridRowDto testGridRowDto = new TestGridRowDto();
             testGridRowDto.setDescription(test.getDescription());
             testGridRowDto.setIsPublic(test.getIsPublic());
+            testGridRowDto.setId(test.getId());
             testgridrows.add(testGridRowDto);
         }
 
