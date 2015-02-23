@@ -23,6 +23,11 @@ import java.util.HashSet;
 public class Test extends BaseEntity {
 
     /**
+     * Name of the test.
+     */
+    @Column(name = "NAME")
+    private String name;
+    /**
      * Description of the test.
      */
     @Column(name = "DESCRIPTION")
@@ -62,13 +67,16 @@ public class Test extends BaseEntity {
 
     /**
      * Constructor which provides creating of new test.
-     * 
+     *
+     * @param name
+     *            of test
      * @param description
      *            of test
      * @param isPublic
      *            status of test
      */
-    public Test(String description, Boolean isPublic) {
+    public Test(String name,String description, Boolean isPublic) {
+        this.name = name;
         this.description = description;
         this.isPublic = isPublic;
     }
@@ -79,6 +87,14 @@ public class Test extends BaseEntity {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Boolean getIsPublic() {
