@@ -22,6 +22,12 @@ import java.util.Set;
 public class Question extends BaseEntity {
 
     /**
+     * Name of the question.
+     */
+    @Column(name = "NAME", nullable = false)
+    private String name;
+
+    /**
      * Description of the question.
      */
     @Column(name = "DESCRIPTION", nullable = false)
@@ -114,6 +120,12 @@ public class Question extends BaseEntity {
     public void setUserAnswers(Set<UserAnswer> userAnswers) {
         this.userAnswers = userAnswers;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }
-
-
