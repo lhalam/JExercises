@@ -1,5 +1,6 @@
 package com.softserveinc.ita.jexercises.business.services.impl;
 
+import com.softserveinc.ita.jexercises.business.services.CurrentUserService;
 import com.softserveinc.ita.jexercises.business.services.UserProfileService;
 import com.softserveinc.ita.jexercises.business.services.UserService;
 import com.softserveinc.ita.jexercises.common.dto.UserProfileDto;
@@ -18,7 +19,13 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class UserProfileServiceImpl implements UserProfileService {
     /**
-     * User DAO instance.
+     * Current User Service instance.
+     */
+    @Autowired
+    private CurrentUserService currentUserService;
+
+    /**
+     * User Service instance.
      */
     @Autowired
     private UserService userService;
@@ -39,13 +46,13 @@ public class UserProfileServiceImpl implements UserProfileService {
     @Override
     public User updateUserProfile(UserProfileDto userDto) {
         UserProfileMapper userProfileMapper = new UserProfileMapper();
-        User user = userService.findUserByEmail(userDto.getEmail());
+        User user = currentUserService.getCurrentUser();
 
         if (!userDto.getPassword().isEmpty()) {
             userDto.setPassword(getHashPassword(userDto.getPassword()));
         }
 
-        userProfileMapper.toEntity(userDto);
+        userProfileMapper.toEntity(user, userDto);
 
         return userService.updateUser(user);
     }
