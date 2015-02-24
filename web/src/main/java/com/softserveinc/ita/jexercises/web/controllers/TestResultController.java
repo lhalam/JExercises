@@ -46,7 +46,7 @@ public class TestResultController {
     @RequestMapping(value = "/testresult", method = RequestMethod.POST)
     @ResponseBody
     public TestResultDto showTestResultInfo() {
-        TestResultDto testResultDto = testResultService.getTestResultInfo(1L);
+        TestResultDto testResultDto = testResultService.getTestResultInfo(4L);
         return testResultDto;
     }
 }
