@@ -46,9 +46,9 @@
 				</configuration>
 				<executions>
 					<execution>
-						<phase>verify</phase>
+						<phase>process-sources</phase>
 						<goals>
-							<goal>checkstyle</goal>
+							<goal>check</goal>
 						</goals>
 					</execution>
 				</executions>

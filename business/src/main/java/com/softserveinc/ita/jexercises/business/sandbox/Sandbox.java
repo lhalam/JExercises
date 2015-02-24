@@ -2,7 +2,7 @@ package com.softserveinc.ita.jexercises.business.sandbox;
 
 import bsh.EvalError;
 import bsh.Interpreter;
-import com.softserveinc.ita.jexercises.business.utils.SecurityException;
+import com.softserveinc.ita.jexercises.business.utils.UnsuccessEvent;
 import com.softserveinc.ita.jexercises.common.entity.Assert;
 import org.apache.log4j.Logger;
 
@@ -14,7 +14,7 @@ import java.util.List;
  * @author Volodymyr Yakymiv.
  * @version 1.0
  */
-public class Sandbox {
+public final class Sandbox {
 
     /**
      * The result of executing untrusted code.
@@ -45,11 +45,11 @@ public class Sandbox {
      * @param untrustedCode User input answer.
      * @param asserts       List of asserts.
      * @return True if user answer is correct and false is incorrect.
-     * @throws Exception .
+     * @throws UnsuccessEvent .
      */
     public static boolean checkUserAnswer(String untrustedCode,
                                           List<Assert> asserts)
-        throws Exception {
+            throws UnsuccessEvent {
         String pw = SandboxServiceManager.getInstance()
                 .restrict(SandboxContextManager.getInstance());
         try {
@@ -57,8 +57,7 @@ public class Sandbox {
                 try {
                     if (interpreter.eval(untrustedCode + instance
                             .getInputData()).toString().equals(instance
-                            .getExpectedAnswer()))
-                    {
+                            .getExpectedAnswer())) {
                         result = true;
                     } else {
                         result = false;
@@ -66,10 +65,7 @@ public class Sandbox {
                     }
                 } catch (EvalError evalError) {
                     logger.error(evalError.getStackTrace());
-                    throw new SecurityException("Security exception");
-                } catch (Exception e) {
-                    logger.error(e.getStackTrace());
-                    throw new Exception();
+                    throw new UnsuccessEvent("unsafe input");
                 }
             }
         } finally {
