@@ -3,27 +3,27 @@ package com.softserveinc.ita.jexercises.common.dto;
 /**
  * DTO for test result page.
  *
- * @author Volodymyr Lishchynski
+ * @author Volodymyr Lishchynskiy
  * @version 1.0
  */
 public class TestResultAnswerDto {
 
     /**
-     * Description of question.
+     * Name of question.
      */
-    private String questionDescription;
+    private String questionName;
 
     /**
      * Is user answer correct or incorrect.
      */
     private boolean isCorrect;
 
-    public String getQuestionDescription() {
-        return questionDescription;
+    public String getQuestionName() {
+        return questionName;
     }
 
-    public void setQuestionDescription(String questionDescription) {
-        this.questionDescription = questionDescription;
+    public void setQuestionName(String questionName) {
+        this.questionName = questionName;
     }
 
     public boolean isCorrect() {

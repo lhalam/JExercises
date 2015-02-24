@@ -21,11 +21,7 @@ public class TestResultDto {
     /**
      * Last name of user.
      */
-    private String lastName;
-    /**
-     * User email.
-     */
-    private String email;
+    private String lastName;   
     /**
      * Date of passing test.
      */
@@ -100,15 +96,7 @@ public class TestResultDto {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
+    
     public Date getCreateDate() {
         return createDate;
     }
