@@ -54,7 +54,7 @@ public class TestResultServiceImpl implements TestResultService {
             TestResultAnswerDto testResultAnswerDto = new TestResultAnswerDto();
             testResultAnswerDto.setCorrect(userAnswer.isCorrect());
 
-            testResultAnswerDto.setQuestionDescription(userAnswer.getQuestion()
+            testResultAnswerDto.setQuestionName(userAnswer.getQuestion()
                     .getName());
             testResultAnswerDtos.add(testResultAnswerDto);
         }

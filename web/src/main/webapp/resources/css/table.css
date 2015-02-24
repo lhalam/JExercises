@@ -3,3 +3,6 @@
 .gridtable {
     display:none;
 }
+.gridtableborder {
+    border: 2px solid black;
+}
