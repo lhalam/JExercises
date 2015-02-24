@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf8"
 	pageEncoding="utf8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
 <html>
 <head>
 </head>
@@ -16,7 +17,6 @@
 <script type="text/javascript"
 	src="resources/js/summernote/summernote.js"></script>
 <script src="resources/js/questioncreating.js"></script>
-<!-- <script src="resources/js/summernote/qc.js"></script> -->
 <body background="resources/background.jpg">
 	<div class="row">
 		<div class="col-md-offset-2 col-md-8">
