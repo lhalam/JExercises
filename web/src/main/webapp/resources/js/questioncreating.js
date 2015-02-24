@@ -13,10 +13,10 @@ $(document).ready(
 
 			$("#submitButton").click(
 					function(event) {
-						dataRequest.questionName = $('#questionName').val()
+						dataRequest.questionName = $('#questionName').code()
 								.toString();
 						dataRequest.questionDescription = $(
-								'#questionDescription').val().toString();
+								'#questionDescription').code().toString();
 						dataRequest.expectedAnswer = $('#expectedAnswer').val()
 								.toString();
 						dataRequest.inputData = $('#inputData').val()
@@ -30,13 +30,13 @@ $(document).ready(
 							mimeType : 'application/json',
 							success : function(data) {
 								window.location.replace("/web/index");
-							},
-							error : function(jqXHR, status, err) {
-								var errorMsg = "";
-								errorMsg += status + "\n" + err;
-								alert(errorMsg);
-							},
+							}
 
 						});
 					});
 		});
+$(function() {
+	$('.summernote').summernote({
+		height : 50
+	})
+});
