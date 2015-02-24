@@ -9,7 +9,7 @@ import net.datenwerke.sandbox.permissions.FilePrefixPermission;
  * @author Volodymyr Yakymiv
  * @version 1.0
  */
-public class SandboxContextManager {
+public final class SandboxContextManager {
     /**
      * SandboxContext instance.
      */
@@ -64,7 +64,7 @@ public class SandboxContextManager {
     }
 
     /**
-     * Private SandboxContext constructor
+     * Private SandboxContext constructor.
      */
     private SandboxContextManager() {
     }

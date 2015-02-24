@@ -23,13 +23,13 @@ public class Assert extends BaseEntity {
     private Question question;
 
     /**
-     * Correct answer
+     * Correct answer.
      */
     @Column(name = "EXPECTED_ANSWER")
     private String expectedAnswer;
 
     /**
-     * Data inputed by user
+     * Data inputed by user.
      */
     @Column(name = "INPUT_DATA")
     private String inputData;

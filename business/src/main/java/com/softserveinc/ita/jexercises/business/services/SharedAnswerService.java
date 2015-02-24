@@ -13,7 +13,7 @@ import com.softserveinc.ita.jexercises.common.entity.SharedAnswer;
 public interface SharedAnswerService {
 
     /**
-     * Creates new sharedAnswer
+     * Creates new sharedAnswer.
      * 
      * @param sharedAnswer
      *            New sharedAnswer
@@ -21,7 +21,7 @@ public interface SharedAnswerService {
     void createSharedAnswer(SharedAnswer sharedAnswer);
 
     /**
-     * Update sharedAnswer
+     * Update sharedAnswer.
      * 
      * @param sharedAnswer
      *            Modified sharedAnswer
@@ -30,7 +30,7 @@ public interface SharedAnswerService {
     SharedAnswer updateSharedAnswer(SharedAnswer sharedAnswer);
 
     /**
-     * Deletes sharedAnswer
+     * Deletes sharedAnswer.
      * 
      * @param sharedAnswer
      *            Unnecessary saredAnswer
@@ -38,7 +38,7 @@ public interface SharedAnswerService {
     void deleteSharedAnswer(SharedAnswer sharedAnswer);
 
     /**
-     * Deletes sharedAnswers by id
+     * Deletes sharedAnswers by id.
      * 
      * @param id
      *            Id of unnecessary sharedAnswer
@@ -46,7 +46,7 @@ public interface SharedAnswerService {
     void deleteSharedAnswerById(Long id);
 
     /**
-     * Searching sharedAnswer by id
+     * Searching sharedAnswer by id.
      * 
      * @param id
      *            Id of sharedAnswer
@@ -55,14 +55,14 @@ public interface SharedAnswerService {
     SharedAnswer findSharedAnswerById(Long id);
 
     /**
-     * Gets all sharedAnswers
+     * Gets all sharedAnswers.
      * 
      * @return Set of sharedAnswers
      */
     List<SharedAnswer> findAllSharedAnswers();
 
     /**
-     * Gets all sharedAnswers by question id
+     * Gets all sharedAnswers by question id.
      * 
      * @param questionId
      *            Id of question

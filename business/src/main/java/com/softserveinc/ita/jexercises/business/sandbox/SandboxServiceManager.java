@@ -9,7 +9,7 @@ import net.datenwerke.sandbox.SandboxServiceImpl;
  * @author Volodymyr Yakymiv
  * @version 1.0
  */
-public class SandboxServiceManager {
+public final class SandboxServiceManager {
 
     /**
      * SandboxService instance.
@@ -17,7 +17,7 @@ public class SandboxServiceManager {
     private static volatile SandboxService instance;
 
     /**
-     * Private SandboxService constructor
+     * Private SandboxService constructor.
      */
     private SandboxServiceManager() {
     }

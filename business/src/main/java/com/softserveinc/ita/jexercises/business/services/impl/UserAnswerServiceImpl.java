@@ -12,7 +12,7 @@ import com.softserveinc.ita.jexercises.common.entity.UserAnswer;
 import com.softserveinc.ita.jexercises.persistence.dao.impl.UserAnswerDao;
 
 /**
- * Represent UserAnswerService interface implementation
+ * Represent UserAnswerService interface implementation.
  * 
  * @author Oleg Pavlish
  * @version 1.0
@@ -21,7 +21,7 @@ import com.softserveinc.ita.jexercises.persistence.dao.impl.UserAnswerDao;
 public class UserAnswerServiceImpl implements UserAnswerService {
 
     /**
-     * UserAnswerDao instance
+     * UserAnswerDao instance.
      */
     @Autowired
     private UserAnswerDao userAnswerDao;

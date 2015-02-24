@@ -13,7 +13,7 @@ import com.softserveinc.ita.jexercises.common.entity.UserAnswer;
 public interface UserAnswerService {
 
     /**
-     * Creates new userAnswer
+     * Creates new userAnswer.
      * 
      * @param userAnswer
      *            New userAnswer
@@ -21,7 +21,7 @@ public interface UserAnswerService {
     void createUserAnswer(UserAnswer userAnswer);
 
     /**
-     * Update userAnswer
+     * Update userAnswer.
      * 
      * @param userAnswer
      *            Modified userAnswer
@@ -30,7 +30,7 @@ public interface UserAnswerService {
     UserAnswer updateUserAnswer(UserAnswer userAnswer);
 
     /**
-     * Deletes userAnswer
+     * Deletes userAnswer.
      * 
      * @param userAnswer
      *            Unnecessary userAnswer
@@ -38,7 +38,7 @@ public interface UserAnswerService {
     void deleteUserAnswer(UserAnswer userAnswer);
 
     /**
-     * Deletes userAnswer by id
+     * Deletes userAnswer by id.
      * 
      * @param id
      *            Id of unnecessary userAnswer
@@ -46,7 +46,7 @@ public interface UserAnswerService {
     void deleteUserAnswerById(Long id);
 
     /**
-     * Searching userAnswer by id
+     * Searching userAnswer by id.
      * 
      * @param id
      *            Id of userAnswer
@@ -55,7 +55,7 @@ public interface UserAnswerService {
     UserAnswer findUserAnswerById(Long id);
 
     /**
-     * Gets all userAnswers
+     * Gets all userAnswers.
      * 
      * @return Set of userAnswers
      */

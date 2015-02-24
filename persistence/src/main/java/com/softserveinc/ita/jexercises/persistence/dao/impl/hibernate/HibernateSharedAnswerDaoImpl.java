@@ -10,7 +10,7 @@ import com.softserveinc.ita.jexercises.common.entity.SharedAnswer;
 import com.softserveinc.ita.jexercises.persistence.dao.impl.SharedAnswerDao;
 
 /**
- * Represents Hibernate SharedAnswer DAO implementation
+ * Represents Hibernate SharedAnswer DAO implementation.
  * 
  * @author Oleg Pavlish
  * @version 1.0

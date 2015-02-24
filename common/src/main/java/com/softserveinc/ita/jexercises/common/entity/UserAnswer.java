@@ -7,7 +7,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
- * Represents UserAnswer Entity
+ * Represents UserAnswer Entity.
  * 
  * @author Oleg Pavlish
  * @version 1.0
@@ -17,26 +17,26 @@ import javax.persistence.Table;
 public class UserAnswer extends BaseEntity {
 
     /**
-     * Attempt of the answer
+     * Attempt of the answer.
      */
     @ManyToOne
     @JoinColumn(name = "ATTEMPT_ID")
     private Attempt attempt;
 
     /**
-     * String containing user answer
+     * String containing user answer.
      */
     @Column(name = "ANSWER")
     private String answer;
 
     /**
-     * Represents if the answer is correct
+     * Represents if the answer is correct.
      */
     @Column(name = "IS_CORRECT")
     private boolean isCorrect;
 
     /**
-     * Answered question
+     * Answered question.
      */
     @ManyToOne
     @JoinColumn(name = "QUESTION_ID")

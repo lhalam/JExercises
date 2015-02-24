@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
- * Class which includes index-controller
+ * Class which includes index-controller.
  * 
  * @author Kucheryavenko Dmytro
  *
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class IndexController {
     /**
-     * Method provides mapping on "idex" input
+     * Method provides mapping on "index" input.
      * 
      * @return index.jsp
      */

@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
- * Class which includes controllers responsible for Login process
+ * Class which includes controllers responsible for Login process.
  * 
  * @author Kucheryavenko Dmytro
  *
@@ -15,7 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class LoginController {
     /**
-     * Method provides mapping on "login" input
+     * Method provides mapping on "login" input.
      * 
      * @return ModelAndView object,in current case that actually means returning
      *         login.jsp
@@ -26,7 +26,7 @@ public class LoginController {
     }
 
     /**
-     * Method provides mapping on "logout" input
+     * Method provides mapping on "logout" input.
      * 
      * @return ModelAndView object,in current case that actually means returning
      *         logout.jsp
@@ -37,7 +37,7 @@ public class LoginController {
     }
 
     /**
-     * Method provides mapping on "forgotpassword" input
+     * Method provides mapping on "forgotpassword" input.
      *
      * @return ModelAndView object,in current case that actually means returning
      *         forgotpassword.jsp

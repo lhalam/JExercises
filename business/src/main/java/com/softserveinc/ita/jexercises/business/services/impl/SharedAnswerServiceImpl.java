@@ -12,7 +12,7 @@ import com.softserveinc.ita.jexercises.common.entity.SharedAnswer;
 import com.softserveinc.ita.jexercises.persistence.dao.impl.SharedAnswerDao;
 
 /**
- * Represent SharedAnswerService interface implementation
+ * Represent SharedAnswerService interface implementation.
  * 
  * @author Oleg Pavlish
  * @version 1.0
@@ -21,7 +21,7 @@ import com.softserveinc.ita.jexercises.persistence.dao.impl.SharedAnswerDao;
 public class SharedAnswerServiceImpl implements SharedAnswerService {
 
     /**
-     * SharedAnswerDao instance
+     * SharedAnswerDao instance.
      */
     @Autowired
     private SharedAnswerDao sharedAnswerDao;

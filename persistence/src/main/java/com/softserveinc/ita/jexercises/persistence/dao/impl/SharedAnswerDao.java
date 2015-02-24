@@ -6,7 +6,7 @@ import com.softserveinc.ita.jexercises.common.entity.SharedAnswer;
 import com.softserveinc.ita.jexercises.persistence.dao.GenericDao;
 
 /**
- * DAO of sharedAnswer
+ * DAO of sharedAnswer.
  * 
  * @author Oleg Pavlish
  * @version 1.0
@@ -14,7 +14,7 @@ import com.softserveinc.ita.jexercises.persistence.dao.GenericDao;
 public interface SharedAnswerDao extends GenericDao<SharedAnswer, Long> {
 
     /**
-     * Searching all sharedAnswers by question id
+     * Searching all sharedAnswers by question id.
      * 
      * @param questionId
      *            Question id

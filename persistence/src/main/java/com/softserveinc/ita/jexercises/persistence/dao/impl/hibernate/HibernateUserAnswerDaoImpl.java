@@ -6,7 +6,7 @@ import com.softserveinc.ita.jexercises.common.entity.UserAnswer;
 import com.softserveinc.ita.jexercises.persistence.dao.impl.UserAnswerDao;
 
 /**
- * Represents Hibernate UserAnswer DAO implementation
+ * Represents Hibernate UserAnswer DAO implementation.
  * 
  * @author Oleg Pavlish
  * @version 1.0

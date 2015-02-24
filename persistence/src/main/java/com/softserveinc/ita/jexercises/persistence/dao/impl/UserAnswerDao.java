@@ -4,8 +4,8 @@ import com.softserveinc.ita.jexercises.common.entity.UserAnswer;
 import com.softserveinc.ita.jexercises.persistence.dao.GenericDao;
 
 /**
- * DAO of UserAnswer
- * 
+ * DAO of UserAnswer.
+ *
  * @author Oleg Pavlish
  * @version 1.0
  */

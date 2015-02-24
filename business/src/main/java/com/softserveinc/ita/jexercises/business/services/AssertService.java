@@ -21,7 +21,7 @@ public interface AssertService {
     void createAssert(Assert assertVar);
 
     /**
-     * Delete
+     * Delete.
      * 
      * @param assertVar
      *            Unnecessary assert.
