@@ -19,7 +19,7 @@
 <script src="resources/js/questioncreating.js"></script>
 <body background="resources/background.jpg">
 	<div class="row">
-		<div class="col-md-offset-2 col-md-8">
+		<div class="col-md-offset-1 col-md-10">
 			<form method="POST" id="questioncreatingForm"
 				class="panel panel-default">
 				<div class="row">
@@ -28,7 +28,7 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-md-offset-2 col-md-8">
+					<div class="col-md-offset-1 col-md-10">
 						<div class="form-group">
 							<label for="comment">Question name:</label>
 							<textarea class="form-control summernote" rows="2"
