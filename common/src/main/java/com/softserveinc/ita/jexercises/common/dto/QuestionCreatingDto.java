@@ -1,7 +1,7 @@
 package com.softserveinc.ita.jexercises.common.dto;
 
 /**
- * Class represents user dto.
+ * Class represents question creating DTO.
  * 
  * @author Kucheryavenko Dmytro
  *

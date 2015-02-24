@@ -23,7 +23,7 @@
 						
 						<div class="form-group">
 							<label for="comment">Question name:</label>
-							<textarea class="form-control" rows="4" id="questionName"
+							<textarea class="form-control" rows="2" id="questionName"
 								placeholder="Input question name..."></textarea>
 						</div>
 						
@@ -35,13 +35,13 @@
 
 						<div class="form-group">
 							<label for="comment">Answer:</label>
-							<textarea class="form-control" rows="4" id="expectedAnswer"
+							<textarea class="form-control" rows="2" id="expectedAnswer"
 								placeholder="Input expected answer..."></textarea>
 						</div>
 
 						<div class="form-group">
 							<label for="comment">Input Data:</label>
-							<textarea class="form-control" rows="4" id="inputData"
+							<textarea class="form-control" rows="2" id="inputData"
 								placeholder="Input data..."></textarea>
 						</div>
 
