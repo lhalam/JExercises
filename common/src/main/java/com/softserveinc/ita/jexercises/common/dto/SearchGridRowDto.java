@@ -6,7 +6,7 @@ package com.softserveinc.ita.jexercises.common.dto;
  * @author Ihor Demkovych
  * @version 1.0
  */
-public class TestGridRowDto {
+public class SearchGridRowDto {
 
     /**
      * Description of test.
@@ -16,7 +16,7 @@ public class TestGridRowDto {
     /**
      * Availability of test.
      */
-    private boolean isPublic;
+    private String isPublic;
 
     /**
      * ID of test.
@@ -39,11 +39,11 @@ public class TestGridRowDto {
         this.description = description;
     }
 
-    public boolean getIsPublic() {
+    public String getIsPublic() {
         return isPublic;
     }
 
-    public void setIsPublic(boolean isPublic) {
+    public void setIsPublic(String isPublic) {
         this.isPublic = isPublic;
     }
 
