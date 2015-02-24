@@ -11,22 +11,21 @@
 <jsp:include page="../navigation.jsp"/>
 <link rel="stylesheet" href="//cdn.datatables.net/1.10.5/css/jquery.dataTables.min.css">
 <link rel="stylesheet" href="${basedir}/web/resources/css/table.css">
-<link rel="stylesheet" href="${basedir}/web/resources/css/lib/bootstrap.dataTables.integration.css">
 <script src="${basedir}/web/resources/js/lib/jquery.dataTables.min.js"></script>
 <script src="${basedir}/web/resources/js/testgrid.js"></script>
-<script src="${basedir}/web/resources/js/lib/jquery.dataTables.integration.js"></script>
 <body id="container">
 <div class="row-fluid">
     <div class="col-md-offset-2 col-md-8">
         <form class="panel panel-primary">
-            <div class="container-fluid gridtableborder">
+            <div class="container-fluid">
                 <div class="col-md-offset-5 col-md-1">
                     <h3>
                         Tests
                     </h3>
                 </div>
-                <div class="row-fluid gridtableborder">
-                    <div class="col-md-offset-2 col-md-8">
+                <div class="row-fluid ">
+                    <div class="col-md-offset-2 col-md-8 gridtableborder">
+                        <br></br>
                         <table id="testgrid" class="display cell-border row-border"
                                cellspacing="0" width="100%">
                             <thead>
@@ -45,9 +44,11 @@
                             </tr>
                             </tfoot>
                         </table>
+                        <br></br>
                     </div>
                 </div>
             </div>
+            <br></br>
         </form>
     </div>
 </div>
