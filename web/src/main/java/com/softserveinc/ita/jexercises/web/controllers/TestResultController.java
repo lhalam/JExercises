@@ -26,7 +26,7 @@ public class TestResultController {
     private TestResultService testResultService;
 
     /**
-     * Method provides mapping on "testresult" input
+     * Method provides mapping on "testresult" input.
      *
      * @param model
      *            Model.

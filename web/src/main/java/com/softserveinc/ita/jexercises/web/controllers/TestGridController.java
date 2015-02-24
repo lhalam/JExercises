@@ -28,7 +28,7 @@ public class TestGridController {
     private TestGridService testGridService;
 
     /**
-     * Method provides mapping on "testgrid" input
+     * Method provides mapping on "testgrid" input.
      *
      * @param model Model.
      * @return ModelAndView object,in current

@@ -50,7 +50,7 @@ public interface AttemptService {
     Attempt findAttemptById(Long id);
 
     /**
-     * Gets all attempts
+     * Gets all attempts.
      * 
      * @return List of attempts.
      */
