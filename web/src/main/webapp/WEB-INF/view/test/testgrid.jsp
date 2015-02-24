@@ -10,6 +10,7 @@
 <jsp:include page="../base.jsp"/>
 <jsp:include page="../navigation.jsp"/>
 <link rel="stylesheet" href="//cdn.datatables.net/1.10.5/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="${basedir}/web/resources/css/table.css">
 <script src="${basedir}/web/resources/js/lib/jquery.dataTables.min.js"></script>
 <script src="${basedir}/web/resources/js/testgrid.js"></script>
 <body id="container">

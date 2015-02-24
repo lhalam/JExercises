@@ -12,14 +12,14 @@ $(document).ready(function() {
              "dataSrc": "testGridRows"
          },
          "columns": [
-             {"data": "id",
-              "visible": false },
+             {"data": "id", "sClass": "gridtable" },
              {"data": "description"},
              {"data": "isPublic"}
-         ]
+             ]
      });
     $('#testgrid tbody').on('click', 'tr', function () {
         var urlid = $('td', this).eq(0).text();
         window.location=url+urlid;
     } );
+
 } );
