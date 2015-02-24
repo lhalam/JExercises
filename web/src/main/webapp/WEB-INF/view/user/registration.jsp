@@ -3,14 +3,15 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
+<c:set var="basedir" value="${pageContext.request.contextPath}" />
 <%@ include file="../base.jsp"%>
 <%@ include file="../navigation.jsp"%>
 <link href="${basedir}/resources/css/registration.css" rel="stylesheet"
 	type="text/css">
-<script src="${basedir}/resources/js/lib/moment.js"></script>
-<script src="${basedir}/resources/js/lib/combodate.js"></script>
-<script src="${basedir}/resources/js/registration_data_validation.js"></script>
-<script src="${basedir}/resources/js/register.js"></script>
+<script src="${basedir}/resources/js/registration/datepicker.js"></script>
+<script src="${basedir}/resources/js/registration/registation.js"></script>
+<script
+	src="${basedir}/resources/js/registration/registration-data-validation.js"></script>
 <script src="${basedir}/resources/js/lib/jquery.validate.min.js"></script>
 </head>
 <body id="container">
@@ -35,11 +36,12 @@
 							type="password" /> <input id="matchingPassword"
 							class="form-control" placeholder="Confirm Password"
 							name="matchingPassword" type="password" /><br> <label
-							class="label">Birthday</label> <br> <input id="birthDate"
-							class="combodate" type="text" data-format="MM/DD/YYYY"
-							data-template="D MMM YYYY" name="birthDate" /> <br> <br>
-						<input id="submitButton" class="btn btn-lg btn-success btn-block"
-							type="button" value="Sign up"> <br>
+							class="label">Birthday</label> <br>
+						<div id="datepicker" class="combodate"></div>
+						<input id="birthDate" class="dateRequired" type="hidden"
+							name="birthDate" /> <br><input id="submitButton"
+							class="btn btn-lg btn-success btn-block" type="button"
+							value="Sign up"> <br>
 					</div>
 				</form>
 			</div>

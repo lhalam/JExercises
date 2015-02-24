@@ -42,21 +42,20 @@ public class TestResultServiceImpl implements TestResultService {
         User user = attempt.getUser();
         Test test = attempt.getTest();
         testResultDto.setFirstName(user.getFirstName());
-        testResultDto.setLastName(user.getLastName());
-        testResultDto.setEmail(user.getEmail());
+        testResultDto.setLastName(user.getLastName());        
         testResultDto.setCreateDate(attempt.getCreatedDate());
         testResultDto.setTotalAnswersCount(attempt.getUserAnswers().size());
         testResultDto.setCorrectAnswersCount(countCorrect(attemptId));
         testResultDto.setRole(user.getRole());
         testResultDto.setPublic(test.getIsPublic());
-        List<UserAnswer> userAnswers = (List<UserAnswer>) attempt
-                .getUserAnswers();
+        List<UserAnswer> userAnswers = new ArrayList<UserAnswer>(
+                attempt.getUserAnswers());
         for (UserAnswer userAnswer : userAnswers) {
             TestResultAnswerDto testResultAnswerDto = new TestResultAnswerDto();
             testResultAnswerDto.setCorrect(userAnswer.isCorrect());
 
-            testResultAnswerDto.setQuestionDescription(userAnswer.getQuestion()
-                    .getDescription());
+            testResultAnswerDto.setQuestionName(userAnswer.getQuestion()
+                    .getName());
             testResultAnswerDtos.add(testResultAnswerDto);
         }
 

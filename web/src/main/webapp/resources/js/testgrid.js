@@ -14,7 +14,7 @@ $(document).ready(function() {
          "columns": [
              {"data": "id", "sClass": "gridtable" },
              {"data": "description"},
-             {"data": "isPublic"}
+             {"data": "isPublic", "bSortable": false }
              ]
      });
     $('#testgrid tbody').on('click', 'tr', function () {
