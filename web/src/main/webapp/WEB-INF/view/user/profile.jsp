@@ -31,7 +31,7 @@
                     <div id="profileForm" class="row">
                         <div class="col-md-3 col-lg-3 " align="center"><img
                                 alt="User Pic"
-                                src="${pageContext.request.contextPath}/user/profile/avatar"
+                                src="${basedir}/resources/no-avatar.png"
                                 class="img-circle"></div>
                         <div class=" col-md-9 col-lg-9 ">
                             <table class="table table-user-information">
@@ -70,7 +70,7 @@
                     <a data-original-title="Broadcast Message"
                        data-toggle="tooltip" type="button"
                        class="btn btn-sm btn-primary"><i
-                            class="glyphicon glyphicon-envelope"></i></a>
+                            class="glyphicon glyphicon-user"></i></a>
                         <span class="pull-right">
                             <a href="/web/user/profile/edit"
                                data-original-title="Edit this user"

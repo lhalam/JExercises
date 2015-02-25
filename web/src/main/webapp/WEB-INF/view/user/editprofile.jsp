@@ -9,13 +9,15 @@
     <link href="${basedir}/resources/css/profile.cssjquery.Jcrop.min.css" rel="stylesheet"
           type="text/css">
     <script src="${basedir}/resources/js/editprofile.js"></script>
-    <script src="${basedir}/resources/js/uploader/jquery-1.11.0.min.js"></script>
-    <script src="${basedir}/resources/js/uploader/define_FileAPI.js"></script>
+    <script src="${basedir}/resources/js/edit-profile-data-validation.js"></script>
+    <script src="${basedir}/resources/js/lib/jquery.validate.min.js"></script>
+
+    <script src="${basedir}/resources/js/uploader/define-FileAPI.js"></script>
     <script src="${basedir}/resources/js/uploader/FileAPI.min.js"></script>
     <script src="${basedir}/resources/js/uploader/FileAPI.exif.js"></script>
     <script src="${basedir}/resources/js/uploader/jquery.fileapi.js"></script>
     <script src="${basedir}/resources/js/uploader/jquery.Jcrop.min.js"></script>
-    <script src="${basedir}/resources/js/uploader/upload_avatar.js"></script>
+    <script src="${basedir}/resources/js/uploader/upload-avatar.js"></script>
 </head>
 
 <body id="container">
@@ -49,7 +51,7 @@
                                     Name</label>
 
                                 <div class="col-lg-8">
-                                    <input class="form-control"
+                                    <input id="firstName" class="form-control"
                                            placeholder="First Name"
                                            value="${userFirstName}"
                                            name="firstName"
@@ -64,7 +66,7 @@
                                     Name</label>
 
                                 <div class="col-lg-8">
-                                    <input class="form-control"
+                                    <input id="lastName" class="form-control"
                                            placeholder="Last Name"
                                            value="${userLastName}"
                                            name="lastName"
@@ -131,7 +133,6 @@
                                     <input class="form-control"
                                            id="matchingPassword"
                                            placeholder="Confirm Password"
-
                                            type="password"/>
                                 </div>
                             </div>
