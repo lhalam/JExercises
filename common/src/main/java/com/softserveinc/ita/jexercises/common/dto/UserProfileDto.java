@@ -43,7 +43,7 @@ public class UserProfileDto {
     /**
      * Avatar.
      */
-    private byte[] avatar;
+    private String avatar;
 
     public Date getRegistrationDate() {
         return registrationDate;
@@ -61,11 +61,11 @@ public class UserProfileDto {
         this.role = role;
     }
 
-    public byte[] getAvatar() {
+    public String getAvatar() {
         return avatar;
     }
 
-    public void setAvatar(byte[] avatar) {
+    public void setAvatar(String avatar) {
         this.avatar = avatar;
     }
 
