@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	$.validator.setDefaults({ 
-	    ignore: [],
+	    ignore: []
 	});
 	
 	$("#registrationForm").validate({
@@ -40,7 +40,7 @@ $(document).ready(function() {
 	});
 
 	function isValidDate(date) {
-		var validDateFormat = /^[1-3]?[0-9]\/[1-3]?[0-9]\/(?:[0-9]{2})?[0-9]{2}$/;
+		var validDateFormat = /^[1-3]?[0-9]\/[1]?[0-9]\/([0-9]{4})$/;
 		if (validDateFormat.test(date)) {
 			var arr = date.split('/');
 			var day = arr[0];
