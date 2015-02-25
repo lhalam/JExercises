@@ -23,12 +23,16 @@ public class UserProfileServiceImpl implements UserProfileService {
      */
     @Autowired
     private CurrentUserService currentUserService;
-
     /**
      * User Service instance.
      */
     @Autowired
     private UserService userService;
+    /**
+     * User Profile Mapper instance.
+     */
+    @Autowired
+    private UserProfileMapper userProfileMapper;
     /**
      * Instance of BCryptPasswordEncoder.
      */
@@ -45,7 +49,7 @@ public class UserProfileServiceImpl implements UserProfileService {
     @Transactional
     @Override
     public User updateUserProfile(UserProfileDto userDto) {
-        UserProfileMapper userProfileMapper = new UserProfileMapper();
+
         User user = currentUserService.getCurrentUser();
 
         if (!userDto.getPassword().isEmpty()) {
@@ -55,6 +59,12 @@ public class UserProfileServiceImpl implements UserProfileService {
         userProfileMapper.toEntity(user, userDto);
 
         return userService.updateUser(user);
+    }
+
+    @Override
+    public boolean hasAvatar() {
+        User user = currentUserService.getCurrentUser();
+        return (user.getAvatar() != null);
     }
 
     /**

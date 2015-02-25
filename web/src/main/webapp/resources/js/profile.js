@@ -16,10 +16,10 @@ function load() {
             $('#userRegistrationDate').append(regDate.getDate() + '/' +
                 (regDate.getMonth() + 1) + '/' + regDate.getFullYear());
             if (json.birthDate != "") {
-                $('#userBirthDate').append(birthDate.getDate() + '/' +
-                    (birthDate.getMonth() + 1) + '/' + birthDate.getYear());
+                $('#userDateOfBirth').append(birthDate.getDate() + '/' +
+                    (birthDate.getMonth() + 1) + '/' + birthDate.getFullYear());
             } else {
-                $('#userDateOfBirth').text('-');
+                $('#userDateOfBirth').append('-');
             }
             if (json.role == "ROLE_ADMIN") {
                 role = roleAdmin;

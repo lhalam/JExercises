@@ -2,12 +2,14 @@ package com.softserveinc.ita.jexercises.common.mapper;
 
 import com.softserveinc.ita.jexercises.common.dto.UserProfileDto;
 import com.softserveinc.ita.jexercises.common.entity.User;
+import org.springframework.stereotype.Component;
 
 /**
  * Represents entity/DTO mapping tool.
  *
  * @author Taras Vuyiv
  */
+@Component
 public class UserProfileMapper {
 
     /**
@@ -31,8 +33,8 @@ public class UserProfileMapper {
             user.setPassword(userProfileDto.getPassword());
         }
 
-        if (userProfileDto.getAvatar() != null) {
-            user.setAvatar(userProfileDto.getAvatar());
+        if (!userProfileDto.getAvatar().isEmpty()) {
+            user.setAvatar(userProfileDto.getAvatar().getBytes());
         }
 
         if (userProfileDto.getRole() != null) {
@@ -50,7 +52,9 @@ public class UserProfileMapper {
      */
     public UserProfileDto toDto(User user) {
         UserProfileDto userProfileDto = new UserProfileDto();
-        userProfileDto.setAvatar(user.getAvatar());
+        if (user.getAvatar() != null) {
+            userProfileDto.setAvatar(new String(user.getAvatar()));
+        }
         userProfileDto.setEmail(user.getEmail());
         userProfileDto.setFirstName(user.getFirstName());
         userProfileDto.setLastName(user.getLastName());
