@@ -9,9 +9,8 @@
 <html>
 <jsp:include page="../base.jsp"/>
 <jsp:include page="../navigation.jsp"/>
-<link rel="stylesheet" href="//cdn.datatables.net/1.10.5/css/jquery.dataTables.min.css">
 <link rel="stylesheet" href="${basedir}/web/resources/css/table.css">
-<link rel="stylesheet" href="//cdn.datatables.net/plug-ins/f2c75b7247b/integration/bootstrap/3/dataTables.bootstrap.css">
+<link rel="stylesheet" href="${basedir}/web/resources/css/lib/dataTables.bootstrap.css">
 <script src="${basedir}/web/resources/js/lib/jquery.dataTables.min.js"></script>
 <script src="${basedir}/web/resources/js/testgrid.js"></script>
 <script src="//cdn.datatables.net/plug-ins/f2c75b7247b/integration/bootstrap/3/dataTables.bootstrap.js"></script>
