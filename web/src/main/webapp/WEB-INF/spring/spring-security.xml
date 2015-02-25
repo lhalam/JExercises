@@ -13,12 +13,11 @@
 		<intercept-url pattern="/user/registration" access="permitAll" />
 		<intercept-url pattern="/testgrid" access="permitAll" />
 		<intercept-url pattern="/login" access="permitAll" />
-		<intercept-url pattern="/testresult" access="permitAll" />
 		<intercept-url pattern="/**" access="isAuthenticated()" />
 		<form-login login-page="/login" default-target-url="/index"
 			always-use-default-target="true" authentication-failure-url="/login?error" />
-		<logout logout-success-url="/logout"/>
-		<remember-me key="uniqueAndSecret"/>
+		<logout logout-success-url="/logout" />
+		<remember-me key="uniqueAndSecret" />
 	</http>
 
 	<authentication-manager>
