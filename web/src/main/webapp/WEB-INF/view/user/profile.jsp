@@ -31,7 +31,7 @@
                     <div id="profileForm" class="row">
                         <div class="col-md-3 col-lg-3 " align="center"><img
                                 alt="User Pic"
-                                src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=100"
+                                src="${pageContext.request.contextPath}/user/profile/avatar"
                                 class="img-circle"></div>
                         <div class=" col-md-9 col-lg-9 ">
                             <table class="table table-user-information">
