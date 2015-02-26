@@ -17,6 +17,7 @@ $(document).ready(function() {
              {"data": "isPublic", "bSortable": false }
              ]
      });
+    $('#testgrid_wrapper').removeClass('dataTables_wrapper');
     $('#testgrid tbody').on('click', 'tr', function () {
         var urlid = $('td', this).eq(0).text();
         window.location=url+urlid;
