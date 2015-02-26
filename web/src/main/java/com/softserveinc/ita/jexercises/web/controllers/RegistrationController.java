@@ -6,8 +6,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import com.softserveinc.ita.jexercises.business.services.
-       UserRegistrationService;
+
+import com.softserveinc.ita.jexercises.business.services.AutoLoginService;
+import com.softserveinc.ita.jexercises.business.services.UserRegistrationService;
 import com.softserveinc.ita.jexercises.business.utils.EmailExistsException;
 import com.softserveinc.ita.jexercises.common.dto.UserDto;
 
@@ -27,6 +28,12 @@ public class RegistrationController {
     private UserRegistrationService userRegistrationService;
 
     /**
+     * Service that handles authentication after registration.
+     */
+    @Autowired
+    private AutoLoginService autoLoginService;
+
+    /**
      * Gets registration form page.
      * 
      * @return Registration page.
@@ -37,7 +44,7 @@ public class RegistrationController {
     }
 
     /**
-     * Starts registration process.
+     * Controls registration process.
      * 
      * @param model
      *            UserDto object.
@@ -47,7 +54,11 @@ public class RegistrationController {
     @ResponseBody
     public UserDto registerUserAccount(UserDto model) {
         try {
-            userRegistrationService.registerNewUserAccount(model);
+            boolean isSuccessfulRegistration = userRegistrationService
+                    .registerNewUserAccount(model);
+            if (isSuccessfulRegistration) {
+                autoLoginService.authenticateUser(model);
+            }
         } catch (EmailExistsException exeption) {
             model.addError(exeption.getMessage());
         }

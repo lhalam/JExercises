@@ -20,7 +20,7 @@
 		<remember-me key="uniqueAndSecret" />
 	</http>
 
-	<authentication-manager>
+	<authentication-manager alias="authenticationManager">
 		<authentication-provider user-service-ref="userDetailsService">
 			<password-encoder ref="encoder" />
 		</authentication-provider>

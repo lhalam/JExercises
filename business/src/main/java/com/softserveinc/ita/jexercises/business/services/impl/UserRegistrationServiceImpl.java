@@ -26,6 +26,11 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
      */
     private static final String EMAIL_EXISTS_MESSAGE 
         = "User with email %s already exists";
+    
+    /**
+     * Registration status.
+     */
+    private boolean isSuccessfulRegistration;
     /**
      * User DAO instance.
      */
@@ -33,7 +38,7 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
     private UserDao userDao;
     
     /**
-     * User mapper instance.
+     * UserMapper instance.
      */
     @Autowired
     private UserMapper userMapper;
@@ -46,18 +51,17 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
 
     @Transactional
     @Override
-    public UserDto registerNewUserAccount(UserDto userDto)
+    public boolean registerNewUserAccount(UserDto userDto)
         throws EmailExistsException {
-        User user = null;
         String email = userDto.getEmail();
         if (emailExist(email)) {
             throw new EmailExistsException(String.format(EMAIL_EXISTS_MESSAGE,
                     email));
         } else {
-            user = userMapper.toEntity(userDto);
-            user = createNewUserAccount(user);
+            User user = userMapper.toEntity(userDto);
+            createNewUserAccount(user);
         }
-        return userMapper.toDto(user);
+        return isSuccessfulRegistration;
     }
 
     /**
@@ -77,14 +81,13 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
      * 
      * @param user
      *            User Entity object.
-     * @return User with registered account.
      */
-    private User createNewUserAccount(User user) {
+    private void createNewUserAccount(User user) {
         String hashedPassword = hashPassword(user.getPassword());
         user.setPassword(hashedPassword);
         user.setRole(Role.ROLE_USER);
         userDao.create(user);
-        return user;
+        isSuccessfulRegistration=true;
     }
 
     /**

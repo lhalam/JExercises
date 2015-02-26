@@ -16,9 +16,9 @@ public interface UserRegistrationService {
      * 
      * @param userDto
      *            User DTO object.
-     * @return Registered user.
+     * @return true if registration is successful.
      * @throws EmailExistsException
      *             if user with current email already exists.
      */
-    UserDto registerNewUserAccount(UserDto userDto) throws EmailExistsException;
+    boolean registerNewUserAccount(UserDto userDto) throws EmailExistsException;
 }
