@@ -3,29 +3,13 @@ package com.softserveinc.ita.jexercises.common.dto;
 import java.util.Date;
 import java.util.List;
 
-import com.softserveinc.ita.jexercises.common.utils.Role;
-
-
-
 /**
  * Represents TestResult DTO.
  * 
  * @author Volodymyr Lishchynskiy
  * @version 1.0
  */
-public class TestResultDto {
-    /**
-     * First name of user.
-     */
-    private String firstName;
-    /**
-     * Last name of user.
-     */
-    private String lastName;   
-    /**
-     * Date of passing test.
-     */
-    private Date createDate;
+public class TestResultDto {    
     /**
      * List of user answers dtos.
      */
@@ -42,11 +26,7 @@ public class TestResultDto {
      * Is test public or not.
      */
     private boolean isPublic;
-    /**
-     * Role of user.
-     */
-    private Role role;    
-    
+        
     public boolean isPublic() {
         return isPublic;
     }
@@ -54,15 +34,7 @@ public class TestResultDto {
     public void setPublic(boolean isPublic) {
         this.isPublic = isPublic;
     }
-
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
-
+   
     public int getTotalAnswersCount() {
         return totalAnswersCount;
     }
@@ -81,30 +53,7 @@ public class TestResultDto {
         this.correctAnswersCount = correctAnswersCount;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-    
-    public Date getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
-    }
-
+  
     public List<TestResultAnswerDto> getAnswers() {
         return answers;
     }
