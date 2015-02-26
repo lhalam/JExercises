@@ -15,7 +15,7 @@ $(document).ready(function() {
 				dataType : "json",
 				data : form.serialize(),
 				success : function(data) {
-					if (data.hasErrors) {
+					if (data.errors.length > 0) {
 						var error = data.errors[0];
 						errorMessageHolder.text(error);
 						errorMessageHolder.show();

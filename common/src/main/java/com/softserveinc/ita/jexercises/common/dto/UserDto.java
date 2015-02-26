@@ -41,30 +41,8 @@ public class UserDto {
      */
     private HashSet<String> errors = new HashSet<String>();
 
-    /**
-     * Error flag.
-     */
-    private boolean hasErrors;
-
     public HashSet<String> getErrors() {
         return errors;
-    }
-
-    /**
-     * Adds errors to collection.
-     * 
-     * @param error
-     *            Error string.
-     */
-    public void addError(String error) {
-        errors.add(error);
-        if (!hasErrors) {
-            hasErrors = true;
-        }
-    }
-
-    public boolean getHasErrors() {
-        return hasErrors;
     }
 
     public Date getBirthDate() {
@@ -113,6 +91,16 @@ public class UserDto {
 
     public void setMatchingPassword(String matchingPassword) {
         this.matchingPassword = matchingPassword;
+    }
+
+    /**
+     * Adds errors to collection.
+     * 
+     * @param error
+     *            Error string.
+     */
+    public void addError(String error) {
+        errors.add(error);
     }
 
 }
