@@ -2,11 +2,10 @@
  * 
  */
 $(document).ready(function() {
-	var errorMessageHolder = $("#errorMessageHolder");
-	errorMessageHolder.hide();
 
 	$("#submitButton").click(function(e) {
 		var form = $('#registrationForm');
+		var errorMessageHolder = $("#errorMessageHolder");
 		var email = $("#email");
 		setDate();
 		if (form.valid()) {

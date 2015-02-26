@@ -25,7 +25,7 @@
 							style="color: dimgray; text-align: center">JExercises Please
 							Register</h3>
 						<hr class="colorgraph">
-						<div id="errorMessageHolder" class="alert alert-danger"></div>
+						<div id="errorMessageHolder" class="alert alert-danger" hidden="true"></div>
 						<input class="form-control" placeholder="First name"
 							id="firstName" name="firstName" type="text" /> <input
 							class="form-control" placeholder="Last name" id="lastName"
