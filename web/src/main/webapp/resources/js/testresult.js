@@ -32,7 +32,7 @@ function sendPost() {
 				});						
 					
 				$('.public').show();
-				$('.okbtn;').show();
+				$('.okbtn').show();
 			}
 			else {
 				$('.private').show();
