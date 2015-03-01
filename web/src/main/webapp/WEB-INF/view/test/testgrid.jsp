@@ -34,6 +34,9 @@
                                 <th>Id</th>
                                 <th>Name</th>
                                 <th>Availability</th>
+                                <th>View</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
                             </tr>
                             </thead>
 
@@ -42,6 +45,9 @@
                                 <th>Id</th>
                                 <th>Name</th>
                                 <th>Availability</th>
+                                <th>View</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
                             </tr>
                             </tfoot>
                         </table>
