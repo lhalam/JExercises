@@ -5,6 +5,7 @@
 $(document).ready(function() {
 	$('.public').hide();
 	$('.private').hide();
+	$('.okbtn').hide();
 	sendPost();
 });
 
@@ -26,14 +27,16 @@ function sendPost() {
 					"data" : responseData.answers,
 					"columns" : [ 
 					              {"data" : "questionName"},
-					              {"data" : "correct"},
+					              {"data" : "isCorrect"},
 					            ]
 				});						
 					
 				$('.public').show();
+				$('.okbtn;').show();
 			}
 			else {
 				$('.private').show();
+				$('.okbtn').show();
 
 		}
 		}

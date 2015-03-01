@@ -14,9 +14,9 @@
 <link rel="stylesheet"
 	href="//cdn.datatables.net/1.10.5/css/jquery.dataTables.min.css">
 <link rel="stylesheet"
-	href="/web/resources/css/lib/dataTables.bootstrap.css">
-<script src="resources/js/lib/jquery.dataTables.min.js"></script>
-<script src="resources/js/testresult.js"></script>
+	href="${basedir}/resources/css/lib/dataTables.bootstrap.css">
+<script src="${basedir}/resources/js/lib/jquery.dataTables.min.js"></script>
+<script src="${basedir}/resources/js/testresult.js"></script>
 </head>
 <body>
 	<div class="row-fluid">
@@ -33,7 +33,8 @@
 						<div class="userpublic">
 							<div class="row-fluid">
 								<div class="col-md-offset-2 col-md-8">
-									<table id="testresult" class="table table-striped table-bordered" cellspacing="0"
+									<table id="testresult"
+										class="table table-striped table-bordered" cellspacing="0"
 										width="100%">
 										<thead>
 											<tr>
@@ -47,9 +48,18 @@
 						</div>
 					</div>
 					<div class="row-fluid private">
-						<div class="col-md-offset-3 col-md-6">
-							<p id="thanks">Thank you for complete test !</p>
+						<div class="col-md-offset-4 col-md-8">
+							<p id="thanks">
+								<strong>Thank you for complete test !</strong>
+							</p>
 						</div>
+					</div>
+
+					<div class="col-md-2 col-lg-2 col-md-offset-5 okbtn" id="pagebar"
+						style="margin-top: 50px; height: 50px">
+						<a class="btn btn-primary btn-sm" type="button"
+							style="height: 30px; width: 70px"
+							href="http://localhost:9090/web/login.com">OK</a>
 					</div>
 				</div>
 			</form>

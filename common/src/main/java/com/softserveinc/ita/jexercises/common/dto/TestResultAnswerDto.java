@@ -7,16 +7,14 @@ package com.softserveinc.ita.jexercises.common.dto;
  * @version 1.0
  */
 public class TestResultAnswerDto {
-
     /**
      * Name of question.
      */
     private String questionName;
-
     /**
      * Is user answer correct or incorrect.
      */
-    private boolean isCorrect;
+    private String isCorrect;
 
     public String getQuestionName() {
         return questionName;
@@ -26,11 +24,11 @@ public class TestResultAnswerDto {
         this.questionName = questionName;
     }
 
-    public boolean isCorrect() {
+    public String getIsCorrect() {
         return isCorrect;
     }
 
-    public void setCorrect(boolean isCorrect) {
+    public void setIsCorrect(String isCorrect) {
         this.isCorrect = isCorrect;
-    }
+    }   
 }
