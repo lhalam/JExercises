@@ -1,8 +1,4 @@
 $(document).ready(function() {
-	$.validator.setDefaults({ 
-	    ignore: []
-	});
-	
 	$("#registrationForm").validate({
 		rules : {
 			"firstName" : {
@@ -21,23 +17,40 @@ $(document).ready(function() {
 			"matchingPassword" : {
 				required : true,
 				equalTo : "#password"
+			},
+			"birthDate" : {
+				required : true,
+				dateValid : true
 			}
-		}
-	});
-		
-	var shortMonths = [ 4, 6, 9, 11 ];
-	var february=2;
-	
-	$.validator.addMethod("checkDate", function(element) {
-		return isValidDate(element);
-	}, "Please, enter а valid date of birth")
+		},
 
-	$.validator.addClassRules({
-		dateRequired : {
-			required : true,
-			checkDate : true
+		showErrors : function(errorMap, errorList) {
+
+			$.each(this.successList, function(index, value) {
+				$(value).popover('hide');
+			});
+
+			$.each(errorList, function(index, value) {
+				var popover = $(value.element).popover({
+					trigger : 'manual',
+					placement : 'right',
+					content : value.message
+				});
+
+				popover.data('bs.popover').options.content = value.message;
+				$(value.element).popover('show');
+
+			});
+
 		}
 	});
+
+	var shortMonths = [ 4, 6, 9, 11 ];
+	var february = 2;
+
+	$.validator.addMethod("dateValid", function(value) {
+		return isValidDate(value);
+	}, "Please, enter а valid date of birth.")
 
 	function isValidDate(date) {
 		var validDateFormat = /^[1-3]?[0-9]\/[1]?[0-9]\/([0-9]{4})$/;
@@ -58,10 +71,9 @@ $(document).ready(function() {
 		}
 		return false;
 	}
-	
+
 	function isLeapYear(year) {
-		return ((year % 4 == 0) && (year % 100 != 0))
-				|| (year % 400 == 0);
+		return ((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0);
 	}
 
 });

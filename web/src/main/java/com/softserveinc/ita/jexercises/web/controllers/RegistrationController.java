@@ -40,7 +40,8 @@ public class RegistrationController {
      */
     @RequestMapping(value = "/user/registration", method = RequestMethod.GET)
     public ModelAndView showRegistrationForm() {
-        return new ModelAndView("user/registration");
+        UserDto model=new UserDto();
+        return new ModelAndView("user/registration","model",model);
     }
 
     /**
