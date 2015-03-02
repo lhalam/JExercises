@@ -10,7 +10,7 @@ import com.softserveinc.ita.jexercises.business.services.AutoLoginService;
 import com.softserveinc.ita.jexercises.business.services.UserRegistrationService;
 import com.softserveinc.ita.jexercises.common.dto.ResponseDto;
 import com.softserveinc.ita.jexercises.common.dto.UserDto;
-import com.softserveinc.ita.jexercises.common.utils.DatePicker;
+import com.softserveinc.ita.jexercises.common.utils.DateUtils;
 
 /**
  * Controls new user registration process.
@@ -36,13 +36,15 @@ public class RegistrationController {
     /**
      * Gets registration form page.
      * 
-     * @param model
-     *            DatePicker model.
      * @return Registration page.
      */
     @RequestMapping(value = "/user/registration", method = RequestMethod.GET)
-    public ModelAndView showRegistrationForm(DatePicker model) {
-        return new ModelAndView("user/registration", "model", model);
+    public ModelAndView showRegistrationForm() {
+        ModelAndView modelAndView = new ModelAndView("user/registration");
+        modelAndView.addObject("days", DateUtils.getDays());
+        modelAndView.addObject("months", DateUtils.getMonths());
+        modelAndView.addObject("years", DateUtils.getYears());
+        return modelAndView;
     }
 
     /**

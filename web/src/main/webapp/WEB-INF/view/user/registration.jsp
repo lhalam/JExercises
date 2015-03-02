@@ -46,18 +46,18 @@
 						<div id="datePicker" class="combodate">
 							<select id="day" name="day">
 								<option disabled selected>Day</option>
-								<c:forEach items="${model.days}" var="day">
+								<c:forEach items="${days}" var="day">
 									<option value="${day}"><c:out value="${day}" /></option>
 								</c:forEach>
 							</select> <select id="month" name="month">
 								<option disabled selected>Month</option>
-								<c:forEach items="${model.months}" var="month">
+								<c:forEach items="${months}" var="month">
 									<option value="${month.key}"><c:out
 											value="${month.value}" /></option>
 								</c:forEach>
 							</select> <select id="year" name="year">
 								<option disabled selected>Year</option>
-								<c:forEach items="${model.years}" var="year">
+								<c:forEach items="${years}" var="year">
 									<option value="${year}"><c:out value="${year}" /></option>
 								</c:forEach>
 							</select>
