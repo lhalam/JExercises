@@ -16,7 +16,7 @@
 <script src="//cdn.datatables.net/plug-ins/f2c75b7247b/integration/bootstrap/3/dataTables.bootstrap.js"></script>
 <body id="container">
 <div class="row-fluid">
-    <div class="col-md-offset-2 col-md-8">
+    <div class="col-md-offset-1 col-md-10">
         <form class="panel panel-primary">
             <div class="container-fluid">
                 <div class="col-md-offset-5 col-md-1">
@@ -25,7 +25,7 @@
                     </h3>
                 </div>
                 <div class="row-fluid ">
-                    <div class="col-md-offset-2 col-md-8">
+                    <div class="col-md-offset-1 col-md-10">
                         <br></br>
                         <table id="testgrid" class="table table-striped table-bordered"
                                cellspacing="0" width="100%">
@@ -35,6 +35,7 @@
                                 <th>Name</th>
                                 <th>Availability</th>
                                 <th>View</th>
+                                <th>View attempts</th>
                                 <th>Edit</th>
                                 <th>Delete</th>
                             </tr>
@@ -46,6 +47,7 @@
                                 <th>Name</th>
                                 <th>Availability</th>
                                 <th>View</th>
+                                <th>View attempts</th>
                                 <th>Edit</th>
                                 <th>Delete</th>
                             </tr>
