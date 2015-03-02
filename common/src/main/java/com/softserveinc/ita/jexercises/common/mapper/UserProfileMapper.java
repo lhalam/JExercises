@@ -2,6 +2,7 @@ package com.softserveinc.ita.jexercises.common.mapper;
 
 import com.softserveinc.ita.jexercises.common.dto.UserProfileDto;
 import com.softserveinc.ita.jexercises.common.entity.User;
+import org.apache.commons.codec.binary.Base64;
 import org.springframework.stereotype.Component;
 
 /**
@@ -34,7 +35,7 @@ public class UserProfileMapper {
         }
 
         if (!userProfileDto.getAvatar().isEmpty()) {
-            user.setAvatar(userProfileDto.getAvatar().getBytes());
+            user.setAvatar(Base64.decodeBase64(userProfileDto.getAvatar()));
         }
 
         if (userProfileDto.getRole() != null) {
@@ -53,7 +54,7 @@ public class UserProfileMapper {
     public UserProfileDto toDto(User user) {
         UserProfileDto userProfileDto = new UserProfileDto();
         if (user.getAvatar() != null) {
-            userProfileDto.setAvatar(new String(user.getAvatar()));
+            userProfileDto.setAvatar(Base64.encodeBase64String(user.getAvatar()));
         }
         userProfileDto.setEmail(user.getEmail());
         userProfileDto.setFirstName(user.getFirstName());
