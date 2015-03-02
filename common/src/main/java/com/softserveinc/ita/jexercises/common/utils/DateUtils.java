@@ -9,30 +9,40 @@ import java.util.Set;
 import java.util.TreeSet;
 
 /**
- * Represents model of date picker tool.
+ * Represents date creation helper tool.
  * 
  * @author Oksana Senchuk
  * @version 1.0
  */
 public final class DateUtils {
     /**
-     * Days set.
+     * Days collection.
      */
     private static final Set<Byte> DAYS = initializeDays();
     /**
-     * Years set.
-     */
-    private static final Set<Short> YEARS = initializeYears();
-    /**
-     * Months map.
+     * Months collection.
      */
     private static final Map<Byte, String> MONTHS = initializeMonths();
+    /**
+     * Years collection.
+     */
+    private static final Set<Short> YEARS = initializeYears();
 
     /**
-     * Constructs DatePicker object.
+     * Prevents from external construction of DateUtils object.
      */
     private DateUtils() {
 
+    }
+
+    private static Set<Byte> initializeDays() {
+        TreeSet<Byte> days = new TreeSet<Byte>();
+        byte minDay = 1;
+        byte maxDay = 31;
+        for (byte i = minDay; i <= maxDay; i++) {
+            days.add(i);
+        }
+        return days;
     }
 
     private static Map<Byte, String> initializeMonths() {
@@ -55,16 +65,6 @@ public final class DateUtils {
             years.add(i);
         }
         return years;
-    }
-
-    private static Set<Byte> initializeDays() {
-        TreeSet<Byte> days = new TreeSet<Byte>();
-        byte minDay = 1;
-        byte maxDay = 31;
-        for (byte i = minDay; i <= maxDay; i++) {
-            days.add(i);
-        }
-        return days;
     }
 
     public static Set<Byte> getDays() {
