@@ -1,5 +1,6 @@
 package com.softserveinc.ita.jexercises.persistence.dao.impl.hibernate;
 
+import com.mysema.query.BooleanBuilder;
 import com.mysema.query.jpa.impl.JPAQuery;
 import com.mysema.query.types.OrderSpecifier;
 import com.mysema.query.types.path.PathBuilder;
@@ -26,27 +27,14 @@ import java.util.Map;
 
 public class HibernateGenericDaoImpl<T, PK extends Serializable> implements
         GenericDao<T, PK> {
-    /**
-     * Service final variable for getEntityName() method.
-     */
+
     private static final String EMPTY = "";
-    /**
-     * Service decrescent final variable for getAllByCriteria method.
-     */
     private static final String DESC = "desc";
-    /**
-     * Represents entity class.
-     */
     private Class<T> entityClass;
-    /**
-     * Entity manager variable.
-     */
+    private String entity;
+
     @PersistenceContext
     private EntityManager entityManager;
-    /**
-     * Service variable for getEntityName() method.
-     */
-    private String entity;
 
     /**
      * Constructor. Assigns class of entity.
@@ -100,22 +88,22 @@ public class HibernateGenericDaoImpl<T, PK extends Serializable> implements
                 Introspector.decapitalize(getEntityName()));
 
         JPAQuery jpaQuery = new JPAQuery(entityManager);
+        BooleanBuilder builder = new BooleanBuilder();
 
         jpaQuery.offset(searchCondition.getPageNumber()
                 * searchCondition.getPageSize())
                 .limit(searchCondition.getPageSize()).from(qObject);
 
         for (Map.Entry<String, String> filter :
-                searchCondition.getFilterMap().entrySet())
-        {
+                searchCondition.getFilterMap().entrySet()) {
             StringPath filterFieldPath = qObject.getString(filter.getKey());
-
-            jpaQuery.where(filterFieldPath.like(filter.getValue()));
+            builder.or(filterFieldPath.containsIgnoreCase(filter.getValue()));
         }
 
+        jpaQuery.where(builder);
+
         for (Map.Entry<String, String> order :
-                searchCondition.getOrderByMap().entrySet())
-        {
+                searchCondition.getOrderByMap().entrySet()) {
             StringPath sortFieldPath = qObject.getString(order.getKey());
             OrderSpecifier<String> orderSpecifier = sortFieldPath.asc();
 
@@ -135,16 +123,17 @@ public class HibernateGenericDaoImpl<T, PK extends Serializable> implements
                 Introspector.decapitalize(getEntityName()));
 
         JPAQuery jpaQuery = new JPAQuery(entityManager);
+        BooleanBuilder builder = new BooleanBuilder();
 
         jpaQuery.from(qObject);
 
         for (Map.Entry<String, String> filter :
-                searchCondition.getFilterMap().entrySet())
-        {
+                searchCondition.getFilterMap().entrySet()) {
             StringPath filterFieldPath = qObject.getString(filter.getKey());
-
-            jpaQuery.where(filterFieldPath.like(filter.getValue()));
+            builder.or(filterFieldPath.containsIgnoreCase(filter.getValue()));
         }
+
+        jpaQuery.where(builder);
 
         return jpaQuery.list(qObject).size();
     }
@@ -155,11 +144,6 @@ public class HibernateGenericDaoImpl<T, PK extends Serializable> implements
                 (double) searchCondition.getPageSize());
     }
 
-    /**
-     * Get name of entity class.
-     *
-     * @return String with the name of entity class.
-     */
     private String getEntityName() {
         if (entity == null) {
             Entity entityAnn = (Entity) entityClass.getAnnotation(Entity.class);
