@@ -6,11 +6,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-
 import com.softserveinc.ita.jexercises.business.services.AutoLoginService;
 import com.softserveinc.ita.jexercises.business.services.UserRegistrationService;
-import com.softserveinc.ita.jexercises.business.utils.EmailExistsException;
+import com.softserveinc.ita.jexercises.common.dto.ResponseDto;
 import com.softserveinc.ita.jexercises.common.dto.UserDto;
+import com.softserveinc.ita.jexercises.common.utils.DatePicker;
 
 /**
  * Controls new user registration process.
@@ -36,12 +36,13 @@ public class RegistrationController {
     /**
      * Gets registration form page.
      * 
+     * @param model
+     *            DatePicker model.
      * @return Registration page.
      */
     @RequestMapping(value = "/user/registration", method = RequestMethod.GET)
-    public ModelAndView showRegistrationForm() {
-        UserDto model=new UserDto();
-        return new ModelAndView("user/registration","model",model);
+    public ModelAndView showRegistrationForm(DatePicker model) {
+        return new ModelAndView("user/registration", "model", model);
     }
 
     /**
@@ -49,20 +50,16 @@ public class RegistrationController {
      * 
      * @param model
      *            UserDto object.
-     * @return UserDto object.
+     * @return ResponseDto object.
      */
     @RequestMapping(value = "/user/registration", method = RequestMethod.POST)
     @ResponseBody
-    public UserDto registerUserAccount(UserDto model) {
-        try {
-            boolean isSuccessfulRegistration = userRegistrationService
-                    .registerNewUserAccount(model);
-            if (isSuccessfulRegistration) {
-                autoLoginService.authenticateUser(model);
-            }
-        } catch (EmailExistsException exeption) {
-            model.addError(exeption.getMessage());
+    public ResponseDto registerUserAccount(UserDto model) {
+        ResponseDto response = userRegistrationService
+                .registerNewUserAccount(model);
+        if (response.isSuccess()) {
+            autoLoginService.authenticateUser(model);
         }
-        return model;
+        return response;
     }
 }

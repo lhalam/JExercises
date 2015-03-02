@@ -20,11 +20,10 @@
 					class="panel panel-default">
 					<div class="container-fluid">
 						<h3 class="sign-up-title"
-							style="color: dimgray; text-align: center">JExercises Please
-							Register</h3>
+							style="color: dimgray; text-align: center">JExercises Register</h3>
 						<hr class="colorgraph">
 						<div id="errorMessageHolder" class="alert alert-danger"
-							hidden="true"></div>
+							hidden="true" ></div>
 						<hr class="line">
 						<input class="form-control" placeholder="First name*"
 							id="firstName" name="firstName" type="text" data-toggle="popover" /><br />

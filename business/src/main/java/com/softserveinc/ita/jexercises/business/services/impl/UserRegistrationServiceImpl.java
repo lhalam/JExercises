@@ -4,9 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import com.softserveinc.ita.jexercises.business.services.
-       UserRegistrationService;
-import com.softserveinc.ita.jexercises.business.utils.EmailExistsException;
+
+import com.softserveinc.ita.jexercises.business.services.UserRegistrationService;
+import com.softserveinc.ita.jexercises.common.dto.ResponseDto;
 import com.softserveinc.ita.jexercises.common.dto.UserDto;
 import com.softserveinc.ita.jexercises.common.entity.User;
 import com.softserveinc.ita.jexercises.common.mapper.UserMapper;
@@ -24,19 +24,14 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
     /**
      * User with current email already exists message.
      */
-    private static final String EMAIL_EXISTS_MESSAGE 
-        = "User with email %s already exists";
-    
-    /**
-     * Registration status.
-     */
-    private boolean isSuccessfulRegistration;
+    private static final String EMAIL_EXISTS_MESSAGE = "User with email %s already exists";
+
     /**
      * User DAO instance.
      */
     @Autowired
     private UserDao userDao;
-    
+
     /**
      * UserMapper instance.
      */
@@ -51,17 +46,17 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
 
     @Transactional
     @Override
-    public boolean registerNewUserAccount(UserDto userDto)
-        throws EmailExistsException {
+    public ResponseDto registerNewUserAccount(UserDto userDto) {
+        ResponseDto response = new ResponseDto();
         String email = userDto.getEmail();
         if (emailExist(email)) {
-            throw new EmailExistsException(String.format(EMAIL_EXISTS_MESSAGE,
-                    email));
+            response.addError(String.format(EMAIL_EXISTS_MESSAGE, email));
         } else {
             User user = userMapper.toEntity(userDto);
             createNewUserAccount(user);
+            response.setSuccess(true);
         }
-        return isSuccessfulRegistration;
+        return response;
     }
 
     /**
@@ -87,7 +82,6 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
         user.setPassword(hashedPassword);
         user.setRole(Role.ROLE_USER);
         userDao.create(user);
-        isSuccessfulRegistration=true;
     }
 
     /**
