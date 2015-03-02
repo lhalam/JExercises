@@ -8,11 +8,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.softserveinc.ita.jexercises.business.services.TestResultService;
-import com.softserveinc.ita.jexercises.common.dto.TestResultAnswerDto;
 import com.softserveinc.ita.jexercises.common.dto.TestResultDto;
 import com.softserveinc.ita.jexercises.common.entity.Attempt;
-import com.softserveinc.ita.jexercises.common.entity.Test;
 import com.softserveinc.ita.jexercises.common.entity.UserAnswer;
+import com.softserveinc.ita.jexercises.common.mapper.TestResultMapper;
 import com.softserveinc.ita.jexercises.persistence.dao.impl.AttemptDao;
 
 /**
@@ -30,33 +29,18 @@ public class TestResultServiceImpl implements TestResultService {
     @Autowired
     private AttemptDao attemptDao;
 
-    @SuppressWarnings("unchecked")
+    /**
+     * Mapper from entities to dto.
+     */
+    @Autowired
+    private TestResultMapper testResultMapper;
+
     @Transactional
     @Override
     public TestResultDto getTestResultInfo(long attemptId) {
-        TestResultDto testResultDto = new TestResultDto();
-        List<TestResultAnswerDto> testResultAnswerDtos
-            = new ArrayList<TestResultAnswerDto>();
         Attempt attempt = attemptDao.findById(attemptId);
-        Test test = attempt.getTest();
-        testResultDto.setTotalAnswersCount(attempt.getUserAnswers().size());
-        testResultDto.setCorrectAnswersCount(countCorrect(attemptId));
-        testResultDto.setPublic(test.getIsPublic());
-        
-        List<UserAnswer> userAnswers = new ArrayList<UserAnswer>(
-                attempt.getUserAnswers());
-        for (UserAnswer userAnswer : userAnswers) {
-            TestResultAnswerDto testResultAnswerDto = new TestResultAnswerDto();
-            testResultAnswerDto.setCorrect(userAnswer.isCorrect());
-
-            testResultAnswerDto.setQuestionName(userAnswer.getQuestion()
-                    .getName());
-            testResultAnswerDtos.add(testResultAnswerDto);
-        }
-
-        testResultDto.setAnswers(testResultAnswerDtos);
-
-        return testResultDto;
+        int numberCorrect = countCorrect(attemptId);
+        return testResultMapper.toDto(attempt, numberCorrect);
     }
 
     @Override

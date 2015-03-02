@@ -14,13 +14,33 @@ $(document).ready(function() {
          "columns": [
              {"data": "id", "sClass": "gridtable" },
              {"data": "description"},
-             {"data": "isPublic", "bSortable": false }
+             {"data": "isPublic", "bSortable": false},
+             {
+                 "data" : "id",
+                 "bSortable": false,
+                 "render": function (data, type, full, meta) {
+                     return '<a class="btn btn-info" href="test/' +
+                         data + '">View</a>';
+                 }
+             },
+             {
+                 "data" : "id",
+                 "bSortable": false,
+                 "render": function (data, type, full, meta) {
+                     return '<a class="btn btn-warning" href="test/edit/' +
+                         data + '">Edit</a>';
+                 }
+             },
+             {
+                 "data" : "id",
+                 "bSortable": false,
+                 "render": function (data, type, full, meta) {
+                     return '<a class="btn btn-danger" href="test/delete/' +
+                         data + '"><span class="glyphicon glyphicon-trash">' +
+                         '</span> Delete</a>';
+                 }
+             }
              ]
      });
     $('#testgrid_wrapper').removeClass('dataTables_wrapper');
-    $('#testgrid tbody').on('click', 'tr', function () {
-        var urlid = $('td', this).eq(0).text();
-        window.location=url+urlid;
-    } );
-
-} );
+});

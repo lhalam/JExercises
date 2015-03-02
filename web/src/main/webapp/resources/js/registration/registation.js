@@ -2,7 +2,7 @@
  * 
  */
 $(document).ready(function() {
-
+	
 	$("#submitButton").click(function(e) {
 		var form = $('#registrationForm');
 		var errorMessageHolder = $("#errorMessageHolder");
@@ -37,8 +37,9 @@ $(document).ready(function() {
 		var year = $("#year").val();
 		var birthDate = day + "/" + month + "/" + year;
 		birthDateHolder.val(birthDate);
-		$("#datepicker").change(function() {
-			$("label[for='birthDate']").hide();
+		$("#datePicker").change(function() {
+			setDate();
+			birthDateHolder.valid();
 		})
 	}
 
