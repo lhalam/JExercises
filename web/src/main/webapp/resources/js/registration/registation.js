@@ -2,15 +2,18 @@
  * 
  */
 $(document).ready(function() {
-	var baseDir = $("#contextRootHolder").val();
+
+	$("#datePicker").change(function() {
+		setDate();
+	});
 
 	$("#submitButton").click(function(e) {
 		var form = $('#registrationForm');
 		var errorMessageHolder = $("#errorMessageHolder");
-		var email = $("#email");
+		var emailHolder = $("#email");
+		var baseDir = $("#contextRootHolder").val();
 		var postUrl = baseDir + "/user/registration";
 		var redirectUrl = baseDir + "/user/profile";
-		setDate();
 		if (form.valid()) {
 			$.ajax({
 				type : "POST",
@@ -22,7 +25,7 @@ $(document).ready(function() {
 						var error = data.errors[0];
 						errorMessageHolder.text(error);
 						errorMessageHolder.show();
-						email.change(function() {
+						emailHolder.change(function() {
 							errorMessageHolder.hide();
 						});
 					} else {
@@ -40,10 +43,7 @@ $(document).ready(function() {
 		var year = $("#year").val();
 		var birthDate = day + "/" + month + "/" + year;
 		birthDateHolder.val(birthDate);
-		$("#datePicker").change(function() {
-			setDate();
-			birthDateHolder.valid();
-		})
+		birthDateHolder.valid();
 	}
 
 });

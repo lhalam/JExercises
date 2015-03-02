@@ -29,19 +29,19 @@
 
 						<hr class="line">
 						<input class="form-control" placeholder="First name*"
-							id="firstName" name="firstName" type="text" data-toggle="popover" /><br />
+							id="firstName" name="firstName" type="text" data-toggle="tooltip" /><br />
 						<input class="form-control" placeholder="Last name*" id="lastName"
-							name="lastName" type="text" data-toggle="popover" /><br /> <input
+							name="lastName" type="text" data-toggle="tooltip" /><br /> <input
 							class="form-control" placeholder="E-mail*" id="email"
-							name="email" type="email" data-toggle="popover" /> <br /> <input
+							name="email" type="email" data-toggle="tooltip" /> <br /> <input
 							id="password" class="form-control" placeholder="Password*"
-							name="password" type="password" data-toggle="popover" /> <br />
+							name="password" type="password" data-toggle="tooltip" /> <br />
 						<input id="matchingPassword" class="form-control"
 							placeholder="Confirm Password*" name="matchingPassword"
-							type="password" data-toggle="popover" />
+							type="password" data-toggle="tooltip" />
 						<hr class="line">
 						<label class="label" id="label">Birthday <input
-							id="birthDate" name="birthDate" data-toggle="popover"
+							id="birthDate" name="birthDate" data-toggle="tooltip"
 							class="hiddenContainer"></label> <br></br>
 						<div id="datePicker" class="combodate">
 							<select id="day" name="day">
