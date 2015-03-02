@@ -13,6 +13,7 @@
 <script src="${basedir}/resources/js/lib/jquery.validate.min.js"></script>
 </head>
 <body id="container">
+	<input type="hidden" id="contextRootHolder" value="${basedir}" />
 	<div class="container">
 		<div class="row" style="margin-top: 60px;">
 			<div class="col-md-4 col-md-offset-4">
@@ -20,10 +21,12 @@
 					class="panel panel-default">
 					<div class="container-fluid">
 						<h3 class="sign-up-title"
-							style="color: dimgray; text-align: center">JExercises Register</h3>
+							style="color: dimgray; text-align: center">JExercises
+							Register</h3>
 						<hr class="colorgraph">
 						<div id="errorMessageHolder" class="alert alert-danger"
-							hidden="true" ></div>
+							hidden="true"></div>
+
 						<hr class="line">
 						<input class="form-control" placeholder="First name*"
 							id="firstName" name="firstName" type="text" data-toggle="popover" /><br />

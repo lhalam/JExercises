@@ -6,10 +6,12 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
+
 /**
  * Represents model of date picker tool.
+ * 
  * @author Oksana Senchuk
- *@version 1.0
+ * @version 1.0
  */
 public class DatePicker {
     /**
@@ -26,7 +28,7 @@ public class DatePicker {
      * Datepicker's years list.
      */
     private List<Integer> years;
-    
+
     public List<Integer> getDays() {
         return days;
     }
@@ -38,6 +40,7 @@ public class DatePicker {
     public List<Integer> getYears() {
         return years;
     }
+
     /**
      * Constructs DatePicker object.
      */

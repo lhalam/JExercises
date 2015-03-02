@@ -2,16 +2,19 @@
  * 
  */
 $(document).ready(function() {
-	
+	var baseDir = $("#contextRootHolder").val();
+
 	$("#submitButton").click(function(e) {
 		var form = $('#registrationForm');
 		var errorMessageHolder = $("#errorMessageHolder");
 		var email = $("#email");
+		var postUrl = baseDir + "/user/registration";
+		var redirectUrl = baseDir + "/user/profile";
 		setDate();
 		if (form.valid()) {
 			$.ajax({
 				type : "POST",
-				url : "/web/user/registration",
+				url : postUrl,
 				dataType : "json",
 				data : form.serialize(),
 				success : function(data) {
@@ -23,7 +26,7 @@ $(document).ready(function() {
 							errorMessageHolder.hide();
 						});
 					} else {
-						window.location.href = "/web/user/profile";
+						window.location.href = redirectUrl;
 					}
 				}
 			});
