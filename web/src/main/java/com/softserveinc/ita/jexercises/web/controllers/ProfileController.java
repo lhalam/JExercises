@@ -3,20 +3,22 @@ package com.softserveinc.ita.jexercises.web.controllers;
 import com.softserveinc.ita.jexercises.business.services.CurrentUserService;
 import com.softserveinc.ita.jexercises.business.services.UserProfileService;
 import com.softserveinc.ita.jexercises.common.dto.UserProfileDto;
-import org.apache.commons.io.IOUtils;
+import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
-import java.io.File;
-import java.io.FileInputStream;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,19 +26,12 @@ import java.util.Map;
  * Controls process of viewing and editing user profiles.
  *
  * @author Taras Vuyiv
- * @version 1.0
  */
 @Controller
 public class ProfileController {
 
-    /**
-     * Service that handles profile related processes.
-     */
     @Autowired
     private UserProfileService userProfileService;
-    /**
-     * Service for getting current user from SecurityContext.
-     */
     @Autowired
     private CurrentUserService currentUserService;
 
@@ -82,74 +77,79 @@ public class ProfileController {
     }
 
     /**
-     * Starts process of user profile data update.
+     * Getting new user data and updating his profile.
      *
-     * @param model User Profile DTO Object.
-     * @return Profile page.
+     * @param userProfileDto User Profile DTO.
+     * @return Status.
      */
     @RequestMapping(value = "/user/profile/edit", method = RequestMethod.POST)
     @ResponseBody
-    public UserProfileDto postEditProfileDataJSON(UserProfileDto model) {
-        userProfileService.updateUserProfile(model);
+    public String updateUserProfile(UserProfileDto userProfileDto) {
+        userProfileService.updateUserProfile(userProfileDto);
 
-        return model;
+        return "{\"status\": \"success\"}";
     }
 
     /**
      * Gets byte array from uploaded picture.
      *
-     * @param request Request data.
+     * @param file Uploaded image.
      * @return Json with image as String.
      * @throws IOException InputStream error.
      */
-    @RequestMapping(value = "/user/profile/avatar/*",
+    @RequestMapping(value = "/post/avatar/*",
             produces = "application/json",
             method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, String> postUserAvatar(
-            final HttpServletRequest request)
+    public Map<String, String> uploadUserAvatar(
+            @RequestParam("filedata") MultipartFile file)
             throws IOException {
 
-        InputStream inputStream = request.getInputStream();
-
-        byte[] avatar = IOUtils.toByteArray(inputStream);
+        byte[] avatar = file.getBytes();
 
         Map<String, String> avatarMap = new HashMap<>();
-        avatarMap.put("image", new String(avatar));
+        avatarMap.put("image", Base64.encodeBase64String(avatar));
 
         return avatarMap;
     }
 
     /**
-     * Gets current user avatar.
+     * Gets avatar of current user.
      *
-     * @return Image byte array converted to string.
+     * @param response Response.
+     * @throws IOException InputStream Exception.
      */
     @RequestMapping(value = "/user/profile/avatar",
             method = RequestMethod.GET)
     @ResponseBody
-    public String getUserAvatar() {
+    public void getUserAvatar(HttpServletResponse response) throws IOException {
+        byte[] image;
+
         if (userProfileService.hasAvatar()) {
-            return new String(currentUserService.getCurrentUser().getAvatar());
+            image = currentUserService.getCurrentUser().getAvatar();
         } else {
-
-            String workingDir = System.getProperty("user.dir");
-            File file = new File(workingDir +
-                    "\\web\\src\\main\\webapp\\resources\\no-avatar.png");
-            byte[] image = new byte[(int) file.length()];
-            FileInputStream fileInputStream;
-
-            try {
-                fileInputStream = new FileInputStream(file);
-                fileInputStream.read(image);
-                fileInputStream.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            return new String(image);
+            image = getDefaultAvatar();
         }
+
+        response.reset();
+        response.setContentType("image/jpeg");
+        response.setContentLength(image.length);
+        response.getOutputStream().write(image);
     }
 
+    private byte[] getDefaultAvatar() {
+        byte[] image = null;
+        String picturePath = Paths.get("").toAbsolutePath().toString() +
+                "\\web\\src\\main\\webapp\\resources" +
+                "\\no-avatar.png";
 
+        Path path = Paths.get(picturePath);
+            try {
+            image = Files.readAllBytes(path);
+        } catch (IOException e) {
+            System.out.println("Input error.");
+        }
+
+        return image;
+    }
 }
