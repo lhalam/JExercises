@@ -2,9 +2,12 @@ package com.softserveinc.ita.jexercises.web.controllers;
 
 import com.softserveinc.ita.jexercises.business.services.CurrentUserService;
 import com.softserveinc.ita.jexercises.business.services.UserProfileService;
+import com.softserveinc.ita.jexercises.common.dto.ResponseDto;
 import com.softserveinc.ita.jexercises.common.dto.UserProfileDto;
 import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,11 +17,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,6 +30,7 @@ import java.util.Map;
 @Controller
 public class ProfileController {
 
+    private static final String DEFAULT_AVATAR_PICTURE_NAME = "no-avatar.png";
     @Autowired
     private UserProfileService userProfileService;
     @Autowired
@@ -48,12 +49,11 @@ public class ProfileController {
     /**
      * Getting profile view data from User Profile DTO.
      *
-     * @return User Profile DTO type JSON.
+     * @return User Profile DTO.
      */
-    @RequestMapping(value = "/user/profile", method = RequestMethod.POST,
-            headers = "Accept=application/json")
+    @RequestMapping(value = "/user/profile", method = RequestMethod.POST)
     @ResponseBody
-    public UserProfileDto getProfileDataJSON() {
+    public UserProfileDto getProfileData() {
         return userProfileService.getUserInfo(currentUserService
                 .getCurrentUser());
     }
@@ -65,7 +65,7 @@ public class ProfileController {
      * @return Profile page.
      */
     @RequestMapping(value = "/user/profile/edit", method = RequestMethod.GET)
-    public ModelAndView getEditProfileNew(Model model) {
+    public ModelAndView getEditProfileView(Model model) {
         UserProfileDto user = userProfileService.getUserInfo(currentUserService
                 .getCurrentUser());
 
@@ -84,10 +84,13 @@ public class ProfileController {
      */
     @RequestMapping(value = "/user/profile/edit", method = RequestMethod.POST)
     @ResponseBody
-    public String updateUserProfile(UserProfileDto userProfileDto) {
+    public ResponseDto updateUserProfile(UserProfileDto userProfileDto) {
         userProfileService.updateUserProfile(userProfileDto);
 
-        return "{\"status\": \"success\"}";
+        ResponseDto response = new ResponseDto();
+        response.setSuccess(true);
+
+        return response;
     }
 
     /**
@@ -97,9 +100,7 @@ public class ProfileController {
      * @return Json with image as String.
      * @throws IOException InputStream error.
      */
-    @RequestMapping(value = "/post/avatar/*",
-            produces = "application/json",
-            method = RequestMethod.POST)
+    @RequestMapping(value = "/post/avatar/*", method = RequestMethod.POST)
     @ResponseBody
     public Map<String, String> uploadUserAvatar(
             @RequestParam("filedata") MultipartFile file)
@@ -116,13 +117,13 @@ public class ProfileController {
     /**
      * Gets avatar of current user.
      *
-     * @param response Response.
+     * @return Image byte array.
      * @throws IOException InputStream Exception.
      */
-    @RequestMapping(value = "/user/profile/avatar",
-            method = RequestMethod.GET)
+    @RequestMapping(value = "/user/profile/avatar", method = RequestMethod.GET,
+            produces = MediaType.IMAGE_JPEG_VALUE)
     @ResponseBody
-    public void getUserAvatar(HttpServletResponse response) throws IOException {
+    public byte[] getUserAvatar() throws IOException {
         byte[] image;
 
         if (userProfileService.hasAvatar()) {
@@ -131,25 +132,15 @@ public class ProfileController {
             image = getDefaultAvatar();
         }
 
-        response.reset();
-        response.setContentType("image/jpeg");
-        response.setContentLength(image.length);
-        response.getOutputStream().write(image);
+        return image;
     }
 
-    private byte[] getDefaultAvatar() {
-        byte[] image = null;
-        String picturePath = Paths.get("").toAbsolutePath().toString() +
-                "\\web\\src\\main\\webapp\\resources" +
-                "\\no-avatar.png";
+    private byte[] getDefaultAvatar() throws IOException {
 
-        Path path = Paths.get(picturePath);
-            try {
-            image = Files.readAllBytes(path);
-        } catch (IOException e) {
-            System.out.println("Input error.");
-        }
+        InputStream inputStream =
+                getClass().getClassLoader()
+                        .getResourceAsStream(DEFAULT_AVATAR_PICTURE_NAME);
 
-        return image;
+        return IOUtils.toByteArray(inputStream);
     }
 }

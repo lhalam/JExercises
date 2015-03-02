@@ -26,10 +26,14 @@
     border-top: 0;
 }
 
-
 .table-user-information > tbody > tr > td {
     border-top: 0;
 }
-.toppad
-{margin-top:20px;
+
+.toppad {
+    margin-top:20px;
+}
+
+.hidden-attribute {
+    display: none;
 }

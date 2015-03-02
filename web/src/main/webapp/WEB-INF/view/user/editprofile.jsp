@@ -9,6 +9,9 @@
     <link href="${basedir}/resources/css/profile.cssjquery.Jcrop.min.css"
           rel="stylesheet"
           type="text/css">
+    <link href="${basedir}/resources/css/editprofile.css"
+          rel="stylesheet"
+          type="text/css">
     <script src="${basedir}/resources/js/editprofile.js"></script>
 
     <script src="${basedir}/resources/js/uploader/define-FileAPI.js"></script>
@@ -21,26 +24,23 @@
 
 <body id="container">
 <div class="container">
-    <div class="row" style="margin-top:20px;">
+    <div class="row">
         <div class="col-md-5">
             <div class="panel panel-info">
                 <div class="panel-heading">
-                    <h3 class="panel-title"><a href="../profile"
-                                               class="btn btn-default"><span
-                            class="glyphicon glyphicon-arrow-left"></span> Back</a>
+                    <h3 class="panel-title">
                         Account Settings </h3>
                 </div>
                 <div class="panel-body">
 
-                    <div id="successAlert" style="display:none;">
+                    <div class="success-alert" id="successAlert">
                         <div class="alert alert-success alert-dismissible">
                             <button type="button" class="close"
                                     >&times;</button>
                             Your settings have been updated!
                         </div>
                     </div>
-                    <form action="/user/profile/edit"
-                          method="post"
+                    <form method="post"
                           id="editProfileForm"
                           class="form-horizontal">
 
@@ -99,8 +99,7 @@
 
                                     <div id="upload-avatar"
                                          class="upload-avatar">
-                                        <div class="userpic"
-                                             style="background-image: url('/web/user/profile/avatar');">
+                                        <div class="userpic">
                                             <div class="js-preview userpic__preview"></div>
                                         </div>
                                         <div class="btn btn-sm btn-success js-fileapi-wrapper">
@@ -109,8 +108,7 @@
                                                 <input type="file"
                                                        name="filedata">
                                             </div>
-                                            <div class="js-upload"
-                                                 style="display: none;">
+                                            <div class="js-upload uploading-progress">
                                                 <div class="progress progress-success">
                                                     <div class="js-progress bar"></div>
                                                 </div>
@@ -149,8 +147,9 @@
 
                             <div class="form-group">
                                 <div class="col-lg-offset-7 col-lg-12">
-                                    <input class="btn btn-sm" type="reset"
-                                           value="Reset form">
+                                    <a href="../profile"
+                                       class="btn btn-default btn-sm"
+                                       type="button">Cancel</a>
                                     <input class="btn btn-info"
                                            id="submitButton"
                                            type="button"
@@ -164,7 +163,7 @@
         </div>
 
         <div class="col-md-7">
-            <div id="cropper-preview" style="display:none;">
+            <div class="cropper-prev" id="cropper-preview">
                 <div class="panel panel-info">
                     <div class="panel-heading">
                         <h3 class="panel-title"> Crop the picture </h3>
@@ -179,8 +178,8 @@
                 </div>
             </div>
         </div>
-
     </div>
+    <div class="hidden-attribute" basedir="${basedir}"></div>
 </div>
 
 </body>

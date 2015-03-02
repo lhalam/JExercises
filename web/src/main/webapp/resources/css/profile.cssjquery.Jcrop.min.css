@@ -52,7 +52,6 @@
     height: 5px;
     position: absolute;
     background-color: #000;
-
 }
 
 .progress .bar {
@@ -107,7 +106,6 @@
     border-radius: 3px;
     display: inline-block;
     position: relative;
-    background: url('../no-avatar-big.jpg') no-repeat;
     -webkit-background-size: 100% 100%;
     -moz-background-size: 100% 100%;
     -o-background-size: 100% 100%;
