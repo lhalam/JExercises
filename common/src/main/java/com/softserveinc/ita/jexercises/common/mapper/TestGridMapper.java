@@ -22,7 +22,7 @@ public class TestGridMapper {
      * @return List SearchGridRows DTO.
      */
     public List<SearchGridRowDto> toDto(List<Test> tests) {
-        List<SearchGridRowDto> searchgridrows = new ArrayList<SearchGridRowDto>();
+        List<SearchGridRowDto> searchGridRows = new ArrayList<SearchGridRowDto>();
         for (Test test : tests) {
             SearchGridRowDto searchGridRowDto = new SearchGridRowDto();
             searchGridRowDto.setDescription(test.getName());
@@ -32,8 +32,8 @@ public class TestGridMapper {
                 searchGridRowDto.setIsPublic("Private");
             }
             searchGridRowDto.setId(test.getId());
-            searchgridrows.add(searchGridRowDto);
+            searchGridRows.add(searchGridRowDto);
         }
-        return searchgridrows;
+        return searchGridRows;
     }
 }
