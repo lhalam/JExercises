@@ -6,11 +6,10 @@
 <head>
     <%@ include file="../base.jsp" %>
     <%@ include file="../navigation.jsp" %>
-    <link href="${basedir}/resources/css/profile.cssjquery.Jcrop.min.css" rel="stylesheet"
+    <link href="${basedir}/resources/css/profile.cssjquery.Jcrop.min.css"
+          rel="stylesheet"
           type="text/css">
     <script src="${basedir}/resources/js/editprofile.js"></script>
-    <script src="${basedir}/resources/js/edit-profile-data-validation.js"></script>
-    <script src="${basedir}/resources/js/lib/jquery.validate.min.js"></script>
 
     <script src="${basedir}/resources/js/uploader/define-FileAPI.js"></script>
     <script src="${basedir}/resources/js/uploader/FileAPI.min.js"></script>
@@ -33,13 +32,15 @@
                 </div>
                 <div class="panel-body">
 
-                    <div id="successAlert"
-                         class="alert alert-success alert-dismissible">
-                        <button type="button" class="close"
-                                >&times;</button>
-                        Your settings have been updated!
+                    <div id="successAlert" style="display:none;">
+                        <div class="alert alert-success alert-dismissible">
+                            <button type="button" class="close"
+                                    >&times;</button>
+                            Your settings have been updated!
+                        </div>
                     </div>
-                    <form method="POST"
+                    <form action="/user/profile/edit"
+                          method="post"
                           id="editProfileForm"
                           class="form-horizontal">
 
@@ -89,27 +90,36 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="col-lg-4 control-label">Profile Picture</label>
+                                <label class="col-lg-4 control-label">Profile
+                                    Picture</label>
+
                                 <div class="col-lg-8">
-                                    <input type="hidden" id="avatar-hidden" name="avatar" value="">
-                                    <div id="upload-avatar" class="upload-avatar">
-                                        <div class="userpic" style="background-image: url('${basedir}/resources/no-avatar.png');">
+                                    <input type="hidden" id="avatar-hidden"
+                                           name="avatar" value="">
+
+                                    <div id="upload-avatar"
+                                         class="upload-avatar">
+                                        <div class="userpic"
+                                             style="background-image: url('/web/user/profile/avatar');">
                                             <div class="js-preview userpic__preview"></div>
                                         </div>
                                         <div class="btn btn-sm btn-success js-fileapi-wrapper">
                                             <div class="js-browse">
                                                 <span class="btn-txt">Choose</span>
-                                                <input type="file" name="filedata">
+                                                <input type="file"
+                                                       name="filedata">
                                             </div>
-                                            <div class="js-upload" style="display: none;">
-                                                <div class="progress progress-success"><div class="js-progress bar"></div></div>
+                                            <div class="js-upload"
+                                                 style="display: none;">
+                                                <div class="progress progress-success">
+                                                    <div class="js-progress bar"></div>
+                                                </div>
                                                 <span class="btn-txt">Uploading</span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
 
                             <div class="form-group ">
                                 <label for="password"
@@ -162,6 +172,7 @@
                     <div class="panel-body">
                         <div class="js-img"></div>
                         <p>
+
                         <div class="js-upload btn btn-primary">Upload</div>
                         </p>
                     </div>

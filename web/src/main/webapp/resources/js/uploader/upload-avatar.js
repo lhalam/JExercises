@@ -1,15 +1,10 @@
-if (top != self) {
-    top.location.replace(document.location);
-    alert("For security reasons, framing is not allowed; click OK to remove the frames.")
-}
-
 jQuery(function ($) {
     $('#cropper-preview').on('click', '.js-upload', function () {
         $('#upload-avatar').fileapi('upload');
         $('#cropper-preview').fadeOut();
     });
     $('#upload-avatar').fileapi({
-        url: '/web/user/profile/avatar/',
+        url: '/web/post/avatar/',
         accept: 'image/*',
         imageSize: { minWidth: 100, minHeight: 100 },
         imageTransform: {
@@ -27,7 +22,7 @@ jQuery(function ($) {
         },
 
         onSelect: function (evt, ui) {
-            var file = ui.all[0];
+            var file = ui.files[0];
 
             if (file) {
                 $('#cropper-preview').show();
@@ -54,7 +49,6 @@ jQuery(function ($) {
             } catch (er) {
                 FileAPI.log('PARSE ERROR:', er.message);
             }
-
         }
 
     });

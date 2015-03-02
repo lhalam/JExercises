@@ -31,7 +31,7 @@
                     <div id="profileForm" class="row">
                         <div class="col-md-3 col-lg-3 " align="center"><img
                                 alt="User Pic"
-                                src="${basedir}/resources/no-avatar.png"
+                                src="/web/user/profile/avatar"
                                 class="img-circle"></div>
                         <div class=" col-md-9 col-lg-9 ">
                             <table class="table table-user-information">
