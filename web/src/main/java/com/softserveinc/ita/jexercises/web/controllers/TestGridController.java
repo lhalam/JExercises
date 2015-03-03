@@ -32,7 +32,7 @@ public class TestGridController {
      *
      * @param model Model.
      * @return ModelAndView object,in current
-     *                            case that actually means returning.
+     * case that actually means returning.
      * testsGrid.jsp
      */
     @RequestMapping(value = "/testsgrid", method = RequestMethod.GET)
@@ -52,7 +52,7 @@ public class TestGridController {
     public SearchGridDto showTestGridPage(@RequestBody
                                           SearchParametersDto searchParametersDto) {
         SearchGridDto searchGridDto
-            = testGridService.buildTestGrid(searchParametersDto);
+                = testGridService.buildTestGrid(searchParametersDto);
         return searchGridDto;
     }
 
@@ -60,6 +60,7 @@ public class TestGridController {
      * Make Tests Grid.
      *
      * @param testId of test which will be deleted.
+     * @return test id.
      */
     @RequestMapping(value = "/testdelete", method = RequestMethod.POST)
     @ResponseBody
@@ -68,4 +69,20 @@ public class TestGridController {
         return testId.toString();
     }
 
+
+    /**
+     * Method provides mapping on "testsGrid" input.
+     *
+     * @param model Model.
+     * @return ModelAndView object,in current
+     * case that actually means returning.
+     * testsGrid.jsp
+     */
+    @RequestMapping(value = "/testedit", method = RequestMethod.GET)
+    public ModelAndView showestGridPage(Model model) {
+
+        return new ModelAndView("redirect:/login");
+    }
+
 }
+
