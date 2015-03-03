@@ -9,15 +9,15 @@ var searchParametersDto = {
     draw: 0
 };
 $(document).ready(function () {
-    var table = $('#testgrid').dataTable({
-        "processing": true,
-        "serverSide": true,
-        "ajax": {
-            url: "/web/testgrid",
+    var table = $('#testsGrid').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: {
+            url: "/web/testsGrid",
             type: 'POST',
             mimeType: 'application/json',
             contentType: 'application/json',
-            processData: false, // important so the raw data makes it to the beforeSend handler
+            processData: false,
             beforeSend: function (jqXHR, settings) {
                 var data = settings.data;
                 searchParametersDto.draw = data.draw;
@@ -28,63 +28,27 @@ $(document).ready(function () {
                 data = searchParametersDto;
                 settings.data = JSON.stringify(data);
             },
-            "dataSrc": "testGridRows"
+            dataSrc: "testGridRows"
         },
-        "columns": [
-            {"data": "id", "sClass": "gridtable"},
-            {"data": "description"},
-            {"data": "isPublic", "bSortable": false},
-            {
-                "data": "id",
-                "bSortable": false,
-                "render": function (data, type, full, meta) {
-                    return '<button class="btn btn-primary" value="' +
-                        data + '">View</button>'
-                }
-            },
-            {
-                "data": "id",
-                "bSortable": false,
-                "render": function (data, type, full, meta) {
-                    return '<button class="btn btn-success" value="' +
-                        data + '">View attempts</button>'
-                }
-
-            },
-            {
-                "data": "id",
-                "bSortable": false,
-                "render": function (data, type, full, meta) {
-                    return '<button class="btn btn-warning" value="' +
-                        data + '">Edit</button>';
-                }
-            },
-            {
-                "data": "id",
-                "bSortable": false,
-                "render": function (data, type, full, meta) {
-                    return '<button class="btn btn-danger" value="' +
-                        data + '"><span class="glyphicon glyphicon-trash">' +
-                        '</span> Delete</a>';
-                }
+        columns: [
+            {data: "description"},
+            {data: "isPublic", bSortable: false},
+            {data: null, bSortable: false,
+                defaultContent:
+                '<button class="btn btn-danger pull-right">' +
+                    '<span class="glyphicon glyphicon-trash"></span> Delete</button>'+
+                '<button class="btn btn-warning pull-right">' +
+                    '<span class="glyphicon glyphicon-pencil"></span> Edit</button>'+
+                '<button class="btn btn-success pull-right">' +
+                    '<span class="glyphicon glyphicon-list-alt"></span> Attempts</button>' +
+                '<button class="btn btn-primary pull-right">' +
+                    '<span class="glyphicon glyphicon-eye-open"></span> View</button>'
             }
         ]
     });
     $('#testgrid_wrapper').removeClass('dataTables_wrapper');
-    $("#testgrid").on("click", ".btn-primary", function () {
-        var id = $(this).val();
-        alert("View " + id);
-    });
-    $("#testgrid").on("click", ".btn-success", function () {
-        var id = $(this).val();
-        alert("View attempt " + id);
-    });
-    $("#testgrid").on("click", ".btn-warning", function () {
-        var id = $(this).val();
-        alert("Edit " + id);
-    });
-    $("#testgrid").on("click", ".btn-danger", function () {
-        var id = $(this).val();
-        alert("Delete " + id);
+    $('#testsGrid tbody').on('click', '.btn-primary', function () {
+        var id = table.row( $(this).parents('tr') ).data().id;
+
     });
 });
