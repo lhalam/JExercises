@@ -120,8 +120,21 @@
                             </div>
 
                             <div class="form-group ">
-                                <label for="password"
+                                <label for="currentPassword"
                                        class="col-lg-4 control-label">Password</label>
+
+                                <div class="col-lg-8">
+                                    <input class="form-control"
+                                           id="currentPassword"
+                                           placeholder="Current Password"
+                                           name="currentPassword"
+                                           type="currentPassword">
+                                </div>
+                            </div>
+
+                            <div class="form-group ">
+                                <label for="password"
+                                       class="col-lg-4 control-label">New Password</label>
 
                                 <div class="col-lg-8">
                                     <input class="form-control"
@@ -179,7 +192,7 @@
             </div>
         </div>
     </div>
-    <div class="hidden-attribute" basedir="${basedir}"></div>
+    <div class="hidden-attribute" id="hidden-attr" basedir="${basedir}"></div>
 </div>
 
 </body>

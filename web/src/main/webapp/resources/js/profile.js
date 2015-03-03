@@ -39,7 +39,7 @@ function load(path) {
 
 $(document).ready(function(){
         $("#profileForm").hide();
-        var basedir = $(".hidden-attribute").attr("basedir");
+        var basedir = $("#hidden-attr").attr("basedir");
         load(basedir);
     }
 );

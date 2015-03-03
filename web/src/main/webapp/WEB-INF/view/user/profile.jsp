@@ -36,28 +36,28 @@
                             <table class="table table-user-information">
                                 <tbody>
                                 <tr>
-                                    <td>Name:</td>
+                                    <td><strong>Name:</strong></td>
                                     <td id="userFirstName"></td>
                                 </tr>
                                 <tr>
-                                    <td>Surname:</td>
+                                    <td><strong>Surname:</strong></td>
                                     <td id="userLastName"></td>
                                 </tr>
                                 <tr>
-                                    <td>Registration date:</td>
+                                    <td><strong>Registration date:</strong></td>
                                     <td id="userRegistrationDate"></td>
                                 </tr>
                                 <tr>
-                                    <td>Date of Birth:</td>
+                                    <td><strong>Date of Birth:</strong></td>
                                     <td id="userDateOfBirth"></td>
                                 </tr>
                                 <tr>
-                                    <td>Email</td>
+                                    <td><strong>Email:</strong></td>
                                     <td id="userEmail">
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Role</td>
+                                    <td><strong>Role:</strong></td>
                                     <td id="userRole"></td>
                                 </tr>
                                 </tbody>
@@ -67,8 +67,8 @@
                 </div>
                 <div class="panel-footer">
                     <a type="button"
-                       class="btn btn-default btn-sm"><span
-                            class="glyphicon glyphicon-list-alt"></span> View
+                       class="btn btn-success btn-sm"><span
+                            class="glyphicon glyphicon-th-list"></span> View
                         attempts</a>
 
                     <div class="pull-right">
@@ -82,7 +82,7 @@
             </div>
         </div>
     </div>
-    <div class="hidden-attribute" basedir="${basedir}"></div>
+    <div class="hidden-attribute" id="hidden-attr" basedir="${basedir}"></div>
 </div>
 </body>
 </html>

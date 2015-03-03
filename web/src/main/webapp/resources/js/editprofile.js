@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    var basedir = $(".hidden-attribute").attr("basedir");
+    var basedir = $("#hidden-attr").attr("basedir");
     $(".userpic").css({"background-image": "url('" + basedir + "/user/profile/avatar')"});
 
     $("#submitButton").click(function () {
