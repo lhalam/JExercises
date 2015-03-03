@@ -56,11 +56,10 @@ $(document).ready(function () {
         var id = table.row( $(this).parents('tr') ).data().id;
         $.ajax({
                 url: "/web/testview",
-                type: 'GET',
+                type: 'POST',
                 mimeType: 'application/json',
                 contentType: 'application/json',
-                data: JSON.stringify(id),
-                success: function (dataResponse) {}
+                data: JSON.stringify(id)
             }
         );
     });
@@ -69,11 +68,10 @@ $(document).ready(function () {
         var id = table.row( $(this).parents('tr') ).data().id;
         $.ajax({
                 url: "/web/attempts",
-                type: 'GET',
+                type: 'POST',
                 mimeType: 'application/json',
                 contentType: 'application/json',
-                data: JSON.stringify(id),
-                success: function (dataResponse) {}
+                data: JSON.stringify(id)
             }
         );
     });
@@ -81,12 +79,11 @@ $(document).ready(function () {
     $('#testsGrid tbody').on('click', '.btn-warning', function () {
         var id = table.row( $(this).parents('tr') ).data().id;
         $.ajax({
-                url: "/web/testsgrid/edit",
-                type: 'GET',
+                url: "/web/testedit",
+                type: 'POST',
                 mimeType: 'application/json',
                 contentType: 'application/json',
-                data: JSON.stringify(id),
-                success: function (dataResponse) {}
+                data: JSON.stringify(id)
             }
         );
     });
@@ -109,11 +106,9 @@ $(document).ready(function () {
     $('.btn-default').on('click', function () {
         $.ajax({
                 url: "/web/testadd",
-                type: 'POST',
+                type: 'GET',
                 mimeType: 'application/json',
-                contentType: 'application/json',
-                data: JSON.stringify(id),
-                success: function (dataResponse) {}
+                contentType: 'application/json'
             }
         );
     });
