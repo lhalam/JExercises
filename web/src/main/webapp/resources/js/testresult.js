@@ -6,7 +6,9 @@ $(document).ready(function() {
 	$('.public').hide();
 	$('.private').hide();
 	$('.okbtn').hide();
+	$('.admin').hide();
 	sendPost();
+	
 });
 
 function sendPost() {
@@ -18,6 +20,10 @@ function sendPost() {
 		contentType : 'application/json',
 		mimeType : 'application/json',
 		success : function(responseData) {
+			$("#user").text("User: " + responseData.firstName+"  " 
+					+ responseData.lastName);
+	        $("#test").text("Test: " + responseData.testName);
+	        $("#date").text("Date: " + responseData.date);
 			
 			if (responseData.public) {
 				$("#result").text("Test result is " + responseData.correctAnswersCount
@@ -33,10 +39,12 @@ function sendPost() {
 					
 				$('.public').show();
 				$('.okbtn').show();
+				$('.admin').show();
 			}
 			else {
 				$('.private').show();
 				$('.okbtn').show();
+				$('.admin').show();
 
 		}
 		}

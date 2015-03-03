@@ -1,5 +1,6 @@
 package com.softserveinc.ita.jexercises.common.dto;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -8,7 +9,23 @@ import java.util.List;
  * @author Volodymyr Lishchynskiy
  * @version 1.0
  */
-public class TestResultDto {    
+public class TestResultDto {
+    /**
+     * First name of user.
+     */
+    private String firstName;
+    /**
+     * Last name of user.
+     */
+    private String lastName;
+    /**
+     * Name of test.
+     */
+    private String testName;
+    /**
+     * Date of passing test.
+     */
+    private Date date;
     /**
      * List of user answers dtos.
      */
@@ -20,12 +37,12 @@ public class TestResultDto {
     /**
      * Number of correct user answers.
      */
-    private int correctAnswersCount;   
+    private int correctAnswersCount;
     /**
      * Is test public or not.
      */
     private boolean isPublic;
-        
+
     public boolean isPublic() {
         return isPublic;
     }
@@ -33,7 +50,7 @@ public class TestResultDto {
     public void setPublic(boolean isPublic) {
         this.isPublic = isPublic;
     }
-   
+
     public int getTotalAnswersCount() {
         return totalAnswersCount;
     }
@@ -52,12 +69,43 @@ public class TestResultDto {
         this.correctAnswersCount = correctAnswersCount;
     }
 
-  
     public List<TestResultAnswerDto> getAnswers() {
         return answers;
     }
 
     public void setAnswers(List<TestResultAnswerDto> answers) {
         this.answers = answers;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getTestName() {
+        return testName;
+    }
+
+    public void setTestName(String testName) {
+        this.testName = testName;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 }

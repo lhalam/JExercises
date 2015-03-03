@@ -52,6 +52,10 @@ public class TestResultMapper {
         testResultDto.setPublic(test.getIsPublic());
         testResultDto.setTotalAnswersCount(answers.size());
         testResultDto.setCorrectAnswersCount(countCorrect);
+        testResultDto.setFirstName(attempt.getUser().getFirstName());
+        testResultDto.setLastName(attempt.getUser().getLastName());
+        testResultDto.setTestName(test.getName());
+        testResultDto.setDate(attempt.getCreatedDate());
 
         return testResultDto;
     }
