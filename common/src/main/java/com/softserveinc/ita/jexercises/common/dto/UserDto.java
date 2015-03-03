@@ -26,11 +26,7 @@ public class UserDto {
      * User password.
      */
     private String password;
-    /**
-     * Password confirmation.
-     */
-    private String matchingPassword;
-
+   
     /**
      * User date of birth.
      */
@@ -77,12 +73,5 @@ public class UserDto {
         this.password = password;
     }
 
-    public String getMatchingPassword() {
-        return matchingPassword;
-    }
-
-    public void setMatchingPassword(String matchingPassword) {
-        this.matchingPassword = matchingPassword;
-    }
- 
+   
 }

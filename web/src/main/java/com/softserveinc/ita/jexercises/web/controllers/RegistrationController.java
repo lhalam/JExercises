@@ -2,10 +2,12 @@ package com.softserveinc.ita.jexercises.web.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
 import com.softserveinc.ita.jexercises.business.services.AutoLoginService;
 import com.softserveinc.ita.jexercises.business.services.UserRegistrationService;
 import com.softserveinc.ita.jexercises.common.dto.ResponseDto;
@@ -56,7 +58,7 @@ public class RegistrationController {
      */
     @RequestMapping(value = "/user/registration", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseDto registerUserAccount(UserDto model) {
+    public ResponseDto registerUserAccount(@RequestBody UserDto model) {
         ResponseDto response = userRegistrationService
                 .registerNewUserAccount(model);
         if (response.isSuccess()) {

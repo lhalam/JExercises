@@ -33,17 +33,6 @@
 	background-color: #fee;
 }
 
-.hiddenContainer, .hiddenContainer.error {
-	background: transparent;
-	border: none;
-	color: transparent;
-	cursor: default;
-	box-shadow: none;
-	width: 0px;
-	heigh: 0px;
-	outline: none;
-}
-
 .line {
 	border: 0;
 	height: 1px;

@@ -7,42 +7,70 @@
 <%@ include file="../navigation.jsp"%>
 <link href="${basedir}/resources/css/registration.css" rel="stylesheet"
 	type="text/css">
-<script src="${basedir}/resources/js/registration/registation.js"></script>
 <script
 	src="${basedir}/resources/js/registration/registration-data-validation.js"></script>
 <script src="${basedir}/resources/js/lib/jquery.validate.min.js"></script>
 </head>
 <body id="container">
+
 	<input type="hidden" id="contextRootHolder" value="${basedir}" />
 	<div class="container">
 		<div class="row" style="margin-top: 60px;">
 			<div class="col-md-4 col-md-offset-4">
-				<form id="registrationForm" method="POST"
-					class="panel panel-default">
+
+				<form id="registrationForm" method="POST" accept-charset="UTF-8"
+					role="form" class="panel panel-default">
 					<div class="container-fluid">
+						<br />
+						<div id="errorMessageHolder" class="alert alert-danger"
+							hidden="true"></div>
 						<h3 class="sign-up-title"
 							style="color: dimgray; text-align: center">JExercises
 							Register</h3>
 						<hr class="colorgraph">
-						<div id="errorMessageHolder" class="alert alert-danger"
-							hidden="true"></div>
+						<hr class="line">
+						<div class="form-group has-feedback fullWidth">
+							<input class="form-control roundedTop validated"
+								placeholder="First name*" id="firstName" name="firstName"
+								type="text"><span
+								class="glyphicon form-control-feedback roundedTopRight"
+								id="firstNameFeedback"></span>
+						</div>
+
+						<div class="form-group has-feedback fullWidth">
+							<input class="form-control roundedTop validated"
+								placeholder="Last name*" id="lastName" name="lastName"
+								type="text" /><span
+								class="glyphicon form-control-feedback roundedTopRight"
+								id="firstNameFeedback"></span>
+						</div>
+
+						<div class="form-group has-feedback fullWidth">
+							<input class="form-control roundedTop validated"
+								placeholder="E-mail*" id="email" name="email" type="email" /><span
+								class="glyphicon form-control-feedback roundedTopRight"
+								id="firstNameFeedback"></span>
+						</div>
+
+						<div class="form-group has-feedback fullWidth">
+							<input id="password" class="form-control roundedTop validated"
+								placeholder="Password*" name="password" type="password" /> <span
+								class="glyphicon form-control-feedback roundedTopRight"
+								id="firstNameFeedback"></span>
+						</div>
+
+						<div class="form-group has-feedback fullWidth">
+							<input id="matchingPassword"
+								class="form-control roundedTop validated"
+								placeholder="Confirm Password*" name="matchingPassword"
+								type="password" /> <span
+								class="glyphicon form-control-feedback roundedTopRight"
+								id="firstNameFeedback"></span>
+						</div>
+
 
 						<hr class="line">
-						<input class="form-control" placeholder="First name*"
-							id="firstName" name="firstName" type="text" data-toggle="tooltip" /><br />
-						<input class="form-control" placeholder="Last name*" id="lastName"
-							name="lastName" type="text" data-toggle="tooltip" /><br /> <input
-							class="form-control" placeholder="E-mail*" id="email"
-							name="email" type="email" data-toggle="tooltip" /> <br /> <input
-							id="password" class="form-control" placeholder="Password*"
-							name="password" type="password" data-toggle="tooltip" /> <br />
-						<input id="matchingPassword" class="form-control"
-							placeholder="Confirm Password*" name="matchingPassword"
-							type="password" data-toggle="tooltip" />
-						<hr class="line">
-						<label class="label" id="label">Birthday <input
-							id="birthDate" name="birthDate" data-toggle="tooltip"
-							class="hiddenContainer"></label> <br></br>
+						<label class="label" id="label">Birthday</label> <br></br>
 						<div id="datePicker" class="combodate">
 							<select id="day" name="day">
 								<option disabled selected>Day</option>
@@ -64,7 +92,7 @@
 						</div>
 						<hr class="line">
 						<input id="submitButton" class="btn btn-lg btn-success btn-block"
-							type="button" value="Sign up"> <br>
+							type="submit" value="Sign up"> <br>
 					</div>
 				</form>
 			</div>
