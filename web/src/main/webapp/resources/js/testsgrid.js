@@ -12,6 +12,7 @@ $(document).ready(function () {
     var table = $('#testsGrid').DataTable({
         processing: true,
         serverSide: true,
+        fnUpdate: false,
         ajax: {
             url: "/web/testsgrid",
             type: 'POST',
@@ -35,24 +36,26 @@ $(document).ready(function () {
             {data: "isPublic", bSortable: false},
             {data: null, bSortable: false,
                 defaultContent:
-                '<button class="btn btn-danger pull-right">' +
+                '<button type="button" class="btn btn-danger pull-right">' +
                     '<span class="glyphicon glyphicon-trash"></span> Delete</button>'+
-                '<button class="btn btn-warning pull-right">' +
+                '<button type="button" class="btn btn-warning pull-right">' +
                     '<span class="glyphicon glyphicon-pencil"></span> Edit</button>'+
-                '<button class="btn btn-success pull-right">' +
+                '<button type="button" class="btn btn-success pull-right">' +
                     '<span class="glyphicon glyphicon-list-alt"></span> Attempts</button>' +
-                '<button class="btn btn-primary pull-right">' +
+                '<button type="button" class="btn btn-primary pull-right">' +
                     '<span class="glyphicon glyphicon-eye-open"></span> View</button>'
             }
         ]
     });
+
+
 
     $('#testgrid_wrapper').removeClass('dataTables_wrapper');
 
     $('#testsGrid tbody').on('click', '.btn-primary', function () {
         var id = table.row( $(this).parents('tr') ).data().id;
         $.ajax({
-                url: "/web/testsgrid/view",
+                url: "/web/testview",
                 type: 'GET',
                 mimeType: 'application/json',
                 contentType: 'application/json',
@@ -65,7 +68,7 @@ $(document).ready(function () {
     $('#testsGrid tbody').on('click', '.btn-success', function () {
         var id = table.row( $(this).parents('tr') ).data().id;
         $.ajax({
-                url: "/web/testsgrid/attempts",
+                url: "/web/attempts",
                 type: 'GET',
                 mimeType: 'application/json',
                 contentType: 'application/json',
@@ -95,15 +98,18 @@ $(document).ready(function () {
                 url: "/web/testdelete",
                 data: JSON.stringify(id),
                 contentType: "application/json; charset=utf-8",
-                dataType:"json"
+                dataType:"json",
+                success: function () {
+                    table.ajax.reload();
+                }
             }
         );
     });
 
     $('.btn-default').on('click', function () {
         $.ajax({
-                url: "/web/testsgrid/add",
-                type: 'GET',
+                url: "/web/testadd",
+                type: 'POST',
                 mimeType: 'application/json',
                 contentType: 'application/json',
                 data: JSON.stringify(id),

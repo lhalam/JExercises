@@ -60,12 +60,12 @@ public class TestGridController {
      * Make Tests Grid.
      *
      * @param testId of test which will be deleted.
-     * @return String object.
      */
     @RequestMapping(value = "/testdelete", method = RequestMethod.POST)
     @ResponseBody
     public String showTestGridPage(@RequestBody Long testId) {
         testGridService.delete(testId);
-        return "okay";
+        return testId.toString();
     }
+
 }
