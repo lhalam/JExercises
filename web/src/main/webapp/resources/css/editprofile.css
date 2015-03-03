@@ -1,0 +1,21 @@
+@CHARSET "UTF-8";
+
+.row {
+    margin-top: 20px;
+}
+
+.success-alert {
+    display: none;
+}
+
+.uploading-progress {
+    display: none;
+}
+
+.cropper-prev {
+     display: none;
+ }
+
+.hidden-attribute {
+    display: none;
+}

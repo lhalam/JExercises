@@ -1,9 +1,9 @@
-function load() {
+function load(path) {
     $.ajax({
         type: "POST",
         contentType: "application/json",
         dataType: "json",
-        url: "/web/user/profile",
+        url: path,
         success: function (json) {
             var regDate = new Date(json.registrationDate);
             var birthDate = new Date(json.birthDate);
@@ -39,6 +39,7 @@ function load() {
 
 $(document).ready(function(){
         $("#profileForm").hide();
-        load();
+        var loadURL = $("#hidden-attr").attr("data-post-url");
+        load(loadURL);
     }
 );

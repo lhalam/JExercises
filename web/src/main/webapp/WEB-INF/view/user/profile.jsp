@@ -4,7 +4,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
-    <c:set var="basedir" value="${pageContext.request.contextPath}"/>
     <%@ include file="../base.jsp" %>
     <%@ include file="../navigation.jsp" %>
     <link href="${basedir}/resources/css/profile.css" rel="stylesheet"
@@ -13,6 +12,15 @@
           type="text/css">
     <script src="${basedir}/resources/js/profile.js"></script>
 </head>
+
+<c:choose>
+    <c:when test="${currentUser}">
+        <c:set var="postUrl" value="${basedir}/user/profile" scope="session"  />
+    </c:when>
+    <c:otherwise>
+        <c:set var="postUrl" value="${basedir}/user/profile/${userId}" scope="session"  />
+    </c:otherwise>
+</c:choose>
 
 <body id="container">
 <div class="container">
@@ -31,35 +39,35 @@
                     <div id="profileForm" class="row">
                         <div class="col-md-3 col-lg-3 " align="center"><img
                                 alt="User Pic"
-                                src="/web/user/profile/avatar"
+                                src="${postUrl}/avatar"
                                 class="img-circle"></div>
                         <div class=" col-md-9 col-lg-9 ">
                             <table class="table table-user-information">
                                 <tbody>
                                 <tr>
-                                    <td>Name:</td>
+                                    <td><strong>Name:</strong></td>
                                     <td id="userFirstName"></td>
                                 </tr>
                                 <tr>
-                                    <td>Surname:</td>
+                                    <td><strong>Surname:</strong></td>
                                     <td id="userLastName"></td>
                                 </tr>
                                 <tr>
-                                    <td>Registration date:</td>
+                                    <td><strong>Registration date:</strong></td>
                                     <td id="userRegistrationDate"></td>
                                 </tr>
                                 <tr>
-                                    <td>Date of Birth:</td>
+                                    <td><strong>Date of Birth:</strong></td>
                                     <td id="userDateOfBirth"></td>
                                 </tr>
                                 <tr>
-                                    <td>Role</td>
-                                    <td id="userRole"></td>
-                                </tr>
-                                <tr>
-                                    <td>Email</td>
+                                    <td><strong>Email:</strong></td>
                                     <td id="userEmail">
                                     </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Role:</strong></td>
+                                    <td id="userRole"></td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -67,25 +75,23 @@
                     </div>
                 </div>
                 <div class="panel-footer">
-                    <a data-original-title="Broadcast Message"
-                       data-toggle="tooltip" type="button"
-                       class="btn btn-sm btn-primary"><i
-                            class="glyphicon glyphicon-user"></i></a>
-                        <span class="pull-right">
-                            <a href="/web/user/profile/edit"
-                               data-original-title="Edit this user"
-                               data-toggle="tooltip" type="button"
-                               class="btn btn-sm btn-warning"><i
-                                    class="glyphicon glyphicon-edit"></i></a>
-                            <a data-original-title="Remove this user"
-                               data-toggle="tooltip" type="button"
-                               class="btn btn-sm btn-danger"><i
-                                    class="glyphicon glyphicon-remove"></i></a>
-                        </span>
+                    <a type="button"
+                       class="btn btn-success btn-sm"><span
+                            class="glyphicon glyphicon-th-list"></span> View
+                        attempts</a>
+
+                    <div class="pull-right">
+                        <a href="${basedir}/user/profile/edit"
+                           type="button"
+                           class="btn btn-warning btn-sm"><span
+                                class="glyphicon glyphicon-edit"></span>
+                            Edit</a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    <div class="hidden-attribute" id="hidden-attr" data-post-url="${postUrl}"></div>
 </div>
 </body>
 </html>

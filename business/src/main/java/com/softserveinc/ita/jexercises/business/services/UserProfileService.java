@@ -29,8 +29,17 @@ public interface UserProfileService {
     User updateUserProfile(UserProfileDto userProfileDto);
 
     /**
-     * Check if user has an avatar.
+     * Check if current user has an avatar.
+     *
      * @return False is there is no avatar uploaded for current user.
      */
     boolean hasAvatar();
+
+    /**
+     * Check if selected user has an avatar.
+     *
+     * @param id User id.
+     * @return False is there is no avatar uploaded for current user.
+     */
+    boolean hasAvatar(Long id);
 }

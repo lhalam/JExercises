@@ -67,12 +67,12 @@ public class UserProfileServiceImpl implements UserProfileService {
         return (user.getAvatar() != null);
     }
 
-    /**
-     * Encodes password.
-     *
-     * @param password User password.
-     * @return Hashed password.
-     */
+    @Override
+    public boolean hasAvatar(Long id) {
+        User user = userService.findUserById(id);
+        return (user.getAvatar() != null);
+    }
+
     private String getHashPassword(String password) {
         return encoder.encode(password);
     }

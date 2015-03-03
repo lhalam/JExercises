@@ -28,26 +28,26 @@ public class TestGridController {
     private TestGridService testGridService;
 
     /**
-     * Method provides mapping on "testgrid" input.
+     * Method provides mapping on "testsGrid" input.
      *
      * @param model Model.
      * @return ModelAndView object,in current
      *                            case that actually means returning.
-     * testgrid.jsp
+     * testsGrid.jsp
      */
-    @RequestMapping(value = "/testgrid", method = RequestMethod.GET)
+    @RequestMapping(value = "/testsgrid", method = RequestMethod.GET)
     public ModelAndView showTestGridPage(Model model) {
 
-        return new ModelAndView("test/testgrid");
+        return new ModelAndView("test/testsgrid");
     }
 
     /**
-     * Make TestGrid.
+     * Make Tests Grid.
      *
      * @param searchParametersDto to rebuild new table.
      * @return TestGridDto object.
      */
-    @RequestMapping(value = "/testgrid", method = RequestMethod.POST)
+    @RequestMapping(value = "/testsgrid", method = RequestMethod.POST)
     @ResponseBody
     public SearchGridDto showTestGridPage(@RequestBody
                                           SearchParametersDto searchParametersDto) {
@@ -55,4 +55,17 @@ public class TestGridController {
             = testGridService.buildTestGrid(searchParametersDto);
         return searchGridDto;
     }
+
+    /**
+     * Make Tests Grid.
+     *
+     * @param testId of test which will be deleted.
+     */
+    @RequestMapping(value = "/testdelete", method = RequestMethod.POST)
+    @ResponseBody
+    public String showTestGridPage(@RequestBody Long testId) {
+        testGridService.delete(testId);
+        return testId.toString();
+    }
+
 }

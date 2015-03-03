@@ -23,6 +23,31 @@
 		<div class="col-md-offset-2 col-md-8">
 			<form class="panel panel-primary">
 				<div class="container-fluid">
+					<div class="admin">
+						<div class="row-fluid">
+							<div class="col-md-offset-4 col-md-4">
+								<p id="user"></p>
+							</div>
+						</div>
+						<div class="row-fluid">
+							<div class="col-md-offset-4 col-md-4">
+								<p id="test"></p>
+							</div>
+						</div>
+
+						<div class="row-fluid">
+							<div class="col-md-offset-4 col-md-4">
+								<p id="date"></p>
+							</div>
+						</div>
+
+						<div class="row-fluid">
+							<div class="col-md-offset-4 col-md-4">
+								<hr class="colorgraph">
+							</div>
+						</div>
+					</div>
+
 					<div class="public">
 						<div class="row-fluid">
 							<div class="col-md-offset-4 col-md-4">

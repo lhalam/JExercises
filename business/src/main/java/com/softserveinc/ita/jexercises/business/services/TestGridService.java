@@ -21,4 +21,12 @@ public interface TestGridService {
     SearchGridDto buildTestGrid(SearchParametersDto
         searchParametersDto);
 
+    /**
+     * Deletes test.
+     *
+     * @param testId
+     *             Id of unnecessary Test.
+     */
+    void delete(Long testId);
+
 }
