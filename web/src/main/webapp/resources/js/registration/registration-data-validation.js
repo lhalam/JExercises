@@ -155,20 +155,11 @@ $(document)
 									});
 
 					$.validator.addMethod("dateValid", function() {
+						var shortMonths = [ "4", "6", "9", "11" ];
+						var february = 2;
 						var day = $("#day").val();
 						var month = $("#month").val();
 						var year = $("#year").val();
-						var date = month + "/" + day + "/" + year;
-						return isValid(date);
-					}, "Please, enter а valid date of birth.");
-
-					function isValid(date) {
-						var shortMonths = [ "4", "6", "9", "11" ];
-						var february = 2;
-						var arr = date.split('/');
-						var month = arr[0];
-						var day = arr[1];
-						var year = arr[2];
 						if (month == february) {
 							if (isLeapYear(year)) {
 								return day <= 29;
@@ -178,7 +169,7 @@ $(document)
 							return day <= 30;
 						}
 						return true;
-					}
+					}, "Please, enter а valid date of birth.");
 
 					function isLeapYear(year) {
 						return ((year % 4 == 0) && (year % 100 != 0))
