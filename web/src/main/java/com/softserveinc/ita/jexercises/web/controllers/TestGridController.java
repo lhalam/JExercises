@@ -35,10 +35,10 @@ public class TestGridController {
      *                            case that actually means returning.
      * testsGrid.jsp
      */
-    @RequestMapping(value = "/testsGrid", method = RequestMethod.GET)
+    @RequestMapping(value = "/testsgrid", method = RequestMethod.GET)
     public ModelAndView showTestGridPage(Model model) {
 
-        return new ModelAndView("test/testsGrid");
+        return new ModelAndView("test/testsgrid");
     }
 
     /**
@@ -47,12 +47,25 @@ public class TestGridController {
      * @param searchParametersDto to rebuild new table.
      * @return TestGridDto object.
      */
-    @RequestMapping(value = "/testsGrid", method = RequestMethod.POST)
+    @RequestMapping(value = "/testsgrid", method = RequestMethod.POST)
     @ResponseBody
     public SearchGridDto showTestGridPage(@RequestBody
                                           SearchParametersDto searchParametersDto) {
         SearchGridDto searchGridDto
             = testGridService.buildTestGrid(searchParametersDto);
         return searchGridDto;
+    }
+
+    /**
+     * Make Tests Grid.
+     *
+     * @param testId of test which will be deleted.
+     * @return String object.
+     */
+    @RequestMapping(value = "/testdelete", method = RequestMethod.POST)
+    @ResponseBody
+    public String showTestGridPage(@RequestBody Long testId) {
+        testGridService.delete(testId);
+        return "okay";
     }
 }

@@ -9,6 +9,7 @@ import com.softserveinc.ita.jexercises.common.mapper.TestGridMapper;
 import com.softserveinc.ita.jexercises.persistence.dao.impl.TestDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -29,11 +30,6 @@ public class TestGridServiceImpl implements TestGridService {
     @Autowired
     private TestDao testDao;
 
-    /**
-     * Constant symbol.
-     */
-    private String proword = "%";
-
     @Override
     public SearchGridDto buildTestGrid(SearchParametersDto
         searchParametersDto) {
@@ -50,8 +46,7 @@ public class TestGridServiceImpl implements TestGridService {
         Map<String, String> filter = new LinkedHashMap<String, String>();
         Map<String, String> order = new LinkedHashMap<String, String>();
 
-        filter.put("name", proword +
-                searchParametersDto.getSearchKey() + proword);
+        filter.put("name", searchParametersDto.getSearchKey());
         order.put("name", searchParametersDto.getOrder());
 
         searchCondition.setFilterMap(filter);
@@ -66,6 +61,12 @@ public class TestGridServiceImpl implements TestGridService {
         TestGridMapper testGridMapper = new TestGridMapper();
         searchGridDto.setTestRows(testGridMapper.toDto(tests));
         return searchGridDto;
+    }
+
+    @Override
+    @Transactional
+    public void delete(Long testId){
+        testDao.deleteById(testId);
     }
 
 }

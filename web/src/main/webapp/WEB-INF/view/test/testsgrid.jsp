@@ -23,7 +23,7 @@
     <script src="${basedir}/resources/js/lib/jquery-1.11.1.js" type="text/javascript"></script>
     <script src="${basedir}/resources/js/lib/bootstrap.js" type="text/javascript"></script>
     <script src="${basedir}/resources/js/lib/jquery.dataTables.min.js"></script>
-    <script src="${basedir}/resources/js/testgrid.js"></script>
+    <script src="${basedir}/resources/js/testsgrid.js"></script>
     <script src="${basedir}/resources/js/lib/bootstrap.jquery.dataTable.js"></script>
 </head>
 <jsp:include page="../navigation.jsp"/>
@@ -36,6 +36,14 @@
                     <h3>
                         Tests
                     </h3>
+                </div>
+                <div class="row-fluid ">
+                    <div class="col-md-offset-1 col-md-10">
+                        <button class="btn btn-default">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                             Add test
+                        </button>
+                    </div>
                 </div>
                 <div class="row-fluid ">
                     <div class="col-md-offset-1 col-md-10">
