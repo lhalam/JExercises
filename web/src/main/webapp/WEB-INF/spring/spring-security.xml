@@ -6,6 +6,7 @@
 	http://www.springframework.org/schema/security
 	http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
+    <global-method-security pre-post-annotations="enabled" />
 	<http pattern="/resources/**" security="none" />
 	<http auto-config="true" use-expressions="true"
 		disable-url-rewriting="true">
