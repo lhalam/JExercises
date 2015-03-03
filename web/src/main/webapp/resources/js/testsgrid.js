@@ -80,7 +80,7 @@ $(document).ready(function () {
         var id = table.row( $(this).parents('tr') ).data().id;
         $.ajax({
                 url: "/web/testedit",
-                type: 'POST',
+                type: 'GET',
                 mimeType: 'application/json',
                 contentType: 'application/json',
                 data: JSON.stringify(id)
