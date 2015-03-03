@@ -2,14 +2,18 @@ package com.softserveinc.ita.jexercises.web.controllers;
 
 import com.softserveinc.ita.jexercises.business.services.CurrentUserService;
 import com.softserveinc.ita.jexercises.business.services.UserProfileService;
+import com.softserveinc.ita.jexercises.business.services.UserService;
 import com.softserveinc.ita.jexercises.common.dto.ResponseDto;
 import com.softserveinc.ita.jexercises.common.dto.UserProfileDto;
+import com.softserveinc.ita.jexercises.web.utils.ResourceNotFoundException;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -32,6 +36,8 @@ public class ProfileController {
 
     private static final String DEFAULT_AVATAR_PICTURE_NAME = "no-avatar.png";
     @Autowired
+    private UserService userService;
+    @Autowired
     private UserProfileService userProfileService;
     @Autowired
     private CurrentUserService currentUserService;
@@ -39,10 +45,12 @@ public class ProfileController {
     /**
      * Getting profile view.
      *
+     * @param model UI view model.
      * @return Profile page.
      */
     @RequestMapping(value = "/user/profile", method = RequestMethod.GET)
-    public ModelAndView getProfileNew() {
+    public ModelAndView getCurrentUserProfileView(Model model) {
+        model.addAttribute("currentUser", true);
         return new ModelAndView("user/profile");
     }
 
@@ -53,9 +61,46 @@ public class ProfileController {
      */
     @RequestMapping(value = "/user/profile", method = RequestMethod.POST)
     @ResponseBody
-    public UserProfileDto getProfileData() {
+    public UserProfileDto getCurrentUserProfileData() {
         return userProfileService.getUserInfo(currentUserService
                 .getCurrentUser());
+    }
+
+    /**
+     * Getting user profile view for admin.
+     *
+     * @param userId User id.
+     * @param model  UI view model.
+     * @return Profile page.
+     * @throws ResourceNotFoundException No user with such id exception.
+     */
+    @RequestMapping(value = "/user/profile/{userId}",
+            method = RequestMethod.GET)
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public ModelAndView getUserProfileNew(@PathVariable long userId,
+                                          Model model)
+            throws ResourceNotFoundException {
+        if (userService.findUserById(userId) == null) {
+            throw new ResourceNotFoundException();
+        } else {
+            model.addAttribute("currentUser", false);
+            model.addAttribute("userId", userId);
+            return new ModelAndView("user/profile");
+        }
+    }
+
+    /**
+     * Getting profile view data from User Profile DTO.
+     *
+     * @param userId User id.
+     * @return User Profile DTO.
+     */
+    @RequestMapping(value = "/user/profile/{userId}",
+            method = RequestMethod.POST)
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @ResponseBody
+    public UserProfileDto getUserProfileData(@PathVariable long userId) {
+        return userProfileService.getUserInfo(userService.findUserById(userId));
     }
 
     /**
@@ -123,11 +168,35 @@ public class ProfileController {
     @RequestMapping(value = "/user/profile/avatar", method = RequestMethod.GET,
             produces = MediaType.IMAGE_JPEG_VALUE)
     @ResponseBody
-    public byte[] getUserAvatar() throws IOException {
+    public byte[] getCurrentUserAvatar() throws IOException {
         byte[] image;
 
         if (userProfileService.hasAvatar()) {
             image = currentUserService.getCurrentUser().getAvatar();
+        } else {
+            image = getDefaultAvatar();
+        }
+
+        return image;
+    }
+
+    /**
+     * Gets avatar of user by id.
+     *
+     * @param userId User id.
+     * @return Image byte array.
+     * @throws IOException InputStream Exception.
+     */
+    @RequestMapping(value = "/user/profile/{userId}/avatar",
+            method = RequestMethod.GET,
+            produces = MediaType.IMAGE_JPEG_VALUE)
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @ResponseBody
+    public byte[] getUserAvatar(@PathVariable long userId) throws IOException {
+        byte[] image;
+
+        if (userProfileService.hasAvatar(userId)) {
+            image = userService.findUserById(userId).getAvatar();
         } else {
             image = getDefaultAvatar();
         }

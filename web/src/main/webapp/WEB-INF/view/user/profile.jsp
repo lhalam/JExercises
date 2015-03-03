@@ -13,6 +13,15 @@
     <script src="${basedir}/resources/js/profile.js"></script>
 </head>
 
+<c:choose>
+    <c:when test="${currentUser}">
+        <c:set var="postUrl" value="${basedir}/user/profile" scope="session"  />
+    </c:when>
+    <c:otherwise>
+        <c:set var="postUrl" value="${basedir}/user/profile/${userId}" scope="session"  />
+    </c:otherwise>
+</c:choose>
+
 <body id="container">
 <div class="container">
     <div class="row">
@@ -30,7 +39,7 @@
                     <div id="profileForm" class="row">
                         <div class="col-md-3 col-lg-3 " align="center"><img
                                 alt="User Pic"
-                                src="${basedir}/user/profile/avatar"
+                                src="${postUrl}/avatar"
                                 class="img-circle"></div>
                         <div class=" col-md-9 col-lg-9 ">
                             <table class="table table-user-information">
@@ -82,7 +91,7 @@
             </div>
         </div>
     </div>
-    <div class="hidden-attribute" id="hidden-attr" basedir="${basedir}"></div>
+    <div class="hidden-attribute" id="hidden-attr" data-post-url="${postUrl}"></div>
 </div>
 </body>
 </html>

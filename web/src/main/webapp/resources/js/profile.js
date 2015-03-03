@@ -3,7 +3,7 @@ function load(path) {
         type: "POST",
         contentType: "application/json",
         dataType: "json",
-        url: path + "/user/profile",
+        url: path,
         success: function (json) {
             var regDate = new Date(json.registrationDate);
             var birthDate = new Date(json.birthDate);
@@ -39,7 +39,7 @@ function load(path) {
 
 $(document).ready(function(){
         $("#profileForm").hide();
-        var basedir = $("#hidden-attr").attr("basedir");
-        load(basedir);
+        var loadURL = $("#hidden-attr").attr("data-post-url");
+        load(loadURL);
     }
 );
