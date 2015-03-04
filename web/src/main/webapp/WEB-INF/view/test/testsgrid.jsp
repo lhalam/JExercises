@@ -39,10 +39,11 @@
                 </div>
                 <div class="row-fluid ">
                     <div class="col-md-offset-1 col-md-10">
-                        <button type="button" class="btn btn-default">
-                            <span class="glyphicon glyphicon-pencil"></span>
+                        <a class="btn btn-default"
+                                href="/web/testadd">
+                            <span class="glyphicon glyphicon-plus"></span>
                              Add test
-                        </button>
+                        </a>
                     </div>
                 </div>
                 <div class="row-fluid ">

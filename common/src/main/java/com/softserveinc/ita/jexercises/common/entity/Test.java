@@ -9,8 +9,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import java.util.Set;
-import java.util.HashSet;
+import java.util.List;
 
 /**
  * Represents Test Entity.
@@ -43,20 +42,20 @@ public class Test extends BaseEntity {
      * The set of attempts.
      */
     @Column(name = "ATTEMPT_ID")
-    @OneToMany(fetch = FetchType.LAZY, 
-        cascade = CascadeType.ALL, mappedBy = "test")
-    private Set<Attempt> attempts = new HashSet<Attempt>(0);
+    @OneToMany(fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL, mappedBy = "test")
+    private List<Attempt> attempts;
 
     /**
      * The set of questions.
      */
     @ManyToMany(fetch = FetchType.LAZY, targetEntity = Question.class)
-    @JoinTable(name = "QUESTION_TEST", 
-        joinColumns = { @JoinColumn(name = "TEST_ID", 
-        nullable = false, updatable = false) }, 
-        inverseJoinColumns = { @JoinColumn(name = "QUESTION_ID", 
-            nullable = false, updatable = false) })
-    private Set<Question> questions;
+    @JoinTable(name = "QUESTION_TEST",
+            joinColumns = {@JoinColumn(name = "TEST_ID",
+                    nullable = false, updatable = false)},
+            inverseJoinColumns = {@JoinColumn(name = "QUESTION_ID",
+                    nullable = false, updatable = false)})
+    private List<Question> questions;
 
     /**
      * Constructor which provides creating of new test.
@@ -68,14 +67,11 @@ public class Test extends BaseEntity {
     /**
      * Constructor which provides creating of new test.
      *
-     * @param name
-     *            of test
-     * @param description
-     *            of test
-     * @param isPublic
-     *            status of test
+     * @param name        of test
+     * @param description of test
+     * @param isPublic    status of test
      */
-    public Test(String name,String description, Boolean isPublic) {
+    public Test(String name, String description, Boolean isPublic) {
         this.name = name;
         this.description = description;
         this.isPublic = isPublic;
@@ -105,20 +101,21 @@ public class Test extends BaseEntity {
         this.isPublic = isPublic;
     }
 
-    public Set<Attempt> getAttempts() {
+    public List<Attempt> getAttempts() {
         return attempts;
     }
 
-    public void setAttempts(Set<Attempt> attempts) {
+    public void setAttempts(List<Attempt> attempts) {
         this.attempts = attempts;
     }
 
-    public Set<Question> getQuestions() {
+    public List<Question> getQuestions() {
         return this.questions;
     }
 
-    public void setQuestions(Set<Question> questions) {
+    public void setQuestions(List<Question> questions) {
         this.questions = questions;
     }
-
 }
+
+

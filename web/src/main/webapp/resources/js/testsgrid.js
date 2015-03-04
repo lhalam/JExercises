@@ -43,7 +43,7 @@ $(document).ready(function () {
                 '<button type="button" class="btn btn-success pull-right">' +
                     '<span class="glyphicon glyphicon-list-alt"></span> Attempts</button>' +
                 '<button type="button" class="btn btn-primary pull-right">' +
-                    '<span class="glyphicon glyphicon-eye-open"></span> View</button>'
+                    '<span class="glyphicon glyphicon-eye-open"></span> Complete</button>'
             }
         ]
     });
@@ -79,11 +79,15 @@ $(document).ready(function () {
     $('#testsGrid tbody').on('click', '.btn-warning', function () {
         var id = table.row( $(this).parents('tr') ).data().id;
         $.ajax({
+                type: "POST",
                 url: "/web/testedit",
-                type: 'GET',
-                mimeType: 'application/json',
-                contentType: 'application/json',
-                data: JSON.stringify(id)
+                data: JSON.stringify(id),
+                contentType: "application json",
+                dataType:'text/html',
+                success: function(dataResponse){
+                    $("html").html(dataResponse);
+                },
+                error: alert("err")
             }
         );
     });
@@ -103,13 +107,4 @@ $(document).ready(function () {
         );
     });
 
-    $('.btn-default').on('click', function () {
-        $.ajax({
-                url: "/web/testadd",
-                type: 'GET',
-                mimeType: 'application/json',
-                contentType: 'application/json'
-            }
-        );
-    });
 });
