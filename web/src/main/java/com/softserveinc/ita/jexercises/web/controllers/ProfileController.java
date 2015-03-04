@@ -5,6 +5,7 @@ import com.softserveinc.ita.jexercises.business.services.UserProfileService;
 import com.softserveinc.ita.jexercises.business.services.UserService;
 import com.softserveinc.ita.jexercises.common.dto.ResponseDto;
 import com.softserveinc.ita.jexercises.common.dto.UserProfileDto;
+import com.softserveinc.ita.jexercises.common.utils.DateUtils;
 import com.softserveinc.ita.jexercises.web.utils.ResourceNotFoundException;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.IOUtils;
@@ -77,7 +78,7 @@ public class ProfileController {
     @RequestMapping(value = "/user/profile/{userId}",
             method = RequestMethod.GET)
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public ModelAndView getUserProfileNew(@PathVariable long userId,
+    public ModelAndView getUserProfileNew(@PathVariable Long userId,
                                           Model model)
             throws ResourceNotFoundException {
         if (userService.findUserById(userId) == null) {
@@ -99,7 +100,7 @@ public class ProfileController {
             method = RequestMethod.POST)
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @ResponseBody
-    public UserProfileDto getUserProfileData(@PathVariable long userId) {
+    public UserProfileDto getUserProfileData(@PathVariable Long userId) {
         return userProfileService.getUserInfo(userService.findUserById(userId));
     }
 
@@ -117,6 +118,9 @@ public class ProfileController {
         model.addAttribute("userFirstName", user.getFirstName());
         model.addAttribute("userLastName", user.getLastName());
         model.addAttribute("userEmail", user.getEmail());
+        model.addAttribute("days", DateUtils.getDays());
+        model.addAttribute("months", DateUtils.getMonths());
+        model.addAttribute("years", DateUtils.getYears());
         model.addAttribute("currentUser", true);
 
         return new ModelAndView("user/editprofile");
@@ -132,7 +136,7 @@ public class ProfileController {
     @RequestMapping(value = "/user/profile/{userId}/edit",
             method = RequestMethod.GET)
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public ModelAndView getUserEditProfileView(@PathVariable long userId,
+    public ModelAndView getUserEditProfileView(@PathVariable Long userId,
                                            Model model) {
         UserProfileDto user = userProfileService.getUserInfo(userService
                 .findUserById(userId));
@@ -140,6 +144,9 @@ public class ProfileController {
         model.addAttribute("userFirstName", user.getFirstName());
         model.addAttribute("userLastName", user.getLastName());
         model.addAttribute("userEmail", user.getEmail());
+        model.addAttribute("days", DateUtils.getDays());
+        model.addAttribute("months", DateUtils.getMonths());
+        model.addAttribute("years", DateUtils.getYears());
         model.addAttribute("currentUser", false);
         model.addAttribute("userId", userId);
 
@@ -157,10 +164,7 @@ public class ProfileController {
     public ResponseDto updateUserProfile(UserProfileDto userProfileDto) {
         userProfileService.updateUserProfile(userProfileDto);
 
-        ResponseDto response = new ResponseDto();
-        response.setSuccess(true);
-
-        return response;
+        return new ResponseDto();
     }
 
     /**
@@ -217,12 +221,13 @@ public class ProfileController {
             produces = MediaType.IMAGE_JPEG_VALUE)
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @ResponseBody
-    public byte[] getUserAvatar(@PathVariable long userId) throws IOException {
+    public byte[] getUserAvatar(@PathVariable Long userId) throws IOException {
         byte[] image;
 
         if (userProfileService.hasAvatar(userId)) {
             image = userService.findUserById(userId).getAvatar();
         } else {
+            image = getDefaultAvatar();
             image = getDefaultAvatar();
         }
 
