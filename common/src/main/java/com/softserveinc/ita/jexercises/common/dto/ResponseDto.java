@@ -1,6 +1,7 @@
 package com.softserveinc.ita.jexercises.common.dto;
 
 import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Represents Response DTO object.
@@ -12,22 +13,18 @@ public class ResponseDto {
     /**
      * Success flag.
      */
-    private boolean success;
+    private boolean success = true;
 
     /**
      * Collection of errors.
      */
-    private HashSet<String> errors = new HashSet<String>();
+    private Set<String> errors = new HashSet<String>();
 
     public boolean isSuccess() {
         return success;
     }
 
-    public void setSuccess(boolean success) {
-        this.success = success;
-    }
-
-    public HashSet<String> getErrors() {
+    public Set<String> getErrors() {
         return errors;
     }
 
@@ -39,5 +36,6 @@ public class ResponseDto {
      */
     public void addError(String error) {
         errors.add(error);
+        success = false;
     }
 }

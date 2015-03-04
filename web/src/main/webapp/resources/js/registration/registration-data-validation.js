@@ -82,8 +82,8 @@ $(document)
 											registrationData.password = $(
 													"#password").val();
 											registrationData.birthDate = new Date(
-													$("#year").val(),
-													$("#month").val() - 1, $(
+													$("#year").val(), $(
+															"#month").val(), $(
 															"#day").val());
 											$
 													.ajax({
@@ -155,25 +155,13 @@ $(document)
 									});
 
 					$.validator.addMethod("dateValid", function() {
-						var shortMonths = [ "4", "6", "9", "11" ];
-						var february = 2;
 						var day = $("#day").val();
-						var month = $("#month").val();
-						var year = $("#year").val();
-						if (month == february) {
-							if (isLeapYear(year)) {
-								return day <= 29;
-							}
-							return day <= 28;
-						} else if ($.inArray(month, shortMonths) !== -1) {
-							return day <= 30;
+						var matchDay = new Date($("#year").val(), $("#month")
+								.val(), day).getDate();
+						if (day == matchDay) {
+							return true;
 						}
-						return true;
+						return false;
 					}, "Please, enter а valid date of birth.");
-
-					function isLeapYear(year) {
-						return ((year % 4 == 0) && (year % 100 != 0))
-								|| (year % 400 == 0);
-					}
 
 				});

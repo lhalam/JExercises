@@ -49,10 +49,9 @@ public final class DateUtils {
         LinkedHashMap<Byte, String> months = new LinkedHashMap<Byte, String>();
         String[] monthsArray = new DateFormatSymbols(Locale.ENGLISH)
                 .getShortMonths();
-        byte minMonth = 1;
         byte maxMonth = 12;
-        for (byte i = minMonth; i <= maxMonth; i++) {
-            months.put(i, monthsArray[i - 1]);
+        for (byte i = 0; i < maxMonth; i++) {
+            months.put(i, monthsArray[i]);
         }
         return months;
     }

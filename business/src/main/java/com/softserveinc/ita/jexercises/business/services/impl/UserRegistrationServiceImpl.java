@@ -54,7 +54,6 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
         } else {
             User user = userMapper.toEntity(userDto);
             createNewUserAccount(user);
-            response.setSuccess(true);
         }
         return response;
     }
