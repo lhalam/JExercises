@@ -110,13 +110,38 @@ public class ProfileController {
      * @return Profile page.
      */
     @RequestMapping(value = "/user/profile/edit", method = RequestMethod.GET)
-    public ModelAndView getEditProfileView(Model model) {
+    public ModelAndView getCurrentUserEditProfileView(Model model) {
         UserProfileDto user = userProfileService.getUserInfo(currentUserService
                 .getCurrentUser());
 
         model.addAttribute("userFirstName", user.getFirstName());
         model.addAttribute("userLastName", user.getLastName());
         model.addAttribute("userEmail", user.getEmail());
+        model.addAttribute("currentUser", true);
+
+        return new ModelAndView("user/editprofile");
+    }
+
+    /**
+     * Getting edit profile view for selected user.
+     *
+     * @param userId User id.
+     * @param model UI view model.
+     * @return Profile page.
+     */
+    @RequestMapping(value = "/user/profile/{userId}/edit",
+            method = RequestMethod.GET)
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public ModelAndView getUserEditProfileView(@PathVariable long userId,
+                                           Model model) {
+        UserProfileDto user = userProfileService.getUserInfo(userService
+                .findUserById(userId));
+
+        model.addAttribute("userFirstName", user.getFirstName());
+        model.addAttribute("userLastName", user.getLastName());
+        model.addAttribute("userEmail", user.getEmail());
+        model.addAttribute("currentUser", false);
+        model.addAttribute("userId", userId);
 
         return new ModelAndView("user/editprofile");
     }
