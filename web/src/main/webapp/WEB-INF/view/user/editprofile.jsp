@@ -9,6 +9,9 @@
     <link href="${basedir}/resources/css/profile.cssjquery.Jcrop.min.css"
           rel="stylesheet"
           type="text/css">
+    <link href="${basedir}/resources/css/lib/bootstrap-select.css"
+          rel="stylesheet"
+          type="text/css">
     <link href="${basedir}/resources/css/editprofile.css"
           rel="stylesheet"
           type="text/css">
@@ -20,7 +23,22 @@
     <script src="${basedir}/resources/js/uploader/jquery.fileapi.js"></script>
     <script src="${basedir}/resources/js/uploader/jquery.Jcrop.min.js"></script>
     <script src="${basedir}/resources/js/uploader/upload-avatar.js"></script>
+    <script src="${basedir}/resources/js/lib/bootstrap-select.js"></script>
 </head>
+
+<c:choose>
+    <c:when test="${currentUser}">
+        <c:set var="postUrl" value="${basedir}/user/profile/" scope="request"/>
+        <c:set var="disabled" value="" scope="request"/>
+        <c:set var="hidden" value="hidden-attribute" scope="request"/>
+    </c:when>
+    <c:otherwise>
+        <c:set var="postUrl" value="${basedir}/user/profile/${userId}/"
+               scope="request"/>
+        <c:set var="disabled" value="disabled" scope="request"/>
+        <c:set var="hidden" value="" scope="request"/>
+    </c:otherwise>
+</c:choose>
 
 <body id="container">
 <div class="container">
@@ -54,6 +72,7 @@
                                 <div class="col-lg-8">
                                     <input id="firstName" class="form-control"
                                            placeholder="First Name"
+                                    ${disabled}
                                            value="${userFirstName}"
                                            name="firstName"
                                            type="text">
@@ -69,6 +88,7 @@
                                 <div class="col-lg-8">
                                     <input id="lastName" class="form-control"
                                            placeholder="Last Name"
+                                    ${disabled}
                                            value="${userLastName}"
                                            name="lastName"
                                            type="text">
@@ -82,7 +102,7 @@
                                 <div class="col-lg-8">
                                     <input class="form-control"
                                            placeholder="${userEmail}"
-                                           disabled="true"
+                                           disabled="disabled"
                                            name="email"
                                            type="text"
                                            id="email">
@@ -102,7 +122,7 @@
                                         <div class="userpic">
                                             <div class="js-preview userpic__preview"></div>
                                         </div>
-                                        <div class="btn btn-sm btn-success js-fileapi-wrapper">
+                                        <div class="btn btn-sm btn-success js-fileapi-wrapper ${disabled}">
                                             <div class="js-browse">
                                                 <span class="btn-txt">Choose</span>
                                                 <input type="file"
@@ -127,6 +147,7 @@
                                     <input class="form-control"
                                            id="currentPassword"
                                            placeholder="Current Password"
+                                    ${disabled}
                                            name="currentPassword"
                                            type="currentPassword">
                                 </div>
@@ -134,12 +155,14 @@
 
                             <div class="form-group ">
                                 <label for="password"
-                                       class="col-lg-4 control-label">New Password</label>
+                                       class="col-lg-4 control-label">New
+                                    Password</label>
 
                                 <div class="col-lg-8">
                                     <input class="form-control"
                                            id="password"
                                            placeholder="New Password"
+                                    ${disabled}
                                            name="password"
                                            type="password">
                                 </div>
@@ -154,13 +177,27 @@
                                     <input class="form-control"
                                            id="matchingPassword"
                                            placeholder="Confirm Password"
+                                    ${disabled}
                                            type="password"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group ${hidden}">
+                                <label for="userRole"
+                                       class="col-lg-4 control-label">Role</label>
+
+                                <div class="col-lg-8">
+                                    <select id="userRole" class="selectpicker"
+                                            data-style="btn-warning" data-width="100%">
+                                            <option value="user">User</option>
+                                            <option value="admin">Admin</option>
+                                    </select>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <div class="col-lg-offset-7 col-lg-12">
-                                    <a href="../profile"
+                                    <a href="${postUrl}"
                                        class="btn btn-default btn-sm"
                                        type="button">Cancel</a>
                                     <input class="btn btn-info"
@@ -192,7 +229,8 @@
             </div>
         </div>
     </div>
-    <div class="hidden-attribute" id="hidden-attr" basedir="${basedir}"></div>
+    <div class="hidden-attribute" id="hidden-attr"
+         data-post-url="${postUrl}"></div>
 </div>
 
 </body>

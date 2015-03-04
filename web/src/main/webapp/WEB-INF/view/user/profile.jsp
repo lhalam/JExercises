@@ -15,10 +15,10 @@
 
 <c:choose>
     <c:when test="${currentUser}">
-        <c:set var="postUrl" value="${basedir}/user/profile" scope="session"  />
+        <c:set var="postUrl" value="${basedir}/user/profile" scope="request"  />
     </c:when>
     <c:otherwise>
-        <c:set var="postUrl" value="${basedir}/user/profile/${userId}" scope="session"  />
+        <c:set var="postUrl" value="${basedir}/user/profile/${userId}" scope="request"  />
     </c:otherwise>
 </c:choose>
 
@@ -81,7 +81,7 @@
                         attempts</a>
 
                     <div class="pull-right">
-                        <a href="${basedir}/user/profile/edit"
+                        <a href="${postUrl}/edit"
                            type="button"
                            class="btn btn-warning btn-sm"><span
                                 class="glyphicon glyphicon-edit"></span>

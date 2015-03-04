@@ -1,12 +1,12 @@
 $(document).ready(function () {
-    var basedir = $("#hidden-attr").attr("basedir");
-    $(".userpic").css({"background-image": "url('" + basedir + "/user/profile/avatar')"});
+    var postUrl = $("#hidden-attr").attr("data-post-url");
+    $(".userpic").css({"background-image": "url('" + postUrl + "avatar')"});
 
     $("#submitButton").click(function () {
         var form = $('#editProfileForm');
         $.ajax({
             type: "POST",
-            url: basedir + "/user/profile/edit",
+            url: postUrl + "edit",
             dataType: "json",
             data: form.serialize(),
             success: function () {
