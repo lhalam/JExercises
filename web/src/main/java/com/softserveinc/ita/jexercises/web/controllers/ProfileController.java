@@ -24,6 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -115,12 +116,15 @@ public class ProfileController {
         UserProfileDto user = userProfileService.getUserInfo(currentUserService
                 .getCurrentUser());
 
+        Date birthDate = user.getBirthDate();
+
         model.addAttribute("userFirstName", user.getFirstName());
         model.addAttribute("userLastName", user.getLastName());
         model.addAttribute("userEmail", user.getEmail());
         model.addAttribute("days", DateUtils.getDays());
         model.addAttribute("months", DateUtils.getMonths());
         model.addAttribute("years", DateUtils.getYears());
+        model.addAttribute("userBirthDate", birthDate);
         model.addAttribute("currentUser", true);
 
         return new ModelAndView("user/editprofile");
@@ -141,12 +145,7 @@ public class ProfileController {
         UserProfileDto user = userProfileService.getUserInfo(userService
                 .findUserById(userId));
 
-        model.addAttribute("userFirstName", user.getFirstName());
-        model.addAttribute("userLastName", user.getLastName());
-        model.addAttribute("userEmail", user.getEmail());
-        model.addAttribute("days", DateUtils.getDays());
-        model.addAttribute("months", DateUtils.getMonths());
-        model.addAttribute("years", DateUtils.getYears());
+        model.addAttribute("userRole", user.getRole());
         model.addAttribute("currentUser", false);
         model.addAttribute("userId", userId);
 
@@ -227,7 +226,6 @@ public class ProfileController {
         if (userProfileService.hasAvatar(userId)) {
             image = userService.findUserById(userId).getAvatar();
         } else {
-            image = getDefaultAvatar();
             image = getDefaultAvatar();
         }
 

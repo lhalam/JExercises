@@ -19,3 +19,7 @@
 .hidden-attribute {
     display: none;
 }
+
+.combodate select {
+    width: 32%;
+}
