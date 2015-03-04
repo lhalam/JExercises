@@ -62,28 +62,13 @@ public class TestGridController {
      * @param testId of test which will be deleted.
      * @return test Id.
      */
-    @RequestMapping(value = "/testdelete", method = RequestMethod.POST)
+    @RequestMapping(value = "/test/delete", method = RequestMethod.POST)
     @ResponseBody
     public String deleteTest(@RequestBody Long testId) {
         testGridService.delete(testId);
         return testId.toString();
     }
 
-
-    /**
-     * Method provides mapping on "testsGrid" input.
-     *
-     * @param id test.
-     * @param model Model.
-     * @return ModelAndView object,in current
-     * case that actually means returning.
-     * testsGrid.jsp
-     */
-    @RequestMapping(value = "/testedit", method = RequestMethod.POST)
-    public ModelAndView editTest(Long id, Model model) {
-
-        return new ModelAndView("login");
-    }
 
 }
 

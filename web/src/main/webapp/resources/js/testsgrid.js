@@ -38,8 +38,8 @@ $(document).ready(function () {
                 defaultContent:
                 '<button type="button" class="btn btn-danger pull-right">' +
                     '<span class="glyphicon glyphicon-trash"></span> Delete</button>'+
-                '<button type="button" class="btn btn-warning pull-right">' +
-                    '<span class="glyphicon glyphicon-pencil"></span> Edit</button>'+
+                '<a  type="button" class="btn btn-warning pull-right">' +
+                     '<span class="glyphicon glyphicon-pencil"></span> Edit</a>'+
                 '<button type="button" class="btn btn-success pull-right">' +
                     '<span class="glyphicon glyphicon-list-alt"></span> Attempts</button>' +
                 '<button type="button" class="btn btn-primary pull-right">' +
@@ -48,63 +48,6 @@ $(document).ready(function () {
         ]
     });
 
-
-
     $('#testgrid_wrapper').removeClass('dataTables_wrapper');
-
-    $('#testsGrid tbody').on('click', '.btn-primary', function () {
-        var id = table.row( $(this).parents('tr') ).data().id;
-        $.ajax({
-                url: "/web/testview",
-                type: 'POST',
-                mimeType: 'application/json',
-                contentType: 'application/json',
-                data: JSON.stringify(id)
-            }
-        );
-    });
-
-    $('#testsGrid tbody').on('click', '.btn-success', function () {
-        var id = table.row( $(this).parents('tr') ).data().id;
-        $.ajax({
-                url: "/web/attempts",
-                type: 'POST',
-                mimeType: 'application/json',
-                contentType: 'application/json',
-                data: JSON.stringify(id)
-            }
-        );
-    });
-
-    $('#testsGrid tbody').on('click', '.btn-warning', function () {
-        var id = table.row( $(this).parents('tr') ).data().id;
-        $.ajax({
-                type: "POST",
-                url: "/web/testedit",
-                data: JSON.stringify(id),
-                contentType: "application json",
-                dataType:'text/html',
-                success: function(dataResponse){
-                    $("html").html(dataResponse);
-                },
-                error: alert("err")
-            }
-        );
-    });
-
-    $('#testsGrid tbody').on('click', '.btn-danger', function () {
-        var id = table.row( $(this).parents('tr') ).data().id;
-        $.ajax({
-                type: "POST",
-                url: "/web/testdelete",
-                data: JSON.stringify(id),
-                contentType: "application/json; charset=utf-8",
-                dataType:"json",
-                success: function () {
-                    table.ajax.reload();
-                }
-            }
-        );
-    });
 
 });
