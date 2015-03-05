@@ -40,7 +40,7 @@
                 <div class="row-fluid ">
                     <div class="col-md-offset-1 col-md-10">
                         <a class="btn btn-default"
-                                href="/web/testadd">
+                                href="/web/testcreating">
                             <span class="glyphicon glyphicon-plus"></span>
                              Add test
                         </a>
@@ -52,6 +52,7 @@
                         <table id="testsGrid" class="table table-striped table-bordered"
                                cellspacing="0" width="100%">
                             <thead>
+                                <th>Id</th>
                                 <th>Name</th>
                                 <th>Availability</th>
                                 <th class="pull-right">Command</th>
