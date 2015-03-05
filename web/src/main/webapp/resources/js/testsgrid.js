@@ -1,13 +1,6 @@
 /**
  * Created by Ihor Demkovych on 16.02.15.
  */
-var searchParametersDto = {
-    pagesize:10,
-    pagenumber:0,
-    searchKey:"",
-    order:"desc",
-    draw:0
-};
 $(document).ready(function () {
     var table = $('#testsGrid').DataTable({
         processing: true,
@@ -18,16 +11,8 @@ $(document).ready(function () {
             type: 'POST',
             mimeType: 'application/json',
             contentType: 'application/json',
-            processData: false,
-            beforeSend: function (jqXHR, settings) {
-                var data = settings.data;
-                searchParametersDto.draw = data.draw;
-                searchParametersDto.pagenumber = data.start;
-                searchParametersDto.pagesize = data.length;
-                searchParametersDto.order = data.order[0].dir;
-                searchParametersDto.searchKey = data.search.value;
-                data = searchParametersDto;
-                settings.data = JSON.stringify(data);
+            data : function(dataRequest) {
+                return JSON.stringify(dataRequest);
             },
             dataSrc: "testGridRows"
         },

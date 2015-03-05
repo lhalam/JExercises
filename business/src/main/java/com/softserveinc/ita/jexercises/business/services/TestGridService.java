@@ -1,7 +1,7 @@
 package com.softserveinc.ita.jexercises.business.services;
 
-import com.softserveinc.ita.jexercises.common.dto.SearchParametersDto;
 import com.softserveinc.ita.jexercises.common.dto.SearchGridDto;
+import com.softserveinc.ita.jexercises.common.dto.dataTables.DataTablesDto;
 
 /**
  * Service that make TestGrid.
@@ -14,12 +14,11 @@ public interface TestGridService {
     /**
      * Make TestGrid.
      *
-     * @param searchParametersDto
+     * @param dataTablesDto
      *                  to set search conditions.
      * @return TestGridDto object.
      */
-    SearchGridDto buildTestGrid(SearchParametersDto
-        searchParametersDto);
+    SearchGridDto buildTestGrid(DataTablesDto dataTablesDto);
 
     /**
      * Deletes test.

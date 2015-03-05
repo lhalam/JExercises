@@ -20,7 +20,7 @@
             <ul class="nav navbar-nav">
                 <li><a href="${basedir}/welcome">General </a></li>
                 <li><a href="${basedir}/about">About</a></li>
-                <li><a href="${basedir}/testsGrid">Tests</a></li>
+                <li><a href="${basedir}/testsgrid">Tests</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="${basedir}/user/registration">Registration</a></li>

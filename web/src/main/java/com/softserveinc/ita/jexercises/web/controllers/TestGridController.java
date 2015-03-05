@@ -1,8 +1,8 @@
 package com.softserveinc.ita.jexercises.web.controllers;
 
 import com.softserveinc.ita.jexercises.business.services.TestGridService;
-import com.softserveinc.ita.jexercises.common.dto.SearchParametersDto;
 import com.softserveinc.ita.jexercises.common.dto.SearchGridDto;
+import com.softserveinc.ita.jexercises.common.dto.dataTables.DataTablesDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-
 
 /**
  * Controls Test result page.
@@ -44,15 +43,16 @@ public class TestGridController {
     /**
      * Make Tests Grid.
      *
-     * @param searchParametersDto to rebuild new table.
+     *@param dataTablesDto search conditions.
      * @return TestGridDto object.
      */
     @RequestMapping(value = "/testsgrid", method = RequestMethod.POST)
     @ResponseBody
     public SearchGridDto showTestGridPage(@RequestBody
-                                          SearchParametersDto searchParametersDto) {
-        SearchGridDto searchGridDto
-                = testGridService.buildTestGrid(searchParametersDto);
+                                          DataTablesDto dataTablesDto) {
+       SearchGridDto searchGridDto
+                = testGridService.buildTestGrid(dataTablesDto);
+
         return searchGridDto;
     }
 
