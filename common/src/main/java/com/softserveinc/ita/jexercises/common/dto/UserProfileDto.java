@@ -13,6 +13,10 @@ import java.util.Date;
  */
 public class UserProfileDto {
     /**
+     * User id.
+     */
+    private Long id;
+    /**
      * First name of user.
      */
     private String firstName;
@@ -107,5 +111,13 @@ public class UserProfileDto {
 
     public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

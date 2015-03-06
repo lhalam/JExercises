@@ -56,6 +56,7 @@ public class UserProfileMapper {
         if (user.getAvatar() != null) {
             userProfileDto.setAvatar(Base64.encodeBase64String(user.getAvatar()));
         }
+        userProfileDto.setId(user.getId());
         userProfileDto.setEmail(user.getEmail());
         userProfileDto.setFirstName(user.getFirstName());
         userProfileDto.setLastName(user.getLastName());

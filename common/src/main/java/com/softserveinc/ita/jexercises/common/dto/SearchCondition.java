@@ -10,6 +10,10 @@ import java.util.Map;
  */
 public class SearchCondition {
     /**
+     * Draw counter.
+     */
+    private int draw;
+    /**
      * Number of page.
      */
     private int pageNumber;
@@ -59,4 +63,11 @@ public class SearchCondition {
         this.orderByMap = orderByMap;
     }
 
+    public int getDraw() {
+        return draw;
+    }
+
+    public void setDraw(int draw) {
+        this.draw = draw;
+    }
 }
