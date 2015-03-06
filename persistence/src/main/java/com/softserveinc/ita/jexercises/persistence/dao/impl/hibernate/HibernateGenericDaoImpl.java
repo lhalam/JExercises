@@ -118,7 +118,7 @@ public class HibernateGenericDaoImpl<T, PK extends Serializable> implements
     }
 
     @Override
-    public int getNumberOfAllResults(SearchCondition searchCondition) {
+    public Long getNumberOfFilteredRecords(SearchCondition searchCondition) {
         PathBuilder<T> qObject = new PathBuilder<>(entityClass,
                 Introspector.decapitalize(getEntityName()));
 
@@ -133,15 +133,17 @@ public class HibernateGenericDaoImpl<T, PK extends Serializable> implements
             builder.or(filterFieldPath.containsIgnoreCase(filter.getValue()));
         }
 
-        jpaQuery.where(builder);
-
-        return jpaQuery.list(qObject).size();
+        return jpaQuery.where(builder).count();
     }
 
     @Override
-    public int getNumberOfPages(SearchCondition searchCondition) {
-        return (int) Math.ceil((double) getNumberOfAllResults(searchCondition) /
-                (double) searchCondition.getPageSize());
+    public Long getNumberOfRecords() {
+        PathBuilder<T> qObject = new PathBuilder<>(entityClass,
+                Introspector.decapitalize(getEntityName()));
+
+        JPAQuery jpaQuery = new JPAQuery(entityManager);
+
+        return jpaQuery.from(qObject).count();
     }
 
     private String getEntityName() {
