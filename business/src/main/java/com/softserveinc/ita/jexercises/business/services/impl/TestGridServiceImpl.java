@@ -59,7 +59,7 @@ public class TestGridServiceImpl implements TestGridService {
         searchGridDto.setRecordsTotal(testDao.findAll().size());
         searchGridDto.setDraw( (dataTablesDto.getDraw() + 1) );
         searchGridDto.setRecordsFiltered(
-            testDao.getNumberOfAllResults(searchCondition));
+            testDao.getNumberOfFilteredRecords(searchCondition));
 
         TestGridMapper testGridMapper = new TestGridMapper();
         searchGridDto.setTestRows(testGridMapper.toDto(tests));

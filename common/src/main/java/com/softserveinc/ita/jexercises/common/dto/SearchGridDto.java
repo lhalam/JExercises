@@ -23,7 +23,7 @@ public class SearchGridDto {
     /**
      * Number of pages in test data table.
      */
-    private int recordsFiltered;
+    private Long recordsFiltered;
 
     /**
      * List of rows from data table.
@@ -44,12 +44,16 @@ public class SearchGridDto {
         this.recordsTotal = recordsTotal;
     }
 
-    public int getRecordsFiltered() {
+    public Long getRecordsFiltered() {
         return recordsFiltered;
     }
 
-    public void setRecordsFiltered(int recordsFiltered) {
+    public void setRecordsFiltered(Long recordsFiltered) {
         this.recordsFiltered = recordsFiltered;
+    }
+
+    public void setTestGridRows(List<SearchGridRowDto> testGridRows) {
+        this.testGridRows = testGridRows;
     }
 
     public List<SearchGridRowDto> getTestGridRows() {
