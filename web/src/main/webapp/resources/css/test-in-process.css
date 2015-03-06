@@ -1,0 +1,23 @@
+@CHARSET "UTF-8";
+
+.panel {
+    text-align: center;
+    height: inherit;
+}
+
+.question-description-panel {
+    min-height: 200px;
+    margin-top: 20px;
+    text-align: justify;
+}
+
+.btn {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.separate-line {
+    background-color: lightgray;
+    height: 1px;
+    width: 100%;
+}
