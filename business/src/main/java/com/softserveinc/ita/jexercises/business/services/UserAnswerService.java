@@ -61,4 +61,21 @@ public interface UserAnswerService {
      */
     List<UserAnswer> findAllUserAnswers();
 
+    /**
+     * Searching userAnswer by question id and attempt id.
+     *
+     * @param questionId Id of question
+     * @param attemptId Id of attempt.
+     * @return UserAnswer instance
+     */
+    UserAnswer findUserAnswerByAttemptIdAndQuestionId(Long questionId,
+                                                      Long attemptId);
+
+    /**
+     * Searching all user answers by attempt id.
+     *
+     * @param attemptId Attempt Id.
+     * @return Set of user answer if exists
+     */
+    List<UserAnswer> findAllByAttemptId(Long attemptId);
 }

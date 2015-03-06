@@ -1,19 +1,18 @@
 package com.softserveinc.ita.jexercises.business.services.impl;
 
-import java.util.List;
-
+import com.softserveinc.ita.jexercises.business.services.UserAnswerService;
+import com.softserveinc.ita.jexercises.common.entity.UserAnswer;
+import com.softserveinc.ita.jexercises.persistence.dao.impl.UserAnswerDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.softserveinc.ita.jexercises.business.services.UserAnswerService;
-import com.softserveinc.ita.jexercises.common.entity.UserAnswer;
-import com.softserveinc.ita.jexercises.persistence.dao.impl.UserAnswerDao;
+import java.util.List;
 
 /**
  * Represent UserAnswerService interface implementation.
- * 
+ *
  * @author Oleg Pavlish
  * @version 1.0
  */
@@ -63,4 +62,17 @@ public class UserAnswerServiceImpl implements UserAnswerService {
         return userAnswerDao.findAll();
     }
 
+    @Override
+    @Transactional(propagation = Propagation.SUPPORTS)
+    public UserAnswer findUserAnswerByAttemptIdAndQuestionId(Long questionId,
+                                                             Long attemptId) {
+        return userAnswerDao.findUserAnswerByQuestionIdAndAttemptId(
+                questionId, attemptId);
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.SUPPORTS)
+    public List<UserAnswer> findAllByAttemptId(Long attemptId) {
+        return userAnswerDao.findAllByAttemptId(attemptId);
+    }
 }
