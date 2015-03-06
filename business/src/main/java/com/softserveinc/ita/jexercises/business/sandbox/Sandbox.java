@@ -14,12 +14,12 @@ import java.util.List;
  * @author Volodymyr Yakymiv.
  * @version 1.0
  */
-public final class Sandbox {
+public class Sandbox {
 
     /**
      * The result of executing untrusted code.
      */
-    private static boolean result;
+    private boolean result;
 
     /**
      * Log4j logger instance.
@@ -30,13 +30,7 @@ public final class Sandbox {
      * The beanshell script interpreter instance.
      * Can be used to evaluate statements or expressions.
      */
-    private static Interpreter interpreter = new Interpreter();
-
-    /**
-     * Private constructor.
-     */
-    private Sandbox() {
-    }
+    private Interpreter interpreter = new Interpreter();
 
     /**
      * Checks untrusted code and return is user input answer correct or
@@ -47,7 +41,7 @@ public final class Sandbox {
      * @return True if user answer is correct and false is incorrect.
      * @throws UnsuccessEvent .
      */
-    public static boolean checkUserAnswer(String untrustedCode,
+    public boolean checkUserAnswer(String untrustedCode,
                                           List<Assert> asserts)
             throws UnsuccessEvent {
         String pw = SandboxServiceManager.getInstance()
