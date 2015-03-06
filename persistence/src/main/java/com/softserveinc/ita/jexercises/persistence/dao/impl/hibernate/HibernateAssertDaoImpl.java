@@ -24,11 +24,10 @@ public class HibernateAssertDaoImpl extends
     @Override
     public List<Assert> findAllByQuestion(Long questionId) {
         String queryString = "select distinct a  from Assert a" +
-                " INNER JOIN a.question q where q.id=:questionId";
+                "  where a.question.id=:questionId";
         Query query = getEntityManager().createQuery(queryString);
         query.setParameter("questionId", questionId);
         List<Assert> asserts = (List<Assert>) query.getResultList();
         return asserts;
     }
-
 }
