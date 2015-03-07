@@ -1,0 +1,30 @@
+@CHARSET "UTF-8";
+
+.test-result-table > tbody > tr {
+    border-top: 1px solid rgb(221, 221, 221);
+}
+
+.test-result-table > tbody > tr:first-child {
+    border-top: 0;
+}
+
+.test-result-table > tbody > tr > td {
+    border-top: 0;
+}
+
+.toppad {
+    margin-top:20px;
+}
+
+.okbtn {
+    height: 30px;
+    width : 100px;
+}
+.wrapper{
+	text-align: center;
+}
+
+.pos {
+	margin-top: 40px; 
+	height: 50px;
+}

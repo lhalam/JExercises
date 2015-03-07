@@ -19,10 +19,9 @@ function sendPost() {
 		mimeType : 'application/json',
 		success : function(responseData) {
 			$("#user").text(
-					"User: " + responseData.firstName + "  "
-							+ responseData.lastName);
-			$("#test").text("Test: " + responseData.testName);
-			$("#date").text("Date: " + responseData.date);
+					responseData.firstName + "  " + responseData.lastName);
+			$("#test").text(responseData.testName);
+			$("#date").text(responseData.date);
 			$("#result").text(
 					"Test result is " + responseData.correctAnswersCount
 							+ " of " + responseData.totalAnswersCount);
