@@ -3,6 +3,7 @@ package com.softserveinc.ita.jexercises.web.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -33,7 +34,7 @@ public class TestResultController {
      * @return ModelAndView object,in current case that actually means returning
      *         testresult.jsp
      */
-    @RequestMapping(value = "/testresult", method = RequestMethod.GET)
+    @RequestMapping(value = "/test/result/{id}", method = RequestMethod.GET)
     public ModelAndView showTestResultPage(Model model) {
         return new ModelAndView("test/testresult");
     }
@@ -43,10 +44,10 @@ public class TestResultController {
      * 
      * @return TestResultDto object with all parameters.
      */
-    @RequestMapping(value = "/testresult", method = RequestMethod.POST)
+    @RequestMapping(value = "/test/result/{id}", method = RequestMethod.POST)
     @ResponseBody
-    public TestResultDto showTestResultInfo() {
-        TestResultDto testResultDto = testResultService.getTestResultInfo(4L);
+    public TestResultDto showTestResultInfo(@PathVariable("id") Long id) {
+        TestResultDto testResultDto = testResultService.getTestResultInfo(id);
         return testResultDto;
     }
 }
