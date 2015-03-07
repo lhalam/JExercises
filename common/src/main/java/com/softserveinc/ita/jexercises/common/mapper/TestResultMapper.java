@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import com.softserveinc.ita.jexercises.common.utils.Role;
 import org.springframework.stereotype.Component;
 
 import com.softserveinc.ita.jexercises.common.dto.TestResultAnswerDto;
@@ -28,7 +29,7 @@ public class TestResultMapper {
      *            Number of correct answers.
      * @return Dto with all parameters for test result.
      */
-    public TestResultDto toDto(Attempt attempt, int countCorrect) {
+    public TestResultDto toDto(Attempt attempt, int countCorrect, Role role) {
         Test test = attempt.getTest();
         TestResultDto testResultDto = new TestResultDto();
         List<TestResultAnswerDto> testResultAnswerDtos
@@ -56,6 +57,7 @@ public class TestResultMapper {
         testResultDto.setLastName(attempt.getUser().getLastName());
         testResultDto.setTestName(test.getName());
         testResultDto.setDate(attempt.getCreatedDate());
+        testResultDto.setRole(role);
 
         return testResultDto;
     }

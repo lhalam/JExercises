@@ -36,7 +36,7 @@ function sendPost() {
 				}, ]
 			});
 
-			if (dataResponse.role == "ROLE_ADMIN") {
+			if (responseData.role == "ROLE_ADMIN") {
 				$("#loadingIcon").hide();
 				$("#admin").show();
 				$("#public").show();
