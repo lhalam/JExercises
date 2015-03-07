@@ -35,5 +35,4 @@ public class QuestionCreatingServiceImpl implements QuestionCreatingService {
                 .toEntity(questionCreatingDto));
 
     }
-
 }

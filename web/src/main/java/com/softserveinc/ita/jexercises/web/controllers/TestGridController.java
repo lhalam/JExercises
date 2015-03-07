@@ -92,5 +92,6 @@ public class TestGridController {
         return userProfileService.getUserInfo(currentUserService
                 .getCurrentUser()).getRole();
     }
+
 }
 

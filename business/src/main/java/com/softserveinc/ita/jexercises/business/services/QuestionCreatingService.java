@@ -18,5 +18,4 @@ public interface QuestionCreatingService {
      *
      */
     void createQuestionDescription(QuestionCreatingDto questionCreatingDto);
-
 }

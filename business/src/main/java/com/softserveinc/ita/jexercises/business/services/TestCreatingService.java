@@ -30,5 +30,4 @@ public interface TestCreatingService {
      */
     GridResponseDto<QuestionGridDto> getGridRows(SearchCondition searchCondition);
 
-
 }
