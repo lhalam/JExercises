@@ -41,7 +41,8 @@ public class TestResultController {
 
     /**
      * Method provides mapping on "testresult" input.
-     * 
+     *
+     * @param id Attempt id.
      * @return TestResultDto object with all parameters.
      */
     @RequestMapping(value = "/test/result/{id}", method = RequestMethod.POST)
