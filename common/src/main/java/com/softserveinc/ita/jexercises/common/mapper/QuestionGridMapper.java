@@ -3,7 +3,6 @@ package com.softserveinc.ita.jexercises.common.mapper;
 import com.softserveinc.ita.jexercises.common.dto.QuestionGridDto;
 import com.softserveinc.ita.jexercises.common.entity.Question;
 import org.springframework.stereotype.Component;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,4 +34,5 @@ public class QuestionGridMapper {
 
         return questionGridDtoList;
     }
+
 }

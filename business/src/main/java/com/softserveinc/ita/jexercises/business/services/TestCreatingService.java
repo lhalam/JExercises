@@ -1,6 +1,5 @@
 package com.softserveinc.ita.jexercises.business.services;
 
-
 import com.softserveinc.ita.jexercises.common.dto.GridResponseDto;
 import com.softserveinc.ita.jexercises.common.dto.QuestionGridDto;
 import com.softserveinc.ita.jexercises.common.dto.SearchCondition;

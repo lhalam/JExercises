@@ -14,7 +14,7 @@ import java.util.List;
  */
 @Component
 public class TestCreatingMapper {
-   /* *//**
+     /**
      * Transforms Test entity object into TestDescription DTO object.
      *
      * @param testCreatingDto Test creating Dto.
@@ -30,4 +30,5 @@ public class TestCreatingMapper {
         test.setQuestions(questions);
         return test;
     }
+
 }
