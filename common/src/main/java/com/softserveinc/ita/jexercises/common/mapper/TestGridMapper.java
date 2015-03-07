@@ -1,6 +1,6 @@
 package com.softserveinc.ita.jexercises.common.mapper;
 
-import com.softserveinc.ita.jexercises.common.dto.SearchGridRowDto;
+import com.softserveinc.ita.jexercises.common.dto.TestGridDto;
 import com.softserveinc.ita.jexercises.common.entity.Test;
 import org.springframework.stereotype.Component;
 
@@ -18,22 +18,21 @@ public class TestGridMapper {
     /**
      * Transforms Test entity object into TestDescription DTO object.
      *
-     * @param tests list of Test entity.
+     * @param testList list of Test entity.
      * @return List SearchGridRows DTO.
      */
-    public List<SearchGridRowDto> toDto(List<Test> tests) {
-        List<SearchGridRowDto> searchGridRows = new ArrayList<SearchGridRowDto>();
-        for (Test test : tests) {
-            SearchGridRowDto searchGridRowDto = new SearchGridRowDto();
-            searchGridRowDto.setDescription(test.getName());
-            if (test.getIsPublic()) {
-                searchGridRowDto.setIsPublic("Public");
-            } else {
-                searchGridRowDto.setIsPublic("Private");
-            }
-            searchGridRowDto.setId(test.getId());
-            searchGridRows.add(searchGridRowDto);
+    public List<TestGridDto>  toDto(List<Test> testList) {
+
+        List<TestGridDto> testGridDtoList = new ArrayList<>();
+        for (Test test : testList) {
+            TestGridDto testGridDto = new TestGridDto();
+            testGridDto.setId(test.getId());
+            testGridDto.setName(test.getName());
+            testGridDto.setDescription(test.getDescription());
+            testGridDto.setIsPublic(test.getIsPublic());
+            testGridDtoList.add(testGridDto);
         }
-        return searchGridRows;
+
+        return testGridDtoList;
     }
 }

@@ -6,7 +6,12 @@ package com.softserveinc.ita.jexercises.common.dto;
  * @author Ihor Demkovych
  * @version 1.0
  */
-public class SearchGridRowDto {
+public class TestGridDto {
+
+    /**
+     * Name of test.
+     */
+    private String name;
 
     /**
      * Description of test.
@@ -16,7 +21,7 @@ public class SearchGridRowDto {
     /**
      * Availability of test.
      */
-    private String isPublic;
+    private boolean isPublic;
 
     /**
      * ID of test.
@@ -39,12 +44,13 @@ public class SearchGridRowDto {
         this.description = description;
     }
 
-    public String getIsPublic() {
+    public boolean getIsPublic() {
         return isPublic;
     }
 
-    public void setIsPublic(String isPublic) {
-        this.isPublic = isPublic;
-    }
+    public void setIsPublic(boolean isPublic) { this.isPublic = isPublic; }
 
+    public String getName() { return name; }
+
+    public void setName(String name) { this.name = name; }
 }

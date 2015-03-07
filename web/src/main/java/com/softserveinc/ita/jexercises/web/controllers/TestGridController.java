@@ -1,8 +1,8 @@
 package com.softserveinc.ita.jexercises.web.controllers;
 
 import com.softserveinc.ita.jexercises.business.services.TestGridService;
-import com.softserveinc.ita.jexercises.common.dto.SearchGridDto;
-import com.softserveinc.ita.jexercises.common.dto.dataTables.DataTablesDto;
+import com.softserveinc.ita.jexercises.common.dto.GridResponseDto;
+import com.softserveinc.ita.jexercises.common.dto.SearchCondition;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -43,17 +43,14 @@ public class TestGridController {
     /**
      * Make Tests Grid.
      *
-     *@param dataTablesDto search conditions.
+     *@param searchCondition search conditions.
      * @return TestGridDto object.
      */
     @RequestMapping(value = "/testsgrid", method = RequestMethod.POST)
     @ResponseBody
-    public SearchGridDto showTestGridPage(@RequestBody
-                                          DataTablesDto dataTablesDto) {
-       SearchGridDto searchGridDto
-                = testGridService.buildTestGrid(dataTablesDto);
-
-        return searchGridDto;
+    public GridResponseDto showTestGridPage(@RequestBody
+                             SearchCondition searchCondition) {
+        return testGridService.getGridRows(searchCondition);
     }
 
     /**

@@ -49,13 +49,14 @@
                 <div class="row-fluid ">
                     <div class="col-md-offset-1 col-md-10">
                         <br>
-                        <table id="testsGrid" class="table table-striped table-bordered"
+                        <table id="testsGrid" class="table table-striped table-hover"
                                cellspacing="0" width="100%">
                             <thead>
                                 <th>Id</th>
                                 <th>Name</th>
+                                <th>Description</th>
                                 <th>Availability</th>
-                                <th class="pull-right">Command</th>
+                                <th class="col-md-2"></th>
                             </tr>
                             </thead>
                         </table>
@@ -67,5 +68,6 @@
         </form>
     </div>
 </div>
+<div class="hidden-attribute" id="hidden-attr" data-basedir="${basedir}"></div>
 </body>
 </html>

@@ -1,7 +1,29 @@
 /**
  * Created by Ihor Demkovych on 16.02.15.
  */
+function actionButton(baseDir, id) {
+    return '<div class="btn-group btn-group-justified"> <button type="button" style="width:80%;" ' +
+        'class="btn btn-danger btn-xs dropdown-toggle" data-toggle="dropdown" aria-expanded="false"> ' +
+        'Action <span class="caret"></span> </button> <ul class="dropdown-menu" role="menu"> ' +
+        '<li><a href="' + baseDir + '/test/' + id + '">Complete test</a></li>' +
+        '<li><a href="' + baseDir + '/test/attempts/' + id + '">' +
+            '<span class="glyphicon glyphicon-list-alt"></span> ' +
+            'View attempts</a></li>' +
+        '<li class="divider"></li>' +
+        '<li><a href="' + baseDir + '/test/edit/' + id + '">' +
+            '<span class="glyphicon glyphicon-pencil"></span>' +
+            ' Edit</a></li>' +
+        '<li><a id="delete">' +
+            '<span class="glyphicon glyphicon-trash"></span>' +
+            ' Delete</a></li>' +
+        '</ul></div>';
+}
+
+
+
 $(document).ready(function () {
+    var baseDir = $("#hidden-attr").attr("data-basedir");
+
     var table = $('#testsGrid').DataTable({
         processing: true,
         serverSide: true,
@@ -11,25 +33,56 @@ $(document).ready(function () {
             type: 'POST',
             mimeType: 'application/json',
             contentType: 'application/json',
-            data: function (dataRequest) {
-                return JSON.stringify(dataRequest);
+            data: function (dataPost) {
+            var columnOrderMap = {};
+            var columnFilterMap = {};
+
+            for (var i in dataPost.order) {
+                columnOrderMap[dataPost.columns[dataPost.order[i]['column']]['data']] =
+                    dataPost.order[i]['dir'];
+            }
+
+            for (var i = 1; i < 4; i++) {
+                columnFilterMap[dataPost.columns[i]['data']] = dataPost.search['value'];
+            }
+
+            var customDataPost = {
+                "draw": dataPost.draw,
+                "pageNumber": (dataPost.start / dataPost.length),
+                "pageSize": dataPost.length,
+                "filterMap": columnFilterMap,
+                "orderByMap": columnOrderMap
+            };
+            return JSON.stringify(customDataPost);
             },
-            dataSrc: "testGridRows"
         },
         columns: [
             {data: "id", sClass: "gridtable"},
+            {data: "name"},
             {data: "description"},
-            {data: "isPublic", bSortable: false},
+            {data: "isPublic"},
             {
                 data: null, bSortable: false,
-                defaultContent: '<button type="button" class="btn btn-danger pull-right" id="delete">' +
-                '<span class="glyphicon glyphicon-trash"></span> Delete</button>' +
-                '<a  type="button" class="btn btn-warning pull-right" id="edit">' +
-                '<span class="glyphicon glyphicon-pencil"></span> Edit</a>' +
-                '<button type="button" class="btn btn-success pull-right" id="attempts">' +
-                '<span class="glyphicon glyphicon-list-alt"></span> Attempts</button>' +
-                '<button type="button" class="btn btn-primary pull-right" id="test">' +
-                '<span class="glyphicon glyphicon-eye-open"></span> Complete</button>'
+                defaultContent: ""
+            },
+
+        ],
+        "order": [[0, 'asc']],
+        "columnDefs": [{
+            "targets": -1,
+            "createdCell": function (td, cellData, rowData, row, col) {
+                $(td).html(actionButton(baseDir, rowData.id));
+            }
+        },
+            {
+                "targets": 3,
+                "data": "isPublic",
+                "render": function (data, type, full, meta) {
+                    var isPublic;
+                    if (data) { isPublic = "Public"; }
+                    if (!data) { isPublic = "Private"; }
+                    return isPublic;
+                }
             }
         ]
     });
@@ -48,19 +101,4 @@ $(document).ready(function () {
             }
         });
     });
-
-    $('#testsGrid tbody').on('click', '#edit', function () {
-        var data = table.row($(this).parents('tr')).data();
-        window.location.href = "/web/test/edit/"+data.id;
-    })
-
-    $('#testsGrid tbody').on('click', '#attempts', function () {
-        var data = table.row($(this).parents('tr')).data();
-        window.location.href = "/web/attempts/"+data.id;
-    })
-
-    $('#testsGrid tbody').on('click', '#test', function () {
-        var data = table.row($(this).parents('tr')).data();
-        window.location.href = "/web/test/"+data.id;
-    })
 });
