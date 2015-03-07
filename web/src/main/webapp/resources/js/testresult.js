@@ -6,23 +6,8 @@ $(document).ready(function() {
 	$("#private").hide();
 	$("#okbtn").hide();
 	$("#admin").hide();
-	getRole();
 	sendPost();
 });
-var role;
-function getRole() {
-	$.ajax({
-		url : "web/user/profile",
-		type : 'post',
-		dataType : 'json',
-		data : '',
-		contentType : 'application/json',
-		mimeType : 'application/json',
-		success : function(responseData) {
-			role = responseData.role;
-		}
-	});
-}
 
 function sendPost() {
 	$.ajax({
@@ -51,7 +36,7 @@ function sendPost() {
 				}, ]
 			});
 
-			if (role == "ROLE_ADMIN") {
+			if (dataResponse.role == "ROLE_ADMIN") {
 				$("#loadingIcon").hide();
 				$("#admin").show();
 				$("#public").show();
