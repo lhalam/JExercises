@@ -62,7 +62,7 @@ function submitTest() {
             contentType: "application/json; charset=utf-8",
             mimeType: 'application/json',
             success: function (data) {
-                window.location.replace("/web/testresult/" + attemptId);
+                window.location.replace("/web/test/result/" + attemptId);
             },
             error: function () {
                 alert("Error");
