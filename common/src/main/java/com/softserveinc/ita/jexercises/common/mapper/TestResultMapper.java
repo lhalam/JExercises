@@ -27,6 +27,8 @@ public class TestResultMapper {
      *            Concrete attempt.
      * @param countCorrect
      *            Number of correct answers.
+     * @param role
+     *            user role.
      * @return Dto with all parameters for test result.
      */
     public TestResultDto toDto(Attempt attempt, int countCorrect, Role role) {

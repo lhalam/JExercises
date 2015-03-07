@@ -1,8 +1,11 @@
 package com.softserveinc.ita.jexercises.web.controllers;
 
+import com.softserveinc.ita.jexercises.business.services.CurrentUserService;
 import com.softserveinc.ita.jexercises.business.services.TestGridService;
+import com.softserveinc.ita.jexercises.business.services.UserProfileService;
 import com.softserveinc.ita.jexercises.common.dto.GridResponseDto;
 import com.softserveinc.ita.jexercises.common.dto.SearchCondition;
+import com.softserveinc.ita.jexercises.common.utils.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +28,18 @@ public class TestGridController {
      */
     @Autowired
     private TestGridService testGridService;
+
+    /**
+     * Service which work with DTO.
+     */
+    @Autowired
+    private CurrentUserService currentUserService;
+
+    /**
+     * Service which work with DTO.
+     */
+    @Autowired
+    private UserProfileService userProfileService;
 
     /**
      * Method provides mapping on "testsGrid" input.
@@ -59,13 +74,23 @@ public class TestGridController {
      * @param testId of test which will be deleted.
      * @return test Id.
      */
-    @RequestMapping(value = "/test/delete", method = RequestMethod.POST)
+    @RequestMapping(value = "/testsgrid/delete", method = RequestMethod.POST)
     @ResponseBody
     public String deleteTest(@RequestBody Long testId) {
         testGridService.delete(testId);
         return testId.toString();
     }
 
-
+    /**
+     * Getting role from User Profile DTO.
+     *
+     * @return role of User Profile DTO.
+     */
+    @RequestMapping(value = "/testsgrid/role", method = RequestMethod.POST)
+    @ResponseBody
+    public Role getCurrentUserProfileData() {
+        return userProfileService.getUserInfo(currentUserService
+                .getCurrentUser()).getRole();
+    }
 }
 

@@ -1,7 +1,7 @@
 /**
  * Created by Ihor Demkovych on 16.02.15.
  */
-function actionButton(baseDir, id) {
+function actionButtonAdmin(baseDir, id) {
     return '<div class="btn-group btn-group-justified"> <button type="button" style="width:80%;" ' +
         'class="btn btn-danger btn-xs dropdown-toggle" data-toggle="dropdown" aria-expanded="false"> ' +
         'Action <span class="caret"></span> </button> <ul class="dropdown-menu" role="menu"> ' +
@@ -19,17 +19,42 @@ function actionButton(baseDir, id) {
         '</ul></div>';
 }
 
-
+function actionButtonUser(baseDir, id) {
+    return  '<div><a href="' + baseDir + '/test/'
+            + id + '" type="button" class="btn btn-success' +
+            ' btn-xs dropdown-toggle" >Complete test</a></div>';
+}
 
 $(document).ready(function () {
     var baseDir = $("#hidden-attr").attr("data-basedir");
+    var role = false;
+
+
+
+    $.ajax({
+        url: baseDir + "/testsgrid/role",
+        type: 'post',
+        dataType: 'json',
+        data: '',
+        contentType: 'application/json',
+        mimeType: 'application/json',
+        success: function (responseData) {
+                    if (responseData.toString() == "ROLE_ADMIN") {
+                        role = true;
+                    }
+                    if (!role) {
+                        $('#addtest').hide();
+                    }
+
+        }
+    });
 
     var table = $('#testsGrid').DataTable({
         processing: true,
         serverSide: true,
         fnUpdate: false,
         ajax: {
-            url: "/web/testsgrid",
+            url: baseDir + "/testsgrid",
             type: 'POST',
             mimeType: 'application/json',
             contentType: 'application/json',
@@ -54,7 +79,7 @@ $(document).ready(function () {
                 "orderByMap": columnOrderMap
             };
             return JSON.stringify(customDataPost);
-            },
+            }
         },
         columns: [
             {data: "id", sClass: "gridtable"},
@@ -64,14 +89,19 @@ $(document).ready(function () {
             {
                 data: null, bSortable: false,
                 defaultContent: ""
-            },
+            }
 
         ],
         "order": [[0, 'asc']],
         "columnDefs": [{
             "targets": -1,
             "createdCell": function (td, cellData, rowData, row, col) {
-                $(td).html(actionButton(baseDir, rowData.id));
+                if (role) {
+                    $(td).html(actionButtonAdmin(baseDir, rowData.id));
+                }
+                if (!role) {
+                    $(td).html(actionButtonUser(baseDir, rowData.id));
+                }
             }
         },
             {
@@ -88,11 +118,12 @@ $(document).ready(function () {
     });
 
     $('#testgrid_wrapper').removeClass('dataTables_wrapper');
+
     $('#testsGrid tbody').on('click', '#delete', function () {
         var data = table.row($(this).parents('tr')).data();
         $.ajax({
             type: "POST",
-            url: "/web/test/delete",
+            url: baseDir + "/testsgrid/delete",
             data: JSON.stringify(data.id),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
@@ -100,5 +131,9 @@ $(document).ready(function () {
                 table.ajax.reload();
             }
         });
+    });
+
+    $('#addtest').on('click', function() {
+       window.location.href = baseDir + '/testcreating';
     });
 });
