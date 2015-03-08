@@ -51,7 +51,7 @@
                         <table id="testsGrid" class="table table-striped table-hover"
                                cellspacing="0" width="100%">
                             <thead>
-                                <th>Id</th>
+                                <th>ID</th>
                                 <th>Name</th>
                                 <th>Description</th>
                                 <th>Availability</th>

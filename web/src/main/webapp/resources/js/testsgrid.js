@@ -22,7 +22,7 @@ function actionButtonAdmin(baseDir, id) {
 function actionButtonUser(baseDir, id) {
     return  '<div><a href="' + baseDir + '/test/'
             + id + '" type="button" class="btn btn-success' +
-            ' btn-xs dropdown-toggle" >Complete test</a></div>';
+            ' btn-xs" >Complete test</a></div>';
 }
 
 $(document).ready(function () {

@@ -24,8 +24,8 @@ public class HibernateTestDaoImpl extends
     @Override
     public List<Test> findAllByQuestionId(Long questionId) {
         try {
-            String squerty = "select distinct t from Test t " +
-                    "INNER JOIN t.question t where t.id=:questionId";
+            String squerty = "select distinct test from Test test " +
+                    "INNER JOIN test.questions t where t.id=:questionId";
             Query q = getEntityManager().createQuery(squerty);
             q.setParameter("questionId", questionId);
             @SuppressWarnings("unchecked")

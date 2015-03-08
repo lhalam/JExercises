@@ -3,7 +3,6 @@
   Date: 07.03.15
   Time: 04:47
 --%>
-
 <%@ page language="java" contentType="text/html; charset=utf8"
          pageEncoding="utf8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -24,8 +23,8 @@
     <script src="${basedir}/resources/js/lib/jquery-1.11.1.js" type="text/javascript"></script>
     <script src="${basedir}/resources/js/lib/bootstrap.js" type="text/javascript"></script>
     <script src="${basedir}/resources/js/lib/jquery.dataTables.min.js"></script>
-    <script src="${basedir}/resources/js/testcreating.js"></script>
     <script src="${basedir}/resources/js/lib/bootstrap.jquery.dataTable.js"></script>
+    <script src="${basedir}/resources/js/testcreating.js"></script>
 </head>
 <jsp:include page="../navigation.jsp"/>
 <body id="container">
@@ -72,27 +71,15 @@
                     </div>
                 </div>
                 <div class="row-fluid">
-                    <div class="col-md-offset-5 col-md-2">
-                        <button type="button" id="seeselected" class="btn btn-default pull-right">
-                            <span class="glyphicon glyphicon-eye-open"></span>
-                            Selected
-                        </button>
-                        <button type="button" id="addnew" class="btn btn-default pull-left">
-                            <span class="glyphicon glyphicon-plus"></span>
-                            Add
-                        </button>
-                        <br>
-                    </div>
-                </div>
-                <div class="row-fluid " id="tableSource">
                     <div class="col-md-offset-1 col-md-10">
-                        <table id="questionSource" class="table table-striped table-bordered"
+                        <table id="questionGrid" class="table table-striped table-hover"
                                cellspacing="0" width="100%">
                             <thead>
-                            <th>Id</th>
+                            <th>ID</th>
                             <th>Name</th>
                             <th>Description</th>
-                            <th class="col-md-2 pull-right"></th>
+                            <th class="col-md-2">
+                            </th>
                             </tr>
                             </thead>
                         </table>
@@ -100,16 +87,18 @@
                     </div>
                 </div>
                 <div class="row-fluid">
-                    <div class="col-md-offset-5 col-md-2">
+                    <div class="col-md-2 col-md-offset-5 ">
                         <button type="button" class="btn btn-success">
-                            Save test
+                            Save  new  test
                         </button>
+                        <br>
+                        <br>
                     </div>
                 </div>
             </div>
-            <br>
         </form>
     </div>
 </div>
+<div class="hidden-attribute" id="hidden-attr" data-basedir="${basedir}"></div>
 </body>
 </html>
