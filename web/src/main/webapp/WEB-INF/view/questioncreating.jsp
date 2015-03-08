@@ -56,7 +56,7 @@
 									value="Create question" id="submitButton">
 							</div>
 						</div>
-						<br></br>
+						<br>
 					</div>
 				</div>
 			</form>

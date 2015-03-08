@@ -16,7 +16,7 @@ function actionButtonRemove() {
 var dataRequest = {
     testName : '0',
     testDescription : '0',
-    isPublic : '0',
+    isPublic : false,
     questionsId : []
 };
 
@@ -83,16 +83,11 @@ $(document).ready(function () {
 
 
 
-    $("#submitButton").click(
+    $('#save').on('click',
         function(event) {
-            dataRequest.testName = $('#testName').code()
-                .toString();
-            dataRequest.testDescription = $(
-                '#testDescription').code().toString();
-            dataRequest.expectedAnswer = $('#expectedAnswer').val()
-                .toString();
-            dataRequest.inputData = $('#inputData').val()
-                .toString();
+            dataRequest.testName = $('#testName').code().toString();
+            dataRequest.testDescription = $('#testDescription').code().toString();
+            if (document.getElementById("private").checked) { dataRequest.isPublic = true; }
             $.ajax({
                 url : baseDir + "/testcreating/save",
                 type : 'POST',
