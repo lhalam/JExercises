@@ -5,7 +5,9 @@ function actionButtonAdmin(baseDir, id) {
     return '<div class="btn-group btn-group-justified"> <button type="button" style="width:80%;" ' +
         'class="btn btn-danger btn-xs dropdown-toggle" data-toggle="dropdown" aria-expanded="false"> ' +
         'Action <span class="caret"></span> </button> <ul class="dropdown-menu" role="menu"> ' +
-        '<li><a href="' + baseDir + '/test/' + id + '">Complete test</a></li>' +
+        '<li><a href="' + baseDir + '/test/' + id + '">'+
+            '<span class="glyphicon glyphicon-play-circle"></span>'+
+            ' Complete test</a></li>' +
         '<li><a href="' + baseDir + '/test/attempts/' + id + '">' +
             '<span class="glyphicon glyphicon-list-alt"></span> ' +
             'View attempts</a></li>' +
@@ -112,6 +114,24 @@ $(document).ready(function () {
                     if (data) { isPublic = "Public"; }
                     if (!data) { isPublic = "Private"; }
                     return isPublic;
+                }
+            },
+            {
+                "targets": 1,
+                "data": "name",
+                "render": function (data, type, full, meta) {
+                    var name = data.substring(0,20);
+                    if (data.length > 20) { name += "..." }
+                    return name;
+                }
+            },
+            {
+                "targets": 2,
+                "data": "description",
+                "render": function (data, type, full, meta) {
+                    var description = data.substring(0,30);
+                    if (data.length > 30) { description += "..." }
+                    return description;
                 }
             }
         ]

@@ -18,10 +18,11 @@ function sendPost() {
 		contentType : 'application/json',
 		mimeType : 'application/json',
 		success : function(responseData) {
-			$("#user").text(
-					responseData.firstName + "  " + responseData.lastName);
-			$("#test").text(responseData.testName);
-			$("#date").text(responseData.date);
+            var date = new Date(responseData.date)
+            $("#user").text(
+                responseData.firstName + "  " + responseData.lastName);
+            $("#test").text(responseData.testName);
+            $("#date").text(date.getDate() + '/'+ (date.getMonth()+1) + '/' + date.getFullYear());
 			$("#result").text(
 					"Test result is " + responseData.correctAnswersCount
 							+ " of " + responseData.totalAnswersCount);
