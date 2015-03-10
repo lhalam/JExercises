@@ -1,0 +1,25 @@
+@CHARSET "UTF-8";
+
+.panel.panel {
+    text-align: center;
+    height: inherit;
+}
+
+#test-description {
+    min-height: 200px;
+    margin-top: 20px;
+    text-align: justify;
+}
+
+.btn {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.line {
+    width: 100%;
+    border: 0;
+    height: 1px;
+    background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0),
+    rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0));
+}

@@ -8,7 +8,7 @@ function sendPost() {
             dataType: "json",
             success: function (dataResponse) {
                 $('#test-description').append(dataResponse.description);
-                $('.panel-title').append("Test №" + dataResponse.id + ":" + dataResponse.name);
+                $('#panel-title').append("Test №" + dataResponse.id + ": " + dataResponse.name);
                 testid = dataResponse.id;
             }
         }
@@ -18,7 +18,7 @@ function sendPost() {
 $(document).ready(function () {
         sendPost();
         $("#btnsub").click(
-            function (event) {
+            function () {
                 window.location.replace("/web/test/process/" + testid);
             }
         )
