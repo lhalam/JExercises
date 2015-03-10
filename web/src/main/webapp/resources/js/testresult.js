@@ -2,10 +2,7 @@
  * Created by Volodymyr Lishchynskiy on 25.02.15.
  */
 $(document).ready(function() {
-	$("#public").hide();
-	$("#private").hide();
 	$("#okbtn").hide();
-	$("#admin").hide();
 	sendPost();
 });
 
@@ -18,11 +15,15 @@ function sendPost() {
 		contentType : 'application/json',
 		mimeType : 'application/json',
 		success : function(responseData) {
-            var date = new Date(responseData.date)
-            $("#user").text(
-                responseData.firstName + "  " + responseData.lastName);
-            $("#test").text(responseData.testName);
-            $("#date").text(date.getDate() + '/'+ (date.getMonth()+1) + '/' + date.getFullYear());
+			$("#loadingIcon").hide();
+			$("#okbtn").show();
+			var date = new Date(responseData.date)
+			$("#user").text(
+					responseData.firstName + "  " + responseData.lastName);
+			$("#test").text(responseData.testName);
+			$("#date").text(
+					date.getDate() + '/' + (date.getMonth() + 1) + '/'
+							+ date.getFullYear());
 			$("#result").text(
 					"Test result is " + responseData.correctAnswersCount
 							+ " of " + responseData.totalAnswersCount);
@@ -35,24 +36,6 @@ function sendPost() {
 					"data" : "isCorrect"
 				}, ]
 			});
-
-			if (responseData.role == "ROLE_ADMIN") {
-				$("#loadingIcon").hide();
-				$("#admin").show();
-				$("#public").show();
-				$("#okbtn").show();
-
-			} else {
-				if (responseData.public) {
-					$("#loadingIcon").hide();
-					$("#public").show();
-					$("#okbtn").show();
-				} else {
-					$("#loadingIcon").hide();
-					$("#private").show();
-					$("#okbtn").show();
-				}
-			}
 		}
 	})
 }

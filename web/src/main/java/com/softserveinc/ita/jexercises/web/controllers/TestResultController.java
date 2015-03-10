@@ -43,12 +43,14 @@ public class TestResultController {
      * Method provides mapping on "testresult" input.
      *
      * @param id Attempt id.
+	 * @param model Model.
      * @return TestResultDto object with all parameters.
      */
     @RequestMapping(value = "/test/result/{id}", method = RequestMethod.POST)
     @ResponseBody
-    public TestResultDto showTestResultInfo(@PathVariable("id") Long id) {
+    public TestResultDto showTestResultInfo(@PathVariable("id") Long id,Model model) {
         TestResultDto testResultDto = testResultService.getTestResultInfo(id);
+		model.addAttribute("isPublic",testResultDto.isPublic());
         return testResultDto;
     }
 }
