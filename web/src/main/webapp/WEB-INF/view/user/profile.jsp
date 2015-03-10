@@ -2,6 +2,7 @@
          pageEncoding="utf8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<!DOCTYPE html>
 <html>
 <head>
     <%@ include file="../base.jsp" %>
@@ -45,28 +46,28 @@
                             <table class="table table-user-information">
                                 <tbody>
                                 <tr>
-                                    <td><strong>Name:</strong></td>
+                                    <td><strong>Name</strong></td>
                                     <td id="userFirstName"></td>
                                 </tr>
                                 <tr>
-                                    <td><strong>Surname:</strong></td>
+                                    <td><strong>Surname</strong></td>
                                     <td id="userLastName"></td>
                                 </tr>
                                 <tr>
-                                    <td><strong>Registration date:</strong></td>
+                                    <td><strong>Registration date</strong></td>
                                     <td id="userRegistrationDate"></td>
                                 </tr>
                                 <tr>
-                                    <td><strong>Date of Birth:</strong></td>
+                                    <td><strong>Date of Birth</strong></td>
                                     <td id="userDateOfBirth"></td>
                                 </tr>
                                 <tr>
-                                    <td><strong>Email:</strong></td>
+                                    <td><strong>Email</strong></td>
                                     <td id="userEmail">
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td><strong>Role:</strong></td>
+                                    <td><strong>Role</strong></td>
                                     <td id="userRole"></td>
                                 </tr>
                                 </tbody>

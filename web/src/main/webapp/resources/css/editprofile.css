@@ -1,10 +1,6 @@
 @CHARSET "UTF-8";
 
-.row {
-    margin-top: 20px;
-}
-
-.success-alert {
+.alert {
     display: none;
 }
 

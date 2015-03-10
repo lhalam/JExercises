@@ -12,9 +12,11 @@ import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -43,6 +45,8 @@ public class ProfileController {
     private UserProfileService userProfileService;
     @Autowired
     private CurrentUserService currentUserService;
+    @Autowired
+    private BCryptPasswordEncoder encoder;
 
     /**
      * Getting profile view.
@@ -134,14 +138,14 @@ public class ProfileController {
      * Getting edit profile view for selected user.
      *
      * @param userId User id.
-     * @param model UI view model.
+     * @param model  UI view model.
      * @return Profile page.
      */
     @RequestMapping(value = "/user/profile/{userId}/edit",
             method = RequestMethod.GET)
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ModelAndView getUserEditProfileView(@PathVariable Long userId,
-                                           Model model) {
+                                               Model model) {
         UserProfileDto user = userProfileService.getUserInfo(userService
                 .findUserById(userId));
 
@@ -160,10 +164,21 @@ public class ProfileController {
      */
     @RequestMapping(value = "/user/profile/edit", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseDto updateUserProfile(UserProfileDto userProfileDto) {
-        userProfileService.updateUserProfile(userProfileDto);
+    public ResponseDto updateUserProfile(
+            @RequestBody UserProfileDto userProfileDto) {
+        UserProfileDto user = userProfileService.getUserInfo(currentUserService
+                .getCurrentUser());
+        ResponseDto response = new ResponseDto();
 
-        return new ResponseDto();
+        if (!encoder.matches(userProfileDto.getPassword(),
+                user.getPassword())) {
+            response.addError("Invalid current password!");
+        } else {
+
+            userProfileService.updateUserProfile(userProfileDto);
+        }
+
+        return response;
     }
 
     /**
