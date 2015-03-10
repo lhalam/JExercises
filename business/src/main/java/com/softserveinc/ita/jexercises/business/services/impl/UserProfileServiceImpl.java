@@ -52,8 +52,8 @@ public class UserProfileServiceImpl implements UserProfileService {
 
         User user = currentUserService.getCurrentUser();
 
-        if (!userDto.getPassword().isEmpty()) {
-            userDto.setPassword(getHashPassword(userDto.getPassword()));
+        if (!userDto.getNewPassword().isEmpty()) {
+            userDto.setNewPassword(getHashPassword(userDto.getNewPassword()));
         }
 
         userProfileMapper.toEntity(user, userDto);
