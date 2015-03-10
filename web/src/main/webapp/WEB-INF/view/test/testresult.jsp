@@ -61,7 +61,6 @@
 									<h4 id="test"></h4>
 								</div>
 							</div>
-
 							<div class="row-fluid">
 								<div class="col-md-offset-4 col-md-4">
 									<h4 id="date"></h4>
@@ -74,7 +73,7 @@
 								</div>
 							</div>
 						</div>
-
+                    </div>
 						<div class="public" id="public">
 							<div class="row-fluid">
 								<div class="col-md-offset-4 col-md-4">
@@ -98,7 +97,6 @@
 								</div>
 							</div>
 						</div>
-					</div>
 					<div class="panel panel-info" id="private">
 						<div class="panel-heading">
 							<h4 class="panel-title"></h4>
