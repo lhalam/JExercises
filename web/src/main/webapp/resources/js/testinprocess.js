@@ -15,12 +15,11 @@ $(document).ready(function () {
     nextRequest();
     previousRequest();
     submitTest();
+    preventReload();
 });
 
 function buildPage() {
-    $('#btnnext').show();
-    $('#btnfinish').hide();
-    $('#btnprev').hide();
+    representButton();
     $.ajax({
         url: location.pathname,
         contentType: "application/json",
@@ -32,6 +31,7 @@ function buildPage() {
             questionsListId = dataResponse.questionListId;
             $('#question-description').html(dataResponse.questionDescription);
             $('#panel-title').html("Task " + ++currentQuestion + "/" + questionsQuantity + ": " + dataResponse.questionName);
+            $('#loadingIcon').hide();
         }
     });
 }
@@ -53,6 +53,7 @@ function previousRequest() {
 
 function submitTest() {
     $("#btnfinish").click(function () {
+        window.onbeforeunload = null;
         buildSubmitData();
         $.ajax({
             type: "POST",
@@ -61,7 +62,7 @@ function submitTest() {
             data: JSON.stringify(dataRequest),
             contentType: "application/json; charset=utf-8",
             mimeType: 'application/json',
-            success: function (data) {
+            success: function () {
                 window.location.replace("/web/test/result/" + attemptId);
             },
             error: function () {
@@ -125,4 +126,16 @@ function sendRequestData() {
             alert("Error");
         }
     });
+}
+function preventReload() {
+    window.onbeforeunload = function (e) {
+        var message = 'If you refresh or close page test will be lost. Are you sure?';
+        if (!e) {
+            e = window.event;
+        }
+        if (e) {
+            e.returnValue = message;
+        }
+        return message;
+    }
 }

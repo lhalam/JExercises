@@ -3,8 +3,6 @@ package com.softserveinc.ita.jexercises.common.dto;
 import java.util.Date;
 import java.util.List;
 
-import com.softserveinc.ita.jexercises.common.utils.Role;
-
 /**
  * Represents TestResult DTO.
  * 
@@ -44,11 +42,7 @@ public class TestResultDto {
      * Is test public or not.
      */
     private boolean isPublic;
-    /**
-     * Role of current user.
-     */
-    private Role role;
-
+    
     public boolean isPublic() {
         return isPublic;
     }
@@ -113,13 +107,5 @@ public class TestResultDto {
 
     public void setDate(Date date) {
         this.date = date;
-    }
-
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
     }
 }

@@ -1,11 +1,11 @@
 @CHARSET "UTF-8";
 
-.panel {
+.panel.panel {
     text-align: center;
     height: inherit;
 }
 
-.question-description-panel {
+#test-description {
     min-height: 200px;
     margin-top: 20px;
     text-align: justify;
@@ -22,7 +22,4 @@
     height: 1px;
     background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0),
     rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0));
-}
-#loadingIcon{
-    margin-top: 100px;
 }

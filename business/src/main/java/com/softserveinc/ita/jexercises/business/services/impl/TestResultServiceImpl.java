@@ -13,7 +13,6 @@ import com.softserveinc.ita.jexercises.common.dto.TestResultDto;
 import com.softserveinc.ita.jexercises.common.entity.Attempt;
 import com.softserveinc.ita.jexercises.common.entity.UserAnswer;
 import com.softserveinc.ita.jexercises.common.mapper.TestResultMapper;
-import com.softserveinc.ita.jexercises.common.utils.Role;
 import com.softserveinc.ita.jexercises.persistence.dao.impl.AttemptDao;
 
 /**
@@ -47,9 +46,8 @@ public class TestResultServiceImpl implements TestResultService {
     @Override
     public TestResultDto getTestResultInfo(long attemptId) {
         Attempt attempt = attemptDao.findById(attemptId);
-		Role role = currentUserService.getCurrentUser().getRole();
-        int numberCorrect = countCorrect(attemptId);
-        return testResultMapper.toDto(attempt, numberCorrect, role);
+		int numberCorrect = countCorrect(attemptId);
+        return testResultMapper.toDto(attempt, numberCorrect);
     }
 
     @Override

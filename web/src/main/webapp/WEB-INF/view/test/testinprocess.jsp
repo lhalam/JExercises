@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=utf8"
          pageEncoding="utf8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
     <%@ include file="../base.jsp" %>
     <%@ include file="../navigation.jsp" %>
     <script src="${basedir}/resources/js/testinprocess.js"></script>
     <link href="${basedir}/resources/css/test-in-process.css" rel="stylesheet" type="text/css">
+    <link href="${basedir}/resources/css/loading-icon.css" rel="stylesheet"
+          type="text/css">
 </head>
 <body id="container">
 <div class="container">
@@ -20,9 +20,14 @@
                 <div class="container-fluid">
                     <div class="col-md-10 col-lg-10 col-md-offset-1 col-md-offset-1">
                         <div class="question-description-panel">
+                            <div id="loadingIcon" class="form-group">
+                                <div class="col-md-offset-4 col-md-4 text-center">
+                                    <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span>
+                                </div>
+                            </div>
                             <div id="question-description"></div>
                         </div>
-                        <hr class="separate-line"/>
+                        <hr class="line"/>
                         <div class="form-group">
                             <div class="question-answer">
                                 <label for="question-answer">Answer:</label>

@@ -7,6 +7,8 @@
 <%@ page language="java" contentType="text/html; charset=utf8"
 	pageEncoding="utf8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 <html lang="en">
 <head>
 <%@include file="../base.jsp"%>
@@ -32,6 +34,7 @@
 		<div class="col-md-offset-2 col-md-8">
 			<form class="panel panel-primary">
 				<div class="container-fluid">
+				<sec:authorize access="hasRole('ROLE_ADMIN')">
 					<div class="admin" id="admin">
 						<div class="row-fluid">
 							<div class="col-md-offset-3 col-md-6">
@@ -61,7 +64,6 @@
 									<h4 id="test"></h4>
 								</div>
 							</div>
-
 							<div class="row-fluid">
 								<div class="col-md-offset-4 col-md-4">
 									<h4 id="date"></h4>
@@ -74,7 +76,10 @@
 								</div>
 							</div>
 						</div>
-
+                    </div>
+				</sec:authorize>	
+				<sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
+					<c:if test="${isPublic==true}">
 						<div class="public" id="public">
 							<div class="row-fluid">
 								<div class="col-md-offset-4 col-md-4">
@@ -98,15 +103,21 @@
 								</div>
 							</div>
 						</div>
-					</div>
-					<div class="panel panel-info" id="private">
-						<div class="panel-heading">
-							<h4 class="panel-title"></h4>
+					</c:if>
+				</sec:authorize>
+				
+				<sec:authorize access="hasRole('ROLE_USER')">
+					<c:if test="${isPublic==false}">				
+						<div class="panel panel-info" id="private">
+							<div class="panel-heading">
+								<h4 class="panel-title"></h4>
+							</div>
+							<div class="panel-body">
+								<strong>Thank you for passing test!</strong>
+							</div>
 						</div>
-						<div class="panel-body">
-							<strong>Thank you for passing test!</strong>
-						</div>
-					</div>
+					</c:if>
+				</sec:authorize>
 					<div class="col-md-2 col-lg-2 col-md-offset-5 pos" id="okbtn">
 						<a href="${basedir}/login" class="btn btn-success okbtn"
 							type="button">OK</a>
