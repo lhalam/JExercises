@@ -30,12 +30,16 @@ public class UserProfileMapper {
             user.setFirstName(userProfileDto.getFirstName());
         }
 
-        if (!userProfileDto.getPassword().isEmpty()) {
-            user.setPassword(userProfileDto.getPassword());
+        if (!userProfileDto.getNewPassword().isEmpty()) {
+            user.setPassword(userProfileDto.getNewPassword());
         }
 
-        if (!userProfileDto.getAvatar().isEmpty()) {
+        if (userProfileDto.getAvatar() != null) {
             user.setAvatar(Base64.decodeBase64(userProfileDto.getAvatar()));
+        }
+
+        if (userProfileDto.getBirthDate() != null) {
+            user.setBirthDate(userProfileDto.getBirthDate());
         }
 
         if (userProfileDto.getRole() != null) {
@@ -60,6 +64,7 @@ public class UserProfileMapper {
         userProfileDto.setEmail(user.getEmail());
         userProfileDto.setFirstName(user.getFirstName());
         userProfileDto.setLastName(user.getLastName());
+        userProfileDto.setPassword(user.getPassword());
         userProfileDto.setRegistrationDate(user.getCreatedDate());
         userProfileDto.setRole(user.getRole());
         userProfileDto.setBirthDate(user.getBirthDate());

@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<!DOCTYPE html>
 <html>
 <head>
     <%@ include file="../base.jsp" %>
@@ -19,6 +20,7 @@
     <link href="${basedir}/resources/css/registration.css" rel="stylesheet"
           type="text/css">
     <script src="${basedir}/resources/js/editprofile.js"></script>
+    <script src="${basedir}/resources/js/lib/jquery.validate.min.js"></script>
 
     <script src="${basedir}/resources/js/uploader/define-FileAPI.js"></script>
     <script src="${basedir}/resources/js/uploader/FileAPI.min.js"></script>
@@ -60,13 +62,19 @@
 </div>
 <div class="panel-body">
 
-<div class="success-alert" id="successAlert">
-    <div class="alert alert-success alert-dismissible">
-        <button type="button" class="close"
+    <div class="alert alert-success alert-dismissible" id="successAlert">
+        <button id="successAlertClose" type="button" class="close"
                 >&times;</button>
         Your settings have been updated!
     </div>
-</div>
+
+
+        <div class="alert alert-danger alert-dismissible" id="dangerAlert">
+            <button id="dangerAlertClose" type="button" class="close"
+                    >&times;</button>
+            <span id="errorMessage"></span>
+        </div>
+
 <form method="post"
       id="editProfileForm"
       class="form-horizontal">
@@ -155,7 +163,7 @@
                        id="currentPassword"
                        placeholder="Current Password"
                        name="currentPassword"
-                       type="currentPassword">
+                       type="password">
             </div>
         </div>
 
@@ -179,6 +187,7 @@
             <div class="col-lg-8">
                 <input class="form-control"
                        id="matchingPassword"
+                       name="matchingPassword"
                        placeholder="Confirm Password"
                        type="password"/>
             </div>
@@ -248,7 +257,7 @@
                    type="button">Cancel</a>
                 <input class="btn btn-info"
                        id="submitButton"
-                       type="button"
+                       type="submit"
                        value="Update">
             </div>
         </div>

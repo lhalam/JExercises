@@ -12,41 +12,16 @@ import java.util.Date;
  * @version 1.0
  */
 public class UserProfileDto {
-    /**
-     * User id.
-     */
+
     private Long id;
-    /**
-     * First name of user.
-     */
     private String firstName;
-    /**
-     * Last name of user.
-     */
     private String lastName;
-    /**
-     * User email.
-     */
     private String email;
-    /**
-     * User password.
-     */
     private String password;
-    /**
-     * User registration date.
-     */
+    private String newPassword;
     private Date registrationDate;
-    /**
-     * User birth date.
-     */
     private Date birthDate;
-    /**
-     * User role.
-     */
     private Role role;
-    /**
-     * Avatar.
-     */
     private String avatar;
 
     public Date getRegistrationDate() {
@@ -119,5 +94,13 @@ public class UserProfileDto {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getNewPassword() {
+        return newPassword;
+    }
+
+    public void setNewPassword(String newPassword) {
+        this.newPassword = newPassword;
     }
 }
