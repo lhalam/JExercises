@@ -1,0 +1,16 @@
+@CHARSET "UTF-8";
+
+.sized {
+	height: 35px;
+	width: 35px
+}
+
+.borderless {
+	margin-bottom: 0px;
+	border: 0px;
+	display: inline
+}
+
+.withPadding {
+	padding: 10px;
+}

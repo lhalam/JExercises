@@ -103,14 +103,24 @@ $(document).ready(function() {
             },
 			highlight : function(element) {
 				var feedbackElement = getFeedbackElement(element);
-				highlightElement($(element));
+				if(isDateElement(element)){
+					var dateElements=[$("#day"),$("#month"),$("#year")];
+					$.each(dateElements,function(index,dateElement){
+						highlightElement(dateElement);
+					});
+				}
 				highlightElement(feedbackElement);
 				feedbackElement.removeClass('glyphicon-ok')
 						.addClass('glyphicon-remove');
 			},
 			unhighlight : function(element) {
 				var feedbackElement = getFeedbackElement(element);
-				unhighlightElement($(element));
+				if(isDateElement(element)){
+					var dateElements=[$("#day"),$("#month"),$("#year")];
+					$.each(dateElements,function(index,dateElement){
+						unhighlightElement(dateElement);
+					});
+				}
 				unhighlightElement(feedbackElement);
 				feedbackElement.removeClass('glyphicon-remove')
 						.addClass('glyphicon-ok')
@@ -128,22 +138,24 @@ $(document).ready(function() {
 			});
 	
 	function getFeedbackElement(element){
-		var elementName=$(element).attr("name")
-		if(elementName=="day"|| 
-				elementName=="month"||
-				elementName=="year"){
+		if(isDateElement(element)){
 			return $("#birthDateFeedback");
 		}						
 		return $("#"+ $(element).attr("id")+ "Feedback");
 	}
 	
+	function isDateElement(element){
+		var elementName=$(element).attr("name")
+		return(elementName=="day"||elementName=="month"||elementName=="year")
+	}
+	
 	function unhighlightElement(element){
-		element.closest('.form-group')
-		.removeClass('has-error')
+	    element.closest('.form-group')
+	    .removeClass('has-error')
 		.addClass('has-success');
 	}
 	function highlightElement(element){
-		element.closest('.form-group')
+        element.closest('.form-group')
 		.removeClass('has-success')
 		.addClass('has-error');
 	}

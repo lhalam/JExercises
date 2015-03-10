@@ -16,6 +16,22 @@
 
                 <div class="container-fluid">
                     <input name="_token" type="hidden">
+                    <c:if test="${not empty SPRING_SECURITY_LAST_EXCEPTION}">
+							<div class="alert alert-danger alert-dismissible" role="alert">
+								<button class="close" aria-label="Close" data-dismiss="alert">
+									<span aria-hidden="true">&times;</span>
+								</button>
+								<p>Invalid email or password</p>
+							</div>
+						</c:if>
+						<c:if test="${not empty param.logout}">
+							<div class="alert alert-success alert-dismissible" role="alert">
+								<button class="close" aria-label="Close" data-dismiss="alert">
+									<span aria-hidden="true">&times;</span>
+								</button>
+								<p>You were logged out successfully</p>
+							</div>
+						</c:if>
                     <fieldset>
                         <h3 class="sign-up-title"
                             style="color: dimgray; text-align: center">JExercises Please
