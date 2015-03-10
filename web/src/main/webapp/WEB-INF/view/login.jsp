@@ -15,7 +15,7 @@
                   class="panel panel-primary">
 
                 <div class="container-fluid">
-                    <input name="_token" type="hidden">
+                    <input name="_token" type="hidden"><br/>
                     <c:if test="${not empty SPRING_SECURITY_LAST_EXCEPTION}">
 							<div class="alert alert-danger alert-dismissible" role="alert">
 								<button class="close" aria-label="Close" data-dismiss="alert">
