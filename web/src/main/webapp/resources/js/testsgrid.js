@@ -56,10 +56,10 @@ $(document).ready(function () {
             }
         },
         columns: [
-            {data: "id", sClass: "gridtable"},
+            {data: "id", sClass: "gridtable", searchable: false},
             {data: "name"},
             {data: "description"},
-            {data: "isPublic"},
+            {data: "isPublic", searchable: false},
             {
                 data: null, bSortable: false,
                 defaultContent: ""
