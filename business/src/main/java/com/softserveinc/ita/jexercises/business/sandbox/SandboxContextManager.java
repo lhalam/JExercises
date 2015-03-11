@@ -2,6 +2,7 @@ package com.softserveinc.ita.jexercises.business.sandbox;
 
 import net.datenwerke.sandbox.SandboxContext;
 import net.datenwerke.sandbox.permissions.FilePrefixPermission;
+import net.datenwerke.sandbox.permissions.SecurityPermission;
 
 /**
  * Represents SandboxContext singleton.
@@ -16,22 +17,24 @@ public final class SandboxContextManager {
     private static SandboxContext instance = new SandboxContext();
 
     static {
-        instance.addClassPermission(SandboxContext.AccessType.DENY,
-                new RuntimePermission("createClassLoader").getName());
-        instance.addClassPermission(SandboxContext.AccessType.DENY,
-                new RuntimePermission("createSecurityManager").getName());
-        instance.addClassPermission(SandboxContext.AccessType.DENY,
-                new RuntimePermission("shutdownHooks").getName());
-        instance.addClassPermission(SandboxContext.AccessType.DENY,
-                new RuntimePermission("setFactory").getName());
-        instance.addClassPermission(SandboxContext.AccessType.DENY,
-                new RuntimePermission("stopThread").getName());
-        instance.addClassPermission(SandboxContext.AccessType.DENY,
-                new RuntimePermission("setIO").getName());
-        instance.addClassPermission(SandboxContext.AccessType.DENY,
-                new RuntimePermission("modifyThread").getName());
-        instance.addClassPermission(SandboxContext.AccessType.DENY,
-                new RuntimePermission("exitVM").getName());
+        instance.addSecurityPermission(SandboxContext.AccessType.DENY,
+                new SecurityPermission("java.lang.RuntimePermission",
+                        "modifyThread"));
+        instance.addSecurityPermission(SandboxContext.AccessType.DENY,
+                new SecurityPermission("java.lang.RuntimePermission",
+                        "getClassLoader"));
+        instance.addSecurityPermission(SandboxContext.AccessType.DENY,
+                new SecurityPermission("java.lang.RuntimePermission",
+                        "createSecurityManager"));
+        instance.addSecurityPermission(SandboxContext.AccessType.DENY,
+                new SecurityPermission("java.lang.RuntimePermission",
+                        "exitVM"));
+        instance.addSecurityPermission(SandboxContext.AccessType.PERMIT,
+                new SecurityPermission("java.lang.RuntimePermission",
+                        "createClassLoader"));
+        instance.addSecurityPermission(SandboxContext.AccessType.PERMIT,
+                new SecurityPermission("java.lang.reflect.ReflectPermission",
+                        "suppressAccessChecks"));
         instance.addClassPermission(SandboxContext.AccessType.PERMIT,
                 "java.lang.System");
         instance.addClassPermission(SandboxContext.AccessType.PERMIT,
