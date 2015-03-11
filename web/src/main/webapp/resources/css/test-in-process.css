@@ -6,7 +6,7 @@
 }
 
 .question-description-panel {
-    min-height: 200px;
+    min-height: 100px;
     margin-top: 20px;
     text-align: justify;
 }
@@ -24,5 +24,17 @@
     rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0));
 }
 #loadingIcon{
-    margin-top: 100px;
+    margin-top: 50px;
+}
+.pager li>a {
+    display: inline-block;
+    padding: 5px 14px;
+    background-color: #d9edf7;
+    border: 1px solid #a9a9a9;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+    color: #0075b0;
+    text-decoration: none;
+    width: 120px;
 }

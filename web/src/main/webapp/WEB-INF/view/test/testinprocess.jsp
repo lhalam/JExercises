@@ -37,18 +37,11 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <div class="col-md-2 col-md-offset-1 ">
-                            <button id="btnprev" type="button" class="btn btn-success btn-block"><span
-                                    class="glyphicon glyphicon-arrow-left"></span></button>
-                        </div>
-                        <div class="col-md-2 col-md-offset-6 " id="btnnext">
-                            <button type="button" class="btn btn-success btn-block"><span
-                                    class="glyphicon glyphicon-arrow-right"></span></button>
-                        </div>
-                        <div class="col-md-2 col-md-offset-6" id="btnfinish">
-                            <button type="button" class="btn btn-primary btn-block">
-                                <span class="glyphicon glyphicon-ok"></span></button>
-                        </div>
+                        <ul class="pager">
+                            <li id="btnprev"><a>&larr; Previous</a></li>
+                            <li id="btnnext" rel="popover"><a>Next &rarr;</a></li>
+                            <li id="btnfinish"><a>Submit</a></li>
+                        </ul>
                     </div>
                 </div>
             </div>
