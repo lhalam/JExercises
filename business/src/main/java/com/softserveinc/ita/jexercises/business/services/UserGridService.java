@@ -1,8 +1,9 @@
 package com.softserveinc.ita.jexercises.business.services;
 
+import com.softserveinc.ita.jexercises.common.dto.AttemptDto;
 import com.softserveinc.ita.jexercises.common.dto.GridResponseDto;
-import com.softserveinc.ita.jexercises.common.dto.SearchCondition;
 import com.softserveinc.ita.jexercises.common.dto.UserProfileDto;
+import com.softserveinc.ita.jexercises.common.dto.dataTables.DataTables;
 
 /**
  * Services used for users DataTable.
@@ -14,9 +15,18 @@ public interface UserGridService {
     /**
      * Getting data for users grid.
      *
-     * @param searchCondition Filter parameters.
+     * @param dataTables Filter parameters.
      * @return Grid Response DTO with users profile info.
      */
-    GridResponseDto<UserProfileDto> getGridRows(
-            SearchCondition searchCondition);
+    GridResponseDto<UserProfileDto> getUsers(
+            DataTables dataTables);
+
+    /**
+     * Getting data for grid of attempts.
+     *
+     * @param dataTables Filter parameters.
+     * @return Grid Response DTO with attempts info.
+     */
+    GridResponseDto<AttemptDto> getCurrentUserAttempts(
+            DataTables dataTables);
 }
