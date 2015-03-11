@@ -6,6 +6,7 @@ import com.softserveinc.ita.jexercises.common.dto.GridResponseDto;
 import com.softserveinc.ita.jexercises.common.dto.SearchCondition;
 import com.softserveinc.ita.jexercises.common.dto.TestCreatingDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -37,6 +38,7 @@ public class TestCreatingController {
      * testcreating.jsp
      */
     @RequestMapping(value = "/testcreating", method = RequestMethod.GET)
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ModelAndView showTestCreatingPage(Model model) {
 
         return new ModelAndView("test/testcreating");
@@ -49,6 +51,7 @@ public class TestCreatingController {
      * @return searchDto list of question.
      */
     @RequestMapping(value = "/testcreating", method = RequestMethod.POST)
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @ResponseBody
     public GridResponseDto showQuestions(@RequestBody
                                        SearchCondition searchCondition) {
@@ -62,6 +65,7 @@ public class TestCreatingController {
      * @return String object.
      */
     @RequestMapping(value = "/testcreating/save", method = RequestMethod.POST)
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @ResponseBody
     public String saveTest(@RequestBody
                            TestCreatingDto testCreatingDto) {
