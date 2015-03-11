@@ -3,9 +3,9 @@
   Date: 14.02.15
   Time: 22:40
 --%>
-<%@ page language="java" contentType="text/html; charset=utf8"
-         pageEncoding="utf8" %>
+<%@ page language="java" contentType="text/html; charset=utf8" pageEncoding="utf8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <html>
 <head>
     <c:set var="basedir" value="${pageContext.request.contextPath}" />
@@ -39,10 +39,12 @@
                 </div>
                 <div class="row-fluid ">
                     <div class="col-md-offset-1 col-md-10">
+                        <sec:authorize access = "hasRole('ROLE_ADMIN')">
                         <button class="btn btn-default" type="button" id="addtest">
                             <span class="glyphicon glyphicon-plus"></span>
                              Add test
                         </button>
+                        </sec:authorize>
                     </div>
                 </div>
                 <div class="row-fluid ">

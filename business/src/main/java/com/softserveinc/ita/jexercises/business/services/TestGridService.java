@@ -1,8 +1,8 @@
 package com.softserveinc.ita.jexercises.business.services;
 
 import com.softserveinc.ita.jexercises.common.dto.GridResponseDto;
-import com.softserveinc.ita.jexercises.common.dto.SearchCondition;
 import com.softserveinc.ita.jexercises.common.dto.TestGridDto;
+import com.softserveinc.ita.jexercises.common.dto.dataTables.DataTables;
 
 /**
  * Service that make TestGrid.
@@ -15,11 +15,11 @@ public interface TestGridService {
     /**
      * Make TestGrid.
      *
-     * @param searchCondition
+     * @param dataTables
      *                  to set search conditions.
      * @return response object.
      */
-    GridResponseDto<TestGridDto> getGridRows(SearchCondition searchCondition);
+    GridResponseDto<TestGridDto> getGridRows(DataTables dataTables);
 
     /**
      * Deletes test.

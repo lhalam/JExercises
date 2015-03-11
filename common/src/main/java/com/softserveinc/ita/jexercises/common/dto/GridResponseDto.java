@@ -1,5 +1,7 @@
 package com.softserveinc.ita.jexercises.common.dto;
 
+import com.softserveinc.ita.jexercises.common.utils.Button;
+
 import java.util.List;
 
 /**
@@ -13,6 +15,7 @@ public class GridResponseDto<T> {
     private Long recordsTotal;
     private Long recordsFiltered;
     private List<T> data;
+    private List<Button> buttons;
 
     public int getDraw() {
         return draw;
@@ -44,5 +47,13 @@ public class GridResponseDto<T> {
 
     public void setData(List<T> data) {
         this.data = data;
+    }
+
+    public List<Button> getButtons() {
+        return buttons;
+    }
+
+    public void setButtons(List<Button> buttons) {
+        this.buttons = buttons;
     }
 }

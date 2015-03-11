@@ -1,12 +1,10 @@
 package com.softserveinc.ita.jexercises.web.controllers;
 
-import com.softserveinc.ita.jexercises.business.services.CurrentUserService;
 import com.softserveinc.ita.jexercises.business.services.TestGridService;
-import com.softserveinc.ita.jexercises.business.services.UserProfileService;
 import com.softserveinc.ita.jexercises.common.dto.GridResponseDto;
-import com.softserveinc.ita.jexercises.common.dto.SearchCondition;
-import com.softserveinc.ita.jexercises.common.utils.Role;
+import com.softserveinc.ita.jexercises.common.dto.dataTables.DataTables;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
- * Controls Test result page.
+ * Controls Tests Grid page.
  *
  * @author Ihor Demkovych
  * @version 1.0
@@ -28,18 +26,6 @@ public class TestGridController {
      */
     @Autowired
     private TestGridService testGridService;
-
-    /**
-     * Service which work with DTO.
-     */
-    @Autowired
-    private CurrentUserService currentUserService;
-
-    /**
-     * Service which work with DTO.
-     */
-    @Autowired
-    private UserProfileService userProfileService;
 
     /**
      * Method provides mapping on "testsGrid" input.
@@ -58,14 +44,14 @@ public class TestGridController {
     /**
      * Make Tests Grid.
      *
-     * @param searchCondition search conditions.
+     * @param dataTables search conditions.
      * @return TestGridDto object.
      */
     @RequestMapping(value = "/testsgrid", method = RequestMethod.POST)
     @ResponseBody
     public GridResponseDto showTestGridPage(@RequestBody
-                             SearchCondition searchCondition) {
-        return testGridService.getGridRows(searchCondition);
+                                            DataTables dataTables) {
+        return testGridService.getGridRows(dataTables);
     }
 
     /**
@@ -75,22 +61,11 @@ public class TestGridController {
      * @return test Id.
      */
     @RequestMapping(value = "/testsgrid/delete", method = RequestMethod.POST)
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @ResponseBody
     public String deleteTest(@RequestBody Long testId) {
         testGridService.delete(testId);
         return testId.toString();
-    }
-
-    /**
-     * Getting role from User Profile DTO.
-     *
-     * @return role of User Profile DTO.
-     */
-    @RequestMapping(value = "/testsgrid/role", method = RequestMethod.POST)
-    @ResponseBody
-    public Role getCurrentUserProfileData() {
-        return userProfileService.getUserInfo(currentUserService
-                .getCurrentUser()).getRole();
     }
 
 }
