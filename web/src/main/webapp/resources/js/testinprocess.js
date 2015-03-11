@@ -10,6 +10,7 @@ var dataRequest = {
     "changeQuestionId": 0
 };
 
+
 $(document).ready(function () {
     buildPage();
     nextRequest();
@@ -38,9 +39,11 @@ function buildPage() {
 
 function nextRequest() {
     $("#btnnext").click(function () {
-        buildNextRequestData();
-        representButton();
-        sendRequestData();
+        if (validateUserAnswer($(this))) {
+            buildNextRequestData();
+            representButton();
+            sendRequestData();
+        }
     })
 }
 function previousRequest() {
@@ -53,23 +56,24 @@ function previousRequest() {
 
 function submitTest() {
     $("#btnfinish").click(function () {
-        window.onbeforeunload = null;
-        buildSubmitData();
-        $.ajax({
-            type: "POST",
-            url: "/web/test/process/submit",
-            dataType: 'html',
-            data: JSON.stringify(dataRequest),
-            contentType: "application/json; charset=utf-8",
-            mimeType: 'application/json',
-            success: function () {
-                window.location.replace("/web/test/result/" + attemptId);
-            },
-            error: function () {
-                alert("Error");
-            }
-        });
-
+        if (validateUserAnswer($(this))) {
+            window.onbeforeunload = null;
+            buildSubmitData();
+            $.ajax({
+                type: "POST",
+                url: "/web/test/process/submit",
+                dataType: 'html',
+                data: JSON.stringify(dataRequest),
+                contentType: "application/json; charset=utf-8",
+                mimeType: 'application/json',
+                success: function () {
+                    window.location.replace("/web/test/result/" + attemptId);
+                },
+                error: function () {
+                    alert("Error");
+                }
+            });
+        }
     })
 }
 
@@ -138,4 +142,21 @@ function preventReload() {
         }
         return message;
     }
+}
+
+function validateUserAnswer(element) {
+    if (($('#question-answer').val().length) == 0) {
+        $(element).popover({
+            trigger: 'manual',
+            content: 'Please, input answer',
+            placement: 'top'
+        }).popover('show');
+        $('.form-group').addClass('has-error');
+        setTimeout(function () {
+            $(element).popover('hide');
+            $('.form-group').removeClass('has-error');
+        }, 2000);
+        return false;
+    }
+    return true;
 }

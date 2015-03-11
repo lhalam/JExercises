@@ -17,7 +17,9 @@
                 </div>
                 <div class="container-fluid">
                     <div class=" col-md-10 col-lg-10 col-md-offset-1 col-md-offset-1 ">
-                        <div id="test-description"></div>
+                        <div class="test-description-panel">
+                            <div id="test-description"></div>
+                        </div>
                     </div>
                     <hr class="line"/>
                     <div class="col-md-2 col-lg-2 col-md-offset-5 col-lg-offset-5">

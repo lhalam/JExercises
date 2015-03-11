@@ -5,8 +5,8 @@
     height: inherit;
 }
 
-#test-description {
-    min-height: 200px;
+.test-description-panel {
+    min-height: 100px;
     margin-top: 20px;
     text-align: justify;
 }
