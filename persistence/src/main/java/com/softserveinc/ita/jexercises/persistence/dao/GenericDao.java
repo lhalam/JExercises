@@ -76,9 +76,26 @@ public interface GenericDao<T, PK extends Serializable> {
     Long getNumberOfFilteredRecords(SearchCondition searchCondition);
 
     /**
+     * Get number of filtered by id results for pagination.
+     *
+     * @param searchCondition Object with search parameters.
+     * @return Number of filtered by id results.
+     */
+    Long getNumberOfFilteredByIdRecords(SearchCondition searchCondition);
+
+    /**
      * Get number of all table records for pagination.
      *
      * @return Number of all records.
      */
     Long getNumberOfRecords();
+
+    /**
+     * Load data of fields with lazy fetch type.
+     *
+     * @param object Entity object.
+     * @param fields Array of field names to be loaded.
+     * @return Entity object.
+     */
+    T getLazyFields(T object, List<String> fields);
 }

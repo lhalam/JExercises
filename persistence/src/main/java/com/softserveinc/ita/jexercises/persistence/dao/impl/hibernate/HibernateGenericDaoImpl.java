@@ -3,6 +3,7 @@ package com.softserveinc.ita.jexercises.persistence.dao.impl.hibernate;
 import com.mysema.query.BooleanBuilder;
 import com.mysema.query.jpa.impl.JPAQuery;
 import com.mysema.query.types.OrderSpecifier;
+import com.mysema.query.types.path.NumberPath;
 import com.mysema.query.types.path.PathBuilder;
 import com.mysema.query.types.path.StringPath;
 import com.softserveinc.ita.jexercises.common.dto.SearchCondition;
@@ -11,8 +12,11 @@ import com.softserveinc.ita.jexercises.persistence.dao.GenericDao;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.beans.IntrospectionException;
 import java.beans.Introspector;
+import java.beans.PropertyDescriptor;
 import java.io.Serializable;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 import java.util.Map;
@@ -94,6 +98,13 @@ public class HibernateGenericDaoImpl<T, PK extends Serializable> implements
                 * searchCondition.getPageSize())
                 .limit(searchCondition.getPageSize()).from(qObject);
 
+        for (Map.Entry<String, Long> filter :
+                searchCondition.getFilterByIdMap().entrySet()) {
+            NumberPath filterFieldPath = qObject.getNumber(filter.getKey(),
+                    Long.class);
+            jpaQuery.where(filterFieldPath.eq(filter.getValue()));
+        }
+
         for (Map.Entry<String, String> filter :
                 searchCondition.getFilterMap().entrySet()) {
             StringPath filterFieldPath = qObject.getString(filter.getKey());
@@ -127,6 +138,13 @@ public class HibernateGenericDaoImpl<T, PK extends Serializable> implements
 
         jpaQuery.from(qObject);
 
+        for (Map.Entry<String, Long> filter :
+                searchCondition.getFilterByIdMap().entrySet()) {
+            NumberPath filterFieldPath = qObject.getNumber(filter.getKey(),
+                    Long.class);
+            jpaQuery.where(filterFieldPath.eq(filter.getValue()));
+        }
+
         for (Map.Entry<String, String> filter :
                 searchCondition.getFilterMap().entrySet()) {
             StringPath filterFieldPath = qObject.getString(filter.getKey());
@@ -137,6 +155,24 @@ public class HibernateGenericDaoImpl<T, PK extends Serializable> implements
     }
 
     @Override
+    public Long getNumberOfFilteredByIdRecords(SearchCondition searchCondition) {
+        PathBuilder<T> qObject = new PathBuilder<>(entityClass,
+                Introspector.decapitalize(getEntityName()));
+        JPAQuery jpaQuery = new JPAQuery(entityManager);
+
+        jpaQuery.from(qObject);
+
+        for (Map.Entry<String, Long> filter :
+                searchCondition.getFilterByIdMap().entrySet()) {
+            NumberPath filterFieldPath = qObject.getNumber(filter.getKey(),
+                    Long.class);
+            jpaQuery.where(filterFieldPath.eq(filter.getValue()));
+        }
+
+        return jpaQuery.count();
+    }
+
+    @Override
     public Long getNumberOfRecords() {
         PathBuilder<T> qObject = new PathBuilder<>(entityClass,
                 Introspector.decapitalize(getEntityName()));
@@ -144,6 +180,20 @@ public class HibernateGenericDaoImpl<T, PK extends Serializable> implements
         JPAQuery jpaQuery = new JPAQuery(entityManager);
 
         return jpaQuery.from(qObject).count();
+    }
+
+    @Override
+    public T getLazyFields(T object, List<String> fields) {
+        for (String field : fields) {
+            try {
+                new PropertyDescriptor(field, entityClass)
+                        .getReadMethod().invoke(object);
+            } catch (IntrospectionException | IllegalAccessException
+                    | InvocationTargetException e) {
+                e.printStackTrace();
+            }
+        }
+        return object;
     }
 
     private String getEntityName() {
