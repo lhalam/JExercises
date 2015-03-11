@@ -46,7 +46,7 @@ public class TestResultController {
         model.addAttribute("date", resultInfo.getDate());
         model.addAttribute("total", resultInfo.getTotalAnswersCount());
         model.addAttribute("correct", resultInfo.getCorrectAnswersCount());
-        model.addAttribute("public", resultInfo.isPublic());
+        model.addAttribute("isPublic", resultInfo.isPublic());
         return new ModelAndView("test/testresult");
     }
 

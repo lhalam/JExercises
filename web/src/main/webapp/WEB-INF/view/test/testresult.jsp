@@ -59,7 +59,7 @@
 						</div>
 					</sec:authorize>
 					<sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
-						<c:if test="${public==true}">
+						<c:if test="${isPublic eq 'true'}">
 							<script src="${basedir}/resources/js/testresult.js"></script>
 							<div class="public" id="public">
 								<div class="row-fluid">
@@ -90,7 +90,7 @@
 					</sec:authorize>
 
 					<sec:authorize access="hasRole('ROLE_USER')">
-						<c:if test="${public==false}">
+						<c:if test="${isPublic eq 'false'}">
 							<div class="panel panel-info" id="private">
 								<div class="panel-heading">
 									<h4 class="panel-title"></h4>
