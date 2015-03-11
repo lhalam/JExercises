@@ -2,10 +2,13 @@ function actionButton(baseDir, id) {
     return '<div class="btn-group btn-group-justified"> <button type="button" style="width:80%;" ' +
         'class="btn btn-danger btn-xs dropdown-toggle" data-toggle="dropdown" aria-expanded="false"> ' +
         'Action <span class="caret"></span> </button> <ul class="dropdown-menu" role="menu"> ' +
-        '<li><a href="' + baseDir + '/user/profile/' + id + '">View Profile</a></li>' +
-        '<li><a href="' + baseDir + '/user/profile/' + id + '/edit">Edit Profile</a></li>' +
+        '<li><a href="' + baseDir + '/user/profile/' + id + '" target="_blank">' +
+        '<span class="glyphicon glyphicon-eye-open"></span> View Profile</a></li>' +
+        '<li><a href="' + baseDir + '/user/profile/' + id + '/edit" target="_blank">' +
+        '<span class="glyphicon glyphicon-pencil"></span> Edit Profile</a></li> ' +
         '<li class="divider"></li>' +
-        '<li><a href="' + baseDir + '/user/attempts/' + id + '">View Attempst</a></li>' +
+        '<li><a href="' + baseDir + '/user/attempts/' + id + '" target="_blank">' +
+        '<span class="glyphicon glyphicon-list-alt"></span> View Attempts</a></li>' +
         '</ul></div>';
 }
 
@@ -18,46 +21,50 @@ $(document).ready(function () {
         ajax: {
             url: baseDir + '/user/find',
             type: 'POST',
-            data: function (dataPost) {
-                var columnOrderMap = {};
-                var columnFilterMap = {};
-
-                for (var i in dataPost.order) {
-                    columnOrderMap[dataPost.columns[dataPost.order[i]['column']]['data']] =
-                        dataPost.order[i]['dir'];
-                }
-
-                for (var i = 1; i < 4; i++) {
-                    columnFilterMap[dataPost.columns[i]['data']] = dataPost.search['value'];
-                }
-
-                var customDataPost = {
-                    "draw": dataPost.draw,
-                    "pageNumber": (dataPost.start / dataPost.length),
-                    "pageSize": dataPost.length,
-                    "filterMap": columnFilterMap,
-                    "orderByMap": columnOrderMap
-                };
-                return JSON.stringify(customDataPost);
+            data: function (data) {
+                return JSON.stringify(data);
             },
             dataType: 'json',
             contentType: "application/json"
         },
         "columns": [
-            {"data": "id"},
-            {"data": "firstName"},
-            {"data": "lastName"},
-            {"data": "email"},
-            {"data": "registrationDate"},
-            {"data": "role"},
             {
+                "data": "id",
+                "searchable": false,
+                "className": "dt-center"
+            },
+            {
+                "data": "firstName",
+                "className": "dt-center"
+            },
+            {
+                "data": "lastName",
+                "className": "dt-center"
+            },
+            {
+                "data": "email",
+                "className": "dt-center"
+            },
+            {
+                "data": "registrationDate",
+                "searchable": false,
+                "className": "dt-center"
+            },
+            {
+                "data": "role",
+                "searchable": false,
+                "className": "dt-center"
+            },
+            {
+                "searchable": false,
                 "orderable": false,
                 "data": null,
-                "defaultContent": ""
+                "defaultContent": "",
+                "className": "dt-center"
             }
 
         ],
-        "order": [[0, 'asc']],
+        "order": [[0, 'desc']],
         "columnDefs": [{
             "targets": 6,
             "createdCell": function (td, cellData, rowData, row, col) {

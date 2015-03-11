@@ -8,12 +8,10 @@
     <%@ include file="../base.jsp" %>
     <%@ include file="../navigation.jsp" %>
 
-    <link href="${basedir}/resources/css/loading-icon.css" rel="stylesheet"
-          type="text/css">
     <link href="${basedir}/resources/css/lib/dataTables.bootstrap.css"
           rel="stylesheet"
           type="text/css">
-    <link href="${basedir}/resources/css/usersgrid.css"
+    <link href="${basedir}/resources/css/usergrid.css"
           rel="stylesheet"
           type="text/css">
     <script charset="utf8" src="${basedir}/resources/js/lib/jquery-1.11.1.js"

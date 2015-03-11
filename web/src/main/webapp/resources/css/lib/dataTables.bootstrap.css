@@ -163,8 +163,11 @@ div.dataTables_scrollHead table.table-bordered {
     border-bottom-width: 0;
 }
 
-
-
+th.dt-center,
+td.dt-center,
+td.dataTables_empty {
+    text-align: center;
+}
 
 /*
  * TableTools styles
