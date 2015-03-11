@@ -1,4 +1,4 @@
-/**
+ /**
  * Created by Volodymyr Lishchynskiy on 25.02.15.
  */
 $(document).ready(function() {
@@ -15,18 +15,7 @@ function sendPost() {
 		contentType : 'application/json',
 		mimeType : 'application/json',
 		success : function(responseData) {
-			$("#loadingIcon").hide();
 			$("#okbtn").show();
-			var date = new Date(responseData.date)
-			$("#user").text(
-					responseData.firstName + "  " + responseData.lastName);
-			$("#test").text(responseData.testName);
-			$("#date").text(
-					date.getDate() + '/' + (date.getMonth() + 1) + '/'
-							+ date.getFullYear());
-			$("#result").text(
-					"Test result is " + responseData.correctAnswersCount
-							+ " of " + responseData.totalAnswersCount);
 			$("#testresult").dataTable({
 				"bFilter" : false,
 				"data" : responseData.answers,

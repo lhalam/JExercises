@@ -31,26 +31,36 @@ public class TestResultController {
      *
      * @param model
      *            Model.
+     * @param id
+     *            Attempt id.
      * @return ModelAndView object,in current case that actually means returning
      *         testresult.jsp
      */
     @RequestMapping(value = "/test/result/{id}", method = RequestMethod.GET)
-    public ModelAndView showTestResultPage(Model model) {
+    public ModelAndView showTestResultPage(@PathVariable("id") Long id,
+            Model model) {
+        TestResultDto resultInfo = testResultService.getTestResultInfo(id);
+        model.addAttribute("firstName", resultInfo.getFirstName());
+        model.addAttribute("lastName", resultInfo.getLastName());
+        model.addAttribute("testName", resultInfo.getTestName());
+        model.addAttribute("date", resultInfo.getDate());
+        model.addAttribute("total", resultInfo.getTotalAnswersCount());
+        model.addAttribute("correct", resultInfo.getCorrectAnswersCount());
+        model.addAttribute("public", resultInfo.isPublic());
         return new ModelAndView("test/testresult");
     }
 
     /**
      * Method provides mapping on "testresult" input.
      *
-     * @param id Attempt id.
-	 * @param model Model.
+     * @param id
+     *            Attempt id.
      * @return TestResultDto object with all parameters.
      */
     @RequestMapping(value = "/test/result/{id}", method = RequestMethod.POST)
     @ResponseBody
-    public TestResultDto showTestResultInfo(@PathVariable("id") Long id,Model model) {
+    public TestResultDto showTestResultInfo(@PathVariable("id") Long id) {
         TestResultDto testResultDto = testResultService.getTestResultInfo(id);
-		model.addAttribute("isPublic",testResultDto.isPublic());
         return testResultDto;
     }
 }
