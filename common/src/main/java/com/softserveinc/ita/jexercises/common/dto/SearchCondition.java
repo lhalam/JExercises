@@ -29,7 +29,13 @@ public class SearchCondition {
     /**
      * Map for filtering. Contains filterField as key and filterValue as value.
      */
-    private Map<String, String> filterMap = new LinkedHashMap<String, String>();
+    private Map<String, String> filterMap = new LinkedHashMap<>();
+
+    /**
+     * Map for filtering by id.
+     * Contains filterField as key and filterValue as value.
+     */
+    private Map<String, Long> filterByIdMap = new LinkedHashMap<>();
 
     public int getPageNumber() {
         return pageNumber;
@@ -69,5 +75,13 @@ public class SearchCondition {
 
     public void setDraw(int draw) {
         this.draw = draw;
+    }
+
+    public Map<String, Long> getFilterByIdMap() {
+        return filterByIdMap;
+    }
+
+    public void setFilterByIdMap(Map<String, Long> filterByIdMap) {
+        this.filterByIdMap = filterByIdMap;
     }
 }
