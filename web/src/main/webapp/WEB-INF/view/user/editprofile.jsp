@@ -17,8 +17,6 @@
     <link href="${basedir}/resources/css/editprofile.css"
           rel="stylesheet"
           type="text/css">
-    <link href="${basedir}/resources/css/registration.css" rel="stylesheet"
-          type="text/css">
     <script src="${basedir}/resources/js/editprofile.js"></script>
     <script src="${basedir}/resources/js/lib/jquery.validate.min.js"></script>
 
