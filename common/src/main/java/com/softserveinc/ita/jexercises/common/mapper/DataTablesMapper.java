@@ -6,7 +6,7 @@ import com.softserveinc.ita.jexercises.common.dto.dataTables.DataTables;
 import com.softserveinc.ita.jexercises.common.dto.dataTables.Order;
 import org.springframework.stereotype.Component;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
@@ -24,8 +24,8 @@ public class DataTablesMapper {
      */
     public SearchCondition toSearchCondition(DataTables dataTables) {
         SearchCondition searchCondition = new SearchCondition();
-        Map<String, String> filter = new HashMap<>();
-        Map<String, String> orderBy = new HashMap<>();
+        Map<String, String> filter = new LinkedHashMap<>();
+        Map<String, String> orderBy = new LinkedHashMap<>();
 
         for (Order order : dataTables.getOrder()) {
             orderBy.put(dataTables.getColumns().get(order.getColumn())
