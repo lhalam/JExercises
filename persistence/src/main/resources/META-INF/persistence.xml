@@ -13,6 +13,7 @@
 		<class>com.softserveinc.ita.jexercises.common.entity.Assert</class>
 		<class>com.softserveinc.ita.jexercises.common.entity.UserAnswer</class>
 		<class>com.softserveinc.ita.jexercises.common.entity.SharedAnswer</class>
+		<class>com.softserveinc.ita.jexercises.common.entity.Link</class>
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
 			<property name="hibernate.connection.show_sql" value="true" />

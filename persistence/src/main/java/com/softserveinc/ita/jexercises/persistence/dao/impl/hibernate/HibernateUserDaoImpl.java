@@ -19,10 +19,10 @@ public class HibernateUserDaoImpl extends HibernateGenericDaoImpl<User, Long>
     @Override
     public User findByEmail(String email) {
         User user = null;
-        TypedQuery<User> q = getEntityManager().createQuery(
+        TypedQuery<User> query = getEntityManager().createQuery(
                 "select u from User u where u.email=:email", User.class)
                 .setParameter("email", email);
-        List<User> list = q.getResultList();
+        List<User> list = query.getResultList();
         if (!list.isEmpty()) {
             user = (User) list.get(0);
         }

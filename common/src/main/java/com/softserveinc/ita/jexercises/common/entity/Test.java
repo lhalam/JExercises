@@ -8,7 +8,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
 import java.util.List;
 
 /**
@@ -56,6 +58,11 @@ public class Test extends BaseEntity {
             inverseJoinColumns = {@JoinColumn(name = "QUESTION_ID",
                     nullable = false, updatable = false)})
     private List<Question> questions;
+    
+   
+    @OneToOne(mappedBy="test", cascade=CascadeType.ALL)
+    private Link link;
+    
 
     /**
      * Constructor which provides creating of new test.
@@ -115,6 +122,13 @@ public class Test extends BaseEntity {
 
     public void setQuestions(List<Question> questions) {
         this.questions = questions;
+    }
+    public Link getLink() {
+        return link;
+    }
+
+    public void setLink(Link link) {
+        this.link = link;
     }
 }
 

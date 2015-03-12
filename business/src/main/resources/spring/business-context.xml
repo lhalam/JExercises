@@ -12,6 +12,8 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
 	<context:annotation-config />
 	<import resource="classpath:persistence-context.xml" />
-	<context:component-scan	base-package="com.softserveinc.ita.jexercises.business.services.impl"/>
-
+	<context:component-scan
+		base-package="com.softserveinc.ita.jexercises.business.services.impl" />
+	<context:component-scan
+		base-package="com.softserveinc.ita.jexercises.business.utils" />
 </beans>
