@@ -29,7 +29,7 @@
 								<button class="close" aria-label="Close" data-dismiss="alert">
 									<span aria-hidden="true">&times;</span>
 								</button>
-								<p>You were logged out successfully</p>
+								<p>You were logout successfully</p>
 							</div>
 						</c:if>
                     <fieldset>

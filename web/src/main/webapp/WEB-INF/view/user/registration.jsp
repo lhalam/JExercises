@@ -121,6 +121,9 @@
 						<input id="submitButton" class="btn btn-lg btn-success btn-block"
 							type="submit" value="Sign up"> <br>
 					</div>
+					<p class="text-center">
+                            <a href="${basedir}/login">Already registered? Please, login.</a>
+                        </p>
 				</form>
 			</div>
 		</div>

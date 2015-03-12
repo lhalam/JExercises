@@ -6,7 +6,7 @@
 	<input type="hidden" id="postUrl" value="${basedir}/account/menu" />
 	<button class="dropdown-toggle navbar navbar-default borderless"
 		type="button" data-toggle="dropdown">
-		<span class="withPadding"><img id="avatar" class="sized"
+		<span class="withPadding"><img id="avatar" class="img-circle sized"
 			alt="User Pic" src="${basedir}/user/profile/avatar"></span> <span
 			id="menuUsername" class="nav navbar-nav withPadding"></span> <span
 			class="caret"></span>
