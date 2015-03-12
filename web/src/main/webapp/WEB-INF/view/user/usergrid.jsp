@@ -28,7 +28,12 @@
 <body id="container">
 <div class="container">
     <div class="row">
-        <div class="panel panel-info">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title text-center">
+                    Users Search
+                </h3>
+            </div>
             <div class="panel-body">
                 <div class="col-md-10 col-md-offset-1">
                     <table id="users_table"
@@ -51,6 +56,6 @@
         </div>
     </div>
 </div>
-<div class="hidden-attribute" id="hidden-attr" data-basedir="${basedir}"></div>
+<div class="hidden" id="hidden-attr" data-basedir="${basedir}"></div>
 </body>
 </html>

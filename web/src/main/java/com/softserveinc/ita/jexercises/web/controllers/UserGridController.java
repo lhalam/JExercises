@@ -6,7 +6,6 @@ import com.softserveinc.ita.jexercises.business.services.UserService;
 import com.softserveinc.ita.jexercises.common.dto.GridResponseDto;
 import com.softserveinc.ita.jexercises.common.dto.dataTables.DataTables;
 import com.softserveinc.ita.jexercises.common.entity.User;
-import com.softserveinc.ita.jexercises.common.utils.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -93,7 +92,7 @@ public class UserGridController {
      * Get view of user attempts.
      *
      * @param model View model.
-     * @param id User id.
+     * @param id    User id.
      * @return Page with attempts DataTable.
      */
     @RequestMapping(value = "/user/{id}/attempts", method = RequestMethod.GET)
@@ -112,7 +111,7 @@ public class UserGridController {
     /**
      * Getting filtered user attempts data.
      *
-     * @param id User id.
+     * @param id         User id.
      * @param dataTables Grid parameters.
      * @return Filtered user attempts.
      */

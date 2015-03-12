@@ -11,7 +11,7 @@
     <link href="${basedir}/resources/css/lib/dataTables.bootstrap.css"
           rel="stylesheet"
           type="text/css">
-    <link href="${basedir}/resources/css/attemptsgrid.css"
+    <link href="${basedir}/resources/css/usergrid.css"
           rel="stylesheet"
           type="text/css">
     <script charset="utf8" src="${basedir}/resources/js/lib/jquery-1.11.1.js"

@@ -17,9 +17,11 @@
 <c:choose>
     <c:when test="${currentUser}">
         <c:set var="postUrl" value="${basedir}/user/profile" scope="request"  />
+        <c:set var="attemptsUrl" value="${basedir}/user/attempts" scope="request"  />
     </c:when>
     <c:otherwise>
         <c:set var="postUrl" value="${basedir}/user/profile/${userId}" scope="request"  />
+        <c:set var="attemptsUrl" value="${basedir}/user/${userId}/attempts" scope="request"  />
     </c:otherwise>
 </c:choose>
 
@@ -76,7 +78,8 @@
                     </div>
                 </div>
                 <div class="panel-footer">
-                    <a type="button"
+                    <a href ="${attemptsUrl}"
+                       type="button"
                        class="btn btn-success btn-sm"><span
                             class="glyphicon glyphicon-th-list"></span> View
                         attempts</a>

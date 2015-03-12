@@ -1,6 +1,6 @@
 function viewButton(baseDir, id, disabled) {
-    return '<a href="' + baseDir + '/test/result/' + id +' target="_blank""' +
-        ' class="btn btn-success btn-xs btn-block"' + disabled + '>' +
+    return '<a href="' + baseDir + '/test/result/' + id + '" target="_blank"' +
+        ' class="btn btn-success btn-xs btn-shortened"' + disabled + '>' +
         '<span class="glyphicon glyphicon-new-window"></span> View</a>';
 }
 
