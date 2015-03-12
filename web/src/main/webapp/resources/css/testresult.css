@@ -18,13 +18,14 @@
 
 .okbtn {
     height: 30px;
-    width : 100px;
+    width : 90px;
 }
 .wrapper{
 	text-align: center;
 }
 
 .pos {
+    text-align: center;
 	margin-top: 40px; 
 	height: 50px;
 }
