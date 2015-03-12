@@ -1,11 +1,17 @@
 package com.softserveinc.ita.jexercises.web.controllers;
 
+import com.softserveinc.ita.jexercises.business.services.CurrentUserService;
 import com.softserveinc.ita.jexercises.business.services.UserGridService;
+import com.softserveinc.ita.jexercises.business.services.UserService;
 import com.softserveinc.ita.jexercises.common.dto.GridResponseDto;
 import com.softserveinc.ita.jexercises.common.dto.dataTables.DataTables;
+import com.softserveinc.ita.jexercises.common.entity.User;
+import com.softserveinc.ita.jexercises.common.utils.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,6 +28,12 @@ public class UserGridController {
 
     @Autowired
     private UserGridService userGridService;
+
+    @Autowired
+    private CurrentUserService currentUserService;
+
+    @Autowired
+    private UserService userService;
 
     /**
      * Get view of users DataTable.
@@ -51,18 +63,19 @@ public class UserGridController {
     }
 
     /**
-     * Get view of user attempts.
+     * Get view of current user attempts.
      *
+     * @param model View model.
      * @return Page with attempts DataTable.
      */
     @RequestMapping(value = "/user/attempts", method = RequestMethod.GET)
-    public ModelAndView getGridOfCurrentUserAttemptsView() {
-
+    public ModelAndView getGridOfCurrentUserAttemptsView(Model model) {
+        model.addAttribute("currentUser", true);
         return new ModelAndView("user/attemptsgrid");
     }
 
     /**
-     * Getting filtered user attempts data.
+     * Getting filtered current user attempts data.
      *
      * @param dataTables Grid parameters.
      * @return Filtered user attempts.
@@ -72,7 +85,44 @@ public class UserGridController {
     public GridResponseDto postCurrentUserAttemptsData(
             @RequestBody DataTables dataTables) {
 
-        return userGridService.getCurrentUserAttempts(dataTables);
+        return userGridService.getUserAttempts(
+                currentUserService.getCurrentUser().getId(), dataTables);
+    }
+
+    /**
+     * Get view of user attempts.
+     *
+     * @param model View model.
+     * @param id User id.
+     * @return Page with attempts DataTable.
+     */
+    @RequestMapping(value = "/user/{id}/attempts", method = RequestMethod.GET)
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public ModelAndView getGridOfUserAttemptsView(Model model,
+                                                  @PathVariable Long id) {
+        User user = userService.findUserById(id);
+
+        model.addAttribute("userName", user.getFirstName() + " "
+                + user.getLastName());
+        model.addAttribute("currentUser", false);
+        model.addAttribute("userId", id);
+        return new ModelAndView("user/attemptsgrid");
+    }
+
+    /**
+     * Getting filtered user attempts data.
+     *
+     * @param id User id.
+     * @param dataTables Grid parameters.
+     * @return Filtered user attempts.
+     */
+    @RequestMapping(value = "/user/{id}/attempts", method = RequestMethod.POST)
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @ResponseBody
+    public GridResponseDto postUserAttemptsData(@PathVariable Long id,
+                                                @RequestBody DataTables dataTables) {
+
+        return userGridService.getUserAttempts(id, dataTables);
     }
 
 }
