@@ -159,23 +159,48 @@ public class ProfileController {
     /**
      * Getting new user data and updating his profile.
      *
+     * @param userId         User ID.
+     * @param userProfileDto User Profile DTO.
+     * @return Status.
+     */
+    @RequestMapping(value = "/user/profile/{userId}/edit",
+            method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseDto updateUserProfile(@PathVariable Long userId,
+                                         @RequestBody UserProfileDto userProfileDto) {
+
+        userProfileService.updateUserProfile(userId, userProfileDto);
+
+        return new ResponseDto();
+    }
+
+    /**
+     * Getting new data of current user and updating his profile.
+     *
      * @param userProfileDto User Profile DTO.
      * @return Status.
      */
     @RequestMapping(value = "/user/profile/edit", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseDto updateUserProfile(
+    public ResponseDto updateCurrentUserProfile(
             @RequestBody UserProfileDto userProfileDto) {
         UserProfileDto user = userProfileService.getUserInfo(currentUserService
                 .getCurrentUser());
         ResponseDto response = new ResponseDto();
+
+        if (userProfileDto.getRole() != null) {
+            response.addError("Security failure.");
+            return response;
+        }
+
 
         if (!encoder.matches(userProfileDto.getPassword(),
                 user.getPassword())) {
             response.addError("Invalid current password!");
         } else {
 
-            userProfileService.updateUserProfile(userProfileDto);
+            userProfileService.updateUserProfile(currentUserService
+                    .getCurrentUser().getId(), userProfileDto);
         }
 
         return response;
@@ -214,7 +239,8 @@ public class ProfileController {
     public byte[] getCurrentUserAvatar() throws IOException {
         byte[] image;
 
-        if (userProfileService.hasAvatar()) {
+        if (userProfileService.hasAvatar(currentUserService
+                .getCurrentUser().getId())) {
             image = currentUserService.getCurrentUser().getAvatar();
         } else {
             image = getDefaultAvatar();

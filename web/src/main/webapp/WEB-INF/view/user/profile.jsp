@@ -16,10 +16,15 @@
 
 <c:choose>
     <c:when test="${currentUser}">
-        <c:set var="postUrl" value="${basedir}/user/profile" scope="request"  />
+        <c:set var="postUrl" value="${basedir}/user/profile" scope="request"/>
+        <c:set var="attemptsUrl" value="${basedir}/user/attempts"
+               scope="request"/>
     </c:when>
     <c:otherwise>
-        <c:set var="postUrl" value="${basedir}/user/profile/${userId}" scope="request"  />
+        <c:set var="postUrl" value="${basedir}/user/profile/${userId}"
+               scope="request"/>
+        <c:set var="attemptsUrl" value="${basedir}/user/${userId}/attempts"
+               scope="request"/>
     </c:otherwise>
 </c:choose>
 
@@ -32,51 +37,67 @@
                     <h3 class="panel-title">Profile</h3>
                 </div>
                 <div class="panel-body">
+
                     <div id="loadingIcon" class="form-group">
                         <div class="col-md-12 text-center">
                             <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span>
                         </div>
                     </div>
-                    <div id="profileForm" class="row">
-                        <div class="col-md-3 col-lg-3 " align="center"><img
-                                alt="User Pic"
-                                src="${postUrl}/avatar"
-                                class="img-circle"></div>
-                        <div class=" col-md-9 col-lg-9 ">
-                            <table class="table table-user-information">
-                                <tbody>
-                                <tr>
-                                    <td><strong>Name</strong></td>
-                                    <td id="userFirstName"></td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Surname</strong></td>
-                                    <td id="userLastName"></td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Registration date</strong></td>
-                                    <td id="userRegistrationDate"></td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Date of Birth</strong></td>
-                                    <td id="userDateOfBirth"></td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Email</strong></td>
-                                    <td id="userEmail">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Role</strong></td>
-                                    <td id="userRole"></td>
-                                </tr>
-                                </tbody>
-                            </table>
+                    <div id="profileForm">
+                        <c:if test="${not empty param.updated}">
+                            <div id="updateAlert"
+                                 class="alert alert-success alert-dismissible"
+                                 role="alert">
+                                <button class="close" aria-label="Close"
+                                        data-dismiss="alert">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <p>Profile has been successfully updated!</p>
+                            </div>
+                        </c:if>
+                        <div class="row">
+                            <div class="col-md-3 col-lg-3 " align="center"><img
+                                    alt="User Pic"
+                                    src="${postUrl}/avatar"
+                                    class="img-circle"></div>
+                            <div class=" col-md-9 col-lg-9 ">
+                                <table class="table table-user-information">
+                                    <tbody>
+                                    <tr>
+                                        <td><strong>Name</strong></td>
+                                        <td id="userFirstName"></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Surname</strong></td>
+                                        <td id="userLastName"></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Registration date</strong>
+                                        </td>
+                                        <td id="userRegistrationDate"></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Date of Birth</strong></td>
+                                        <td id="userDateOfBirth"></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Email</strong></td>
+                                        <td id="userEmail">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Role</strong></td>
+                                        <td id="userRole"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="panel-footer">
-                    <a type="button"
+                    <a href="${attemptsUrl}"
+                       type="button"
                        class="btn btn-success btn-sm"><span
                             class="glyphicon glyphicon-th-list"></span> View
                         attempts</a>
@@ -92,7 +113,8 @@
             </div>
         </div>
     </div>
-    <div class="hidden-attribute" id="hidden-attr" data-post-url="${postUrl}"></div>
+    <div class="hidden-attribute" id="hidden-attr"
+         data-post-url="${postUrl}"></div>
 </div>
 </body>
 </html>

@@ -1,13 +1,13 @@
 function actionButton(baseDir, id) {
-    return '<div class="btn-group btn-group-justified"> <button type="button" style="width:80%;" ' +
-        'class="btn btn-danger btn-xs dropdown-toggle" data-toggle="dropdown" aria-expanded="false"> ' +
+    return '<div class="btn-group btn-group-justified"> <button type="button"" ' +
+        'class="btn btn-danger btn-xs btn-shortened dropdown-toggle" data-toggle="dropdown" aria-expanded="false"> ' +
         'Action <span class="caret"></span> </button> <ul class="dropdown-menu" role="menu"> ' +
         '<li><a href="' + baseDir + '/user/profile/' + id + '" target="_blank">' +
         '<span class="glyphicon glyphicon-eye-open"></span> View Profile</a></li>' +
         '<li><a href="' + baseDir + '/user/profile/' + id + '/edit" target="_blank">' +
         '<span class="glyphicon glyphicon-pencil"></span> Edit Profile</a></li> ' +
         '<li class="divider"></li>' +
-        '<li><a href="' + baseDir + '/user/attempts/' + id + '" target="_blank">' +
+        '<li><a href="' + baseDir + '/user/' + id +'/attempts" target="_blank">' +
         '<span class="glyphicon glyphicon-list-alt"></span> View Attempts</a></li>' +
         '</ul></div>';
 }
@@ -64,7 +64,7 @@ $(document).ready(function () {
             }
 
         ],
-        "order": [[0, 'desc']],
+        "order": [[4, 'desc']],
         "columnDefs": [{
             "targets": 6,
             "createdCell": function (td, cellData, rowData, row, col) {

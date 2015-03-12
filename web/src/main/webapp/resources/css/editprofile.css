@@ -12,10 +12,6 @@
      display: none;
  }
 
-.hidden-attribute {
-    display: none;
-}
-
 .combodate select {
     width: 32%;
 }
@@ -64,4 +60,10 @@
     rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0));
     background-image: -o-linear-gradient(left, rgba(0, 0, 0, 0),
     rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0));
+}
+
+.bg-warning {
+    background-color: #f0ad4e !important;
+    color: #ffffff !important;
+    border-color: #eea236;
 }

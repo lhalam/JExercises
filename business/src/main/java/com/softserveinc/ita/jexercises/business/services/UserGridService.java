@@ -24,9 +24,10 @@ public interface UserGridService {
     /**
      * Getting data for grid of attempts.
      *
+     * @param userId User ID.
      * @param dataTables Filter parameters.
      * @return Grid Response DTO with attempts info.
      */
-    GridResponseDto<AttemptDto> getCurrentUserAttempts(
+    GridResponseDto<AttemptDto> getUserAttempts(Long userId,
             DataTables dataTables);
 }

@@ -42,20 +42,24 @@ public class AttemptMapper {
         int numberOfQuestions = 0;
         int numberOfCorrectAnswers = 0;
 
-        for (UserAnswer answer : attempt.getUserAnswers()) {
-            if (answer.isCorrect()) {
-                numberOfCorrectAnswers++;
+        if(attempt.getTest().getIsPublic()) {
+            for (UserAnswer answer : attempt.getUserAnswers()) {
+                if (answer.isCorrect()) {
+                    numberOfCorrectAnswers++;
+                }
+                numberOfQuestions++;
             }
-            numberOfQuestions++;
+            attemptResult = numberOfCorrectAnswers + " / " + numberOfQuestions;
+        } else {
+            attemptResult = "-";
         }
-
-        attemptResult = numberOfCorrectAnswers + " / " + numberOfQuestions;
 
         attemptDto.setCreatedDate(attempt.getCreatedDate());
         attemptDto.setId(attempt.getId());
         attemptDto.setResult(attemptResult);
         attemptDto.setTestName(attempt.getTest().getName());
-
+		attemptDto.setFirstName(attempt.getUser().getFirstName());
+		attemptDto.setLastName(attempt.getUser().getLastName());
         return attemptDto;
     }
 }

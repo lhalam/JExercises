@@ -1,16 +1,19 @@
-function viewButton(baseDir, id) {
-    return '<a href="#" class="btn btn-success btn-xs btn-block">' +
+function viewButton(baseDir, id, disabled) {
+    return '<a href="' + baseDir + '/test/result/' + id + '" target="_blank"' +
+        ' class="btn btn-success btn-xs btn-shortened"' + disabled + '>' +
         '<span class="glyphicon glyphicon-new-window"></span> View</a>';
 }
 
 $(document).ready(function () {
     var baseDir = $("#hidden-attr").attr("data-basedir");
+    var postUrl = $("#hidden-attr").attr("data-post-url");
+    var currentUser = $("#hidden-attr").attr("data-user");
 
     var dt = $('#attempts_table').DataTable({
         "processing": true,
         serverSide: true,
         ajax: {
-            url: baseDir + '/user/attempts',
+            url: postUrl,
             type: 'POST',
             data: function (data) {
                 return JSON.stringify(data);
@@ -19,6 +22,12 @@ $(document).ready(function () {
             contentType: "application/json"
         },
         "columns": [
+            {
+                "data": "id",
+                "searchable": false,
+                "visible": false
+
+            },
             {
                 "data": "testName",
                 "className": "dt-center"
@@ -43,9 +52,9 @@ $(document).ready(function () {
             }
 
         ],
-        "order": [[1, 'desc']],
+        "order": [[2, 'desc']],
         "columnDefs": [{
-            "targets": 1,
+            "targets": 2,
             "data": "createdDate",
             "render": function (data, type, full, meta) {
                 var date = new Date(data);
@@ -54,9 +63,16 @@ $(document).ready(function () {
             }
         },
             {
-            "targets": 3,
+            "targets": 4,
             "createdCell": function (td, cellData, rowData, row, col) {
-                $(td).html(viewButton(baseDir, 0));
+                var disabled = "";
+                var attemptId = rowData.id;
+
+                if((rowData.result == '-') && (currentUser == "true")) {
+                    disabled = "disabled";
+                    attemptId = "";
+                }
+                $(td).html(viewButton(baseDir, attemptId, disabled));
             }
         }
         ]

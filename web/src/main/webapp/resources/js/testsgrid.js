@@ -27,7 +27,7 @@ function actionButton(baseDir, id, buttons) {
         '<span class="glyphicon glyphicon-pencil"></span>' +
         ' Edit</a></li>';
     }
-    if ($.inArray("DELETE") != -1) {
+    if ($.inArray("DELETE", buttons) != -1) {
         buttonList += '<li><a id="delete">' +
         '<span class="glyphicon glyphicon-trash"></span>' +
         ' Delete</a></li>' +
@@ -56,14 +56,12 @@ $(document).ready(function () {
             }
         },
         columns: [
-            {data: "id", sClass: "gridtable", searchable: false},
-            {data: "name"},
-            {data: "description"},
-            {data: "isPublic", searchable: false},
-            {
-                data: null, bSortable: false,
-                defaultContent: ""
-            }
+            {data: "id",            className: "gridtable", searchable: false},
+            {data: "name",          className: "dt-center"                   },
+            {data: "description",   className: "dt-center"                   },
+            {data: "isPublic",      className: "dt-center", searchable: false},
+            {data: null,            className: "td-center", searchable: false ,
+                                    defaultContent: "",     bSortable: false }
 
         ],
         "order": [[0, 'asc']],

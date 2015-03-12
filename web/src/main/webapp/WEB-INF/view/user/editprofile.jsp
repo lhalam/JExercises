@@ -11,22 +11,17 @@
     <link href="${basedir}/resources/css/profile.cssjquery.Jcrop.min.css"
           rel="stylesheet"
           type="text/css">
-    <link href="${basedir}/resources/css/lib/bootstrap-select.css"
-          rel="stylesheet"
-          type="text/css">
     <link href="${basedir}/resources/css/editprofile.css"
           rel="stylesheet"
           type="text/css">
-    <script src="${basedir}/resources/js/editprofile.js"></script>
-    <script src="${basedir}/resources/js/lib/jquery.validate.min.js"></script>
-
     <script src="${basedir}/resources/js/uploader/define-FileAPI.js"></script>
     <script src="${basedir}/resources/js/uploader/FileAPI.min.js"></script>
     <script src="${basedir}/resources/js/uploader/FileAPI.exif.js"></script>
     <script src="${basedir}/resources/js/uploader/jquery.fileapi.js"></script>
     <script src="${basedir}/resources/js/uploader/jquery.Jcrop.min.js"></script>
     <script src="${basedir}/resources/js/uploader/upload-avatar.js"></script>
-    <script src="${basedir}/resources/js/lib/bootstrap-select.js"></script>
+    <script src="${basedir}/resources/js/lib/jquery.validate.min.js"></script>
+    <script src="${basedir}/resources/js/editprofile.js"></script>
 </head>
 
 <c:choose>
@@ -34,14 +29,12 @@
         <c:set var="postUrl" value="${basedir}/user/profile/" scope="request"/>
         <c:set var="disabled" value="" scope="request"/>
         <c:set var="hiddenInput" value="" scope="request"/>
-        <c:set var="hiddenRole" value="hidden-attribute" scope="request"/>
     </c:when>
     <c:otherwise>
         <c:set var="postUrl" value="${basedir}/user/profile/${userId}/"
                scope="request"/>
         <c:set var="disabled" value="disabled" scope="request"/>
-        <c:set var="hiddenInput" value="hidden-attribute" scope="request"/>
-        <c:set var="hiddenRole" value="" scope="request"/>
+        <c:set var="hiddenInput" value="hidden" scope="request"/>
     </c:otherwise>
 </c:choose>
 
@@ -59,13 +52,6 @@
         Account Settings </h3>
 </div>
 <div class="panel-body">
-
-    <div class="alert alert-success alert-dismissible" id="successAlert">
-        <button id="successAlertClose" type="button" class="close"
-                >&times;</button>
-        Your settings have been updated!
-    </div>
-
 
         <div class="alert alert-danger alert-dismissible" id="dangerAlert">
             <button id="dangerAlertClose" type="button" class="close"
@@ -138,7 +124,7 @@
                     <div class="btn btn-sm btn-success js-fileapi-wrapper ${disabled}">
                         <div class="js-browse">
                             <span class="btn-txt">Choose</span>
-                            <input type="file"
+                            <input class="ignore" type="file"
                                    name="filedata">
                         </div>
                         <div class="js-upload uploading-progress">
@@ -234,19 +220,27 @@
 
             </div>
         </div>
+        <c:if test="${!currentUser}">
+            <div class="form-group">
+                <label for="role"
+                       class="col-lg-4 control-label">Role</label>
 
-        <div class="form-group ${hiddenRole}">
-            <label for="userRole"
-                   class="col-lg-4 control-label">Role</label>
-
-            <div class="col-lg-8">
-                <select id="userRole" class="selectpicker"
-                        data-style="btn-warning" data-width="100%">
-                    <option value="user">User</option>
-                    <option value="admin">Admin</option>
-                </select>
+                <div class="col-lg-8">
+                    <select id="role" name="role" class="form-control bg-warning">
+                        <option value="ROLE_USER"
+                                <c:if test="${userRole == 'ROLE_USER'}">
+                                        <c:out value="selected"/>
+                                </c:if>
+                                >User</option>
+                        <option value="ROLE_ADMIN"
+                                <c:if test="${userRole == 'ROLE_ADMIN'}">
+                                    <c:out value="selected"/>
+                                </c:if>
+                                >Admin</option>
+                    </select>
+                </div>
             </div>
-        </div>
+        </c:if>
 
         <div class="form-group">
             <div class="col-lg-offset-7 col-lg-12">
@@ -256,6 +250,7 @@
                 <input class="btn btn-info"
                        id="submitButton"
                        type="submit"
+                       name="submitButton"
                        value="Update">
             </div>
         </div>
@@ -282,8 +277,7 @@
     </div>
 </div>
 </div>
-<div class="hidden-attribute" id="hidden-attr"
-     data-post-url="${postUrl}"></div>
+<div class="hidden" id="hidden-attr" data-post-url="${postUrl}"></div>
 </div>
 
 </body>

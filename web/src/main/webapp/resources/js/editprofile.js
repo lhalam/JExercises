@@ -5,6 +5,7 @@ $(document).ready(function () {
     $("#editProfileForm")
         .validate(
         {
+            ignore: ".ignore, :hidden, :disabled",
             rules : {
                 "firstName" : {
                     required : true
@@ -59,10 +60,14 @@ $(document).ready(function () {
                     "#currentPassword").val();
                 editProfileData.newPassword = $(
                     "#password").val();
-                editProfileData.birthDate = new Date(
-                    $("#year").val(), $(
-                        "#month").val(), $(
-                        "#day").val());
+                if($("#year").val()) {
+                    editProfileData.birthDate = new Date(
+                        $("#year").val(), $(
+                            "#month").val(), $(
+                            "#day").val());
+                }
+                editProfileData.avatar = $("#avatar-hidden").val();
+                editProfileData.role = $("#role").val();
 
                 $("#dangerAlert").hide();
                     $.ajax({
@@ -82,7 +87,7 @@ $(document).ready(function () {
                                 $('#dangerAlert')
                                     .show();
                             } else {
-                                $("#successAlert").show();
+                                window.location.href = postUrl + "?updated=true";
                             }
                         }
                     })
@@ -136,11 +141,6 @@ $(document).ready(function () {
         }
         return false;
     }, "Please enter а valid date.");
-
-
-    $("#successAlertClose").click(function () {
-        $("#successAlert").hide();
-    });
 
     $("#dangerAlertClose").click(function () {
         $("#dangerAlert").hide();

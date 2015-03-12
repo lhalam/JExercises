@@ -1,6 +1,5 @@
 package com.softserveinc.ita.jexercises.business.services.impl;
 
-import com.softserveinc.ita.jexercises.business.services.CurrentUserService;
 import com.softserveinc.ita.jexercises.business.services.UserGridService;
 import com.softserveinc.ita.jexercises.business.services.UserProfileService;
 import com.softserveinc.ita.jexercises.common.dto.AttemptDto;
@@ -39,9 +38,6 @@ public class UserGridServiceImpl implements UserGridService {
     private UserProfileService userProfileService;
 
     @Autowired
-    private CurrentUserService currentUserService;
-
-    @Autowired
     private AttemptMapper attemptMapper;
 
     @Autowired
@@ -74,25 +70,25 @@ public class UserGridServiceImpl implements UserGridService {
 
     @Override
     @Transactional
-    public GridResponseDto<AttemptDto> getCurrentUserAttempts(
-            DataTables dataTables) {
+    public GridResponseDto<AttemptDto> getUserAttempts(Long userId,
+                                                       DataTables dataTables) {
 
         GridResponseDto<AttemptDto> response = new GridResponseDto<>();
         List<AttemptDto> attemptDtoList = new ArrayList<>();
         List<String> lazyFields = new ArrayList<>();
 
-        dataTables.getColumns().get(0).setData("test.name");
+        dataTables.getColumns().get(1).setData("test.name");
 
         SearchCondition searchCondition =
                 dataTablesMapper.toSearchCondition(dataTables);
-        Long currentUserId = currentUserService.getCurrentUser().getId();
 
-        searchCondition.getFilterByIdMap().put("user.id", currentUserId);
+        searchCondition.getFilterByIdMap().put("user.id", userId);
 
         List<Attempt> attemptsList = attemptDao
                 .findAllByCriteria(searchCondition);
 
         lazyFields.add("test");
+        lazyFields.add("user");
         lazyFields.add("userAnswers");
 
         for (Attempt attempt : attemptsList) {

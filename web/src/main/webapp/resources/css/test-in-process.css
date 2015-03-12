@@ -44,3 +44,10 @@
 .has-error {
     border: #a94442;
 }
+.pager li>.has-error-btn {
+    background-color: #ebcccc;
+}
+
+.popover.top {
+    margin-top: -17px;
+}

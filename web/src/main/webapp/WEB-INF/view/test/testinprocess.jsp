@@ -39,7 +39,7 @@
                     <div class="form-group">
                         <ul class="pager">
                             <li id="btnprev"><a>&larr; Previous</a></li>
-                            <li id="btnnext" rel="popover"><a>Next &rarr;</a></li>
+                            <li id="btnnext"><a>Next &rarr;</a></li>
                             <li id="btnfinish"><a>Submit</a></li>
                         </ul>
                     </div>

@@ -1,5 +1,10 @@
 @CHARSET "UTF-8";
 
+.btn-shortened {
+    width: 80% !important;
+}
+
 body {
     font-size: 140%;
 }
+

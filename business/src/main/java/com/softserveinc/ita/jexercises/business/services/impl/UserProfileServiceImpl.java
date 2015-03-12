@@ -48,9 +48,9 @@ public class UserProfileServiceImpl implements UserProfileService {
 
     @Transactional
     @Override
-    public User updateUserProfile(UserProfileDto userDto) {
+    public User updateUserProfile(Long userId, UserProfileDto userDto) {
 
-        User user = currentUserService.getCurrentUser();
+        User user = userService.findUserById(userId);
 
         if (!userDto.getNewPassword().isEmpty()) {
             userDto.setNewPassword(getHashPassword(userDto.getNewPassword()));
@@ -59,12 +59,6 @@ public class UserProfileServiceImpl implements UserProfileService {
         userProfileMapper.toEntity(user, userDto);
 
         return userService.updateUser(user);
-    }
-
-    @Override
-    public boolean hasAvatar() {
-        User user = currentUserService.getCurrentUser();
-        return (user.getAvatar() != null);
     }
 
     @Override
