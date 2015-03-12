@@ -21,7 +21,7 @@ public class TestGridDto {
     /**
      * Availability of test.
      */
-    private boolean isPublic;
+    private String isPublic;
 
     /**
      * ID of test.
@@ -44,11 +44,11 @@ public class TestGridDto {
         this.description = description;
     }
 
-    public boolean getIsPublic() {
+    public String getIsPublic() {
         return isPublic;
     }
 
-    public void setIsPublic(boolean isPublic) { this.isPublic = isPublic; }
+    public void setIsPublic(String isPublic) { this.isPublic = isPublic; }
 
     public String getName() { return name; }
 
