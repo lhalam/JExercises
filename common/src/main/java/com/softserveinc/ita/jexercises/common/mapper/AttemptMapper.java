@@ -55,7 +55,8 @@ public class AttemptMapper {
         attemptDto.setId(attempt.getId());
         attemptDto.setResult(attemptResult);
         attemptDto.setTestName(attempt.getTest().getName());
-
+		attemptDto.setFirstName(attempt.getUser().getFirstName());
+		attemptDto.setLastName(attempt.getUser().getLastName());
         return attemptDto;
     }
 }
