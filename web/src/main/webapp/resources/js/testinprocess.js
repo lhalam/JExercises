@@ -152,9 +152,11 @@ function validateUserAnswer(element) {
             placement: 'top'
         }).popover('show');
         $('.form-group').addClass('has-error');
+        $(element).children().addClass('has-error-btn');
         setTimeout(function () {
             $(element).popover('hide');
             $('.form-group').removeClass('has-error');
+            $(element).children().removeClass('has-error-btn');
         }, 2000);
         return false;
     }
