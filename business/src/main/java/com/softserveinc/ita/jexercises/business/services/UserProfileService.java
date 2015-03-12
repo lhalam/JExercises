@@ -23,17 +23,11 @@ public interface UserProfileService {
     /**
      * Update user after profile edit form submitting .
      *
+     * @param userId User ID.
      * @param userProfileDto Contains user fields.
      * @return Updated user.
      */
-    User updateUserProfile(UserProfileDto userProfileDto);
-
-    /**
-     * Check if current user has an avatar.
-     *
-     * @return False is there is no avatar uploaded for current user.
-     */
-    boolean hasAvatar();
+    User updateUserProfile(Long userId, UserProfileDto userProfileDto);
 
     /**
      * Check if selected user has an avatar.
