@@ -1,13 +1,12 @@
-function viewButton(baseDir, id, disabled) {
+function viewButton(baseDir, id) {
     return '<a href="' + baseDir + '/test/result/' + id + '" target="_blank"' +
-        ' class="btn btn-success btn-xs btn-shortened"' + disabled + '>' +
+        ' class="btn btn-success btn-xs btn-shortened">' +
         '<span class="glyphicon glyphicon-new-window"></span> View</a>';
 }
 
 $(document).ready(function () {
     var baseDir = $("#hidden-attr").attr("data-basedir");
     var postUrl = $("#hidden-attr").attr("data-post-url");
-    var currentUser = $("#hidden-attr").attr("data-user");
 
     var dt = $('#attempts_table').DataTable({
         "processing": true,
@@ -65,14 +64,7 @@ $(document).ready(function () {
             {
             "targets": 4,
             "createdCell": function (td, cellData, rowData, row, col) {
-                var disabled = "";
-                var attemptId = rowData.id;
-
-                if((rowData.result == '-') && (currentUser == "true")) {
-                    disabled = "disabled";
-                    attemptId = "";
-                }
-                $(td).html(viewButton(baseDir, attemptId, disabled));
+                $(td).html(viewButton(baseDir, rowData.id));
             }
         }
         ]

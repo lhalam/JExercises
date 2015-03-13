@@ -1,11 +1,14 @@
 package com.softserveinc.ita.jexercises.web.controllers;
 
+import com.softserveinc.ita.jexercises.business.services.AttemptGridService;
 import com.softserveinc.ita.jexercises.business.services.CurrentUserService;
 import com.softserveinc.ita.jexercises.business.services.UserGridService;
 import com.softserveinc.ita.jexercises.business.services.UserService;
 import com.softserveinc.ita.jexercises.common.dto.GridResponseDto;
+import com.softserveinc.ita.jexercises.common.dto.SearchCondition;
 import com.softserveinc.ita.jexercises.common.dto.dataTables.DataTables;
 import com.softserveinc.ita.jexercises.common.entity.User;
+import com.softserveinc.ita.jexercises.common.mapper.DataTablesMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -34,6 +37,11 @@ public class UserGridController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private DataTablesMapper dataTablesMapper;
+
+    @Autowired
+    private AttemptGridService attemptGridService;
     /**
      * Get view of users DataTable.
      *
@@ -57,8 +65,11 @@ public class UserGridController {
     @ResponseBody
     public GridResponseDto postGridOfUsersData(
             @RequestBody DataTables dataTables) {
+        dataTables.getColumns().get(4).setData("createdDate");
+        SearchCondition searchCondition =
+                dataTablesMapper.toSearchCondition(dataTables);
 
-        return userGridService.getUsers(dataTables);
+        return userGridService.getUsers(searchCondition);
     }
 
     /**
@@ -84,15 +95,21 @@ public class UserGridController {
     public GridResponseDto postCurrentUserAttemptsData(
             @RequestBody DataTables dataTables) {
 
-        return userGridService.getUserAttempts(
-                currentUserService.getCurrentUser().getId(), dataTables);
+        dataTables.getColumns().get(1).setData("test.name");
+
+        SearchCondition searchCondition =
+                dataTablesMapper.toSearchCondition(dataTables);
+
+        return attemptGridService.getUserAttempts(
+                currentUserService.getCurrentUser().getId(), null,
+                searchCondition);
     }
 
     /**
      * Get view of user attempts.
      *
      * @param model View model.
-     * @param id    User id.
+     * @param id User id.
      * @return Page with attempts DataTable.
      */
     @RequestMapping(value = "/user/{id}/attempts", method = RequestMethod.GET)
@@ -111,7 +128,7 @@ public class UserGridController {
     /**
      * Getting filtered user attempts data.
      *
-     * @param id         User id.
+     * @param id User id.
      * @param dataTables Grid parameters.
      * @return Filtered user attempts.
      */
@@ -121,7 +138,13 @@ public class UserGridController {
     public GridResponseDto postUserAttemptsData(@PathVariable Long id,
                                                 @RequestBody DataTables dataTables) {
 
-        return userGridService.getUserAttempts(id, dataTables);
+        dataTables.getColumns().get(1).setData("test.name");
+
+        SearchCondition searchCondition =
+                dataTablesMapper.toSearchCondition(dataTables);
+
+        return attemptGridService.getUserAttempts(id, null,
+                searchCondition);
     }
 
 }

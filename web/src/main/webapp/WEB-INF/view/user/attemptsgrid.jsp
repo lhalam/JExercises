@@ -69,6 +69,6 @@
 </div>
 </div>
 <div class="hidden" id="hidden-attr" data-basedir="${basedir}"
-     data-user="${currentUser}" data-post-url="${postUrl}"></div>
+     data-post-url="${postUrl}"></div>
 </body>
 </html>
