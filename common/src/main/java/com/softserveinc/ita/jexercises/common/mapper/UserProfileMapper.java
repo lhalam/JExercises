@@ -34,7 +34,7 @@ public class UserProfileMapper {
             user.setPassword(userProfileDto.getNewPassword());
         }
 
-        if (userProfileDto.getAvatar() != null) {
+        if (!userProfileDto.getAvatar().isEmpty()) {
             user.setAvatar(Base64.decodeBase64(userProfileDto.getAvatar()));
         }
 
