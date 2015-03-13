@@ -24,6 +24,18 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class TestCreatingController {
     /**
+     * To set creating of test.
+     */
+    public static final String CREATE = "create";
+    /**
+     * To set editing of test.
+     */
+    public static final String EDIT = "edit";
+    /**
+     * To set viewing of test.
+     */
+    public static final String VIEW = "view";
+    /**
      * Service which work with DTO.
      */
     @Autowired
@@ -37,11 +49,25 @@ public class TestCreatingController {
      * case that actually means returning.
      * testcreating.jsp
      */
-    @RequestMapping(value = "/testcreating", method = RequestMethod.GET)
+    @RequestMapping(value = "/tests/create", method = RequestMethod.GET)
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ModelAndView showTestCreatingPage(Model model) {
-
+        model.addAttribute("toDo",CREATE);
         return new ModelAndView("test/testcreating");
+    }
+
+    /**
+     * Create new test.
+     *
+     * @param testCreatingDto info about new test.
+     * @return testId of new test.
+     */
+    @RequestMapping(value = "/tests/create", method = RequestMethod.POST)
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @ResponseBody
+    public Long saveTest(@RequestBody
+                           TestCreatingDto testCreatingDto) {
+        return testCreatingService.createTest(testCreatingDto);
     }
 
     /**
@@ -56,21 +82,6 @@ public class TestCreatingController {
     public GridResponseDto showQuestions(@RequestBody
                                        SearchCondition searchCondition) {
         return testCreatingService.getGridRows(searchCondition);
-    }
-
-    /**
-     * Save new test.
-     *
-     * @param testCreatingDto info about new test.
-     * @return String object.
-     */
-    @RequestMapping(value = "/testcreating/save", method = RequestMethod.POST)
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @ResponseBody
-    public String saveTest(@RequestBody
-                           TestCreatingDto testCreatingDto) {
-        testCreatingService.newTest(testCreatingDto);
-        return testCreatingDto.getTestName();
     }
 
 }

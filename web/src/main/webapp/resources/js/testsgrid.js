@@ -100,6 +100,6 @@ $(document).ready(function () {
     });
 
     $('#addtest').on('click', function () {
-        window.location.href = baseDir + '/testcreating';
+        window.location.href = baseDir + '/tests/create';
     });
 });

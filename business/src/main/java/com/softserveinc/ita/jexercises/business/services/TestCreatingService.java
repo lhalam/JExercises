@@ -18,8 +18,9 @@ public interface TestCreatingService {
      *
      * @param testCreatingDto
      *                  to set fields of new test.
+     * @return testId of created test.
      */
-    void newTest(TestCreatingDto testCreatingDto);
+    Long createTest(TestCreatingDto testCreatingDto);
 
     /**
      * Make QuestionGrid.

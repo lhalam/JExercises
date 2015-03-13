@@ -1,7 +1,5 @@
 package com.softserveinc.ita.jexercises.common.dto;
 
-import java.util.List;
-
 /**
  * Class represents question creating DTO.
  *
@@ -22,10 +20,6 @@ public class TestCreatingDto {
      * Availability of test.
      */
     private boolean isPublic;
-    /**
-     * List off qeustion id.
-     */
-    private List<Long> questionsId;
 
     public String getTestName() {
         return testName;
@@ -50,14 +44,4 @@ public class TestCreatingDto {
     public void setIsPublic(boolean isPublic) {
         this.isPublic = isPublic;
     }
-
-    public List<Long> getQuestionsId() {
-        return questionsId;
-    }
-
-    public void setQuestionsId(List<Long> questionsId) {
-        this.questionsId = questionsId;
-    }
-
-
 }
