@@ -69,7 +69,7 @@ public class TestCreatingServiceImpl implements TestCreatingService {
 
         response.setDraw(searchCondition.getDraw());
         response.setRecordsFiltered(questionDao.getNumberOfFilteredRecords(searchCondition));
-        response.setRecordsTotal(questionDao.getNumberOfRecords());
+        response.setRecordsTotal(questionDao.getNumberOfRecords(searchCondition));
 
         List<Question> questionList = questionDao.findAllByCriteria(searchCondition);
 

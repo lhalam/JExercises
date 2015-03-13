@@ -55,7 +55,7 @@ public class TestGridServiceImpl implements TestGridService {
         SearchCondition searchCondition = dataTablesMapper.toSearchCondition(dataTables);
         response.setDraw(searchCondition.getDraw());
         response.setRecordsFiltered(testDao.getNumberOfFilteredRecords(searchCondition));
-        response.setRecordsTotal(testDao.getNumberOfRecords());
+        response.setRecordsTotal(testDao.getNumberOfRecords(searchCondition));
         List<Test> testList = testDao.findAllByCriteria(searchCondition);
         response.setData(testGridMapper.toDto(testList));
         List<Button> buttons = new ArrayList<>();
