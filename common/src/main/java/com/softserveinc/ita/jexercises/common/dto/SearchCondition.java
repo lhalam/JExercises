@@ -1,6 +1,8 @@
 package com.softserveinc.ita.jexercises.common.dto;
 
-import java.util.LinkedHashMap;
+import com.softserveinc.ita.jexercises.common.utils.Wrapper;
+
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -9,33 +11,14 @@ import java.util.Map;
  * @author Taras Vuyiv
  */
 public class SearchCondition {
-    /**
-     * Draw counter.
-     */
-    private int draw;
-    /**
-     * Number of page.
-     */
-    private int pageNumber;
-    /**
-     * Number of values per page.
-     */
-    private int pageSize;
-    /**
-     * Map for ordering. Contains sortField as key and sortDirection as value.
-     */
-    private Map<String, String> orderByMap = new
-            LinkedHashMap<String, String>();
-    /**
-     * Map for filtering. Contains filterField as key and filterValue as value.
-     */
-    private Map<String, String> filterMap = new LinkedHashMap<>();
 
-    /**
-     * Map for filtering by id.
-     * Contains filterField as key and filterValue as value.
-     */
-    private Map<String, Long> filterByIdMap = new LinkedHashMap<>();
+    private int draw;
+    private int pageNumber;
+    private int pageSize;
+    private Map<String, String> orderByMap = new HashMap<>();
+    private Map<String, Wrapper> andFilterMap = new HashMap<>();
+    private Map<String, Wrapper> orFilterMap = new HashMap<>();
+    private Map<String, Wrapper> notFilterMap = new HashMap<>();
 
     public int getPageNumber() {
         return pageNumber;
@@ -51,14 +34,6 @@ public class SearchCondition {
 
     public void setPageSize(int pageSize) {
         this.pageSize = pageSize;
-    }
-
-    public Map<String, String> getFilterMap() {
-        return filterMap;
-    }
-
-    public void setFilterMap(Map<String, String> filterMap) {
-        this.filterMap = filterMap;
     }
 
     public Map<String, String> getOrderByMap() {
@@ -77,11 +52,27 @@ public class SearchCondition {
         this.draw = draw;
     }
 
-    public Map<String, Long> getFilterByIdMap() {
-        return filterByIdMap;
+    public Map<String, Wrapper> getAndFilterMap() {
+        return andFilterMap;
     }
 
-    public void setFilterByIdMap(Map<String, Long> filterByIdMap) {
-        this.filterByIdMap = filterByIdMap;
+    public void setAndFilterMap(Map<String, Wrapper> andFilterMap) {
+        this.andFilterMap = andFilterMap;
+    }
+
+    public Map<String, Wrapper> getOrFilterMap() {
+        return orFilterMap;
+    }
+
+    public void setOrFilterMap(Map<String, Wrapper> orFilterMap) {
+        this.orFilterMap = orFilterMap;
+    }
+
+    public Map<String, Wrapper> getNotFilterMap() {
+        return notFilterMap;
+    }
+
+    public void setNotFilterMap(Map<String, Wrapper> notFilterMap) {
+        this.notFilterMap = notFilterMap;
     }
 }
