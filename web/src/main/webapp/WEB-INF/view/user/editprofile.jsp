@@ -8,7 +8,7 @@
 <head>
     <%@ include file="../base.jsp" %>
     <%@ include file="../navigation.jsp" %>
-    <link href="${basedir}/resources/css/profile.cssjquery.Jcrop.min.css"
+    <link href="${basedir}/resources/css/jquery.Jcrop.css"
           rel="stylesheet"
           type="text/css">
     <link href="${basedir}/resources/css/editprofile.css"
@@ -226,7 +226,7 @@
                        class="col-lg-4 control-label">Role</label>
 
                 <div class="col-lg-8">
-                    <select id="role" name="role" class="form-control bg-warning">
+                    <select id="role" name="role" class="form-control">
                         <option value="ROLE_USER"
                                 <c:if test="${userRole == 'ROLE_USER'}">
                                         <c:out value="selected"/>
@@ -243,7 +243,8 @@
         </c:if>
 
         <div class="form-group">
-            <div class="col-lg-offset-7 col-lg-12">
+            <div class="col-lg-8 col-lg-offset-4">
+                <span class="pull-right">
                 <a href="${postUrl}"
                    class="btn btn-default btn-sm"
                    type="button">Cancel</a>
@@ -252,6 +253,7 @@
                        type="submit"
                        name="submitButton"
                        value="Update">
+                    </span>
             </div>
         </div>
     </fieldset>

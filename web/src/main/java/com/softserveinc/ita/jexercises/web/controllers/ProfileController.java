@@ -193,12 +193,11 @@ public class ProfileController {
             return response;
         }
 
-
-        if (!encoder.matches(userProfileDto.getPassword(),
+        if (!userProfileDto.getNewPassword().isEmpty() &&
+                !encoder.matches(userProfileDto.getPassword(),
                 user.getPassword())) {
             response.addError("Invalid current password!");
         } else {
-
             userProfileService.updateUserProfile(currentUserService
                     .getCurrentUser().getId(), userProfileDto);
         }

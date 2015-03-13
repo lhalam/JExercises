@@ -7,50 +7,46 @@ $(document).ready(function () {
         {
             ignore: ".ignore, :hidden, :disabled",
             rules : {
-                "firstName" : {
+                "firstName": {
                     required : true
                 },
-                "lastName" : {
-                    required : true
+                "lastName": {
+                    required: true
                 },
                 "currentPassword" : {
-                    required : true
+                    required: function(element){
+                        return $("#password").val().length > 0;
+                    }
                 },
                 "matchingPassword" : {
-                    equalTo : "#password"
+                    equalTo: "#password"
                 },
-                "day" : {
-                    required : true,
-                    dateValid : true
+                "day": {
+                    required: true,
+                    dateValid: true
                 },
-                "month" : {
-                    required : true,
-                    dateValid : true
+                "month": {
+                    required: true,
+                    dateValid: true
                 },
-                "year" : {
-                    required : true,
-                    dateValid : true
+                "year": {
+                    required: true,
+                    dateValid: true
                 }
             },
             messages : {
-                "firstName" : {
-                    required : "Please enter your First Name"
+                "day": {
+                    dateValid: "Date is invalid"
                 },
-                "lastName" : {
-                    required : "Please enter your Last Name"
+                "month": {
+                    dateValid: "Date is invalid"
                 },
-                "day" : {
-                    dateValid : "Date is invalid"
-                },
-                "month" : {
-                    dateValid : "Date is invalid"
-                },
-                "year" : {
-                    dateValid : "Date is invalid"
+                "year": {
+                    dateValid: "Date is invalid"
 
                 }
             },
-            submitHandler : function(form) {
+            submitHandler: function(form) {
                 var editProfileData = {};
                 editProfileData.firstName = $(
                     "#firstName").val();
@@ -71,13 +67,13 @@ $(document).ready(function () {
 
                 $("#dangerAlert").hide();
                     $.ajax({
-                        url : postUrl + "edit",
-                        type : "POST",
-                        data : JSON
+                        url: postUrl + "edit",
+                        type: "POST",
+                        data: JSON
                             .stringify(editProfileData),
-                        dataType : 'json',
-                        contentType : "application/json",
-                        success : function(
+                        dataType: 'json',
+                        contentType: "application/json",
+                        success: function(
                             response) {
                             if (response.errors.length > 0) {
 
@@ -92,7 +88,7 @@ $(document).ready(function () {
                         }
                     })
             },
-            showErrors : function(errorMap,
+            showErrors: function(errorMap,
                                   errorList) {
                 $
                     .each(
