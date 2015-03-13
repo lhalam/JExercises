@@ -2,6 +2,7 @@ package com.softserveinc.ita.jexercises.common.mapper;
 
 import com.softserveinc.ita.jexercises.common.dto.TestGridDto;
 import com.softserveinc.ita.jexercises.common.entity.Test;
+import com.softserveinc.ita.jexercises.common.utils.TextFormatter;
 import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +15,17 @@ import java.util.List;
  */
 @Component
 public class TestGridMapper {
+
+    /**
+     * To set size of name field in table.
+     */
+    public static final int NAME = 25;
+
+    /**
+     * To set size of description field in table.
+     */
+    public static final int DESCRIPTION = 40;
+
     /**
      * Transforms Test entity object into TestDescription DTO object.
      *
@@ -26,16 +38,10 @@ public class TestGridMapper {
         for (Test test : testList) {
             TestGridDto testGridDto = new TestGridDto();
             testGridDto.setId(test.getId());
-            if (test.getName().length()>25){
-                testGridDto.setName(test.getName().substring(0,25)+"...");
-            } else {
-                testGridDto.setName(test.getName());
-            }
-            if (test.getDescription().length()>40){
-                testGridDto.setDescription(test.getDescription().substring(0,40)+"...");
-            } else {
-                testGridDto.setDescription(test.getDescription());
-            }
+            TextFormatter textFormatter = new TextFormatter();
+            testGridDto.setName(textFormatter.setThreeDots(test.getName(),NAME));
+            testGridDto.setDescription(textFormatter.setThreeDots(
+                test.getDescription(),DESCRIPTION));
             if (test.getIsPublic()) {
                 testGridDto.setIsPublic("Public");
             } else {
@@ -43,7 +49,6 @@ public class TestGridMapper {
             }
             testGridDtoList.add(testGridDto);
         }
-
         return testGridDtoList;
     }
 }

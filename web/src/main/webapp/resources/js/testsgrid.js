@@ -56,19 +56,29 @@ $(document).ready(function () {
             }
         },
         columns: [
-            {data: "id",            className: "gridtable", searchable: false},
-            {data: "name",          className: "dt-center"                   },
-            {data: "description",   className: "dt-center"                   },
-            {data: "isPublic",      className: "dt-center", searchable: false},
-            {data: null,            className: "td-center", searchable: false ,
-                                    defaultContent: "",     bSortable: false }
+            {data: "id", className: "gridtable", searchable: false},
+            {data: "name", className: "dt-center"},
+            {data: "description", className: "dt-center"},
+            {data: "isPublic", className: "dt-center", searchable: false},
+            {
+                data: null, className: "dt-center", searchable: false,
+                defaultContent: "", bSortable: false
+            }
 
         ],
         "order": [[0, 'asc']],
         "columnDefs": [{
             "targets": -1,
             "createdCell": function (td, cellData, rowData, row, col) {
-                $(td).html(actionButton(baseDir, rowData.id, buttons ));
+                $(td).html(actionButton(baseDir, rowData.id, buttons));
+            }
+        },
+        {
+            "targets": -2,
+            "createdCell": function (td, cellData, rowData, row, col) {
+                if($('#availability').is(':hidden')){
+                    $(td).addClass('gridtable');
+                }
             }
         }]
     });

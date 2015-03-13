@@ -3,6 +3,7 @@ package com.softserveinc.ita.jexercises.web.controllers;
 import com.softserveinc.ita.jexercises.business.services.TestGridService;
 import com.softserveinc.ita.jexercises.common.dto.GridResponseDto;
 import com.softserveinc.ita.jexercises.common.dto.dataTables.DataTables;
+import com.softserveinc.ita.jexercises.common.mapper.DataTablesMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -28,6 +29,12 @@ public class TestGridController {
     private TestGridService testGridService;
 
     /**
+     * Service which maps DataTables SearchCondition.
+     */
+    @Autowired
+    private DataTablesMapper dataTablesMapper;
+
+    /**
      * Method provides mapping on "testsGrid" input.
      *
      * @param model Model.
@@ -51,7 +58,8 @@ public class TestGridController {
     @ResponseBody
     public GridResponseDto showTestGridPage(@RequestBody
                                             DataTables dataTables) {
-        return testGridService.getGridRows(dataTables);
+        return testGridService.getGridRows(
+            dataTablesMapper.toSearchCondition(dataTables));
     }
 
     /**

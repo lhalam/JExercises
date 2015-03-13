@@ -5,12 +5,11 @@ import com.softserveinc.ita.jexercises.business.services.TestGridService;
 import com.softserveinc.ita.jexercises.common.dto.GridResponseDto;
 import com.softserveinc.ita.jexercises.common.dto.SearchCondition;
 import com.softserveinc.ita.jexercises.common.dto.TestGridDto;
-import com.softserveinc.ita.jexercises.common.dto.dataTables.DataTables;
 import com.softserveinc.ita.jexercises.common.entity.Test;
-import com.softserveinc.ita.jexercises.common.mapper.DataTablesMapper;
 import com.softserveinc.ita.jexercises.common.mapper.TestGridMapper;
 import com.softserveinc.ita.jexercises.common.utils.Button;
 import com.softserveinc.ita.jexercises.common.utils.Role;
+import com.softserveinc.ita.jexercises.common.utils.Wrapper;
 import com.softserveinc.ita.jexercises.persistence.dao.impl.TestDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,20 +38,18 @@ public class TestGridServiceImpl implements TestGridService {
     @Autowired
     private TestGridMapper testGridMapper;
     /**
-     * DataTables instance.
-     */
-    @Autowired
-    private DataTablesMapper dataTablesMapper;
-    /**
     * CurrentUserService instance.
     */
     @Autowired
     private CurrentUserService currentUserService;
 
     @Override
-    public GridResponseDto<TestGridDto> getGridRows(DataTables dataTables) {
+    public GridResponseDto<TestGridDto> getGridRows(SearchCondition searchCondition) {
         GridResponseDto<TestGridDto> response = new GridResponseDto<>();
-        SearchCondition searchCondition = dataTablesMapper.toSearchCondition(dataTables);
+        if (currentUserService.getCurrentUser().getRole() == Role.ROLE_USER) {
+            searchCondition.getNotFilterMap().put("isPublic",
+                    new Wrapper(false));
+        }
         response.setDraw(searchCondition.getDraw());
         response.setRecordsFiltered(testDao.getNumberOfFilteredRecords(searchCondition));
         response.setRecordsTotal(testDao.getNumberOfRecords(searchCondition));

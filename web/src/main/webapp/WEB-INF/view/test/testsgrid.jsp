@@ -56,7 +56,11 @@
                                 <th>ID</th>
                                 <th>Name</th>
                                 <th>Description</th>
-                                <th>Availability</th>
+                                <th id="availability"
+                                    <sec:authorize access = "hasRole('ROLE_USER')">
+                                        class="hidden"
+                                    </sec:authorize>
+                                        >Availability</th>
                                 <th class="col-md-2"></th>
                             </tr>
                             </thead>
