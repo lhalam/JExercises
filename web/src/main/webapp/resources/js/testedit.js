@@ -28,6 +28,8 @@ var dataTest = {
 
 $(document).ready(function () {
     var baseDir = $("#hidden-attr").attr("data-basedir");
+    $("#title").html('Edit current test');
+    $("#create").addClass('hidden');
 
     $.ajax({
         url: location.pathname,
@@ -37,12 +39,13 @@ $(document).ready(function () {
         contentType: 'application/json',
         mimeType: 'application/json',
         success: function (dataResponse) {
-            dataTest.testId = dataResponse.testId;
-            dataTest.isPublic = dataResponse.isPublic;
-            dataTest.testName = dataResponse.testName;
-            dataTest.testDescription = dataResponse.testDescription;
-            $('#testName').append(dataTest.testName);
-            $('#testDescription').append(dataTest.testDescription);
+            var data = JSON.parse(dataResponse);
+            dataTest.testId = data.testId;
+            dataTest.isPublic = data.isPublic;
+            dataTest.testName = data.testName;
+            dataTest.testDescription = data.testDescription;
+            $("#testName").code(dataTest.testName.toString());
+            $("#testDescription").code(dataTest.testDescription.toString());
             if (dataTest.isPublic) {
                 document.getElementById("public").checked = true;
             } else {
@@ -66,7 +69,7 @@ $(document).ready(function () {
     });
 
     $('#add').on('click', function(){
-       window.location.href = baseDir + "/question/create/" + dataTest.id ;
+       window.location.href = baseDir + "/question/create/" + dataTest.testId ;
     });
 
     var table = $('#questionGrid').DataTable({

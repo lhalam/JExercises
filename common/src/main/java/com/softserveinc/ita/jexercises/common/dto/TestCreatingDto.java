@@ -9,6 +9,10 @@ package com.softserveinc.ita.jexercises.common.dto;
  */
 public class TestCreatingDto {
     /**
+     * ID of the test.
+     */
+    private Long testId;
+    /**
      * Name of the test.
      */
     private String testName;
@@ -44,4 +48,8 @@ public class TestCreatingDto {
     public void setIsPublic(boolean isPublic) {
         this.isPublic = isPublic;
     }
+
+    public Long getTestId() { return testId; }
+
+    public void setTestId(Long testId) { this.testId = testId; }
 }

@@ -32,7 +32,7 @@ $(document).ready(function () {
             contentType: 'application/json',
             mimeType: 'application/json',
             success: function (testId) {
-                window.location.href = baseDir + "/test/" + testId + "/edit";
+                window.location.href = baseDir + "/tests/" + testId + "/edit";
             }
         });
     });

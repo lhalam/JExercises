@@ -23,6 +23,14 @@ public interface TestCreatingService {
     Long createTest(TestCreatingDto testCreatingDto);
 
     /**
+     * Make info about current test.
+     *
+     * @param testId of test.
+     *
+     * @return testCreatingDto.
+     */
+    TestCreatingDto infoTest(Long testId);
+    /**
      * Make QuestionGrid.
      *
      * @param searchCondition

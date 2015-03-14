@@ -1,6 +1,5 @@
 package com.softserveinc.ita.jexercises.web.controllers;
 
-
 import com.softserveinc.ita.jexercises.business.services.TestCreatingService;
 import com.softserveinc.ita.jexercises.common.dto.GridResponseDto;
 import com.softserveinc.ita.jexercises.common.dto.SearchCondition;
@@ -9,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -68,6 +68,34 @@ public class TestCreatingController {
     public Long saveTest(@RequestBody
                            TestCreatingDto testCreatingDto) {
         return testCreatingService.createTest(testCreatingDto);
+    }
+
+    /**
+     * Method provides mapping on "testcreating" input.
+     *
+     * @param model Model.
+     * @return ModelAndView object,in current
+     * case that actually means returning.
+     * testcreating.jsp
+     */
+    @RequestMapping(value = "/tests/{id}/edit", method = RequestMethod.GET)
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public ModelAndView showTestEditingPage(Model model) {
+        model.addAttribute("toDo",EDIT);
+        return new ModelAndView("test/testcreating");
+    }
+
+    /**
+     * Get info about test.
+     *
+     * @param testId info about new test.
+     * @return testCreatingDto of new test.
+     */
+    @RequestMapping(value = "/tests/{id}/edit", method = RequestMethod.POST)
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @ResponseBody
+    public TestCreatingDto saveTest(@PathVariable("id") Long testId) {
+        return testCreatingService.infoTest(testId);
     }
 
     /**

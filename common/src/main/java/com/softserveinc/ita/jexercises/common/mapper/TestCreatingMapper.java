@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class TestCreatingMapper {
      /**
-     * Transforms Test entity object into TestDescription DTO object.
+     * Transforms TestDescription DTO  object into Test entity object.
      *
      * @param testCreatingDto Test creating Dto.
      * @return Test entity.
@@ -26,5 +26,19 @@ public class TestCreatingMapper {
         return test;
     }
 
+    /**
+     * Transforms Test entity object into TestDescription DTO object.
+     *
+     * @param test is current test.
+     * @return testCreatingDto.
+     */
+    public TestCreatingDto toDto(Test test) {
+        TestCreatingDto testCreatingDto = new TestCreatingDto();
+        testCreatingDto.setTestDescription(test.getDescription());
+        testCreatingDto.setTestName(test.getName());
+        testCreatingDto.setIsPublic(test.getIsPublic());
+        testCreatingDto.setTestId(test.getId());
+        return testCreatingDto;
+    }
 
 }

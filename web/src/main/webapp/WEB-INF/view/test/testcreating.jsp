@@ -44,21 +44,18 @@
         <form class="panel panel-primary">
             <div class="container-fluid">
                 <div class="col-md-offset-5 col-md-7">
-                    <h3>
+                    <h3 id="title">
                         Create new test
                     </h3>
                 </div>
                 <div class="col-md-10 col-md-offset-1">
                     <div class="form-group">
                         <label>Test name:</label>
-							<textarea class="form-control summernote" rows="2"
-                                      id="testName" placeholder="Input test name..."></textarea>
+							<div class="form-control summernote" id="testName"></div>
                     </div>
                     <div class="form-group">
                         <label>Description:</label>
-							<textarea class="form-control summernote" rows="4"
-                                      id="testDescription"
-                                      placeholder="Input test description..."></textarea>
+							<div class="form-control summernote" id="testDescription"></div>
                     </div>
                     <form role="form">
                         <label>Check an availability :</label>

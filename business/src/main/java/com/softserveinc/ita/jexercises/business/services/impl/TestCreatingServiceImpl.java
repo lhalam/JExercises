@@ -55,6 +55,11 @@ public class TestCreatingServiceImpl implements TestCreatingService {
     }
 
     @Override
+    public  TestCreatingDto infoTest(Long testId){
+        return testCreatingMapper.toDto(testDao.findById(testId));
+    }
+
+    @Override
     public GridResponseDto<QuestionGridDto> getGridRows(SearchCondition searchCondition) {
         GridResponseDto<QuestionGridDto> response = new GridResponseDto<>();
 
