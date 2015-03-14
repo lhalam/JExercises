@@ -12,22 +12,20 @@ import com.softserveinc.ita.jexercises.persistence.dao.GenericDao;
 public interface LinkDao extends GenericDao<Link, Long> {
 
     /**
-     * Searching link by shortCode.
+     * Searching public link.
      * 
-     * @param shortCode
-     *            Link shortCode.
-     * @return Link instance if exists or null if there is no link with such
-     *         shortCode.
+     * @param url
+     *            The url.
+     * @return Link instance if exists or null if there is no such link.
      */
-    Link findByShortCode(String shortCode);
+    Link findByUrl(String url);
 
     /**
      * Searching link by test id.
      * 
      * @param testId
      *            Id of the test.
-     * @return Link instance if exists or null if there is no link with such
-     *         shortCode.
+     * @return Link instance if exists or null if there is no such link.
      */
     Link findByTestId(Long testId);
 }

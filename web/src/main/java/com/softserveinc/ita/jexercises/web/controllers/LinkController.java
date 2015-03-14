@@ -18,63 +18,48 @@ import com.softserveinc.ita.jexercises.business.services.LinkService;
  */
 @Controller
 public class LinkController {
-    private static final String DOMAIN = "localhost:8080";
-    private static final String PROTOCOL = "http";
 
     @Autowired
     private LinkService linkService;
 
     /**
-     * Gets new public link.
+     * Gets new or updated public link.
      * 
      * @param id
      *            Test id.
      * @param request
      *            HttpServletRequest.
-     * @return New public link.
+     * @return New or updated public link.
      */
-    @RequestMapping(value = "/public/link/create/{id}", method = RequestMethod.POST)
+    @RequestMapping(value = { "/public/link/create/{id}",
+            "/public/link/update/{id}" }, method = RequestMethod.POST)
     @ResponseBody
     public String generatePublicLink(@PathVariable("id") Long id,
             HttpServletRequest request) {
-        String shortCode = linkService.createShortCode(id);
-        String link = String.format("%s://%s%s/%s", PROTOCOL, DOMAIN,
-                request.getContextPath(), shortCode);
-        return link;
+        String urlPart = constructUrlPart(request);
+        return linkService.generateLink(urlPart, id);
     }
 
     /**
-     * Gets updated public link.
      * 
-     * @param id
-     *            Test id.
+     * Forwards to test description page.
+     *
      * @param request
      *            HttpServletRequest.
-     * @return Updated public link.
+     * @return Test description page.
      */
-    @RequestMapping(value = "/public/link/update/{id}", method = RequestMethod.POST)
-    @ResponseBody
-    public String updatePublicLink(@PathVariable("id") Long id,
-            HttpServletRequest request) {
-        String shortCode = linkService.updateShortCode(id);
-        String link = String.format("%s://%s%s/%s", PROTOCOL, DOMAIN,
-                request.getContextPath(), shortCode);
-        return link;
+    @RequestMapping(value = "/{publicLinkShortCode}", method = { RequestMethod.GET,
+            RequestMethod.POST })
+    public String showPrivateTest(HttpServletRequest request) {
+        String url = request.getRequestURL().toString();
+        Long testId = linkService.findTestByUrl(url);
+        return String.format("forward:/test/%d", testId);
+
     }
 
-    /**
-     * Forwards to page of testing.
-     * 
-     * @param shortCode
-     *            Shortened url.
-     * @return Page of testing.
-     */
-    @RequestMapping(value = "/{shortCode}", method = { RequestMethod.GET,
-            RequestMethod.POST })
-    public String showPrivateTest(@PathVariable("shortCode") String shortCode) {
-        Long testId = linkService.findTestByShortCode(shortCode);
-        String url = String.format("forward:/test/process/%d", testId);
-        return url;
+    private String constructUrlPart(HttpServletRequest request) {
+        return String.format("http://%s:%s%s", request.getServerName(),
+                request.getServerPort(), request.getContextPath());
     }
 
 }

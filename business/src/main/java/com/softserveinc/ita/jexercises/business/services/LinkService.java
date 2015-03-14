@@ -9,30 +9,23 @@ package com.softserveinc.ita.jexercises.business.services;
 public interface LinkService {
 
     /**
-     * Creates short code for link.
+     * Updates link if exists or create one.
      * 
+     * @param urlPart
+     *            Url without short code.
      * @param testId
      *            Test id.
-     * @return Short code for link.
+     * @return New or updated link.
      */
-    String createShortCode(Long testId);
+    String generateLink(String urlPart, Long testId);
 
     /**
-     * Updates short code for link.
+     * Searches test by public url.
      * 
-     * @param testId
-     *            Test id.
-     * @return Updated short code for link or null if it not exists.
-     */
-    String updateShortCode(Long testId);
-
-    /**
-     * Searches test id by link short code.
-     * 
-     * @param shortCode
-     *            Link short code.
+     * @param url
+     *            The public url.
      * @return Test id.
      */
-    Long findTestByShortCode(String shortCode);
+    Long findTestByUrl(String url);
 
 }

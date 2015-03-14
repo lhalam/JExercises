@@ -1,5 +1,7 @@
 package com.softserveinc.ita.jexercises.business.utils;
 
+import java.util.UUID;
+
 import org.springframework.stereotype.Component;
 
 /**
@@ -10,14 +12,16 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class ShortCodeUtil {
+    private static final int SHORT_CODE_LENGTH = 5;
+
     /**
      * Generates url short code.
      * 
      * @return Short code.
      */
     public String generateShortCode() {
-        // short code generation impl;
-        return "";
+        return UUID.randomUUID().toString().subSequence(0, SHORT_CODE_LENGTH)
+                .toString();
     }
 
 }

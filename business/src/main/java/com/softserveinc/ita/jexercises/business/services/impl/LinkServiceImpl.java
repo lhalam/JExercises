@@ -30,33 +30,29 @@ public class LinkServiceImpl implements LinkService {
 
     @Transactional
     @Override
-    public String createShortCode(Long id) {
-        Link link = new Link();
+    public String generateLink(String urlPart, Long testId) {
+        boolean isNew = false;
         String shortCode = shortCodeUtil.generateShortCode();
-        link.setShortCode(shortCode);
-        link.setTest(testDao.findById(id));
-        linkDao.create(link);
-        return link.getShortCode();
+        Link link = linkDao.findByTestId(testId);
+        if (link == null) {
+            isNew = true;
+            link = new Link();
+            link.setTest(testDao.findById(testId));
+        }
+        link.setUrl(String.format("%s/%s", urlPart, shortCode));
+        if (isNew) {
+            return linkDao.create(link).getUrl();
+        }
+        return linkDao.update(link).getUrl();
     }
 
-    @Transactional
     @Override
-    public String updateShortCode(Long id) {
-        Link link = linkDao.findByTestId(id);
-        if(link!=null){
-            String shortCode = shortCodeUtil.generateShortCode();
-            link.setShortCode(shortCode);
-            link = linkDao.update(link);
-            return link.getShortCode();
-        }        
+    public Long findTestByUrl(String url) {
+        Link link = linkDao.findByUrl(url);
+        if (link != null) {
+            return link.getTest().getId();
+        }
         return null;
-    }
-
-    @Override
-    public Long findTestByShortCode(String shortCode) {
-        Link link = linkDao.findByShortCode(shortCode);
-        Long testId = link.getTest().getId();
-        return testId;
     }
 
 }
