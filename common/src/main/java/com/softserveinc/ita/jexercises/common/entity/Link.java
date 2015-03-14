@@ -19,16 +19,15 @@ public class Link extends BaseEntity {
      * The id of the test.
      */
     @OneToOne
-    @JoinColumn(name = "TEST_ID", nullable = false)
+    @JoinColumn(name = "TEST_ID", nullable = false, unique = true)
     private Test test;
 
     /**
-     * The short code of url.
+     * The url.
      */
-    @Column(name = "SHORT_CODE", nullable = false, unique = true)
-    private String shortCode;
+    @Column(name = "URL", nullable = false, unique = true)
+    private String url;
 
-    
     public Test getTest() {
         return test;
     }
@@ -37,11 +36,12 @@ public class Link extends BaseEntity {
         this.test = test;
     }
 
-    public String getShortCode() {
-        return shortCode;
+    public String getUrl() {
+        return url;
     }
 
-    public void setShortCode(String shortCode) {
-        this.shortCode = shortCode;
+    public void setUrl(String url) {
+        this.url = url;
     }
+
 }
