@@ -20,12 +20,11 @@ public class HibernateLinkDaoImpl extends HibernateGenericDaoImpl<Link, Long>
         implements LinkDao {
 
     @Override
-    public Link findByShortCode(String shortCode) {
+    public Link findByUrl(String url) {
         Link link = null;
-        TypedQuery<Link> query = getEntityManager()
-                .createQuery(
-                        "select l from Link l where l.shortCode=:shortCode",
-                        Link.class).setParameter("shortCode", shortCode);
+        TypedQuery<Link> query = getEntityManager().createQuery(
+                "select l from Link l where l.url=:url", Link.class)
+                .setParameter("url", url);
         List<Link> list = query.getResultList();
         if (!list.isEmpty()) {
             link = (Link) list.get(0);
