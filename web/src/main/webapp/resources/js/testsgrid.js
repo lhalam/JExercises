@@ -12,18 +12,18 @@ function actionButton(baseDir, id, buttons) {
             ' Start test</a></li>';
     }
     if ($.inArray("VIEW_MY_ATTEMPTS", buttons) != -1) {
-        buttonList += '<li><a href="' + baseDir + '/test/attempts/' + id + '">' +
+        buttonList += '<li><a href="' + baseDir + '/attempts/' + id + '">' +
         '<span class="glyphicon glyphicon-list-alt"></span> ' +
         'View my attempts</a></li>';
     }
     if ($.inArray("VIEW_ATTEMPTS", buttons) != -1) {
-        buttonList += '<li><a href="' + baseDir + '/test/attempts/' + id + '">' +
+        buttonList += '<li><a href="' + baseDir + '/attempts/' + id + '">' +
         '<span class="glyphicon glyphicon-list-alt"></span> ' +
         'View attempts</a></li>';
     }
     if ($.inArray("EDIT", buttons) != -1) {
         buttonList += '<li class="divider"></li>' +
-        '<li><a href="' + baseDir + '/test/edit/' + id + '">' +
+        '<li><a href="' + baseDir + '/tests/' + id + '/edit">' +
         '<span class="glyphicon glyphicon-pencil"></span>' +
         ' Edit</a></li>';
     }
@@ -61,7 +61,7 @@ $(document).ready(function () {
             {data: "description", className: "dt-center"},
             {data: "isPublic", className: "dt-center", searchable: false},
             {
-                data: null, className: "dt-center", searchable: false,
+                data: null, className: "dt-center col-md-2", searchable: false,
                 defaultContent: "", bSortable: false
             }
 

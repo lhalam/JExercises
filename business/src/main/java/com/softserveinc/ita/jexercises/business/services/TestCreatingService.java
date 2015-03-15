@@ -23,6 +23,16 @@ public interface TestCreatingService {
     Long createTest(TestCreatingDto testCreatingDto);
 
     /**
+     * Updates test.
+     *
+     * @param testCreatingDto
+     *                  to set fields of new test.
+     * @param testId to set existing test.
+     * @return testId of created test.
+     */
+    Long updateTest(TestCreatingDto testCreatingDto, Long testId);
+
+    /**
      * Make info about current test.
      *
      * @param testId of test.
@@ -31,12 +41,46 @@ public interface TestCreatingService {
      */
     TestCreatingDto infoTest(Long testId);
     /**
-     * Make QuestionGrid.
+     * Make QuestionGrid of all questions.
      *
+     * @param testId
+     *                  to set current test.
      * @param searchCondition
      *                  to set search conditions.
      * @return response object.
      */
-    GridResponseDto<QuestionGridDto> getGridRows(SearchCondition searchCondition);
+    GridResponseDto<QuestionGridDto> getGridRowsOfAllQuestions(
+        SearchCondition searchCondition, Long testId);
 
+    /**
+     * Make QuestionGrid of added questions.
+     *
+     * @param testId
+     *                  to set current test.
+     * @param searchCondition
+     *                  to set search conditions.
+     * @return response object.
+     */
+    GridResponseDto<QuestionGridDto> getGridRowsOfAddedQuestions(
+            SearchCondition searchCondition, Long testId);
+
+    /**
+     * Adds Question to test.
+     *
+     * @param testId
+     *                  to set current test.
+     * @param questionId
+     *                  to set question.
+     */
+    void addQuestionToTest(Long questionId, Long testId);
+
+    /**
+     * Removes Question to test.
+     *
+     * @param testId
+     *                  to set current test.
+     * @param questionId
+     *                  to set question.
+     */
+    void removeQuestionToTest(Long questionId, Long testId);
 }

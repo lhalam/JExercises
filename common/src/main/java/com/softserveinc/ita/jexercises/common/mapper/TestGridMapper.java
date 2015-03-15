@@ -19,12 +19,12 @@ public class TestGridMapper {
     /**
      * To set size of name field in table.
      */
-    public static final int NAME = 25;
+    public static final int NAME = 20;
 
     /**
      * To set size of description field in table.
      */
-    public static final int DESCRIPTION = 40;
+    public static final int DESCRIPTION = 25;
 
     /**
      * Transforms Test entity object into TestDescription DTO object.
@@ -33,12 +33,11 @@ public class TestGridMapper {
      * @return List SearchGridRows DTO.
      */
     public List<TestGridDto>  toDto(List<Test> testList) {
-
+        TextFormatter textFormatter = new TextFormatter();
         List<TestGridDto> testGridDtoList = new ArrayList<>();
         for (Test test : testList) {
             TestGridDto testGridDto = new TestGridDto();
             testGridDto.setId(test.getId());
-            TextFormatter textFormatter = new TextFormatter();
             testGridDto.setName(textFormatter.setThreeDots(test.getName(),NAME));
             testGridDto.setDescription(textFormatter.setThreeDots(
                 test.getDescription(),DESCRIPTION));

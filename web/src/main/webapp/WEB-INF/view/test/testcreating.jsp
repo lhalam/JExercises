@@ -25,12 +25,14 @@
     <script src="${basedir}/resources/js/lib/jquery.dataTables.min.js" type="text/javascript"></script>
     <script src="${basedir}/resources/js/lib/bootstrap.jquery.dataTable.js" type="text/javascript"></script>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"/>
-    <link  href="${basedir}/resources/css/summernote/summernote.css" rel="stylesheet" type="text/css">
-    <script src="${basedir}/resources/js/summernote/summernote.js" type="text/javascript"></script>
     <c:if test="${toDo eq 'create'}">
+        <link  href="${basedir}/resources/css/summernote/summernote.css" rel="stylesheet" type="text/css">
+        <script src="${basedir}/resources/js/summernote/summernote.js" type="text/javascript"></script>
         <script src="${basedir}/resources/js/testcreate.js"></script>
     </c:if>
     <c:if test="${toDo eq 'edit'}">
+        <link  href="${basedir}/resources/css/summernote/summernote.css" rel="stylesheet" type="text/css">
+        <script src="${basedir}/resources/js/summernote/summernote.js" type="text/javascript"></script>
         <script src="${basedir}/resources/js/testedit.js"></script>
     </c:if>
     <c:if test="${toDo eq 'view'}">
@@ -57,8 +59,8 @@
                         <label>Description:</label>
 							<div class="form-control summernote" id="testDescription"></div>
                     </div>
-                    <form role="form">
-                        <label>Check an availability :</label>
+                    <form role="form" id="check">
+                        <label >Check an availability :</label>
                         <label class="radio-inline">
                             <input type="radio" name="optradio" id="public" checked>
                             Public
@@ -84,7 +86,7 @@
                         <br>
                         <br>
                         <br>
-                        <div class="col-md-offset-5 col-md-7">
+                        <div class="col-md-offset-5 col-md-7" id="textToTables">
                             <label>
                                 <strong>
                                     Select the questions below

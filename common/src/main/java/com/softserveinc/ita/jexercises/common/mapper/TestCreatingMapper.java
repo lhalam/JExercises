@@ -41,4 +41,18 @@ public class TestCreatingMapper {
         return testCreatingDto;
     }
 
+    /**
+     * Transforms TestDescription DTO  object into existing Test entity object.
+     *
+     * @param testCreatingDto Test creating Dto.
+     * @param test existing object.
+     * @return Test entity.
+     */
+    public Test toExistingEntity(TestCreatingDto testCreatingDto, Test test) {
+        test.setDescription(testCreatingDto.getTestDescription());
+        test.setName(testCreatingDto.getTestName());
+        test.setIsPublic(testCreatingDto.getIsPublic());
+        return test;
+    }
+
 }
