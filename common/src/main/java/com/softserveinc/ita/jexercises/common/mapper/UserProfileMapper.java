@@ -13,6 +13,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserProfileMapper {
 
+    private static final String AVATAR_DELETED = "delete";
+
     /**
      * Transforms UserProfileDto object into User entity object.
      *
@@ -35,7 +37,11 @@ public class UserProfileMapper {
         }
 
         if (!userProfileDto.getAvatar().isEmpty()) {
-            user.setAvatar(Base64.decodeBase64(userProfileDto.getAvatar()));
+            if (AVATAR_DELETED.equals(userProfileDto.getAvatar())) {
+                user.setAvatar(null);
+            } else {
+                user.setAvatar(Base64.decodeBase64(userProfileDto.getAvatar()));
+            }
         }
 
         if (userProfileDto.getBirthDate() != null) {

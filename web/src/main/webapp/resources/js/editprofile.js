@@ -1,6 +1,11 @@
 $(document).ready(function () {
     var postUrl = $("#hidden-attr").attr("data-post-url");
+    var baseDir = $("#hidden-attr").attr("data-basedir");
     $(".userpic").css({"background-image": "url('" + postUrl + "avatar')"});
+    $("#deleteAvatar").click(function(){
+        $("#avatar-hidden").attr("value", "delete");
+        $(".userpic").css({"background-image": "url('" + baseDir + "/resources/no-avatar.png')"});
+    });
 
     $("#editProfileForm")
         .validate(

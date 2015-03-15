@@ -61,3 +61,12 @@
     background-image: -o-linear-gradient(left, rgba(0, 0, 0, 0),
     rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0));
 }
+
+.btn-delete {
+    width: 100px;
+    margin-bottom: 15px;
+}
+
+.custom-margin{
+    margin-bottom: 4px;
+}

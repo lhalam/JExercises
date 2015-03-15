@@ -125,6 +125,7 @@ public class ProfileController {
         model.addAttribute("userFirstName", user.getFirstName());
         model.addAttribute("userLastName", user.getLastName());
         model.addAttribute("userEmail", user.getEmail());
+        model.addAttribute("hasAvatar", user.getAvatar() != null);
         model.addAttribute("days", DateUtils.getDays());
         model.addAttribute("months", DateUtils.getMonths());
         model.addAttribute("years", DateUtils.getYears());
@@ -152,6 +153,7 @@ public class ProfileController {
         model.addAttribute("userRole", user.getRole());
         model.addAttribute("currentUser", false);
         model.addAttribute("userId", userId);
+        model.addAttribute("hasAvatar", user.getAvatar() != null);
 
         return new ModelAndView("user/editprofile");
     }
