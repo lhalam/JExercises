@@ -82,13 +82,4 @@ public interface GenericDao<T, PK extends Serializable> {
      * @return Number of all records.
      */
     Long getNumberOfRecords(SearchCondition searchCondition);
-
-    /**
-     * Load data of fields with lazy fetch type.
-     *
-     * @param object Entity object.
-     * @param fields Array of field names to be loaded.
-     * @return Entity object.
-     */
-    T getLazyFields(T object, List<String> fields);
 }
