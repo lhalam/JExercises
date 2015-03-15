@@ -30,26 +30,28 @@ $(document).ready(function () {
             dataTest = JSON.parse(dataResponse);
             document.getElementById('testName').innerHTML = dataTest.testName;
             document.getElementById('testDescription').innerHTML = dataTest.testDescription;
-            $("#availability").removeClass("hidden");
-            $("#check").addClass("hidden");
+            $("#getAvailability").removeClass("hidden");
+            $("#setAvailability").addClass("hidden");
             if (dataTest.isPublic) {
-                $("#availability").html('<strong>Test is public</strong>');
-            }   else   {
-                $("#availability").html('<strong>Test is private</strong>');
+                $("#getAvailability").html('<strong>Availability:</strong><div class="form">Test is public</div>');
+            } else {
+                $("#getAvailability").html('<strong>Availability:</strong><div class="form">Test is private</div>');
             }
+            $('#testName').addClass('form');
+            $('#testDescription').addClass('form');
         }
     });
 
-    $('#all').hide();
-    $('#add').hide();
-    $('#select').hide();
-    $('#save').hide();
-    $('#allTable').hide();
-    $('#edit').removeClass('hidden');
+    $('#allQuestions').hide();
+    $('#addNewQuestion').hide();
+    $('#selectedQuestions').hide();
+    $('#update').hide();
+    $('#allQuestionsTable').hide();
+    $('#tables').removeClass('hidden');
     $('#textToTables').hide();
     $('#testgrid_wrapper').removeClass('dataTables_wrapper');
 
-    $('#selected').DataTable({
+    $('#selectedQuestionsGrid').DataTable({
         processing: true,
         serverSide: true,
         dom: '<"top"l>rt<"bottom"ip><"clear">',
@@ -73,11 +75,11 @@ $(document).ready(function () {
         ]
     });
 
-    $('#viewEdit').on('click', function(){
-       window.location.href = baseDir + "/tests/" + dataTest.testId + "/edit";
+    $('#viewEdit').on('click', function () {
+        window.location.href = baseDir + "/tests/" + dataTest.testId + "/edit";
     });
 
-    $('#viewGrid').on('click', function(){
-       window.location.href = baseDir + "/testsgrid";
+    $('#viewGrid').on('click', function () {
+        window.location.href = baseDir + "/testsgrid";
     });
 });

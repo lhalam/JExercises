@@ -66,25 +66,25 @@ $(document).ready(function () {
         }
     });
 
-    $('#allTable').hide();
-    $('#edit').removeClass('hidden');
+    $('#allQuestionsTable').hide();
+    $('#tables').removeClass('hidden');
     $('#testgrid_wrapper').removeClass('dataTables_wrapper');
 
-    $('#all').on('click', function () {
-        $('#allTable').show();
-        $('#selectedTable').hide();
+    $('#allQuestions').on('click', function () {
+        $('#allQuestionsTable').show();
+        $('#selectedQuestionsTable').hide();
     });
 
-    $('#select').on('click', function () {
-        $('#allTable').hide();
-        $('#selectedTable').show();
+    $('#selectedQuestions').on('click', function () {
+        $('#allQuestionsTable').hide();
+        $('#selectedQuestionsTable').show();
     });
 
-    $('#add').on('click', function () {
+    $('#addNewQuestion').on('click', function () {
         window.location.href = baseDir + "/question/create/" + dataTest.testId;
     });
 
-    var table = $('#questionGrid').DataTable({
+    var allQuestionsTable = $('#allQuestionsGrid').DataTable({
         processing: true,
         serverSide: true,
         ajax: {
@@ -114,7 +114,7 @@ $(document).ready(function () {
         }]
     });
 
-    var selectedTable = $('#selected').DataTable({
+    var selectedQuestionsTable = $('#selectedQuestionsGrid').DataTable({
         processing: true,
         serverSide: true,
         dom: '<"top"l>rt<"bottom"ip><"clear">',
@@ -144,7 +144,7 @@ $(document).ready(function () {
         }]
     });
 
-    $('#save').on('click',
+    $('#update').on('click',
         function () {
             if (validator($(this))) {
                 dataTest.testName = $('#testName').code().toString();
@@ -167,8 +167,8 @@ $(document).ready(function () {
             }
         });
 
-    $('#selected tbody').on('click', '#remove', function () {
-        var dataID = selectedTable.row($(this).parents('tr')).data();
+    $('#selectedQuestionsGrid tbody').on('click', '#remove', function () {
+        var dataID = selectedQuestionsTable.row($(this).parents('tr')).data();
         $.ajax({
             url: baseDir + "/tests/" + dataTest.testId + "/remove",
             type: 'POST',
@@ -177,14 +177,14 @@ $(document).ready(function () {
             contentType: 'application/json',
             mimeType: 'application/json',
             success: function (dataResponse) {
-                table.ajax.reload();
-                selectedTable.ajax.reload();
+                allQuestionsTable.ajax.reload();
+                selectedQuestionsTable.ajax.reload();
             }
         });
     });
 
-    $('#questionGrid tbody').on('click', '#add', function () {
-        var dataID = table.row($(this).parents('tr')).data();
+    $('#allQuestionsGrid tbody').on('click', '#add', function () {
+        var dataID = allQuestionsTable.row($(this).parents('tr')).data();
         $.ajax({
             url: baseDir + "/tests/" + dataTest.testId + "/add",
             type: 'POST',
@@ -193,8 +193,8 @@ $(document).ready(function () {
             contentType: 'application/json',
             mimeType: 'application/json',
             success: function (dataResponse) {
-                table.ajax.reload();
-                selectedTable.ajax.reload();
+                allQuestionsTable.ajax.reload();
+                selectedQuestionsTable.ajax.reload();
             }
         });
     });

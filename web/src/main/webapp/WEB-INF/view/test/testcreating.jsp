@@ -52,13 +52,15 @@
                 <div class="col-md-10 col-md-offset-1">
                     <div class="form-group">
                         <label>Test name:</label>
+
                         <div class="form-control summernote" id="testName"></div>
                     </div>
                     <div class="form-group">
                         <label>Description:</label>
+
                         <div class="form-control summernote" id="testDescription"></div>
                     </div>
-                    <div id="check">
+                    <div id="setAvailability">
                         <form role="form">
                             <label>Check an availability :</label>
                             <label class="radio-inline">
@@ -71,8 +73,8 @@
                             </label>
                         </form>
                     </div>
-                    <div id="availability" class="hidden">
-                        </div>
+                    <div id="getAvailability" class="hidden">
+                    </div>
                 </div>
                 <div class="col-md-offset-5 col-md-7">
                     <button type="button" class="btn btn-success" id="create">
@@ -81,9 +83,8 @@
                     </button>
                     <br>
                     <br>
-                    <br>
                 </div>
-                <div id="edit" class="hidden">
+                <div id="tables" class="hidden">
                     <div class="row-fluid">
                         <br>
                         <br>
@@ -102,16 +103,17 @@
                     <div class="row-fluid">
                         <div class="col-md-offset-1 col-md-10">
                             <div class="btn-group" role="group">
-                                <button type="button" class="btn btn-default" id="all">All questions</button>
-                                <button type="button" class="btn btn-default" id="select">Added questions</button>
+                                <button type="button" class="btn btn-default" id="allQuestions">All questions</button>
+                                <button type="button" class="btn btn-default" id="selectedQuestions">Added questions
+                                </button>
                             </div>
                             <button type="button" class="btn btn-default pull-right"
-                                    id="add">Add new question
+                                    id="addNewQuestion">Add new question
                             </button>
                         </div>
-                        <div class="col-md-10 col-md-offset-1" id="allTable">
+                        <div class="col-md-10 col-md-offset-1" id="allQuestionsTable">
                             <br>
-                            <table id="questionGrid" class="table table-striped table-hover"
+                            <table id="allQuestionsGrid" class="table table-striped table-hover"
                                    cellspacing="0" width="100%">
                                 <thead>
                                 <th>ID</th>
@@ -122,9 +124,9 @@
                             </table>
                             <br>
                         </div>
-                        <div class="col-md-10 col-md-offset-1" id="selectedTable">
+                        <div class="col-md-10 col-md-offset-1" id="selectedQuestionsTable">
                             <br>
-                            <table id="selected" class="table table-striped table-hover"
+                            <table id="selectedQuestionsGrid" class="table table-striped table-hover"
                                    cellspacing="0" width="100%">
                                 <thead>
                                 <th>ID</th>
@@ -138,7 +140,7 @@
                     </div>
                     <div class="row-fluid">
                         <div class="col-md-7 col-md-offset-5 ">
-                            <button type="button" class="btn btn-success" id="save">
+                            <button type="button" class="btn btn-success" id="update">
                                 <span class="glyphicon glyphicon-floppy-disk"></span>
                                 Save test
                             </button>
@@ -147,8 +149,8 @@
                         </div>
                         <div class="col-md-offset-5 col-md-7 hidden" id="viewButtons">
                             <div class="btn-group" role="group">
-                                <button type="button" class="btn btn-default" id="viewEdit">Edit test</button>
-                                <button type="button" class="btn btn-default" id="viewGrid">All tests</button>
+                                <button type="button" class="btn btn-success" id="viewEdit">Edit test</button>
+                                <button type="button" class="btn btn-success" id="viewGrid">All tests</button>
                             </div>
                             <br>
                             <br>
