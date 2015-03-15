@@ -11,10 +11,11 @@
 	<http auto-config="true" use-expressions="true"
 		disable-url-rewriting="true">
 		<intercept-url pattern="/index" access="permitAll" />
+        <intercept-url pattern="/" access="permitAll" />
 		<intercept-url pattern="/user/registration" access="permitAll" />
 		<intercept-url pattern="/login" access="permitAll" />
 		<intercept-url pattern="/**" access="isAuthenticated()" />
-		<form-login login-page="/login" default-target-url="/index"
+		<form-login login-page="/login" default-target-url="/testsgrid"
 			authentication-failure-url="/login?error" />
 		<logout logout-success-url="/login?logout=true" delete-cookies="JSESSIONID" />
 		<remember-me key="uniqueAndSecret" />
