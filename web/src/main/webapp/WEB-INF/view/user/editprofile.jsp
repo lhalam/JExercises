@@ -38,6 +38,17 @@
     </c:otherwise>
 </c:choose>
 
+<c:choose>
+    <c:when test="${hasAvatar}">
+        <c:set var="buttonHidden" value="" scope="request"/>
+        <c:set var="margin" value="custom-margin" scope="request"/>
+    </c:when>
+    <c:otherwise>
+        <c:set var="buttonHidden" value="hidden" scope="request"/>
+        <c:set var="margin" value="" scope="request"/>
+    </c:otherwise>
+</c:choose>
+
 <fmt:formatDate var="birthDay" value="${userBirthDate}" pattern='dd'/>
 <fmt:formatDate var="birthMonth" value='${userBirthDate}' pattern='MMM'/>
 <fmt:formatDate var="birthYear" value='${userBirthDate}' pattern='yyyy'/>
@@ -108,7 +119,7 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div id="avatarFormGroup" class="form-group ${margin}">
             <label class="col-lg-4 control-label">Profile
                 Picture</label>
 
@@ -137,7 +148,12 @@
                 </div>
             </div>
         </div>
-
+        <div class="row">
+            <div class="col-lg-3 col-lg-offset-4">
+                <div id="deleteAvatar" class="btn btn-xs btn-danger btn-delete ${buttonHidden}">
+                    Delete</div>
+            </div>
+        </div>
         <div class="form-group ${hiddenInput}">
             <label for="currentPassword"
                    class="col-lg-4 control-label">Password</label>
@@ -279,7 +295,7 @@
     </div>
 </div>
 </div>
-<div class="hidden" id="hidden-attr" data-post-url="${postUrl}"></div>
+<div class="hidden" id="hidden-attr" data-basedir="${basedir}" data-post-url="${postUrl}"></div>
 </div>
 
 </body>

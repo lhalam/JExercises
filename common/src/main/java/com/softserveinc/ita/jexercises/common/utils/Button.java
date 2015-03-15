@@ -16,6 +16,10 @@ public enum Button {
      */
     VIEW_MY_ATTEMPTS,
     /**
+     * Start test button.
+     */
+    VIEW_TEST,
+    /**
      * View attempts button.
      */
     VIEW_ATTEMPTS,

@@ -6,13 +6,17 @@ import com.softserveinc.ita.jexercises.common.dto.QuestionGridDto;
 import com.softserveinc.ita.jexercises.common.dto.SearchCondition;
 import com.softserveinc.ita.jexercises.common.dto.TestCreatingDto;
 import com.softserveinc.ita.jexercises.common.entity.Question;
+import com.softserveinc.ita.jexercises.common.entity.Test;
 import com.softserveinc.ita.jexercises.common.mapper.QuestionGridMapper;
 import com.softserveinc.ita.jexercises.common.mapper.TestCreatingMapper;
+import com.softserveinc.ita.jexercises.common.utils.Wrapper;
 import com.softserveinc.ita.jexercises.persistence.dao.impl.QuestionDao;
 import com.softserveinc.ita.jexercises.persistence.dao.impl.TestDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -55,17 +59,78 @@ public class TestCreatingServiceImpl implements TestCreatingService {
     }
 
     @Override
-    public GridResponseDto<QuestionGridDto> getGridRows(SearchCondition searchCondition) {
-        GridResponseDto<QuestionGridDto> response = new GridResponseDto<>();
+    public  TestCreatingDto infoTest(Long testId){
+        return testCreatingMapper.toDto(testDao.findById(testId));
+    }
 
+    @Override
+    public GridResponseDto<QuestionGridDto> getGridRowsOfAllQuestions(
+            SearchCondition searchCondition, Long testId) {
+        GridResponseDto<QuestionGridDto> response = new GridResponseDto<>();
+        List<Long> addedQuestions = new ArrayList<>();
+        for (Question question : questionDao.findAllByTestId(testId)) {
+            addedQuestions.add(question.getId());
+        }
+        searchCondition.getNotFilterMap().put("id", new Wrapper(addedQuestions));
+        List<Question> questionList = questionDao.findAllByCriteria(searchCondition);
         response.setDraw(searchCondition.getDraw());
         response.setRecordsFiltered(questionDao.getNumberOfFilteredRecords(searchCondition));
         response.setRecordsTotal(questionDao.getNumberOfRecords(searchCondition));
-
-        List<Question> questionList = questionDao.findAllByCriteria(searchCondition);
-
         response.setData(questionGridMapper.toDto(questionList));
 
         return response;
+    }
+
+    @Override
+    public GridResponseDto<QuestionGridDto> getGridRowsOfAddedQuestions(
+            SearchCondition searchCondition, Long testId) {
+        GridResponseDto<QuestionGridDto> response = new GridResponseDto<>();
+        List<Question> questions = questionDao.findAllByTestId(testId);
+        List<Long> addedQuestions = new ArrayList<>();
+        for (Question question : questions) {
+            addedQuestions.add(question.getId());
+        }
+        searchCondition.getOrFilterMap().put("id", new Wrapper(addedQuestions));
+        response.setRecordsFiltered(questionDao.getNumberOfFilteredRecords(searchCondition));
+        response.setRecordsTotal(questionDao.getNumberOfRecords(searchCondition));
+        List<Question> questionList = new ArrayList<>();
+        if (!questions.isEmpty()) {
+            questionList = questionDao.findAllByCriteria(searchCondition);
+        } else {
+            response.setRecordsFiltered(0L);
+            response.setRecordsTotal(0L);
+        }
+        response.setDraw(searchCondition.getDraw());
+        response.setData(questionGridMapper.toDto(questionList));
+        return response;
+    }
+
+    @Transactional
+    @Override
+    public void addQuestionToTest(Long questionId, Long testId){
+        Test test = testDao.findById(testId);
+        Question question = questionDao.findById(questionId);
+        List<Question> questions = test.getQuestions();
+        questions.add(question);
+        test.setQuestions(questions);
+        testDao.update(test);
+    }
+
+    @Transactional
+    @Override
+    public void removeQuestionToTest(Long questionId, Long testId){
+        Test test = testDao.findById(testId);
+        Question question = questionDao.findById(questionId);
+        List<Question> questions = test.getQuestions();
+        questions.remove(question);
+        test.setQuestions(questions);
+        testDao.update(test);
+    }
+
+    @Transactional
+    @Override
+    public Long updateTest(TestCreatingDto testCreatingDto, Long testId){
+        return testDao.update(testCreatingMapper.toExistingEntity(
+            testCreatingDto,testDao.findById(testId))).getId();
     }
 }

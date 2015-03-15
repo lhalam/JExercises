@@ -59,6 +59,7 @@ public class TestGridServiceImpl implements TestGridService {
         if (currentUserService.getCurrentUser().getRole() == Role.ROLE_ADMIN )
         {
             buttons.add(Button.START_TEST);
+            buttons.add(Button.VIEW_TEST);
             buttons.add(Button.VIEW_ATTEMPTS);
             buttons.add(Button.EDIT);
             buttons.add(Button.DELETE);

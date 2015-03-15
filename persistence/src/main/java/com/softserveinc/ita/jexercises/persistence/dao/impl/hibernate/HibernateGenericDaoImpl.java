@@ -14,11 +14,8 @@ import com.softserveinc.ita.jexercises.persistence.dao.GenericDao;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.beans.IntrospectionException;
 import java.beans.Introspector;
-import java.beans.PropertyDescriptor;
 import java.io.Serializable;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 import java.util.Map;
@@ -93,7 +90,6 @@ public class HibernateGenericDaoImpl<T, PK extends Serializable> implements
         PathBuilder<T> qObject = getQObject();
 
         JPAQuery jpaQuery = new JPAQuery(entityManager);
-        BooleanBuilder builder = new BooleanBuilder();
 
         jpaQuery.offset(searchCondition.getPageNumber()
                 * searchCondition.getPageSize())
@@ -122,7 +118,6 @@ public class HibernateGenericDaoImpl<T, PK extends Serializable> implements
     public Long getNumberOfFilteredRecords(SearchCondition searchCondition) {
         PathBuilder<T> qObject = getQObject();
         JPAQuery jpaQuery = new JPAQuery(entityManager);
-        BooleanBuilder builder = new BooleanBuilder();
 
         jpaQuery.from(qObject);
 
@@ -146,22 +141,8 @@ public class HibernateGenericDaoImpl<T, PK extends Serializable> implements
         return jpaQuery.count();
     }
 
-    @Override
-    public T getLazyFields(T object, List<String> fields) {
-        for (String field : fields) {
-            try {
-                new PropertyDescriptor(field, entityClass)
-                        .getReadMethod().invoke(object);
-            } catch (IntrospectionException | IllegalAccessException
-                    | InvocationTargetException e) {
-                e.printStackTrace();
-            }
-        }
-        return object;
-    }
-
     private void filterWithAnd(JPAQuery jpaQuery,
-                              SearchCondition searchCondition) {
+                               SearchCondition searchCondition) {
         PathBuilder<T> qObject = getQObject();
         for (Map.Entry<String, Wrapper> filter :
                 searchCondition.getAndFilterMap().entrySet()) {
@@ -180,12 +161,18 @@ public class HibernateGenericDaoImpl<T, PK extends Serializable> implements
                         .getBoolean(filter.getKey());
                 jpaQuery.where(filterFieldPath.eq(
                         filter.getValue().getBooleanObject()));
+            } else if (filter.getValue().getLongList() != null) {
+                NumberPath filterFieldPath = qObject
+                        .getNumber(filter.getKey(), Long.class);
+                for (Long longObject : filter.getValue().getLongList()) {
+                    jpaQuery.where(filterFieldPath.eq(longObject));
+                }
             }
         }
     }
 
     private void filterWithOr(JPAQuery jpaQuery,
-                               SearchCondition searchCondition) {
+                              SearchCondition searchCondition) {
         BooleanBuilder builder = new BooleanBuilder();
         PathBuilder<T> qObject = getQObject();
 
@@ -205,13 +192,19 @@ public class HibernateGenericDaoImpl<T, PK extends Serializable> implements
                         .getBoolean(filter.getKey());
                 builder.or(filterFieldPath.eq(
                         filter.getValue().getBooleanObject()));
+            } else if (filter.getValue().getLongList() != null) {
+                NumberPath filterFieldPath = qObject
+                        .getNumber(filter.getKey(), Long.class);
+                for (Long longObject : filter.getValue().getLongList()) {
+                    builder.or(filterFieldPath.eq(longObject));
+                }
             }
         }
         jpaQuery.where(builder);
     }
 
     private void filterWithNot(JPAQuery jpaQuery,
-                              SearchCondition searchCondition) {
+                               SearchCondition searchCondition) {
         BooleanBuilder builder = new BooleanBuilder();
         PathBuilder<T> qObject = getQObject();
 
@@ -231,6 +224,12 @@ public class HibernateGenericDaoImpl<T, PK extends Serializable> implements
                         .getBoolean(filter.getKey());
                 builder.andNot(filterFieldPath.eq(
                         filter.getValue().getBooleanObject()));
+            } else if (filter.getValue().getLongList() != null) {
+                NumberPath filterFieldPath = qObject
+                        .getNumber(filter.getKey(), Long.class);
+                for (Long longObject : filter.getValue().getLongList()) {
+                    builder.andNot(filterFieldPath.eq(longObject));
+                }
             }
         }
         jpaQuery.where(builder);
