@@ -58,7 +58,7 @@ public class TestCreatingController {
     @RequestMapping(value = "/tests/create", method = RequestMethod.GET)
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ModelAndView showTestCreatingPage(Model model) {
-        model.addAttribute("toDo",CREATE);
+        model.addAttribute("pageAction",CREATE);
         return new ModelAndView("test/testcreating");
     }
 
@@ -102,7 +102,7 @@ public class TestCreatingController {
     @RequestMapping(value = "/tests/{id}/edit", method = RequestMethod.GET)
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ModelAndView showTestEditingPage(Model model) {
-        model.addAttribute("toDo",EDIT);
+        model.addAttribute("pageAction",EDIT);
         return new ModelAndView("test/testcreating");
     }
 
@@ -192,7 +192,7 @@ public class TestCreatingController {
     @RequestMapping(value = "/tests/{id}/view", method = RequestMethod.GET)
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ModelAndView showTestViewingPage(Model model) {
-        model.addAttribute("toDo",VIEW);
+        model.addAttribute("pageAction",VIEW);
         return new ModelAndView("test/testcreating");
     }
 

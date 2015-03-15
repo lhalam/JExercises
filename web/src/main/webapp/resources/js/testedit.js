@@ -117,6 +117,7 @@ $(document).ready(function () {
     var selectedTable = $('#selected').DataTable({
         processing: true,
         serverSide: true,
+        dom: '<"top"l>rt<"bottom"ip><"clear">',
         ajax: {
             url: baseDir + "/tests/" + dataTest.testId + "/added",
             type: 'POST',

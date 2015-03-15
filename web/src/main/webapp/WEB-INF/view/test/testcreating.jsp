@@ -6,6 +6,7 @@
 <%@ page language="java" contentType="text/html; charset=utf8" pageEncoding="utf8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,27 +16,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="JExercises UI">
     <script src="${basedir}/resources/js/lib/jquery-1.11.1.js" type="text/javascript"></script>
-    <link  href="${basedir}/resources/css/lib/bootstrap.css" rel="stylesheet" type="text/css">
-    <link  href="${basedir}/resources/css/lib/bootstrap-theme.css" rel="stylesheet" type="text/css">
-    <link  href="${basedir}/resources/css/lib/styles.css" rel="stylesheet" type="text/css">
-    <link  href="${basedir}/resources/css/table.css" rel="stylesheet" type="text/css">
-    <link  href="${basedir}/resources/css/lib/dataTables.bootstrap.css" rel="stylesheet" type="text/css">
-    <link  href="${basedir}/resources/ss-logo.png" rel="shortcut icon" type="text/css">
+    <link href="${basedir}/resources/css/lib/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="${basedir}/resources/css/lib/bootstrap-theme.css" rel="stylesheet" type="text/css">
+    <link href="${basedir}/resources/css/lib/styles.css" rel="stylesheet" type="text/css">
+    <link href="${basedir}/resources/css/table.css" rel="stylesheet" type="text/css">
+    <link href="${basedir}/resources/css/lib/dataTables.bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="${basedir}/resources/ss-logo.png" rel="shortcut icon" type="text/css">
     <script src="${basedir}/resources/js/lib/bootstrap.js" type="text/javascript"></script>
     <script src="${basedir}/resources/js/lib/jquery.dataTables.min.js" type="text/javascript"></script>
     <script src="${basedir}/resources/js/lib/bootstrap.jquery.dataTable.js" type="text/javascript"></script>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"/>
-    <c:if test="${toDo eq 'create'}">
-        <link  href="${basedir}/resources/css/summernote/summernote.css" rel="stylesheet" type="text/css">
-        <script src="${basedir}/resources/js/summernote/summernote.js" type="text/javascript"></script>
+    <link href="${basedir}/resources/css/summernote/summernote.css" rel="stylesheet" type="text/css">
+    <script src="${basedir}/resources/js/summernote/summernote.js" type="text/javascript"></script>
+    <c:if test="${pageAction eq 'create'}">
         <script src="${basedir}/resources/js/testcreate.js"></script>
     </c:if>
-    <c:if test="${toDo eq 'edit'}">
-        <link  href="${basedir}/resources/css/summernote/summernote.css" rel="stylesheet" type="text/css">
-        <script src="${basedir}/resources/js/summernote/summernote.js" type="text/javascript"></script>
+    <c:if test="${pageAction eq 'edit'}">
         <script src="${basedir}/resources/js/testedit.js"></script>
     </c:if>
-    <c:if test="${toDo eq 'view'}">
+    <c:if test="${pageAction eq 'view'}">
         <script src="${basedir}/resources/js/testview.js"></script>
     </c:if>
 </head>
@@ -53,23 +52,27 @@
                 <div class="col-md-10 col-md-offset-1">
                     <div class="form-group">
                         <label>Test name:</label>
-							<div class="form-control summernote" id="testName"></div>
+                        <div class="form-control summernote" id="testName"></div>
                     </div>
                     <div class="form-group">
                         <label>Description:</label>
-							<div class="form-control summernote" id="testDescription"></div>
+                        <div class="form-control summernote" id="testDescription"></div>
                     </div>
-                    <form role="form" id="check">
-                        <label >Check an availability :</label>
-                        <label class="radio-inline">
-                            <input type="radio" name="optradio" id="public" checked>
-                            Public
-                        </label>
-                        <label class="radio-inline">
-                            <input type="radio" name="optradio" id="private">
-                            Private
-                        </label>
-                    </form>
+                    <div id="check">
+                        <form role="form">
+                            <label>Check an availability :</label>
+                            <label class="radio-inline">
+                                <input type="radio" name="optradio" id="public" checked>
+                                Public
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="optradio" id="private">
+                                Private
+                            </label>
+                        </form>
+                    </div>
+                    <div id="availability" class="hidden">
+                        </div>
                 </div>
                 <div class="col-md-offset-5 col-md-7">
                     <button type="button" class="btn btn-success" id="create">
@@ -86,6 +89,7 @@
                         <br>
                         <br>
                         <br>
+
                         <div class="col-md-offset-5 col-md-7" id="textToTables">
                             <label>
                                 <strong>
@@ -133,11 +137,20 @@
                         </div>
                     </div>
                     <div class="row-fluid">
-                        <div class="col-md-2 col-md-offset-5 ">
+                        <div class="col-md-7 col-md-offset-5 ">
                             <button type="button" class="btn btn-success" id="save">
                                 <span class="glyphicon glyphicon-floppy-disk"></span>
                                 Save test
                             </button>
+                            <br>
+                            <br>
+                        </div>
+                        <div class="col-md-offset-5 col-md-7 hidden" id="viewButtons">
+                            <div class="btn-group" role="group">
+                                <button type="button" class="btn btn-default" id="viewEdit">Edit test</button>
+                                <button type="button" class="btn btn-default" id="viewGrid">All tests</button>
+                            </div>
+                            <br>
                             <br>
                             <br>
                         </div>

@@ -20,12 +20,12 @@ public class QuestionGridMapper {
     /**
      * To set size of name field in table.
      */
-    public static final int NAME = 20;
+    public static final int NAME_LENGTH = 20;
 
     /**
      * To set size of description field in table.
      */
-    public static final int DESCRIPTION = 25;
+    public static final int DESCRIPTION_LENGTH = 25;
     /**
      * Transforms Question entity object into QuestionGrid DTO object.
      *
@@ -38,8 +38,9 @@ public class QuestionGridMapper {
         for (Question question : questionList) {
             QuestionGridDto questionGridDto = new QuestionGridDto();
             questionGridDto.setId(question.getId());
-            questionGridDto.setName(textFormatter.setThreeDots(question.getName(),NAME));
-            questionGridDto.setDescription(textFormatter.setThreeDots(question.getDescription(),DESCRIPTION));
+            questionGridDto.setName(textFormatter.setThreeDots(question.getName(),NAME_LENGTH));
+            questionGridDto.setDescription(textFormatter.setThreeDots(
+                question.getDescription(),DESCRIPTION_LENGTH));
             questionGridDtoList.add(questionGridDto);
         }
 

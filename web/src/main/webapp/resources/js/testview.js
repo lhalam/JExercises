@@ -1,6 +1,7 @@
 /**
  * Created by Ihor Demkovych on 13.03.15.
  */
+
 var dataTest = {
     testId: 0,
     testName: '0',
@@ -10,25 +11,31 @@ var dataTest = {
 
 $(document).ready(function () {
     var baseDir = $("#hidden-attr").attr("data-basedir");
+    $("#viewButtons").removeClass("hidden");
     $("#title").html('View current test');
     $("#create").addClass('hidden');
-
+    $('#testName').removeClass('summernote');
+    $('#testName').removeClass('form-control');
+    $('#testDescription').removeClass('summernote');
+    $('#testDescription').removeClass('form-control');
     $.ajax({
         url: location.pathname,
         type: 'POST',
-        dataType: 'application/json',
+        dataType: 'html',
         async: false,
         data: '',
         contentType: 'application/json',
         mimeType: 'application/json',
         success: function (dataResponse) {
             dataTest = JSON.parse(dataResponse);
-            $("#testName").append("<p>" + dataTest.testName.toString() + "</p>");
-            $("#testDescription").append("<p>"+dataTest.testDescription.toString()+"</p>");
+            document.getElementById('testName').innerHTML = dataTest.testName;
+            document.getElementById('testDescription').innerHTML = dataTest.testDescription;
+            $("#availability").removeClass("hidden");
+            $("#check").addClass("hidden");
             if (dataTest.isPublic) {
-                document.getElementById("public").checked = true;
-            } else {
-                document.getElementById("private").checked = true;
+                $("#availability").html('<strong>Test is public</strong>');
+            }   else   {
+                $("#availability").html('<strong>Test is private</strong>');
             }
         }
     });
@@ -45,6 +52,7 @@ $(document).ready(function () {
     $('#selected').DataTable({
         processing: true,
         serverSide: true,
+        dom: '<"top"l>rt<"bottom"ip><"clear">',
         ajax: {
             url: baseDir + "/tests/" + dataTest.testId + "/added",
             type: 'POST',
@@ -63,5 +71,13 @@ $(document).ready(function () {
                 defaultContent: "", searchable: false
             }
         ]
+    });
+
+    $('#viewEdit').on('click', function(){
+       window.location.href = baseDir + "/tests/" + dataTest.testId + "/edit";
+    });
+
+    $('#viewGrid').on('click', function(){
+       window.location.href = baseDir + "/testsgrid";
     });
 });

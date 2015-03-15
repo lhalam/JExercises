@@ -91,12 +91,17 @@ public class TestCreatingServiceImpl implements TestCreatingService {
             addedQuestions.add(question.getId());
         }
         searchCondition.getOrFilterMap().put("id", new Wrapper(addedQuestions));
-        List<Question> questionList = questionDao.findAllByCriteria(searchCondition);
-        response.setDraw(searchCondition.getDraw());
         response.setRecordsFiltered(questionDao.getNumberOfFilteredRecords(searchCondition));
         response.setRecordsTotal(questionDao.getNumberOfRecords(searchCondition));
+        List<Question> questionList = new ArrayList<>();
+        if (!questions.isEmpty()) {
+            questionList = questionDao.findAllByCriteria(searchCondition);
+        } else {
+            response.setRecordsFiltered(0L);
+            response.setRecordsTotal(0L);
+        }
+        response.setDraw(searchCondition.getDraw());
         response.setData(questionGridMapper.toDto(questionList));
-
         return response;
     }
 

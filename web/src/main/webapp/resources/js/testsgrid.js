@@ -11,6 +11,12 @@ function actionButton(baseDir, id, buttons) {
             '<span class="glyphicon glyphicon-play-circle"></span>' +
             ' Start test</a></li>';
     }
+    if ($.inArray("VIEW_TEST", buttons) != -1) {
+        buttonList +=
+            '<li><a href="' + baseDir + '/tests/' + id + '/view">' +
+            '<span class="glyphicon glyphicon-search"></span>' +
+            ' View test</a></li>';
+    }
     if ($.inArray("VIEW_MY_ATTEMPTS", buttons) != -1) {
         buttonList += '<li><a href="' + baseDir + '/attempts/' + id + '">' +
         '<span class="glyphicon glyphicon-list-alt"></span> ' +
