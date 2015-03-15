@@ -15,6 +15,8 @@ import com.softserveinc.ita.jexercises.persistence.dao.impl.TestDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -62,13 +64,14 @@ public class TestCreatingServiceImpl implements TestCreatingService {
     }
 
     @Override
-    public GridResponseDto<QuestionGridDto> getGridRowsOfAllQuestions(//Label for Taras
+    public GridResponseDto<QuestionGridDto> getGridRowsOfAllQuestions(
             SearchCondition searchCondition, Long testId) {
         GridResponseDto<QuestionGridDto> response = new GridResponseDto<>();
-        for(Question question : questionDao.findAllByTestId(testId)){
-            searchCondition.getNotFilterMap().put("id",
-                    new Wrapper(question.getId()));
+        List<Long> addedQuestions = new ArrayList<>();
+        for (Question question : questionDao.findAllByTestId(testId)) {
+            addedQuestions.add(question.getId());
         }
+        searchCondition.getNotFilterMap().put("id", new Wrapper(addedQuestions));
         List<Question> questionList = questionDao.findAllByCriteria(searchCondition);
         response.setDraw(searchCondition.getDraw());
         response.setRecordsFiltered(questionDao.getNumberOfFilteredRecords(searchCondition));
@@ -79,14 +82,15 @@ public class TestCreatingServiceImpl implements TestCreatingService {
     }
 
     @Override
-    public GridResponseDto<QuestionGridDto> getGridRowsOfAddedQuestions( //Label for Taras
+    public GridResponseDto<QuestionGridDto> getGridRowsOfAddedQuestions(
             SearchCondition searchCondition, Long testId) {
         GridResponseDto<QuestionGridDto> response = new GridResponseDto<>();
         List<Question> questions = questionDao.findAllByTestId(testId);
-        for(Question question : questions) {
-            searchCondition.getOrFilterMap().put("id",
-                    new Wrapper(question.getId()));
+        List<Long> addedQuestions = new ArrayList<>();
+        for (Question question : questions) {
+            addedQuestions.add(question.getId());
         }
+        searchCondition.getOrFilterMap().put("id", new Wrapper(addedQuestions));
         List<Question> questionList = questionDao.findAllByCriteria(searchCondition);
         response.setDraw(searchCondition.getDraw());
         response.setRecordsFiltered(questionDao.getNumberOfFilteredRecords(searchCondition));
