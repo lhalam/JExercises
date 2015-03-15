@@ -1,11 +1,8 @@
 package com.softserveinc.ita.jexercises.persistence.dao.impl.hibernate;
 
 import java.util.List;
-
 import javax.persistence.TypedQuery;
-
 import org.springframework.stereotype.Repository;
-
 import com.softserveinc.ita.jexercises.common.entity.Link;
 import com.softserveinc.ita.jexercises.persistence.dao.impl.LinkDao;
 
@@ -38,6 +35,19 @@ public class HibernateLinkDaoImpl extends HibernateGenericDaoImpl<Link, Long>
         TypedQuery<Link> query = getEntityManager().createQuery(
                 "select l from Link l where l.test.id=:testId", Link.class)
                 .setParameter("testId", testId);
+        List<Link> list = query.getResultList();
+        if (!list.isEmpty()) {
+            link = (Link) list.get(0);
+        }
+        return link;
+    }
+
+    @Override
+    public Link findByShortCode(String shortCode) {
+        Link link = null;
+        TypedQuery<Link> query = getEntityManager().createQuery(
+                "select l from Link l where l.url like:shortCode", Link.class)
+                .setParameter("shortCode", "%" + shortCode + "%");
         List<Link> list = query.getResultList();
         if (!list.isEmpty()) {
             link = (Link) list.get(0);

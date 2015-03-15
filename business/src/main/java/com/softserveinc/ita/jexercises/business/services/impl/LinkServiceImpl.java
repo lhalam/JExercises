@@ -3,8 +3,8 @@ package com.softserveinc.ita.jexercises.business.services.impl;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Service;
+
 import com.softserveinc.ita.jexercises.business.services.LinkService;
 import com.softserveinc.ita.jexercises.business.utils.ShortCodeUtil;
 import com.softserveinc.ita.jexercises.common.entity.Link;
@@ -30,20 +30,32 @@ public class LinkServiceImpl implements LinkService {
 
     @Transactional
     @Override
-    public String generateLink(String urlPart, Long testId) {
-        boolean isNew = false;
-        String shortCode = shortCodeUtil.generateShortCode();
+    public String createLink(String urlPart, Long testId) {
+        Link link = new Link();
+        addUrl(urlPart, link);
+        link.setTest(testDao.findById(testId));
+        return linkDao.create(link).getUrl();
+    }
+
+    @Transactional
+    @Override
+    public String updateLink(String urlPart, Long testId) {
         Link link = linkDao.findByTestId(testId);
-        if (link == null) {
-            isNew = true;
-            link = new Link();
-            link.setTest(testDao.findById(testId));
-        }
-        link.setUrl(String.format("%s/%s", urlPart, shortCode));
-        if (isNew) {
-            return linkDao.create(link).getUrl();
-        }
+        addUrl(urlPart, link);
         return linkDao.update(link).getUrl();
+    }
+
+    private void addUrl(String urlPart, Link link) {
+        String shortCode = null;
+        do {
+            shortCode = shortCodeUtil.generateShortCode();
+        } while (isNotUnique(shortCode));
+        String url = String.format("%s/%s", urlPart, shortCode);
+        link.setUrl(url);
+    }
+
+    private boolean isNotUnique(String shortCode) {
+        return linkDao.findByShortCode(shortCode) != null;
     }
 
     @Override

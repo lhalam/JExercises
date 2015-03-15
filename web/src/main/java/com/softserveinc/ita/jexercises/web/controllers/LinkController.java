@@ -23,21 +23,37 @@ public class LinkController {
     private LinkService linkService;
 
     /**
-     * Gets new or updated public link.
+     * Gets new public link.
      * 
      * @param id
      *            Test id.
      * @param request
      *            HttpServletRequest.
-     * @return New or updated public link.
+     * @return New public link.
      */
-    @RequestMapping(value = { "/public/link/create/{id}",
-            "/public/link/update/{id}" }, method = RequestMethod.POST)
+    @RequestMapping(value = "/public/link/create/{id}", method = RequestMethod.POST)
     @ResponseBody
     public String generatePublicLink(@PathVariable("id") Long id,
             HttpServletRequest request) {
         String urlPart = constructUrlPart(request);
-        return linkService.generateLink(urlPart, id);
+        return linkService.createLink(urlPart, id);
+    }
+
+    /**
+     * Gets updated public link.
+     * 
+     * @param id
+     *            Test id.
+     * @param request
+     *            HttpServletRequest.
+     * @return Updated public link.
+     */
+    @RequestMapping(value = "/public/link/update/{id}", method = RequestMethod.POST)
+    @ResponseBody
+    public String regeneratePublicLink(@PathVariable("id") Long id,
+            HttpServletRequest request) {
+        String urlPart = constructUrlPart(request);
+        return linkService.updateLink(urlPart, id);
     }
 
     /**
@@ -48,8 +64,8 @@ public class LinkController {
      *            HttpServletRequest.
      * @return Test description page.
      */
-    @RequestMapping(value = "/{publicLinkShortCode}", method = { RequestMethod.GET,
-            RequestMethod.POST })
+    @RequestMapping(value = "/{publicLinkShortCode}", method = {
+            RequestMethod.GET, RequestMethod.POST })
     public String showPrivateTest(HttpServletRequest request) {
         String url = request.getRequestURL().toString();
         Long testId = linkService.findTestByUrl(url);

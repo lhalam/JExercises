@@ -28,4 +28,13 @@ public interface LinkDao extends GenericDao<Link, Long> {
      * @return Link instance if exists or null if there is no such link.
      */
     Link findByTestId(Long testId);
+
+    /**
+     * Searching link by shortCode.
+     * 
+     * @param shortCode
+     *            Url shortCode.
+     * @return Link instance if exists or null if there is no such link.
+     */
+    Link findByShortCode(String shortCode);
 }
