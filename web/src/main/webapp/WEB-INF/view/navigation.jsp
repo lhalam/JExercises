@@ -22,6 +22,9 @@
                 <li><a href="${basedir}/welcome">General </a></li>
                 <li><a href="${basedir}/about">About</a></li>
                 <li><a href="${basedir}/testsgrid">Tests</a></li>
+                <sec:authorize access="hasRole('ROLE_ADMIN')">
+                    <li><a href="${basedir}/user/find">Users</a></li>
+                </sec:authorize>
             </ul>
             <sec:authorize access="isAnonymous()">
             <ul class="nav navbar-nav navbar-right">
@@ -34,6 +37,6 @@
 					<li><%@ include file="account-menu.jsp"%></li>
 				</ul>
 			</sec:authorize>
-        </div><!--/.nav-collapse -->
-    </div><!--/.container-fluid -->
+        </div>
+    </div>
 </nav>
