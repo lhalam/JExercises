@@ -19,7 +19,6 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li><a href="${basedir}/welcome">General </a></li>
                 <li><a href="${basedir}/about">About</a></li>
                 <li><a href="${basedir}/testsgrid">Tests</a></li>
                 <sec:authorize access="hasRole('ROLE_ADMIN')">
