@@ -38,6 +38,7 @@ public class LinkServiceImpl implements LinkService {
             link = new Link();
         }
         link.setShortCode(getUniqueShortCode());
+        link.setTest(test);
         test.setLink(link);
         testDao.update(test);
         return link.getShortCode();

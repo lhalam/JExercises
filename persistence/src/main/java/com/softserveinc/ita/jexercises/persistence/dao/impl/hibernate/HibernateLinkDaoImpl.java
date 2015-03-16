@@ -20,7 +20,7 @@ public class HibernateLinkDaoImpl extends HibernateGenericDaoImpl<Link, Long>
     public Link findByShortCode(String shortCode) {
         Link link = null;
         TypedQuery<Link> query = getEntityManager().createQuery(
-                "select l from Link l where l.shortCode:shortCode", Link.class)
+                "select l from Link l where l.shortCode=:shortCode", Link.class)
                 .setParameter("shortCode", shortCode);
         List<Link> list = query.getResultList();
         if (!list.isEmpty()) {
