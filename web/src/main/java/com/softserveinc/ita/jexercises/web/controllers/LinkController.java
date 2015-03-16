@@ -23,59 +23,45 @@ public class LinkController {
     private LinkService linkService;
 
     /**
-     * Gets new public link.
+     * Gets new or updated public link.
      * 
      * @param id
      *            Test id.
      * @param request
      *            HttpServletRequest.
-     * @return New public link.
+     * @return New or updated public link.
      */
-    @RequestMapping(value = "/public/link/create/{id}", method = RequestMethod.POST)
+    @RequestMapping(value = { "/public/link/create/{id}",
+            "/public/link/update/{id}" }, method = RequestMethod.POST)
     @ResponseBody
     public String generatePublicLink(@PathVariable("id") Long id,
             HttpServletRequest request) {
-        String urlPart = constructUrlPart(request);
-        return linkService.createLink(urlPart, id);
-    }
-
-    /**
-     * Gets updated public link.
-     * 
-     * @param id
-     *            Test id.
-     * @param request
-     *            HttpServletRequest.
-     * @return Updated public link.
-     */
-    @RequestMapping(value = "/public/link/update/{id}", method = RequestMethod.POST)
-    @ResponseBody
-    public String regeneratePublicLink(@PathVariable("id") Long id,
-            HttpServletRequest request) {
-        String urlPart = constructUrlPart(request);
-        return linkService.updateLink(urlPart, id);
+        String url = linkService.generateLink(id);
+        return constructFullUrl(request, url);
     }
 
     /**
      * 
      * Forwards to test description page.
      *
+     * @param shortCode
+     *            Url short code.
      * @param request
      *            HttpServletRequest.
      * @return Test description page.
      */
-    @RequestMapping(value = "/{publicLinkShortCode}", method = {
-            RequestMethod.GET, RequestMethod.POST })
-    public String showPrivateTest(HttpServletRequest request) {
-        String url = request.getRequestURL().toString();
-        Long testId = linkService.findTestByUrl(url);
+    @RequestMapping(value = "/{shortCode}", method = { RequestMethod.GET,
+            RequestMethod.POST })
+    public String showPrivateTest(@PathVariable("shortCode") String shortCode,
+            HttpServletRequest request) {
+        Long testId = linkService.findTestByLink(shortCode);
         return String.format("forward:/test/%d", testId);
 
     }
 
-    private String constructUrlPart(HttpServletRequest request) {
-        return String.format("http://%s:%s%s", request.getServerName(),
-                request.getServerPort(), request.getContextPath());
+    private String constructFullUrl(HttpServletRequest request, String url) {
+        return String.format("http://%s:%s%s/%s", request.getServerName(),
+                request.getServerPort(), request.getContextPath(), url);
     }
 
 }

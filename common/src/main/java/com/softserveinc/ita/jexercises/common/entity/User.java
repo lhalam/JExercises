@@ -2,7 +2,6 @@ package com.softserveinc.ita.jexercises.common.entity;
 
 import java.util.Date;
 import java.util.Set;
-
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -25,25 +24,25 @@ import com.softserveinc.ita.jexercises.common.utils.Role;
 public class User extends BaseEntity {
    
     /**
-     * The first name of the user.
+     * User first name.
      */
     @Column(name = "FIRST_NAME", nullable = false)
     private String firstName;
 
     /**
-     * The last name of the user.
+     * User last name.
      */
     @Column(name = "LAST_NAME", nullable = false)
     private String lastName;
 
     /**
-     * The email of the user.
+     * User email.
      */
     @Column(name = "EMAIL", unique = true, nullable = false)
     private String email;
 
     /**
-     * The avatar picture of the user.
+     * User avatar picture.
      */
     @Lob
     @Basic(fetch = FetchType.LAZY)
@@ -51,7 +50,7 @@ public class User extends BaseEntity {
     private byte[] avatar;
 
     /**
-     * The password of the user.
+     * User password.
      */
     @Column(name = "PASSWORD", nullable = false)
     private String password;
@@ -64,7 +63,7 @@ public class User extends BaseEntity {
     private Set<Attempt> attempts;
 
     /**
-     * The role of user.
+     * User role.
      */
     @Column(name = "ROLE", nullable = false)
     private Role role;

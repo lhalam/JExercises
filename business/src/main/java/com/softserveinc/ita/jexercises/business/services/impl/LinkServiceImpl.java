@@ -8,11 +8,12 @@ import org.springframework.stereotype.Service;
 import com.softserveinc.ita.jexercises.business.services.LinkService;
 import com.softserveinc.ita.jexercises.business.utils.ShortCodeUtil;
 import com.softserveinc.ita.jexercises.common.entity.Link;
+import com.softserveinc.ita.jexercises.common.entity.Test;
 import com.softserveinc.ita.jexercises.persistence.dao.impl.LinkDao;
 import com.softserveinc.ita.jexercises.persistence.dao.impl.TestDao;
 
 /**
- * Represents LinkrService interface implementation.
+ * Represents LinkService interface implementation.
  * 
  * @author Oksana Senchuk
  * @version 1.0
@@ -30,28 +31,24 @@ public class LinkServiceImpl implements LinkService {
 
     @Transactional
     @Override
-    public String createLink(String urlPart, Long testId) {
-        Link link = new Link();
-        addUrl(urlPart, link);
-        link.setTest(testDao.findById(testId));
-        return linkDao.create(link).getUrl();
+    public String generateLink(Long testId) {
+        Test test = testDao.findById(testId);
+        Link link = test.getLink();
+        if (link == null) {
+            link = new Link();
+        }
+        link.setShortCode(getUniqueShortCode());
+        test.setLink(link);
+        testDao.update(test);
+        return link.getShortCode();
     }
 
-    @Transactional
-    @Override
-    public String updateLink(String urlPart, Long testId) {
-        Link link = linkDao.findByTestId(testId);
-        addUrl(urlPart, link);
-        return linkDao.update(link).getUrl();
-    }
-
-    private void addUrl(String urlPart, Link link) {
+    private String getUniqueShortCode() {
         String shortCode = null;
         do {
             shortCode = shortCodeUtil.generateShortCode();
         } while (isNotUnique(shortCode));
-        String url = String.format("%s/%s", urlPart, shortCode);
-        link.setUrl(url);
+        return shortCode;
     }
 
     private boolean isNotUnique(String shortCode) {
@@ -59,8 +56,8 @@ public class LinkServiceImpl implements LinkService {
     }
 
     @Override
-    public Long findTestByUrl(String url) {
-        Link link = linkDao.findByUrl(url);
+    public Long findTestByLink(String shortCode) {
+        Link link = linkDao.findByShortCode(shortCode);
         if (link != null) {
             return link.getTest().getId();
         }

@@ -23,10 +23,10 @@ public class Link extends BaseEntity {
     private Test test;
 
     /**
-     * The url.
+     * The url short code.
      */
-    @Column(name = "URL", nullable = false, unique = true)
-    private String url;
+    @Column(name = "SHORT_CODE", nullable = false, unique = true)
+    private String shortCode;
 
     public Test getTest() {
         return test;
@@ -36,12 +36,12 @@ public class Link extends BaseEntity {
         this.test = test;
     }
 
-    public String getUrl() {
-        return url;
+    public String getShortCode() {
+        return shortCode;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setShortCode(String shortCode) {
+        this.shortCode = shortCode;
     }
 
 }

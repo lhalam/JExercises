@@ -8,7 +8,7 @@ package com.softserveinc.ita.jexercises.common.dto;
  */
 public class AccountMenuDto {
     /**
-     * User firt name.
+     * User first name.
      */
     private String firstName;
     /**
