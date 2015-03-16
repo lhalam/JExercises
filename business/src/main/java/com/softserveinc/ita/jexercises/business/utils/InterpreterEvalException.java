@@ -6,13 +6,13 @@ package com.softserveinc.ita.jexercises.business.utils;
  * @author Volodymyr yakymiv
  * @version 1.0
  */
-public class UnsuccessEvent extends Exception {
+public class InterpreterEvalException extends Exception {
 
     /**
      * Method witch return bad event.
      * @param message of event.
      */
-    public UnsuccessEvent (String message){
+    public InterpreterEvalException(String message){
         super (message);
     }
 }

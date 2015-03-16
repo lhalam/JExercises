@@ -15,14 +15,34 @@ public class TextFormatter {
 
     /**
      * Method which forms text.
-     * @param string text of field.
-     * @param size of field
+     *
+     * @param strInput text of field.
+     * @param size     of field
      * @return result.
      */
-    public String setThreeDots(String string, int size){
-        if (string.length()>size){
-            string = string.substring(0,size)+THREEDOTS;
+    public String setThreeDots(String strInput, int size) {
+        String strOutput = new String();
+        int count = 0;
+        boolean htmlLabel = false;
+        for (int i = 0; i < strInput.length(); i++) {
+            if (strInput.charAt(i) == '<') {
+                htmlLabel = true;
+            }
+            if (htmlLabel) {
+                strOutput += strInput.charAt(i);
+            } else {
+                count++;
+                if (count < size) {
+                    strOutput += strInput.charAt(i);
+                }
+            }
+            if (strInput.charAt(i) == '>') {
+                htmlLabel = false;
+            }
         }
-        return string;
+        if (count > size) {
+            strOutput += THREEDOTS;
+        }
+        return strOutput;
     }
 }

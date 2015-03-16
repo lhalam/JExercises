@@ -63,10 +63,4 @@ public class AssertServiceImpl implements AssertService {
     public List<Assert> findAllAsserts() {
         return assertDao.findAll();
     }
-
-    @Override
-    public List<Assert> findAllByQuestionId(Long questionId) {
-        return assertDao.findAllByQuestion(questionId);
-    }
-
 }

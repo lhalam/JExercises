@@ -2,11 +2,11 @@ package com.softserveinc.ita.jexercises.business.sandbox;
 
 import bsh.EvalError;
 import bsh.Interpreter;
-import com.softserveinc.ita.jexercises.business.utils.UnsuccessEvent;
+import com.softserveinc.ita.jexercises.business.utils.InterpreterEvalException;
 import com.softserveinc.ita.jexercises.common.entity.Assert;
 import org.apache.log4j.Logger;
 
-import java.util.List;
+import java.util.Set;
 
 /**
  * Represents Sandbox.
@@ -39,12 +39,12 @@ public class Sandbox {
      * @param untrustedCode User input answer.
      * @param asserts       List of asserts.
      * @return True if user answer is correct and false is incorrect.
-     * @throws UnsuccessEvent .
+     * @throws InterpreterEvalException .
      */
     public boolean checkUserAnswer(String untrustedCode,
-                                          List<Assert> asserts)
-            throws UnsuccessEvent {
-        String pw = SandboxServiceManager.getInstance()
+                                   Set<Assert> asserts)
+            throws InterpreterEvalException {
+        String password = SandboxServiceManager.getInstance()
                 .restrict(SandboxContextManager.getInstance());
         try {
             for (Assert instance : asserts) {
@@ -59,11 +59,11 @@ public class Sandbox {
                     }
                 } catch (EvalError evalError) {
                     logger.error(evalError.getStackTrace());
-                    throw new UnsuccessEvent("unsafe input");
+                    throw new InterpreterEvalException("Script syntax error");
                 }
             }
         } finally {
-            SandboxServiceManager.getInstance().releaseRestriction(pw);
+            SandboxServiceManager.getInstance().releaseRestriction(password);
         }
         return result;
     }
