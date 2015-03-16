@@ -12,6 +12,11 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class TestCreatingMapper {
+    /**
+     * Default value of URL for public test.
+     */
+    public static final String NO_URL = "noURL";
+
      /**
      * Transforms TestDescription DTO  object into Test entity object.
      *
@@ -38,6 +43,11 @@ public class TestCreatingMapper {
         testCreatingDto.setTestName(test.getName());
         testCreatingDto.setIsPublic(test.getIsPublic());
         testCreatingDto.setTestId(test.getId());
+        if (test.getIsPublic()) {
+            testCreatingDto.setTestUrl(NO_URL);
+        } else {
+            testCreatingDto.setTestUrl(test.getLink().getShortCode());
+        }
         return testCreatingDto;
     }
 

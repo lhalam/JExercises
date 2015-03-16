@@ -49,48 +49,58 @@
                         Create new test
                     </h3>
                 </div>
-                <div class="col-md-10 col-md-offset-1">
-                    <div class="form-group">
-                        <label>Test name:</label>
-
-                        <div class="form-control summernote" id="testName"></div>
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1" id="border">
+                        <br>
+                        <br>
+                        <div class="form-group">
+                            <label>Test name:</label>
+                            <div class="form-control summernote" id="testName"></div>
+                        </div>
+                        <div class="form-group">
+                            <label>Description:</label>
+                            <div class="form-control summernote" id="testDescription"></div>
+                        </div>
+                        <div id="setAvailability">
+                            <form role="form">
+                                <label>Check an availability :</label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="optradio" id="public" checked>
+                                    Public
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="optradio" id="private">
+                                    Private
+                                </label>
+                            </form>
+                        </div>
+                        <div id="getAvailability" class="hidden">
+                        </div>
+                        <div class="input-group hidden" id="link">
+                            <input type="text" class="form-control" id="testUrl" disabled>
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="button" id="regenerate">
+                                    <span class="glyphicon glyphicon-cog"></span>
+                                    Regenerate
+                                </button>
+                            </span>
+                        </div>
+                        <br>
+                        <br>
                     </div>
-                    <div class="form-group">
-                        <label>Description:</label>
-
-                        <div class="form-control summernote" id="testDescription"></div>
+                    <div class="col-md-offset-5 col-md-7" id="createBlock">
+                        <br>
+                        <br>
+                        <button type="button" class="btn btn-success" id="create">
+                            <span class="glyphicon glyphicon-floppy-disk"></span>
+                            Create new test
+                        </button>
+                        <br>
+                        <br>
                     </div>
-                    <div id="setAvailability">
-                        <form role="form">
-                            <label>Check an availability :</label>
-                            <label class="radio-inline">
-                                <input type="radio" name="optradio" id="public" checked>
-                                Public
-                            </label>
-                            <label class="radio-inline">
-                                <input type="radio" name="optradio" id="private">
-                                Private
-                            </label>
-                        </form>
-                    </div>
-                    <div id="getAvailability" class="hidden">
-                    </div>
-                </div>
-                <div class="col-md-offset-5 col-md-7">
-                    <button type="button" class="btn btn-success" id="create">
-                        <span class="glyphicon glyphicon-floppy-disk"></span>
-                        Create new test
-                    </button>
-                    <br>
-                    <br>
                 </div>
                 <div id="tables" class="hidden">
                     <div class="row-fluid">
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-
                         <div class="col-md-offset-5 col-md-7" id="textToTables">
                             <label>
                                 <strong>

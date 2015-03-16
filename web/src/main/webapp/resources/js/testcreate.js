@@ -8,9 +8,9 @@ function validator(element) {
             content: 'Please, fill the fields',
             placement: 'top'
         }).popover('show');
-            setTimeout(function () {
+        setTimeout(function () {
             $(element).popover('hide');
-            }, 2000);
+        }, 2000);
         return false;
     }
     return true;
@@ -33,24 +33,40 @@ var dataTest = {
 $(document).ready(function () {
     var baseDir = $("#hidden-attr").attr("data-basedir");
     $("#create").on('click', function () {
-            if (validator($(this))) {
-                dataTest.testName = $('#testName').code().toString();
-                dataTest.testDescription = $('#testDescription').code().toString();
-                if (document.getElementById("private").checked) {
-                    dataTest.isPublic = false;
+        if (validator($(this))) {
+            dataTest.testName = $('#testName').code().toString();
+            dataTest.testDescription = $('#testDescription').code().toString();
+            if (document.getElementById("private").checked) {
+                dataTest.isPublic = false;
+            }
+            $.ajax({
+                url: baseDir + "/tests/create",
+                type: 'POST',
+                dataType: 'html',
+                data: JSON.stringify(dataTest),
+                contentType: 'application/json',
+                mimeType: 'application/json',
+                async: false,
+                success: function (testId) {
+                    dataTest.testId = testId;
+
                 }
+            });
+            if (!dataTest.isPublic) {
                 $.ajax({
-                    url: baseDir + "/tests/create",
+                    url: baseDir + "/public/link/generate/" + dataTest.testId,
                     type: 'POST',
                     dataType: 'html',
                     data: JSON.stringify(dataTest),
                     contentType: 'application/json',
                     mimeType: 'application/json',
-                    success: function (testId) {
-                        window.location.href = baseDir + "/tests/" + testId + "/edit";
+                    async: false,
+                    success: function (url) {
                     }
                 });
             }
+            window.location.href = baseDir + "/tests/" + dataTest.testId + "/edit";
+        }
     });
 
 });

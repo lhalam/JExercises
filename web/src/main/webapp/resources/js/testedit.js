@@ -61,7 +61,49 @@ $(document).ready(function () {
             if (dataTest.isPublic) {
                 document.getElementById("public").checked = true;
             } else {
+                dataTest.testUrl = 'http://' + window.location.host + baseDir + '/' + dataTest.testUrl;
                 document.getElementById("private").checked = true;
+                $('#link').removeClass('hidden');
+                $('#testUrl').val(dataTest.testUrl);
+            }
+        }
+    });
+
+    $('#regenerate').on('click', function () {
+        $.ajax({
+            url: baseDir + "/public/link/generate/" + dataTest.testId,
+            type: 'POST',
+            dataType: 'html',
+            data: JSON.stringify(dataTest),
+            contentType: 'application/json',
+            mimeType: 'application/json',
+            async: false,
+            success: function (url) {
+                dataTest.testUrl = url;
+                $('#testUrl').val(dataTest.testUrl);
+            }
+        });
+    });
+
+    $('input[type=radio]').click(function(){
+        if (this.id == 'public'){
+            $('#link').addClass('hidden');
+        } else {
+            $('#link').removeClass('hidden');
+            if (dataTest.testUrl == 'noURL') {
+                $.ajax({
+                    url: baseDir + "/public/link/generate/" + dataTest.testId,
+                    type: 'POST',
+                    dataType: 'html',
+                    data: JSON.stringify(dataTest),
+                    contentType: 'application/json',
+                    mimeType: 'application/json',
+                    async: false,
+                    success: function (url) {
+                        dataTest.testUrl = url;
+                        $('#testUrl').val(dataTest.testUrl);
+                    }
+                });
             }
         }
     });

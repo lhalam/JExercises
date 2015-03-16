@@ -4,7 +4,8 @@
     display:none;
 }
 .gridtableborder {
-    border: 2px solid black;
+    border: 2px solid #cccccc;
+    background-color: #eeeeee;
 }
 .btn{
     margin-left:10px;

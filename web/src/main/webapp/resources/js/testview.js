@@ -6,14 +6,16 @@ var dataTest = {
     testId: 0,
     testName: '0',
     testDescription: '0',
-    isPublic: true
+    isPublic: true,
+    testUrl: '0'
 };
 
 $(document).ready(function () {
     var baseDir = $("#hidden-attr").attr("data-basedir");
     $("#viewButtons").removeClass("hidden");
+    $("#border").addClass('gridtableborder');
     $("#title").html('View current test');
-    $("#create").addClass('hidden');
+    $("#createBlock").addClass('hidden');
     $('#testName').removeClass('summernote');
     $('#testName').removeClass('form-control');
     $('#testDescription').removeClass('summernote');
@@ -35,7 +37,10 @@ $(document).ready(function () {
             if (dataTest.isPublic) {
                 $("#getAvailability").html('<strong>Availability:</strong><div class="form">Test is public</div>');
             } else {
-                $("#getAvailability").html('<strong>Availability:</strong><div class="form">Test is private</div>');
+                $("#getAvailability").html('<strong>Availability:</strong><div class="form">Test is private</div>' +
+                '<br><strong>Public link:</strong><br><a href="http://' + window.location.host + baseDir +
+                '/' + dataTest.testUrl + '"><a>http://' + window.location.host + baseDir +
+                '/' + dataTest.testUrl+'</a>');
             }
             $('#testName').addClass('form');
             $('#testDescription').addClass('form');

@@ -31,8 +31,7 @@ public class LinkController {
      *            HttpServletRequest.
      * @return New or updated public link.
      */
-    @RequestMapping(value = { "/public/link/create/{id}",
-            "/public/link/update/{id}" }, method = RequestMethod.POST)
+    @RequestMapping(value = "/public/link/generate/{id}", method = RequestMethod.POST)
     @ResponseBody
     public String generatePublicLink(@PathVariable("id") Long id,
             HttpServletRequest request) {

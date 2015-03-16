@@ -24,6 +24,10 @@ public class TestCreatingDto {
      * Availability of test.
      */
     private boolean isPublic;
+    /**
+     * Link to test.
+     */
+    private String testUrl;
 
     public String getTestName() {
         return testName;
@@ -52,4 +56,8 @@ public class TestCreatingDto {
     public Long getTestId() { return testId; }
 
     public void setTestId(Long testId) { this.testId = testId; }
+
+    public String getTestUrl() { return testUrl; }
+
+    public void setTestUrl(String testUrl) { this.testUrl = testUrl; }
 }
