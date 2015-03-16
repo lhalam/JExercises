@@ -3,7 +3,7 @@ package com.softserveinc.ita.jexercises.business.services.impl;
 import com.softserveinc.ita.jexercises.business.sandbox.Sandbox;
 import com.softserveinc.ita.jexercises.business.services.CurrentUserService;
 import com.softserveinc.ita.jexercises.business.services.TestProcessService;
-import com.softserveinc.ita.jexercises.business.utils.UnsuccessEvent;
+import com.softserveinc.ita.jexercises.business.utils.InterpreterEvalException;
 import com.softserveinc.ita.jexercises.common.dto.QuestionRequestDto;
 import com.softserveinc.ita.jexercises.common.dto.QuestionResponseDto;
 import com.softserveinc.ita.jexercises.common.dto.TestStartDto;
@@ -16,7 +16,6 @@ import com.softserveinc.ita.jexercises.common.mapper.AttemptMapper;
 import com.softserveinc.ita.jexercises.common.mapper.QuestionResponseMapper;
 import com.softserveinc.ita.jexercises.common.mapper.TestStartMapper;
 import com.softserveinc.ita.jexercises.common.mapper.UserAnswerMapper;
-import com.softserveinc.ita.jexercises.persistence.dao.impl.AssertDao;
 import com.softserveinc.ita.jexercises.persistence.dao.impl.AttemptDao;
 import com.softserveinc.ita.jexercises.persistence.dao.impl.QuestionDao;
 import com.softserveinc.ita.jexercises.persistence.dao.impl.TestDao;
@@ -61,9 +60,6 @@ public class TestProcessServiceImpl implements TestProcessService {
 
     @Autowired
     private QuestionResponseMapper questionResponseMapper;
-
-    @Autowired
-    private AssertDao assertDao;
 
     @Override
     @Transactional
@@ -134,13 +130,12 @@ public class TestProcessServiceImpl implements TestProcessService {
         for (UserAnswer userAnswer : userAnswers) {
             try {
                 if (new Sandbox().checkUserAnswer(userAnswer.getAnswer(),
-                        assertDao.findAllByQuestion(
-                                userAnswer.getQuestion().getId()))) {
+                        userAnswer.getQuestion().getAsserts())) {
                     userAnswer.setCorrect(true);
                 } else {
                     userAnswer.setCorrect(false);
                 }
-            } catch (UnsuccessEvent unsuccessEvent) {
+            } catch (InterpreterEvalException e) {
                 userAnswer.setCorrect(false);
             }
             userAnswerDao.update(userAnswer);

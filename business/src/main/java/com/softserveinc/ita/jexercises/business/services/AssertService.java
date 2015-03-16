@@ -57,13 +57,4 @@ public interface AssertService {
      * @return List of asserts.
      */
     List<Assert> findAllAsserts();
-
-    /**
-     * 
-     * @param questionId
-     *            Get all asserts by question id.
-     * @return List of asserts.
-     */
-    List<Assert> findAllByQuestionId(Long questionId);
-
 }
