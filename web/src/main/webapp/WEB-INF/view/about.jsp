@@ -15,7 +15,7 @@
         <div class="col-xs-10 col-sm-10 col-md-8 col-lg-8 col-xs-offset-1 col-sm-offset-1 col-md-offset-2 col-lg-offset-2 ">
             <div class="panel panel-info">
                 <div class="panel-heading">
-                    <h4>About:</h4>
+                    <h4>About</h4>
                 </div>
                 <div class="container-fluid">
                     <div class=" col-md-10 col-lg-10 col-md-offset-1 col-md-offset-1 ">
