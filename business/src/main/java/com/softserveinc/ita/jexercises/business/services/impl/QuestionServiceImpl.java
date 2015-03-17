@@ -27,8 +27,8 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Override
     @Transactional
-    public Long createQuestion(Question question) {
-       return questionDao.create(question).getId();
+    public void createQuestion(Question question) {
+        questionDao.create(question);
 
     }
 

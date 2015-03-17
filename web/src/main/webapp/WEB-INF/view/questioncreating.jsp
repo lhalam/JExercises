@@ -4,26 +4,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-<c:set var="basedir" value="${pageContext.request.contextPath}" />
-    <c:set var="basedir" value="${pageContext.request.contextPath}"/>
-    <meta charset="utf-8">
-    <title>JExercises</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="JExercises UI">
-    <script src="${basedir}/resources/js/lib/jquery-1.11.1.js" type="text/javascript"></script>
-    <link href="${basedir}/resources/css/lib/bootstrap.css" rel="stylesheet" type="text/css">
-    <link href="${basedir}/resources/css/lib/bootstrap-theme.css" rel="stylesheet" type="text/css">
-    <link href="${basedir}/resources/css/lib/styles.css" rel="stylesheet" type="text/css">
-    <link href="${basedir}/resources/css/table.css" rel="stylesheet" type="text/css">
-    <link href="${basedir}/resources/css/lib/dataTables.bootstrap.css" rel="stylesheet" type="text/css">
-    <link href="${basedir}/resources/ss-logo.png" rel="shortcut icon" type="text/css">
-    <script src="${basedir}/resources/js/lib/bootstrap.js" type="text/javascript"></script>
-    <script src="${basedir}/resources/js/lib/jquery.dataTables.min.js" type="text/javascript"></script>
-    <script src="${basedir}/resources/js/lib/bootstrap.jquery.dataTable.js" type="text/javascript"></script>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"/>
-    <link href="${basedir}/resources/css/summernote/summernote.css" rel="stylesheet" type="text/css">
-    <script src="${basedir}/resources/js/summernote/summernote.js" type="text/javascript"></script>
-    <script src="${basedir}/resources/js/questioncreating.js"></script>
+
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"
+	type="text/javascript"></script>
+
+<link rel="stylesheet"
+	href="http://netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.min.css" />
+<script type="text/javascript"
+	src="http://netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet"
+	href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" />
+<link rel="stylesheet" href="resources/css/summernote/summernote.css">
+<script type="text/javascript"
+	src="resources/js/summernote/summernote.js"></script>
+<script
+	src="http://cdn.datatables.net/1.10.5/js/jquery.dataTables.min.js"
+	type="text/javascript"></script>
+<link rel="stylesheet"
+	href="http://cdn.datatables.net/1.10.5/css/jquery.dataTables.css" />
+<script src="resources/js/questioncreating.js"></script>
 <%@ include file="navigation.jsp"%>
 </head>
 <body background="resources/background.jpg">
@@ -96,6 +95,5 @@
 			</form>
 		</div>
 	</div>
-    <div class="hidden-attribute" id="hidden-attr" data-basedir="${basedir}"></div>
 </body>
 </html>
