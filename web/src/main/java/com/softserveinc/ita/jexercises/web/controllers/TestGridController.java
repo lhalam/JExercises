@@ -42,7 +42,7 @@ public class TestGridController {
      * case that actually means returning.
      * testsGrid.jsp
      */
-    @RequestMapping(value = "/testsgrid", method = RequestMethod.GET)
+    @RequestMapping(value = "/tests", method = RequestMethod.GET)
     public ModelAndView showTestGridPage(Model model) {
 
         return new ModelAndView("test/testsgrid");
@@ -54,7 +54,7 @@ public class TestGridController {
      * @param dataTables search conditions.
      * @return TestGridDto object.
      */
-    @RequestMapping(value = "/testsgrid", method = RequestMethod.POST)
+    @RequestMapping(value = "/tests", method = RequestMethod.POST)
     @ResponseBody
     public GridResponseDto showTestGridPage(@RequestBody
                                             DataTables dataTables) {
@@ -68,7 +68,7 @@ public class TestGridController {
      * @param testId of test which will be deleted.
      * @return test Id.
      */
-    @RequestMapping(value = "/testsgrid/delete", method = RequestMethod.POST)
+    @RequestMapping(value = "/tests/delete", method = RequestMethod.POST)
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @ResponseBody
     public String deleteTest(@RequestBody Long testId) {

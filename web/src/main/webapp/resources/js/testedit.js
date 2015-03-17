@@ -203,7 +203,7 @@ $(document).ready(function () {
                     contentType: 'application/json',
                     mimeType: 'application/json',
                     success: function (data) {
-                        window.location.href = baseDir + "/testsgrid";
+                        window.location.href = baseDir + "/tests";
                     }
                 });
             }

@@ -49,7 +49,7 @@ $(document).ready(function () {
         processing: true,
         serverSide: true,
         ajax: {
-            url: baseDir + "/testsgrid",
+            url: baseDir + "/tests",
             type: 'POST',
             mimeType: 'application/json',
             contentType: 'application/json',

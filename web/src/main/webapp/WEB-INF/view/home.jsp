@@ -22,7 +22,7 @@
                 </p>
 
                 <div class="banner_btn">
-                    <a href="/web/testsgrid" class="btn btn-default btn-lg">Tests</a>
+                    <a href="/web/tests" class="btn btn-default btn-lg">Tests</a>
                 </div>
             </div>
         </div>

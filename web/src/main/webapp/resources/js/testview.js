@@ -85,6 +85,6 @@ $(document).ready(function () {
     });
 
     $('#viewGrid').on('click', function () {
-        window.location.href = baseDir + "/testsgrid";
+        window.location.href = baseDir + "/tests";
     });
 });

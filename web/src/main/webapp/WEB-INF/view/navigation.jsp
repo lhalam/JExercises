@@ -20,7 +20,7 @@
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li><a href="${basedir}/about">About</a></li>
-                <li><a href="${basedir}/testsgrid">Tests</a></li>
+                <li><a href="${basedir}/tests">Tests</a></li>
                 <sec:authorize access="hasRole('ROLE_ADMIN')">
                     <li><a href="${basedir}/user/find">Users</a></li>
                 </sec:authorize>

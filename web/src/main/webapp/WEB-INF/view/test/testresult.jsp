@@ -113,7 +113,7 @@
 						</c:if>
 					</sec:authorize>
 					<div class="col-md-2 col-lg-2 col-md-offset-5 pos" id="okbtn">
-						<a href="${basedir}/login" class="btn btn-success okbtn"
+						<a href="${basedir}/tests" class="btn btn-success okbtn"
 							type="button">OK</a>
 					</div>
 				</div>
