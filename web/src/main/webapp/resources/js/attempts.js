@@ -25,14 +25,17 @@ $(document).ready(function () {
 			"visible": false
 		},
 		{
-			"data": "firstName"			
+			"data": "firstName",
+			"className": "dt-center"
 		},
 		{
-			"data": "lastName"			
+			"data": "lastName",
+			"className": "dt-center"
 		},
 		{
 			"data": "createdDate",
-			"searchable":false
+			"searchable":false,
+			"className": "dt-center"
 			
 		},	
 		{

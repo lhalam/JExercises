@@ -17,8 +17,9 @@
 }
 
 .mybtn {
-    margin-top: 20px;
-    margin-bottom: 20px;
+	width: 80px;
+	height:30px;   
+    left: 50%;    
 }
 .wrapper{
 	text-align: center;
