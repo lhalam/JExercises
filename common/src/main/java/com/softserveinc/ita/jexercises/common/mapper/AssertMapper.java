@@ -5,7 +5,9 @@ import java.util.List;
 import java.util.Set;
 
 import com.softserveinc.ita.jexercises.common.dto.AssertDto;
+import com.softserveinc.ita.jexercises.common.dto.QuestionDto;
 import com.softserveinc.ita.jexercises.common.entity.Assert;
+import com.softserveinc.ita.jexercises.common.entity.Question;
 
 /**
  * Represents entity/DTO mapping tool.
@@ -16,36 +18,40 @@ import com.softserveinc.ita.jexercises.common.entity.Assert;
  */
 public class AssertMapper {
     /**
-     * Transforms List of AssertDto objects into Set of Assert objects.
      * 
-     * @param assertDtoList
-     *            List of AssertDto.
+     * @param questionDto
+     *            QuestionDto object.
+     * @param question
+     *            question object.
      * @return Set of Assert objects.
      */
-    public Set<Assert> toEntitySet(List<AssertDto> assertDtoList) {
+    public Set<Assert> toEntitySet(QuestionDto questionDto, Question question) {
         Set<Assert> assertSet = new HashSet<>();
+        List<AssertDto> assertDtoList = questionDto.getAssertDtoList();
         AssertMapper assertMapper = new AssertMapper();
+
         for (AssertDto c : assertDtoList) {
             c.getExpectedAnswer();
             c.getInputData();
-            assertSet.add((assertMapper.toEntity(c)));
+            assertSet.add((assertMapper.toEntity(c, question)));
         }
-
         return assertSet;
 
     }
 
     /**
-     * Transforms AssertDto object into Assert entity object.
      * 
      * @param assertDto
-     *            AssertDtoObject.
+     *            AssertDto object.
+     * @param question
+     *            Question object.
      * @return Assert object.
      */
-    private Assert toEntity(AssertDto assertDto) {
+    private Assert toEntity(AssertDto assertDto, Question question) {
         Assert assertVar = new Assert();
         assertVar.setExpectedAnswer(assertDto.getExpectedAnswer());
         assertVar.setInputData(assertDto.getInputData());
+        assertVar.setQuestion(question);
         return assertVar;
 
     }

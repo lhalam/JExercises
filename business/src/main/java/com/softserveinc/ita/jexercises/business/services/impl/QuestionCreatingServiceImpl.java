@@ -4,10 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.softserveinc.ita.jexercises.business.services.
-        QuestionCreatingService;
+import com.softserveinc.ita.jexercises.business.services.QuestionCreatingService;
 import com.softserveinc.ita.jexercises.business.services.QuestionService;
 import com.softserveinc.ita.jexercises.common.dto.QuestionDto;
+import com.softserveinc.ita.jexercises.common.entity.Question;
+import com.softserveinc.ita.jexercises.common.mapper.AssertMapper;
 import com.softserveinc.ita.jexercises.common.mapper.QuestionMapper;
 
 /**
@@ -27,12 +28,14 @@ public class QuestionCreatingServiceImpl implements QuestionCreatingService {
 
     @Transactional
     @Override
-    public void createQuestionDescription(
-            QuestionDto questionDto) {
+    public void createQuestionDescription(QuestionDto questionDto) {
 
         QuestionMapper questionMapper = new QuestionMapper();
-        questionService.createQuestion(questionMapper
-                .toEntity(questionDto));
+        AssertMapper assertMapper = new AssertMapper();
+        Question question;
+        question = questionMapper.toEntity(questionDto);
+        questionService.createQuestion(question);
 
+        question.setAsserts(assertMapper.toEntitySet(questionDto, question));
     }
 }

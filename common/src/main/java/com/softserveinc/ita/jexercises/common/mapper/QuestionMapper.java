@@ -23,10 +23,6 @@ public class QuestionMapper {
         question.setDescription(questionDto.getQuestionDescription());
         question.setName(questionDto.getQuestionName());
 
-        AssertMapper assertMapper = new AssertMapper();
-        question.setAsserts(assertMapper.toEntitySet(questionDto
-                .getAssertDtoList()));
-
         return question;
     }
 
