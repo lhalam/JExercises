@@ -1,7 +1,9 @@
 package com.softserveinc.ita.jexercises.web.controllers;
 
 import com.softserveinc.ita.jexercises.business.services.TestDescriptionService;
+import com.softserveinc.ita.jexercises.business.services.TestService;
 import com.softserveinc.ita.jexercises.common.dto.TestDescriptionDto;
+import com.softserveinc.ita.jexercises.web.utils.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,14 +28,31 @@ public class TestDescriptionController {
     private TestDescriptionService testDescriptionService;
 
     /**
+     * Service which gives test object.
+     */
+    @Autowired
+    private TestService testService;
+
+    /**
      * Gets test description form page.
      *
-     * @param model Model.
+     * @param model  Model.
+     * @param testId Test id.
      * @return Test Description page.
+     * @throws ResourceNotFoundException No test with such id
+     * or user does not have access to private test
      */
     @RequestMapping(value = "/test/{id}", method = RequestMethod.GET)
-    public ModelAndView showTestDescriptionForm(Model model) {
-        return new ModelAndView("test/testdescription");
+    public ModelAndView showTestDescriptionForm(Model model,
+                                                @PathVariable("id")
+                                                Long testId)
+            throws ResourceNotFoundException {
+        if (!testDescriptionService.checkDoesUserHavePrivateLink(testId)
+                || testService.findTestById(testId) == null) {
+            throw new ResourceNotFoundException();
+        } else {
+            return new ModelAndView("test/testdescription");
+        }
     }
 
     /**
@@ -44,8 +63,8 @@ public class TestDescriptionController {
      */
     @RequestMapping(value = "/test/{id}", method = RequestMethod.POST)
     @ResponseBody
-    public TestDescriptionDto showTestDescriptionForm(@PathVariable("id") Long id) {
-        TestDescriptionDto testDescriptionDto = testDescriptionService.getTestDescription(id);
-        return testDescriptionDto;
+    public TestDescriptionDto showTestDescriptionForm(@PathVariable("id")
+                                                      Long id) {
+        return testDescriptionService.getTestDescription(id);
     }
 }

@@ -2,6 +2,7 @@ package com.softserveinc.ita.jexercises.web.controllers;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.softserveinc.ita.jexercises.business.services.TestProcessService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +22,9 @@ public class LinkController {
 
     @Autowired
     private LinkService linkService;
+
+    @Autowired
+    private TestProcessService testProcessService;
 
     /**
      * Gets new or updated public link.
@@ -54,6 +58,7 @@ public class LinkController {
     public String showPrivateTest(@PathVariable("shortCode") String shortCode,
             HttpServletRequest request) {
         Long testId = linkService.findTestByLink(shortCode);
+        testProcessService.createAttemptAndUserAnswersForPrivateTest(testId);
         return String.format("forward:/test/%d", testId);
 
     }

@@ -66,11 +66,16 @@ public class TestProcessServiceImpl implements TestProcessService {
     public TestStartDto getInformationAboutTestQuestions(Long testId) {
         Test test = testDao.findById(testId);
         User user = currentUserService.getCurrentUser();
-        Attempt attempt = attemptMapper.toEntity(test, user);
-        attemptDao.create(attempt);
-        List<Question> questions = questionDao.findAllByTestId(testId);
-        createUserAnswers(attempt, questions);
-        return testStartMapper.toDto(questions, attempt);
+        if (test.getIsPublic()) {
+            Attempt attempt = attemptMapper.toEntity(test, user);
+            attemptDao.create(attempt);
+            createUserAnswers(attempt, test.getQuestions());
+            return testStartMapper.toDto(test.getQuestions(), attempt);
+        } else {
+            Attempt attempt = attemptDao.findAttemptByTestIdAndUserId(
+                    test.getId(), user.getId());
+            return testStartMapper.toDto(test.getQuestions(), attempt);
+        }
     }
 
     @Override
@@ -95,22 +100,27 @@ public class TestProcessServiceImpl implements TestProcessService {
     @Override
     @Transactional
     public void submitTest(QuestionRequestDto questionRequestDto) {
-        UserAnswer currentUserAnswer =
-                userAnswerDao.findUserAnswerByQuestionIdAndAttemptId(
-                        questionRequestDto.getCurrentQuestionId(),
-                        questionRequestDto.getAttemptId());
-        currentUserAnswer.setAnswer(questionRequestDto.getUserAnswer());
-        userAnswerDao.update(currentUserAnswer);
+        updateCurrentUserAnswer(questionRequestDto);
         List<UserAnswer> userAnswers =
                 userAnswerDao.findAllByAttemptId(
                         questionRequestDto.getAttemptId());
         checkUserAnswer(userAnswers);
     }
 
+    @Override
+    @Transactional
+    public void createAttemptAndUserAnswersForPrivateTest(Long testId) {
+        Test test = testDao.findById(testId);
+        User user = currentUserService.getCurrentUser();
+        Attempt attempt = attemptMapper.toEntity(test, user);
+        attemptDao.create(attempt);
+        createUserAnswers(attempt, questionDao.findAllByTestId(test.getId()));
+    }
+
     /**
      * Creates User Answer object.
      *
-     * @param attempt Attempt object
+     * @param attempt   Attempt object
      * @param questions List of questions.
      */
     private void createUserAnswers(Attempt attempt, List<Question> questions) {
@@ -140,5 +150,20 @@ public class TestProcessServiceImpl implements TestProcessService {
             }
             userAnswerDao.update(userAnswer);
         }
+    }
+
+    /**
+     * Updates user answer.
+     *
+     * @param questionRequestDto Question Request DTO.
+     */
+    private void updateCurrentUserAnswer(QuestionRequestDto
+                                                 questionRequestDto){
+        UserAnswer currentUserAnswer =
+                userAnswerDao.findUserAnswerByQuestionIdAndAttemptId(
+                        questionRequestDto.getCurrentQuestionId(),
+                        questionRequestDto.getAttemptId());
+        currentUserAnswer.setAnswer(questionRequestDto.getUserAnswer());
+        userAnswerDao.update(currentUserAnswer);
     }
 }

@@ -1,5 +1,6 @@
 package com.softserveinc.ita.jexercises.web.controllers;
 
+import com.softserveinc.ita.jexercises.business.services.TestDescriptionService;
 import com.softserveinc.ita.jexercises.business.services.TestProcessService;
 import com.softserveinc.ita.jexercises.business.services.TestService;
 import com.softserveinc.ita.jexercises.common.dto.QuestionRequestDto;
@@ -39,17 +40,25 @@ public class TestProcessController {
     private TestService testService;
 
     /**
+     * Service that handles get test description process.
+     */
+    @Autowired
+    private TestDescriptionService testDescriptionService;
+
+    /**
      * Getting test process view.
      *
      * @param model UI view model.
-     * @param id    Test id.
+     * @param testId    Test id.
      * @return Test page.
-     * @throws ResourceNotFoundException No test with such id exception
+     * @throws ResourceNotFoundException No test with such id
+     * or user does not have access to private test
      */
     @RequestMapping(value = "/test/process/{id}", method = RequestMethod.GET)
-    public ModelAndView testForm(Model model, @PathVariable("id") Long id)
+    public ModelAndView testForm(Model model, @PathVariable("id") Long testId)
             throws ResourceNotFoundException {
-        if (testService.findTestById(id) == null) {
+        if (!testDescriptionService.checkDoesUserHavePrivateLink(testId) ||
+                testService.findTestById(testId) == null) {
             throw new ResourceNotFoundException();
         } else {
             return new ModelAndView("test/testinprocess");

@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Repository;
 
@@ -44,6 +45,21 @@ public class HibernateAttemptDaoImpl extends
             q.setParameter("testId_", testId);
             List<Attempt> attempts = (List<Attempt>) q.getResultList();
             return attempts;
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public Attempt findAttemptByTestIdAndUserId(Long testId, Long userId){
+        try {
+            TypedQuery<Attempt> query = getEntityManager().createQuery(
+                    "select a from Attempt a where a.test.id=:testId " +
+                    "and a.user.id=:userId order by a.id desc ",Attempt.class)
+                    .setParameter("testId", testId).setParameter("userId",
+                            userId).setMaxResults(1);
+            return  query.getSingleResult();
         } catch (NoResultException e) {
             return null;
         }

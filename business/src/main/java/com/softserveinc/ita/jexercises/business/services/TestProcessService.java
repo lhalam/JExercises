@@ -16,7 +16,6 @@ public interface TestProcessService {
      * Gives information about questions in test.
      *
      * @param testId Test Id.
-     *
      * @return TestStart DTO object.
      */
     TestStartDto getInformationAboutTestQuestions(Long testId);
@@ -25,7 +24,6 @@ public interface TestProcessService {
      * Gives information about next or previous question.
      *
      * @param questionRequestDto QuestionRequest DTO object.
-     *
      * @return QuestionResponse DTO object.
      */
     QuestionResponseDto getQuestion(QuestionRequestDto questionRequestDto);
@@ -36,4 +34,11 @@ public interface TestProcessService {
      * @param questionRequestDto QuestionRequest DTO object.
      */
     void submitTest(QuestionRequestDto questionRequestDto);
+
+    /**
+     * Creates attempt and user answers for private test.
+     *
+     * @param testId Test Id.
+     */
+    void createAttemptAndUserAnswersForPrivateTest(Long testId);
 }
