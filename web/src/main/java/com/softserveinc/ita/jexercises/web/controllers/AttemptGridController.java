@@ -66,7 +66,7 @@ public class AttemptGridController {
      *            Grid parameters.
      * @return Filtered test attempts.
      */
-    @RequestMapping(value = "/attempts{id}", method = RequestMethod.POST)
+    @RequestMapping(value = "/attempts/{id}", method = RequestMethod.POST)
     @ResponseBody
     public GridResponseDto testAttemptsData(@RequestBody DataTables dataTables,
             @PathVariable Long id) {
@@ -75,7 +75,7 @@ public class AttemptGridController {
         SearchCondition searchCondition = dataTablesMapper
                 .toSearchCondition(dataTables);
         if (currentUserService.getCurrentUser().getRole() == Role.ROLE_USER) {
-            searchCondition.getAndFilterMap().put("user.id", id);
+            searchCondition.getAndFilterMap().put("user.id", currentUserService.getCurrentUser().getId());
             searchCondition.getNotFilterMap().put("test.isPublic", false);
         }
         searchCondition.getAndFilterMap().put("test.id", id);

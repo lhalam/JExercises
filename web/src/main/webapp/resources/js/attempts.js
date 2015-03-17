@@ -9,7 +9,7 @@ $(document).ready(function () {
 		"processing": true,
 		serverSide: true,
 		ajax :{
-			url:baseDir + "/attempts",
+			url:location.pathname,
 			type:'post',
 			data:function (data) {
 	                return JSON.stringify(data);
