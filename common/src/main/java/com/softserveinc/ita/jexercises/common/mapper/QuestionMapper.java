@@ -1,6 +1,6 @@
 package com.softserveinc.ita.jexercises.common.mapper;
 
-import com.softserveinc.ita.jexercises.common.dto.QuestionCreatingDto;
+import com.softserveinc.ita.jexercises.common.dto.QuestionDto;
 import com.softserveinc.ita.jexercises.common.entity.Question;
 
 /**
@@ -12,19 +12,21 @@ import com.softserveinc.ita.jexercises.common.entity.Question;
  */
 public class QuestionMapper {
     /**
-     * Transforms QuestionCreatingDto object into Question entity object.
+     * Transforms QuestionDto object intoQuestion object.
      * 
-     * @param questionCreatingDto
-     *            QuestionCreatingDto object.
-     * @return Question entity object.
+     * @param questionDto
+     *            QuestionDto object.
+     * @return Question object.
      */
-    public Question toEntity(QuestionCreatingDto questionCreatingDto) {
+    public Question toEntity(QuestionDto questionDto) {
         Question question = new Question();
-        question.setDescription(questionCreatingDto.getQuestionDescription());
-        question.setName(questionCreatingDto.getQuestionName());
+        question.setDescription(questionDto.getQuestionDescription());
+        question.setName(questionDto.getQuestionName());
 
         AssertMapper assertMapper = new AssertMapper();
-        question.setAsserts(assertMapper.toEntity(questionCreatingDto));
+        question.setAsserts(assertMapper.toEntitySet(questionDto
+                .getAssertDtoList()));
+
         return question;
     }
 

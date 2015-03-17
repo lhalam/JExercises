@@ -1,9 +1,10 @@
 package com.softserveinc.ita.jexercises.common.mapper;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
-import com.softserveinc.ita.jexercises.common.dto.QuestionCreatingDto;
+import com.softserveinc.ita.jexercises.common.dto.AssertDto;
 import com.softserveinc.ita.jexercises.common.entity.Assert;
 
 /**
@@ -15,19 +16,38 @@ import com.softserveinc.ita.jexercises.common.entity.Assert;
  */
 public class AssertMapper {
     /**
-     * Transforms QuestionCreatingDto object into Set of asserts.
+     * Transforms List of AssertDto objects into Set of Assert objects.
      * 
-     * @param questionCreatingDto
-     *            QuestionCreatingDto object.
-     * @return Set of asserts.
+     * @param assertDtoList
+     *            List of AssertDto.
+     * @return Set of Assert objects.
      */
-    public Set<Assert> toEntity(QuestionCreatingDto questionCreatingDto) {
-        Assert assertVar = new Assert();
+    public Set<Assert> toEntitySet(List<AssertDto> assertDtoList) {
         Set<Assert> assertSet = new HashSet<>();
-        assertVar.setExpectedAnswer(questionCreatingDto.getExpectedAnswer());
-        assertVar.setInputData(questionCreatingDto.getInputData());
-        assertSet.add(assertVar);
+        AssertMapper assertMapper = new AssertMapper();
+        for (AssertDto c : assertDtoList) {
+            c.getExpectedAnswer();
+            c.getInputData();
+            assertSet.add((assertMapper.toEntity(c)));
+        }
+
         return assertSet;
+
+    }
+
+    /**
+     * Transforms AssertDto object into Assert entity object.
+     * 
+     * @param assertDto
+     *            AssertDtoObject.
+     * @return Assert object.
+     */
+    private Assert toEntity(AssertDto assertDto) {
+        Assert assertVar = new Assert();
+        assertVar.setExpectedAnswer(assertDto.getExpectedAnswer());
+        assertVar.setInputData(assertDto.getInputData());
+        return assertVar;
+
     }
 
 }

@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.softserveinc.ita.jexercises.business.services.
         QuestionCreatingService;
 import com.softserveinc.ita.jexercises.business.services.QuestionService;
-import com.softserveinc.ita.jexercises.common.dto.QuestionCreatingDto;
+import com.softserveinc.ita.jexercises.common.dto.QuestionDto;
 import com.softserveinc.ita.jexercises.common.mapper.QuestionMapper;
 
 /**
@@ -28,11 +28,11 @@ public class QuestionCreatingServiceImpl implements QuestionCreatingService {
     @Transactional
     @Override
     public void createQuestionDescription(
-            QuestionCreatingDto questionCreatingDto) {
+            QuestionDto questionDto) {
 
         QuestionMapper questionMapper = new QuestionMapper();
         questionService.createQuestion(questionMapper
-                .toEntity(questionCreatingDto));
+                .toEntity(questionDto));
 
     }
 }

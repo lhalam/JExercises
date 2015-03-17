@@ -1,6 +1,6 @@
 package com.softserveinc.ita.jexercises.business.services;
 
-import com.softserveinc.ita.jexercises.common.dto.QuestionCreatingDto;
+import com.softserveinc.ita.jexercises.common.dto.QuestionDto;
 
 /**
  * Service that handles question creating process.
@@ -11,11 +11,10 @@ import com.softserveinc.ita.jexercises.common.dto.QuestionCreatingDto;
  */
 public interface QuestionCreatingService {
     /**
-     * Creating question description.
+     * Creating new question description.
      * 
-     * @param questionCreatingDto
-     *            QuestionCreatingDto object.
-     *
+     * @param questionDto
+     *            QuestionDto object.
      */
-    void createQuestionDescription(QuestionCreatingDto questionCreatingDto);
+    void createQuestionDescription(QuestionDto questionDto);
 }
