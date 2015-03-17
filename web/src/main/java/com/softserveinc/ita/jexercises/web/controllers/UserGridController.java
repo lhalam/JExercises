@@ -10,7 +10,6 @@ import com.softserveinc.ita.jexercises.common.dto.dataTables.DataTables;
 import com.softserveinc.ita.jexercises.common.entity.User;
 import com.softserveinc.ita.jexercises.common.mapper.DataTablesMapper;
 import com.softserveinc.ita.jexercises.common.utils.Role;
-import com.softserveinc.ita.jexercises.common.utils.Wrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -103,11 +102,10 @@ public class UserGridController {
                 dataTablesMapper.toSearchCondition(dataTables);
 
         searchCondition.getAndFilterMap().put("user.id",
-                new Wrapper(currentUserService.getCurrentUser().getId()));
+                currentUserService.getCurrentUser().getId());
 
         if (currentUserService.getCurrentUser().getRole() == Role.ROLE_USER) {
-            searchCondition.getNotFilterMap().put("test.isPublic",
-                    new Wrapper(false));
+            searchCondition.getNotFilterMap().put("test.isPublic", false);
         }
 
         return attemptGridService.getUserAttempts(searchCondition);
@@ -151,8 +149,7 @@ public class UserGridController {
         SearchCondition searchCondition =
                 dataTablesMapper.toSearchCondition(dataTables);
 
-        searchCondition.getAndFilterMap().put("user.id",
-                new Wrapper(id));
+        searchCondition.getAndFilterMap().put("user.id", id);
 
         return attemptGridService.getUserAttempts(searchCondition);
     }

@@ -9,7 +9,6 @@ import com.softserveinc.ita.jexercises.common.entity.Test;
 import com.softserveinc.ita.jexercises.common.mapper.TestGridMapper;
 import com.softserveinc.ita.jexercises.common.utils.Button;
 import com.softserveinc.ita.jexercises.common.utils.Role;
-import com.softserveinc.ita.jexercises.common.utils.Wrapper;
 import com.softserveinc.ita.jexercises.persistence.dao.impl.TestDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -47,8 +46,7 @@ public class TestGridServiceImpl implements TestGridService {
     public GridResponseDto<TestGridDto> getGridRows(SearchCondition searchCondition) {
         GridResponseDto<TestGridDto> response = new GridResponseDto<>();
         if (currentUserService.getCurrentUser().getRole() == Role.ROLE_USER) {
-            searchCondition.getNotFilterMap().put("isPublic",
-                    new Wrapper(false));
+            searchCondition.getNotFilterMap().put("isPublic", false);
         }
         response.setDraw(searchCondition.getDraw());
         response.setRecordsFiltered(testDao.getNumberOfFilteredRecords(searchCondition));

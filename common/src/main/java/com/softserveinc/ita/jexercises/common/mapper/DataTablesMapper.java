@@ -4,7 +4,6 @@ import com.softserveinc.ita.jexercises.common.dto.SearchCondition;
 import com.softserveinc.ita.jexercises.common.dto.dataTables.Columns;
 import com.softserveinc.ita.jexercises.common.dto.dataTables.DataTables;
 import com.softserveinc.ita.jexercises.common.dto.dataTables.Order;
-import com.softserveinc.ita.jexercises.common.utils.Wrapper;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
@@ -25,7 +24,7 @@ public class DataTablesMapper {
      */
     public SearchCondition toSearchCondition(DataTables dataTables) {
         SearchCondition searchCondition = new SearchCondition();
-        Map<String, Wrapper> filter = new HashMap<>();
+        Map<String, Object> filter = new HashMap<>();
         Map<String, String> orderBy = new HashMap<>();
 
         for (Order order : dataTables.getOrder()) {
@@ -37,7 +36,7 @@ public class DataTablesMapper {
             for (Columns column : dataTables.getColumns()) {
                 if (column.isSearchable()) {
                     filter.put(column.getData(),
-                            new Wrapper(dataTables.getSearch().getValue()));
+                            dataTables.getSearch().getValue());
                 }
             }
             searchCondition.setOrFilterMap(filter);

@@ -1,7 +1,5 @@
 package com.softserveinc.ita.jexercises.common.dto;
 
-import com.softserveinc.ita.jexercises.common.utils.Wrapper;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,9 +14,9 @@ public class SearchCondition {
     private int pageNumber;
     private int pageSize;
     private Map<String, String> orderByMap = new HashMap<>();
-    private Map<String, Wrapper> andFilterMap = new HashMap<>();
-    private Map<String, Wrapper> orFilterMap = new HashMap<>();
-    private Map<String, Wrapper> notFilterMap = new HashMap<>();
+    private Map<String, Object> andFilterMap = new HashMap<>();
+    private Map<String, Object> orFilterMap = new HashMap<>();
+    private Map<String, Object> notFilterMap = new HashMap<>();
 
     public int getPageNumber() {
         return pageNumber;
@@ -52,27 +50,27 @@ public class SearchCondition {
         this.draw = draw;
     }
 
-    public Map<String, Wrapper> getAndFilterMap() {
+    public Map<String, Object> getAndFilterMap() {
         return andFilterMap;
     }
 
-    public void setAndFilterMap(Map<String, Wrapper> andFilterMap) {
+    public void setAndFilterMap(Map<String, Object> andFilterMap) {
         this.andFilterMap = andFilterMap;
     }
 
-    public Map<String, Wrapper> getOrFilterMap() {
+    public Map<String, Object> getOrFilterMap() {
         return orFilterMap;
     }
 
-    public void setOrFilterMap(Map<String, Wrapper> orFilterMap) {
+    public void setOrFilterMap(Map<String, Object> orFilterMap) {
         this.orFilterMap = orFilterMap;
     }
 
-    public Map<String, Wrapper> getNotFilterMap() {
+    public Map<String, Object> getNotFilterMap() {
         return notFilterMap;
     }
 
-    public void setNotFilterMap(Map<String, Wrapper> notFilterMap) {
+    public void setNotFilterMap(Map<String, Object> notFilterMap) {
         this.notFilterMap = notFilterMap;
     }
 }

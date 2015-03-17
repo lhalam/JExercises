@@ -9,7 +9,6 @@ import com.softserveinc.ita.jexercises.common.entity.Question;
 import com.softserveinc.ita.jexercises.common.entity.Test;
 import com.softserveinc.ita.jexercises.common.mapper.QuestionGridMapper;
 import com.softserveinc.ita.jexercises.common.mapper.TestCreatingMapper;
-import com.softserveinc.ita.jexercises.common.utils.Wrapper;
 import com.softserveinc.ita.jexercises.persistence.dao.impl.QuestionDao;
 import com.softserveinc.ita.jexercises.persistence.dao.impl.TestDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,7 +70,7 @@ public class TestCreatingServiceImpl implements TestCreatingService {
         for (Question question : questionDao.findAllByTestId(testId)) {
             addedQuestions.add(question.getId());
         }
-        searchCondition.getNotFilterMap().put("id", new Wrapper(addedQuestions));
+        searchCondition.getNotFilterMap().put("id", addedQuestions);
         List<Question> questionList = questionDao.findAllByCriteria(searchCondition);
         response.setDraw(searchCondition.getDraw());
         response.setRecordsFiltered(questionDao.getNumberOfFilteredRecords(searchCondition));
@@ -90,7 +89,7 @@ public class TestCreatingServiceImpl implements TestCreatingService {
         for (Question question : questions) {
             addedQuestions.add(question.getId());
         }
-        searchCondition.getOrFilterMap().put("id", new Wrapper(addedQuestions));
+        searchCondition.getOrFilterMap().put("id", addedQuestions);
         response.setRecordsFiltered(questionDao.getNumberOfFilteredRecords(searchCondition));
         response.setRecordsTotal(questionDao.getNumberOfRecords(searchCondition));
         List<Question> questionList = new ArrayList<>();

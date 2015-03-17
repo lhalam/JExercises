@@ -1,7 +1,6 @@
 package com.softserveinc.ita.jexercises.business.services.impl;
 
 import com.softserveinc.ita.jexercises.business.services.AttemptGridService;
-import com.softserveinc.ita.jexercises.business.services.CurrentUserService;
 import com.softserveinc.ita.jexercises.common.dto.AttemptDto;
 import com.softserveinc.ita.jexercises.common.dto.GridResponseDto;
 import com.softserveinc.ita.jexercises.common.dto.SearchCondition;
@@ -23,9 +22,6 @@ import java.util.List;
  */
 @Service
 public class AttemptGridServiceImpl implements AttemptGridService {
-
-    @Autowired
-    private CurrentUserService currentUserService;
 
     @Autowired
     private AttemptDao attemptDao;
