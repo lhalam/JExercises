@@ -1,6 +1,7 @@
 package com.softserveinc.ita.jexercises.web.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -34,6 +35,7 @@ public class QuestionCreatingController {
      * @return questioncreating.jsp
      */
     @RequestMapping(value = "/questioncreating", method = RequestMethod.GET)
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ModelAndView showCreateQuestionForm(Model model) {
         return new ModelAndView("questioncreating");
     }
@@ -46,6 +48,7 @@ public class QuestionCreatingController {
      *            QuestionDto object.
      */
     @RequestMapping(value = "/questioncreating", method = RequestMethod.POST)
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public void registerNewQuestion(@RequestBody QuestionDto questionDto) {
         questionCreatingService.createQuestionDescription(questionDto);
 
