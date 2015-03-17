@@ -95,7 +95,7 @@ $(document).ready(function () {
         var data = table.row($(this).parents('tr')).data();
         $.ajax({
             type: "POST",
-            url: baseDir + "/testsgrid/delete",
+            url: baseDir + "/tests/delete",
             data: JSON.stringify(data.id),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
