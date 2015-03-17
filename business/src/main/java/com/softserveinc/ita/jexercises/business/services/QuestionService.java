@@ -17,8 +17,9 @@ public interface QuestionService {
      * Creates new question.
      *
      * @param question New question.
+     * @return questionID.
      */
-    void createQuestion(Question question);
+    Long createQuestion(Question question);
 
     /**
      * Update question.

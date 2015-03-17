@@ -15,6 +15,7 @@ public interface QuestionCreatingService {
      * 
      * @param questionDto
      *            QuestionDto object.
+     * @param testId of test entity.
      */
-    void createQuestionDescription(QuestionDto questionDto);
+    void createQuestionDescription(QuestionDto questionDto,Long testId);
 }

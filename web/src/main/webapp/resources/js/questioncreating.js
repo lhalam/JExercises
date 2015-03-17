@@ -69,6 +69,7 @@ function onTDClickHandler() {
 }
 $(document).ready(
 		function() {
+            var baseDir = $("#hidden-attr").attr("data-basedir");
 			table = $('#assert').DataTable({
 				"columnDefs" : [ {
 					"width" : "50%",
@@ -116,7 +117,7 @@ $(document).ready(
 							contentType : 'application/json',
 							mimeType : 'application/json',
 							success : function(data) {
-								window.location.replace("/web/index");
+								window.location.href = baseDir + '/tests/' + data + '/edit';
 							}
 
 						});
