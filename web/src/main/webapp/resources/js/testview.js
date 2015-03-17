@@ -39,7 +39,7 @@ $(document).ready(function () {
             } else {
                 $("#getAvailability").html('<strong>Availability:</strong><div class="form">Test is private</div>' +
                 '<br><strong>Public link:</strong><br><a href="http://' + window.location.host + baseDir +
-                '/' + dataTest.testUrl + '"><a>http://' + window.location.host + baseDir +
+                '/' + dataTest.testUrl + '">http://' + window.location.host + baseDir +
                 '/' + dataTest.testUrl+'</a>');
             }
             $('#testName').addClass('form');
