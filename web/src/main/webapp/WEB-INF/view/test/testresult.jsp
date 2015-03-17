@@ -11,6 +11,8 @@
 	uri="http://www.springframework.org/security/tags"%>
 <html lang="en">
 <head>
+<c:set var="basedir" value="${pageContext.request.contextPath}" />
+
 <%@include file="../base.jsp"%>
 <%@include file="../navigation.jsp"%>
 <link href="${basedir}/resources/css/lib/dataTables.bootstrap.css"
@@ -113,12 +115,13 @@
 						</c:if>
 					</sec:authorize>
 					<div class="col-md-2 col-lg-2 col-md-offset-5 pos" id="okbtn">
-						<a href="${basedir}/tests" class="btn btn-success okbtn"
+						<a href="${basedir}/tests" class="btn btn-success mybtn"
 							type="button">OK</a>
 					</div>
 				</div>
 			</form>
 		</div>
 	</div>
+	<div class="hidden-attribute" id="hidden-attr" data-basedir="${basedir}"></div>
 </body>
 </html>
