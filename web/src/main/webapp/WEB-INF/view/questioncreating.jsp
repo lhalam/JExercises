@@ -17,23 +17,12 @@
 <link rel="stylesheet" href="resources/css/summernote/summernote.css">
 <script type="text/javascript"
 	src="resources/js/summernote/summernote.js"></script>
-
-
 <script
 	src="http://cdn.datatables.net/1.10.5/js/jquery.dataTables.min.js"
 	type="text/javascript"></script>
-
-
 <link rel="stylesheet"
 	href="http://cdn.datatables.net/1.10.5/css/jquery.dataTables.css" />
-
-
 <script src="resources/js/questioncreating.js"></script>
-<style type="text/css">
-tr {
-	height: 25px
-}
-</style>
 <%@ include file="navigation.jsp"%>
 </head>
 <body background="resources/background.jpg">
@@ -50,12 +39,12 @@ tr {
 					<div class="col-md-offset-1 col-md-10">
 						<div class="form-group">
 							<label for="comment">Question name:</label>
-							<textarea class="form-control summernote" rows="2"
+							<textarea class="form-control summernote"
 								id="questionName" placeholder="Input question name..."></textarea>
 						</div>
 						<div class="form-group">
 							<label for="comment">Description:</label>
-							<textarea class="form-control summernote" rows="4"
+							<textarea class="form-control summernote"
 								id="questionDescription"
 								placeholder="Input question description..."></textarea>
 						</div>
@@ -89,13 +78,13 @@ tr {
 							</table>
 						</div>
 						<div class="row">
-							<div class="col-md-offset-4 col-md-4">
+							<div class="col-md-offset-1 col-md-2">
 								<input class="btn btn-lg btn-success btn-block" type="button"
 									value="Add row" id="addRow">
 							</div>
 						</div>
 						<div class="row">
-							<div class="col-md-offset-4 col-md-4">
+							<div class="col-md-offset-8 col-md-2">
 								<input class="btn btn-lg btn-success btn-block" type="button"
 									value="Save" id="save">
 							</div>
