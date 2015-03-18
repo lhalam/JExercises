@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+    <c:set var="basedir" value="${pageContext.request.contextPath}" />
 <script src="http://code.jquery.com/jquery-1.11.1.min.js"
 	type="text/javascript"></script>
 
@@ -14,19 +14,19 @@
 	src="http://netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js"></script>
 <link rel="stylesheet"
 	href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" />
-<link rel="stylesheet" href="resources/css/summernote/summernote.css">
+<link rel="stylesheet" href="${basedir}/resources/css/summernote/summernote.css">
 <script type="text/javascript"
-	src="resources/js/summernote/summernote.js"></script>
+	src="${basedir}/resources/js/summernote/summernote.js"></script>
 <script
 	src="http://cdn.datatables.net/1.10.5/js/jquery.dataTables.min.js"
 	type="text/javascript"></script>
 <link rel="stylesheet"
 	href="http://cdn.datatables.net/1.10.5/css/jquery.dataTables.css" />
-<script src="resources/js/questioncreating.js"></script>
-<link rel="stylesheet" href="resources/css/questionpage.css">
+<script src="${basedir}/resources/js/questioncreating.js"></script>
+<link rel="stylesheet" href="${basedir}/resources/css/questionpage.css">
 <%@ include file="navigation.jsp"%>
 </head>
-<body background="resources/background.jpg">
+<body background="${basedir}/resources/background.jpg">
 	<div class="row">
 		<div class="col-md-offset-1 col-md-10">
 			<form method="POST" id="questioncreatingForm"
@@ -97,5 +97,6 @@
 			</form>
 		</div>
 	</div>
+<div class="hidden-attribute" id="hidden-attr" data-basedir="${basedir}"></div>
 </body>
 </html>
