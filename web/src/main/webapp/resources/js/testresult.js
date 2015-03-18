@@ -15,6 +15,15 @@ function sendPost() {
 		contentType : 'application/json',
 		mimeType : 'application/json',
 		success : function(responseData) {
+			var date = new Date(responseData.date);
+			var test = responseData.testName;
+			var user = responseData.firstName + ' ' +responseData.lastName;
+			var correct = responseData.correctAnswersCount;
+			var total = responseData.totalAnswersCount;
+			$("#user").append(user);
+			$("#test").append(test);
+			$("#date").append(date.getDate()+'/'+(date.getMonth()+1)+'/'+date.getFullYear()); 
+			$("#result").text('Test result is '+ correct + ' of ' +  total);			
 			$("#okbtn").show();
 			$("#testresult").dataTable({
 				"bFilter" : false,

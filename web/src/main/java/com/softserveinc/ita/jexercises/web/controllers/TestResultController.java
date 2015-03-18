@@ -39,13 +39,7 @@ public class TestResultController {
     @RequestMapping(value = "/test/result/{id}", method = RequestMethod.GET)
     public ModelAndView showTestResultPage(@PathVariable("id") Long id,
             Model model) {
-        TestResultDto resultInfo = testResultService.getTestResultInfo(id);
-        model.addAttribute("firstName", resultInfo.getFirstName());
-        model.addAttribute("lastName", resultInfo.getLastName());
-        model.addAttribute("testName", resultInfo.getTestName());
-        model.addAttribute("date", resultInfo.getDate());
-        model.addAttribute("total", resultInfo.getTotalAnswersCount());
-        model.addAttribute("correct", resultInfo.getCorrectAnswersCount());
+        TestResultDto resultInfo = testResultService.getTestResultInfo(id);        
         model.addAttribute("isPublic", resultInfo.isPublic());
         return new ModelAndView("test/testresult");
     }

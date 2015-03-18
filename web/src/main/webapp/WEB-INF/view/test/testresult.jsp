@@ -50,18 +50,14 @@
 									<table class="table test-result-table">
 										<tbody>
 											<tr>
-												<td><strong>User: </strong> <c:out
-														value="${firstName} ${lastName}" /></td>
-												<td id="user"></td>
+												<td id="user"><strong>User: </strong></td>
 											</tr>
 											<tr>
-												<td><strong>Test: </strong> <c:out value="${testName}" /></td>
-												<td id="test"></td>
+												<td id="test"><strong>Test: </strong></td>
 											</tr>
 											<tr>
-												<td><strong>Date: </strong> <c:out value="${date}" /></td>
-												<td id="date"></td>
-											</tr>
+												<td id="date"><strong>Date: </strong></td>
+                                            </tr>
 										</tbody>
 									</table>
 									<div class="row-fluid">
@@ -78,12 +74,7 @@
 						<div class="public" id="public">
 							<div class="row-fluid">
 								<div class="col-md-offset-4 col-md-4 wrapper">
-									<h4 class="wrapper" id="result">
-										Test result is
-										<c:out value="${correct}" />
-										of
-										<c:out value="${total}" />
-									</h4>
+									<h4 class="wrapper" id="result"></h4>
 								</div>
 							</div>
 							<br> <br> <br>
