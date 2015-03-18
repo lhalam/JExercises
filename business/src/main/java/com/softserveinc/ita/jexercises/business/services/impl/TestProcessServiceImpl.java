@@ -109,7 +109,7 @@ public class TestProcessServiceImpl implements TestProcessService {
 
     @Override
     @Transactional
-    public void createAttemptAndUserAnswersForPrivateTest(Long testId) {
+    public void createAttemptForPrivateTest(Long testId) {
         Test test = testDao.findById(testId);
         User user = currentUserService.getCurrentUser();
         Attempt attempt = attemptMapper.toEntity(test, user);

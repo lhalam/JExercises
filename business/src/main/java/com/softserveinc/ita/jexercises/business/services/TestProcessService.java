@@ -40,5 +40,5 @@ public interface TestProcessService {
      *
      * @param testId Test Id.
      */
-    void createAttemptAndUserAnswersForPrivateTest(Long testId);
+    void createAttemptForPrivateTest(Long testId);
 }
