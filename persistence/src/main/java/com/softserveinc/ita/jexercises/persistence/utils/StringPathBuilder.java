@@ -17,6 +17,6 @@ public class StringPathBuilder<T> implements Strategy <T> {
     public Predicate execute(PathBuilder<T> qObject,
                              Map.Entry<String, Object> filter) {
         StringPath filterFieldPath = qObject.getString(filter.getKey());
-        return filterFieldPath.eq((String)filter.getValue());
+        return filterFieldPath.containsIgnoreCase((String)filter.getValue());
     }
 }
