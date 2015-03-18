@@ -75,7 +75,9 @@ function onTDClickHandler() {
 }
 $(document).ready(
 		function() {
-			table = $('#assert').DataTable({
+            var baseDir = $("#hidden-attr").attr("data-basedir");
+
+            table = $('#assert').DataTable({
 				"columnDefs" : [ {
 					"width" : "50%",
 					"targets" : 0
@@ -115,14 +117,14 @@ $(document).ready(
 						dr.questionDescription = $('#questionDescription')
 								.code().toString();
 						$.ajax({
-							url : "/web/questioncreating",
+							url : baseDir+'/questioncreating',
 							type : 'POST',
 							dataType : 'html',
 							data : JSON.stringify(dr),
 							contentType : 'application/json',
 							mimeType : 'application/json',
 							success : function(data) {
-								window.location.replace("/web/tests/create");
+								window.location.href = baseDir +"/tests";
 							}
 
 						});
