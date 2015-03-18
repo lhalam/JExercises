@@ -16,39 +16,46 @@ var assertDto = [];
 var sibling;
 var assert;
 var table;
+function validate($element){
+	return $element.val();
+
+}
 
 function keypressHandler(e) {
 	if (e.keyCode == 13) {
 		sibling = $(this);
 		$(this).find("textarea").blur();
 	}
+	
 
 }
+function textAreaFocusLost(){
+	$textarea=$(this).find("textarea");
+	console.log($textarea);
+	if(validate($textarea)){
+		$(this).find("textarea").css({"background-color" : "#66FF99"});
+	}else{
+		$textarea.css({"background-color" : "transparent"});
+
+	}
+
+	}
 function createTextArea() {
 	return $("<textarea/>", {
 		readonly : "readonly",
-		class : "no-expand"
-	}).css({
-		"resize" : "none",
-		"overflow" : "hidden",
-		"height" : "100%",
-		"width" : "100%",
-		border : 0,
-		"background-color" : "transparent"
-	});
+		class : "no-expand table-textarea"
+	})
 }
 function createRow() {
 	var $input_data_td = $("<td/>", {
-		class : "editable input_data"
-	}).css({
-		"padding" : 0
-	});
+		class : "editable input-data"
+	})
 	var $answer_td = $("<td/>", {
-		class : "editable expected_answer sorting_1"
-	}).css("padding", 0)
-	$input_data_td.bind("keypress", keypressHandler)
-	$input_data_td.on("click", onTDClickHandler);
-	$answer_td.bind("keypress", keypressHandler);
+		class : "editable sorting_1 expected-answer"
+	});
+	$input_data_td.bind("keypress", keypressHandler).bind("focusout",textAreaFocusLost);
+	$input_data_td.on("click", onTDClickHandler)
+	$answer_td.bind("keypress", keypressHandler).bind("focusout",textAreaFocusLost);;
 	$answer_td.on("click", onTDClickHandler);
 	$input_data_td.append(createTextArea)
 	$answer_td.append(createTextArea)
@@ -60,9 +67,8 @@ function createRow() {
 	return $row;
 }
 function onTDClickHandler() {
-
 	if (!$(this).hasClass("edit_mode")) {
-		$(this).find("textarea").removeAttr("readonly").addClass("edit_mode");
+		$(this).find("textarea").removeAttr("readonly").addClass("edit_mode").css({"background-color" : "white"});
 
 	}
 
@@ -116,7 +122,7 @@ $(document).ready(
 							contentType : 'application/json',
 							mimeType : 'application/json',
 							success : function(data) {
-								window.location.replace("/web/index");
+								window.location.replace("/web/tests/create");
 							}
 
 						});

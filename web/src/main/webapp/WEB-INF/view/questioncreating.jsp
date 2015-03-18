@@ -23,6 +23,7 @@
 <link rel="stylesheet"
 	href="http://cdn.datatables.net/1.10.5/css/jquery.dataTables.css" />
 <script src="resources/js/questioncreating.js"></script>
+<link rel="stylesheet" href="resources/css/questionpage.css">
 <%@ include file="navigation.jsp"%>
 </head>
 <body background="resources/background.jpg">
@@ -39,8 +40,8 @@
 					<div class="col-md-offset-1 col-md-10">
 						<div class="form-group">
 							<label for="comment">Question name:</label>
-							<textarea class="form-control summernote"
-								id="questionName" placeholder="Input question name..."></textarea>
+							<textarea class="form-control summernote" id="questionName"
+								placeholder="Input question name..."></textarea>
 						</div>
 						<div class="form-group">
 							<label for="comment">Description:</label>
@@ -48,14 +49,17 @@
 								id="questionDescription"
 								placeholder="Input question description..."></textarea>
 						</div>
-
 						<div class="row">
-							<div class="col-md-offset-4 col-md-4">
-								<input class="btn btn-lg btn-success btn-block" type="button"
-									value="Create question" id="submitButton">
+							<div class="btn-group col-md-4" role="group"
+								style="padding-left: 30px;">
+								<button class="btn btn-primary" type="button" id="addRow">Add
+									row</button>
+								<button class="btn btn-primary" type="button" id="save">Save</button>
+
 							</div>
+
 						</div>
-						<div class="col-md-offset-1 col-md-10">
+						<div class="col-md-12">
 							<table id="assert" class="display">
 								<thead>
 									<tr>
@@ -77,17 +81,15 @@
 								</tbody>
 							</table>
 						</div>
+
+
 						<div class="row">
-							<div class="col-md-offset-1 col-md-2">
-								<input class="btn btn-lg btn-success btn-block" type="button"
-									value="Add row" id="addRow">
+							<div class="col-md-offset-5 col-md-4">
+								<input type="button" class="btn-lg btn-success"
+									value="Create question" id="submitButton">
 							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-offset-8 col-md-2">
-								<input class="btn btn-lg btn-success btn-block" type="button"
-									value="Save" id="save">
-							</div>
+
+
 						</div>
 						<br>
 					</div>
