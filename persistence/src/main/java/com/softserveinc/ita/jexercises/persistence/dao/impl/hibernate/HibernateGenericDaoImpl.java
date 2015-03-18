@@ -3,6 +3,7 @@ package com.softserveinc.ita.jexercises.persistence.dao.impl.hibernate;
 import com.mysema.query.BooleanBuilder;
 import com.mysema.query.jpa.impl.JPAQuery;
 import com.mysema.query.types.OrderSpecifier;
+import com.mysema.query.types.path.NumberPath;
 import com.mysema.query.types.path.PathBuilder;
 import com.mysema.query.types.path.StringPath;
 import com.softserveinc.ita.jexercises.common.dto.SearchCondition;
@@ -15,6 +16,7 @@ import javax.persistence.PersistenceContext;
 import java.beans.Introspector;
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -157,9 +159,17 @@ public class HibernateGenericDaoImpl<T, PK extends Serializable> implements
 
         for (Map.Entry<String, Object> filter :
                 searchCondition.getOrFilterMap().entrySet()) {
-            Context<T> context = new Context<>();
-            context.load(filter.getValue().getClass().getName());
-            builder.or(context.executeStrategy(qObject, filter));
+            if ("ArrayList".equals(filter.getValue().getClass().getSimpleName())) {
+                NumberPath filterFieldPath = qObject
+                        .getNumber(filter.getKey(), Long.class);
+                for (Long longObject : (ArrayList<Long>) filter.getValue()) {
+                    builder.or(filterFieldPath.eq(longObject));
+                }
+            } else {
+                Context<T> context = new Context<>();
+                context.load(filter.getValue().getClass().getName());
+                builder.or(context.executeStrategy(qObject, filter));
+            }
         }
         jpaQuery.where(builder);
     }
@@ -171,9 +181,17 @@ public class HibernateGenericDaoImpl<T, PK extends Serializable> implements
 
         for (Map.Entry<String, Object> filter :
                 searchCondition.getNotFilterMap().entrySet()) {
-            Context<T> context = new Context<>();
-            context.load(filter.getValue().getClass().getName());
-            builder.andNot(context.executeStrategy(qObject, filter));
+            if ("ArrayList".equals(filter.getValue().getClass().getSimpleName())) {
+                NumberPath filterFieldPath = qObject
+                        .getNumber(filter.getKey(), Long.class);
+                for (Long longObject : (ArrayList<Long>) filter.getValue()) {
+                    builder.andNot(filterFieldPath.eq(longObject));
+                }
+            } else {
+                Context<T> context = new Context<>();
+                context.load(filter.getValue().getClass().getName());
+                builder.andNot(context.executeStrategy(qObject, filter));
+            }
         }
         jpaQuery.where(builder);
     }
