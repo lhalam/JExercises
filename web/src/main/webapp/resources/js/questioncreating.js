@@ -124,8 +124,7 @@ $(document).ready(
 							contentType : 'application/json',
 							mimeType : 'application/json',
 							success : function(data) {
-                                alert(data);
-								window.location.href = baseDir +"/tests";
+								window.location.href = baseDir +"/tests/" + data + "/edit";
 							}
 
 						});

@@ -1,5 +1,6 @@
 package com.softserveinc.ita.jexercises.business.services.impl;
 
+import com.softserveinc.ita.jexercises.business.services.TestCreatingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,16 +27,21 @@ public class QuestionCreatingServiceImpl implements QuestionCreatingService {
     @Autowired
     private QuestionService questionService;
 
+    /**
+     * Service provides using test service.
+     */
+    @Autowired
+    private TestCreatingService testCreatingService;
+
     @Transactional
     @Override
-    public void createQuestionDescription(QuestionDto questionDto) {
+    public void createQuestionDescription(QuestionDto questionDto, Long testId) {
 
         QuestionMapper questionMapper = new QuestionMapper();
         AssertMapper assertMapper = new AssertMapper();
         Question question;
         question = questionMapper.toEntity(questionDto);
-        questionService.createQuestion(question);
-
+        testCreatingService.addQuestionToTest(questionService.createQuestion(question),testId);
         question.setAsserts(assertMapper.toEntitySet(questionDto, question));
     }
 }
