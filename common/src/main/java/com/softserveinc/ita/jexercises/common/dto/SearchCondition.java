@@ -1,5 +1,7 @@
 package com.softserveinc.ita.jexercises.common.dto;
 
+import com.softserveinc.ita.jexercises.common.utils.ManyToManyFilter;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,6 +19,8 @@ public class SearchCondition {
     private Map<String, Object> andFilterMap = new HashMap<>();
     private Map<String, Object> orFilterMap = new HashMap<>();
     private Map<String, Object> notFilterMap = new HashMap<>();
+    private ManyToManyFilter manyToManyAndFilter;
+    private ManyToManyFilter manyToManyNotInFilter;
 
     public int getPageNumber() {
         return pageNumber;
@@ -72,5 +76,21 @@ public class SearchCondition {
 
     public void setNotFilterMap(Map<String, Object> notFilterMap) {
         this.notFilterMap = notFilterMap;
+    }
+
+    public ManyToManyFilter getManyToManyAndFilter() {
+        return manyToManyAndFilter;
+    }
+
+    public void setManyToManyAndFilter(ManyToManyFilter manyToManyAndFilter) {
+        this.manyToManyAndFilter = manyToManyAndFilter;
+    }
+
+    public ManyToManyFilter getManyToManyNotInFilter() {
+        return manyToManyNotInFilter;
+    }
+
+    public void setManyToManyNotInFilter(ManyToManyFilter manyToManyNotInFilter) {
+        this.manyToManyNotInFilter = manyToManyNotInFilter;
     }
 }
