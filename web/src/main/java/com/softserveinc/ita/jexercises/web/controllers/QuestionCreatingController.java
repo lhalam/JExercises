@@ -5,9 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.softserveinc.ita.jexercises.business.services.QuestionCreatingService;
@@ -47,10 +45,13 @@ public class QuestionCreatingController {
      * 
      * @param questionDto
      *            QuestionDto object.
+     * @return testId of current test.
      */
-    @RequestMapping(value = "/questioncreating", method = RequestMethod.POST)
+    @RequestMapping(value = "/question/create/{id}", method = RequestMethod.POST)
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public void registerNewQuestion(@RequestBody QuestionDto questionDto) {
+    @ResponseBody
+    public Long registerNewQuestion(@RequestBody QuestionDto questionDto,@PathVariable("id") Long testId) {
         questionCreatingService.createQuestionDescription(questionDto);
+        return(testId);
     }
 }
