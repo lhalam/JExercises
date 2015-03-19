@@ -59,7 +59,6 @@ $(document).ready(function () {
     $('#selectedQuestionsGrid').DataTable({
         processing: true,
         serverSide: true,
-        dom: '<"top"l>rt<"bottom"ip><"clear">',
         ajax: {
             url: baseDir + "/tests/" + dataTest.testId + "/added",
             type: 'POST',

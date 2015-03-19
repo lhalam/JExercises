@@ -43,26 +43,22 @@ public interface TestCreatingService {
     /**
      * Make QuestionGrid of all questions.
      *
-     * @param testId
-     *                  to set current test.
      * @param searchCondition
      *                  to set search conditions.
      * @return response object.
      */
     GridResponseDto<QuestionGridDto> getGridRowsOfAllQuestions(
-        SearchCondition searchCondition, Long testId);
+        SearchCondition searchCondition);
 
     /**
      * Make QuestionGrid of added questions.
      *
-     * @param testId
-     *                  to set current test.
      * @param searchCondition
      *                  to set search conditions.
      * @return response object.
      */
     GridResponseDto<QuestionGridDto> getGridRowsOfAddedQuestions(
-            SearchCondition searchCondition, Long testId);
+            SearchCondition searchCondition);
 
     /**
      * Adds Question to test.
