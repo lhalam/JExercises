@@ -19,6 +19,8 @@
 	rel="stylesheet" type="text/css">
 <link href="${basedir}/resources/css/testresult.css" rel="stylesheet"
 	type="text/css">
+<link href="${basedir}/resources/css/loading-icon.css" rel="stylesheet"
+	type="text/css">	
 <script charset="utf8"
 	src="${basedir}/resources/js/lib/jquery-1.11.1.js"
 	type="text/javascript"></script>
@@ -71,6 +73,12 @@
 					</sec:authorize>
 					<c:if test="${show eq 'true'}">
 						<script src="${basedir}/resources/js/testresult.js"></script>
+						<div id="loadingIcon" class="form-group">
+							<div class="col-md-12 text-center">
+								<span
+									class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span>
+							</div>
+						</div>
 						<div class="public" id="public">
 							<div class="row-fluid">
 								<div class="col-md-offset-4 col-md-4 wrapper">
@@ -106,7 +114,7 @@
 						</c:if>
 					</sec:authorize>
 					<div class="col-md-2 col-lg-2 col-md-offset-5 pos" id="okbtn">
-						<a href="${basedir}/tests" class="btn btn-success mybtn"
+						<a href="${basedir}/tests" class="btn btn-block btn-success mybtn"
 							type="button">OK</a>
 					</div>
 				</div>

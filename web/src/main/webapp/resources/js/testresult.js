@@ -2,6 +2,7 @@
  * Created by Volodymyr Lishchynskiy on 25.02.15.
  */
 $(document).ready(function() {
+	$("#loadingIcon").show();
 	$("#okbtn").hide();
 	sendPost();
 });
@@ -25,6 +26,7 @@ function sendPost() {
 			$("#date").append(date.getDate()+'/'+(date.getMonth()+1)+'/'+date.getFullYear()); 
 			$("#result").text('Test result is '+ correct + ' of ' +  total);			
 			$("#okbtn").show();
+			$("#loadingIcon").hide();			
 			$("#testresult").dataTable({
 				"bFilter" : false,
 				"data" : responseData.answers,

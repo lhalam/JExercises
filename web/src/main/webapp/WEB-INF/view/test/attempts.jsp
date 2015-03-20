@@ -14,6 +14,8 @@
 	rel="stylesheet" type="text/css">
 <link href="${basedir}/resources/css/testresult.css" rel="stylesheet"
 	type="text/css">
+<link href="${basedir}/resources/css/usergrid.css" rel="stylesheet"
+	type="text/css">	
 <script charset="utf8"
 	src="${basedir}/resources/js/lib/jquery-1.11.1.js"
 	type="text/javascript"></script>
@@ -27,7 +29,7 @@
 
 </head>
 
-<c:set var="testName" value="Attempts to ${testName}" />
+<c:set var="testName" value="All attempts to ${testName}" />
 
 <body id="container">
 	<div class="row-fluid">
@@ -56,13 +58,15 @@
 									</sec:authorize>>
 										Surname</th>
 									<th>Date</th>
-									<th></th>
+									<th>Result</th>
+									<th class="col-md-2"></th>
 								</tr>
 							</thead>
 						</table>
 					</div>
 					<div class="col-md-2 col-lg-2 col-md-offset-5 pos">
-						<a href="${basedir}/tests" class="btn btn-success btn-block mybtn" type="button">Back</a>
+						<a href="${basedir}/tests" class="btn btn-success btn-block mybtn"
+							type="button">Back</a>
 					</div>
 				</div>
 			</div>
