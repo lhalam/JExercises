@@ -34,7 +34,17 @@ function sendPost() {
 					"data" : "questionName"
 				}, {
 					"data" : "isCorrect"
-				}, ]
+				}, ],				
+				"columnDefs" : [ {
+					"targets" : 1,
+					"createdCell" : function(td, cellData, rowData, row, col) {
+						if(cellData == "Correct"){
+						$(td).css('color','limegreen');
+						}else{
+							$(td).css('color','red');
+						}						
+					}
+				} ]
 			});
 		}
 	})
