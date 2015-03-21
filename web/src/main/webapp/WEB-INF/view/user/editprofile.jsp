@@ -76,7 +76,7 @@
 
     <fieldset>
 
-        <div class="form-group ${hiddenInput}">
+        <div class="form-group has-feedback ${hiddenInput}">
             <label for="email"
                    class="col-lg-4 control-label">First
                 Name</label>
@@ -87,11 +87,13 @@
                        value="${userFirstName}"
                        name="firstName"
                        type="text">
+                <span class="glyphicon form-control-feedback"
+                      id="firstNameFeedback"></span>
             </div>
         </div>
 
 
-        <div class="form-group ${hiddenInput}">
+        <div class="form-group has-feedback ${hiddenInput}">
             <label for="email"
                    class="col-lg-4 control-label">Last
                 Name</label>
@@ -102,6 +104,8 @@
                        value="${userLastName}"
                        name="lastName"
                        type="text">
+                <span class="glyphicon form-control-feedback"
+                      id="lastNameFeedback"></span>
             </div>
         </div>
 
@@ -154,7 +158,7 @@
                     Delete</div>
             </div>
         </div>
-        <div class="form-group ${hiddenInput}">
+        <div class="form-group has-feedback ${hiddenInput}">
             <label for="currentPassword"
                    class="col-lg-4 control-label">Password</label>
 
@@ -164,6 +168,8 @@
                        placeholder="Current Password"
                        name="currentPassword"
                        type="password">
+                <span class="glyphicon form-control-feedback"
+                      id="currentPasswordFeedback"></span>
             </div>
         </div>
 
@@ -180,7 +186,7 @@
             </div>
         </div>
 
-        <div class="form-group ${hiddenInput}">
+        <div class="form-group has-feedback ${hiddenInput}">
             <label for="matchingPassword"
                    class="col-lg-4 control-label">Confirm</label>
 
@@ -190,10 +196,13 @@
                        name="matchingPassword"
                        placeholder="Confirm Password"
                        type="password"/>
+                <span class="glyphicon form-control-feedback"
+                      id="matchingPasswordFeedback"></span>
             </div>
+
         </div>
 
-        <div class="form-group ${hiddenInput}">
+        <div class="form-group has-feedback ${hiddenInput}">
             <label for="datePicker" class="col-lg-4 control-label">Birth
                 Date</label>
 
@@ -234,6 +243,8 @@
                     </c:forEach>
                 </select>
 
+                <span class="form-control-feedback"
+                      id="birthDateFeedback"></span>
             </div>
         </div>
         <c:if test="${!currentUser}">

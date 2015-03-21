@@ -2,7 +2,7 @@ $(document).ready(function () {
     var postUrl = $("#hidden-attr").attr("data-post-url");
     var baseDir = $("#hidden-attr").attr("data-basedir");
     $(".userpic").css({"background-image": "url('" + postUrl + "avatar')"});
-    $("#deleteAvatar").click(function(){
+    $("#deleteAvatar").click(function () {
         $("#avatar-hidden").attr("value", "delete");
         $(".userpic").css({"background-image": "url('" + baseDir + "/resources/no-avatar.png')"});
     });
@@ -11,35 +11,32 @@ $(document).ready(function () {
         .validate(
         {
             ignore: ".ignore, :hidden, :disabled",
-            rules : {
+            rules: {
                 "firstName": {
-                    required : true
+                    required: true
                 },
                 "lastName": {
                     required: true
                 },
-                "currentPassword" : {
-                    required: function(element){
+                "currentPassword": {
+                    required: function (element) {
                         return $("#password").val().length > 0;
                     }
                 },
-                "matchingPassword" : {
+                "matchingPassword": {
                     equalTo: "#password"
                 },
                 "day": {
-                    required: true,
                     dateValid: true
                 },
                 "month": {
-                    required: true,
                     dateValid: true
                 },
                 "year": {
-                    required: true,
                     dateValid: true
                 }
             },
-            messages : {
+            messages: {
                 "day": {
                     dateValid: "Date is invalid"
                 },
@@ -51,7 +48,7 @@ $(document).ready(function () {
 
                 }
             },
-            submitHandler: function(form) {
+            submitHandler: function (form) {
                 var editProfileData = {};
                 editProfileData.firstName = $(
                     "#firstName").val();
@@ -61,79 +58,79 @@ $(document).ready(function () {
                     "#currentPassword").val();
                 editProfileData.newPassword = $(
                     "#password").val();
-                if($("#year").val()) {
-                    editProfileData.birthDate = new Date(
-                        $("#year").val(), $(
-                            "#month").val(), $(
-                            "#day").val());
-                }
+                editProfileData.birthDate = new Date(
+                    $("#year").val(), $(
+                        "#month").val(), $(
+                        "#day").val());
                 editProfileData.avatar = $("#avatar-hidden").val();
                 editProfileData.role = $("#role").val();
 
                 $("#dangerAlert").hide();
-                    $.ajax({
-                        url: postUrl + "edit",
-                        type: "POST",
-                        data: JSON
-                            .stringify(editProfileData),
-                        dataType: 'json',
-                        contentType: "application/json",
-                        success: function(
-                            response) {
-                            if (response.errors.length > 0) {
-
-                                var error = response.errors[0];
-                                $('#errorMessage')
-                                    .text(error);
-                                $('#dangerAlert')
-                                    .show();
-                            } else {
-                                window.location.href = postUrl + "?updated=true";
-                            }
+                $.ajax({
+                    url: postUrl + "edit",
+                    type: "POST",
+                    data: JSON.stringify(editProfileData),
+                    dataType: 'json',
+                    contentType: "application/json",
+                    success: function (response) {
+                        if (response.errors.length > 0) {
+                            var error = response.errors[0];
+                            $('#errorMessage').text(error);
+                            $('#dangerAlert').show();
+                        } else {
+                            window.location.href = postUrl + "?updated=true";
                         }
-                    })
+                    }
+                })
             },
-            showErrors: function(errorMap,
-                                  errorList) {
-                $
-                    .each(
-                    this
-                        .validElements(),
-                    function(index,
-                             element) {
-                        var $element = $(element);
-                        $element
-                            .removeClass(
-                            "error")
-                            .tooltip(
-                            "destroy");
-                    });
-
-                $
-                    .each(
-                    errorList,
-                    function(index,
-                             error) {
-                        var $element = $(error.element);
-                        $element
-                            .attr(
-                            "data-original-title",
-                            error.message)
-                            .tooltip(
-                            {
-                                placement : "right"
-                            })
-                            .tooltip(
-                            "fixTitle")
-                            .addClass(
-                            "error");
-                        $element
-                            .tooltip();
-                    });
+            highlight: function (element) {
+                var feedbackElement = getFeedbackElement(element);
+                highlightElement(feedbackElement);
+                if (!isDateElement(element)) {
+                    feedbackElement.addClass('glyphicon-remove');
+                }
+            },
+            unhighlight: function (element) {
+                var feedbackElement = getFeedbackElement(element);
+                unhighlightElement(feedbackElement);
+            },
+            errorPlacement: function (error, element) {
+                var feedbackElement = getFeedbackElement(element);
+                var errorMessage = error.html();
+                feedbackElement.attr('data-content', errorMessage);
+                feedbackElement.popover({
+                    trigger: 'manual',
+                    content: errorMessage
+                }).popover('show');
             }
         });
 
-    $.validator.addMethod("dateValid", function() {
+    function getFeedbackElement(element) {
+        if (isDateElement(element)) {
+            return $("#birthDateFeedback");
+        }
+        return $("#" + $(element).attr("id") + "Feedback");
+    }
+
+    function isDateElement(element) {
+        var elementName = $(element).attr("name")
+        return (elementName == "day" || elementName == "month" || elementName == "year")
+    }
+
+    function unhighlightElement(element) {
+        element.closest('.form-group')
+            .removeClass('has-error');
+        element.removeClass('glyphicon-remove')
+            .popover('hide');
+    }
+
+    function highlightElement(element) {
+        element.closest('.form-group')
+            .removeClass('has-success')
+            .addClass('has-error');
+    }
+
+    $.validator.addMethod("dateValid", function () {
         var day = $("#day").val();
         var matchDay = new Date($("#year").val(), $("#month")
             .val(), day).getDate();
@@ -142,6 +139,12 @@ $(document).ready(function () {
         }
         return false;
     }, "Please enter а valid date.");
+
+    $('#password').change(function () {
+        if ($("#password").val() == '') {
+            unhighlightElement($('#currentPasswordFeedback'));
+        }
+    });
 
     $("#dangerAlertClose").click(function () {
         $("#dangerAlert").hide();
