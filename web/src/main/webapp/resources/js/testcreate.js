@@ -49,12 +49,11 @@ $(document).ready(function () {
                 async: false,
                 success: function (testId) {
                     dataTest.testId = testId;
-
                 }
             });
             if (!dataTest.isPublic) {
                 $.ajax({
-                    url: baseDir + "/public/link/generate/" + dataTest.testId,
+                    url: baseDir + "/public/link/generate",
                     type: 'POST',
                     dataType: 'html',
                     data: JSON.stringify(dataTest),
@@ -62,11 +61,14 @@ $(document).ready(function () {
                     mimeType: 'application/json',
                     async: false,
                     success: function (url) {
+                    var linkData = {};
+               		linkData.testId = dataTest.testId;
+               		linkData.shortCode = url;
+               		saveLink(linkData);
                     }
                 });
             }
             window.location.href = baseDir + "/tests/" + dataTest.testId + "/edit";
         }
     });
-
-});
+ });

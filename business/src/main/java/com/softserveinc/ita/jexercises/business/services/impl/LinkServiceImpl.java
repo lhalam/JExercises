@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.softserveinc.ita.jexercises.business.services.LinkService;
 import com.softserveinc.ita.jexercises.business.utils.ShortCodeUtil;
+import com.softserveinc.ita.jexercises.common.dto.LinkDto;
 import com.softserveinc.ita.jexercises.common.entity.Link;
 import com.softserveinc.ita.jexercises.common.entity.Test;
 import com.softserveinc.ita.jexercises.persistence.dao.impl.LinkDao;
@@ -31,20 +32,20 @@ public class LinkServiceImpl implements LinkService {
 
     @Transactional
     @Override
-    public String generateLink(Long testId) {
-        Test test = testDao.findById(testId);
+    public void saveLink(LinkDto linkDto) {
+        Test test = testDao.findById(linkDto.getTestId());
         Link link = test.getLink();
         if (link == null) {
             link = new Link();
         }
-        link.setShortCode(getUniqueShortCode());
+        link.setShortCode(linkDto.getShortCode());
         link.setTest(test);
         test.setLink(link);
         testDao.update(test);
-        return link.getShortCode();
     }
 
-    private String getUniqueShortCode() {
+    @Override
+    public String generateUniqueShortCode() {
         String shortCode = null;
         do {
             shortCode = shortCodeUtil.generateShortCode();

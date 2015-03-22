@@ -1,5 +1,7 @@
 package com.softserveinc.ita.jexercises.business.services;
 
+import com.softserveinc.ita.jexercises.common.dto.LinkDto;
+
 /**
  * Service that handles manipulation with public link.
  * 
@@ -9,13 +11,12 @@ package com.softserveinc.ita.jexercises.business.services;
 public interface LinkService {
 
     /**
-     * Generates or regenerates public link.
+     * Saves public link.
      * 
-     * @param testId
-     *            Test id.
-     * @return New or updated public link.
+     * @param linkDto
+     *            LinkDto instance.
      */
-    String generateLink(Long testId);
+    void saveLink(LinkDto linkDto);
 
     /**
      * Searches test by link.
@@ -25,5 +26,12 @@ public interface LinkService {
      * @return Test id.
      */
     Long findTestByLink(String shortCode);
+
+    /**
+     * Generates unique short code for public link.
+     * 
+     * @return The public url shortCode.
+     */
+    String generateUniqueShortCode();
 
 }

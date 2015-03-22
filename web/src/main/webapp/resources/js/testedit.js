@@ -40,6 +40,10 @@ var dataTest = {
     testDescription: '0',
     isPublic: true
 };
+var linkData = {
+	testId: 0,
+	shortCode:''
+};
 
 $(document).ready(function () {
     var baseDir = $("#hidden-attr").attr("data-basedir");
@@ -71,7 +75,7 @@ $(document).ready(function () {
 
     $('#regenerate').on('click', function () {
         $.ajax({
-            url: baseDir + "/public/link/generate/" + dataTest.testId,
+            url: baseDir + "/public/link/generate/",
             type: 'POST',
             dataType: 'html',
             data: JSON.stringify(dataTest),
@@ -79,7 +83,8 @@ $(document).ready(function () {
             mimeType: 'application/json',
             async: false,
             success: function (url) {
-                dataTest.testUrl = url;
+                dataTest.testUrl = 'http://' + window.location.host + baseDir + '/' + url;
+                linkData.shortCode=url;
                 $('#testUrl').val(dataTest.testUrl);
             }
         });
@@ -92,7 +97,7 @@ $(document).ready(function () {
             $('#link').removeClass('hidden');
             if (dataTest.testUrl == 'noURL') {
                 $.ajax({
-                    url: baseDir + "/public/link/generate/" + dataTest.testId,
+                    url: baseDir + "/public/link/generate/",
                     type: 'POST',
                     dataType: 'html',
                     data: JSON.stringify(dataTest),
@@ -100,7 +105,8 @@ $(document).ready(function () {
                     mimeType: 'application/json',
                     async: false,
                     success: function (url) {
-                        dataTest.testUrl = url;
+                        dataTest.testUrl = 'http://' + window.location.host + baseDir + '/' + url;
+                        linkData.shortCode=url;
                         $('#testUrl').val(dataTest.testUrl);
                     }
                 });
@@ -202,6 +208,10 @@ $(document).ready(function () {
                     contentType: 'application/json',
                     mimeType: 'application/json',
                     success: function (data) {
+                    	if(!dataTest.isPublic){
+                    		linkData.testId=dataTest.testId;
+                    		saveLink(linkData);
+                    	}
                         window.location.href = baseDir + "/tests";
                     }
                 });

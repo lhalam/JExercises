@@ -6,10 +6,12 @@ import com.softserveinc.ita.jexercises.business.services.TestProcessService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.softserveinc.ita.jexercises.business.services.LinkService;
+import com.softserveinc.ita.jexercises.common.dto.LinkDto;
 
 /**
  * Controls public link manipulation.
@@ -27,20 +29,27 @@ public class LinkController {
     private TestProcessService testProcessService;
 
     /**
-     * Gets new or updated public link.
+     * Gets new or updated public link short code.
      * 
-     * @param id
-     *            Test id.
      * @param request
      *            HttpServletRequest.
-     * @return New or updated public link.
+     * @return New or updated public link short code.
      */
-    @RequestMapping(value = "/public/link/generate/{id}", method = RequestMethod.POST)
+    @RequestMapping(value = "/public/link/generate", method = RequestMethod.POST)
     @ResponseBody
-    public String generatePublicLink(@PathVariable("id") Long id,
-            HttpServletRequest request) {
-        String url = linkService.generateLink(id);
-        return constructFullUrl(request, url);
+    public String generateLink(HttpServletRequest request) {
+        return linkService.generateUniqueShortCode();
+    }
+
+    /**
+     * Saves public link.
+     * 
+     * @param linkDto
+     *            LinkDto object.
+     */
+    @RequestMapping(value = "/public/link/save", method = RequestMethod.POST)
+    public void savePublicLink(@RequestBody LinkDto linkDto) {
+        linkService.saveLink(linkDto);
     }
 
     /**
@@ -60,12 +69,6 @@ public class LinkController {
         Long testId = linkService.findTestByLink(shortCode);
         testProcessService.createAttemptForPrivateTest(testId);
         return String.format("forward:/test/%d", testId);
-
-    }
-
-    private String constructFullUrl(HttpServletRequest request, String url) {
-        return String.format("http://%s:%s%s/%s", request.getServerName(),
-                request.getServerPort(), request.getContextPath(), url);
     }
 
 }
