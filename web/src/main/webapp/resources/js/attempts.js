@@ -37,7 +37,13 @@ $(document).ready(function () {
 			"searchable":false,
 			"className": "dt-center"
 			
-		},	
+		},
+        {
+            "data": "result",
+            "searchable": false,
+            "orderable": false,
+            "className": "dt-center"
+        },		
 		{
 			"searchable": false,
 			"orderable": false,
@@ -57,7 +63,7 @@ $(document).ready(function () {
             }
         },
         {
-            "targets": 4,
+            "targets": 5,
             "createdCell": function (td, cellData, rowData, row, col) {
                 $(td).html(showButton(baseDir, rowData.id));
             }

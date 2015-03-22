@@ -1,11 +1,13 @@
 package com.softserveinc.ita.jexercises.web.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -47,10 +49,14 @@ public class QuestionCreatingController {
      * 
      * @param questionDto
      *            QuestionDto object.
+     * @param testId of current test.
+     * @return testId of current test.
      */
-    @RequestMapping(value = "/questioncreating", method = RequestMethod.POST)
+    @RequestMapping(value = "/question/create/{id}", method = RequestMethod.POST)
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public void registerNewQuestion(@RequestBody QuestionDto questionDto) {
-        questionCreatingService.createQuestionDescription(questionDto);
+    @ResponseBody
+    public Long registerNewQuestion(@RequestBody QuestionDto questionDto,@PathVariable("id") Long testId) {
+        questionCreatingService.createQuestionDescription(questionDto,testId);
+        return(testId);
     }
 }

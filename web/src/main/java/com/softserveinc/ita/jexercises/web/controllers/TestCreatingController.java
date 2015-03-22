@@ -2,9 +2,12 @@ package com.softserveinc.ita.jexercises.web.controllers;
 
 import com.softserveinc.ita.jexercises.business.services.TestCreatingService;
 import com.softserveinc.ita.jexercises.common.dto.GridResponseDto;
+import com.softserveinc.ita.jexercises.common.dto.SearchCondition;
 import com.softserveinc.ita.jexercises.common.dto.TestCreatingDto;
 import com.softserveinc.ita.jexercises.common.dto.dataTables.DataTables;
+import com.softserveinc.ita.jexercises.common.entity.Test;
 import com.softserveinc.ita.jexercises.common.mapper.DataTablesMapper;
+import com.softserveinc.ita.jexercises.common.utils.ManyToManyFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -131,8 +134,15 @@ public class TestCreatingController {
     @ResponseBody
     public GridResponseDto showAllQuestions(@RequestBody DataTables
         dataTables,@PathVariable("id") Long testId) {
-        return testCreatingService.getGridRowsOfAllQuestions(
-            dataTablesMapper.toSearchCondition(dataTables), testId);
+        SearchCondition searchCondition =  dataTablesMapper.toSearchCondition(dataTables);
+        ManyToManyFilter filter = new ManyToManyFilter();
+        filter.setJoinClass(Test.class);
+        filter.setJoinFieldName("tests");
+        filter.getFilterMap().put("id", testId);
+        filter.setNotInFieldName("id");
+        filter.setNotInFieldClass(Long.class);
+        searchCondition.setManyToManyNotInFilter(filter);
+        return testCreatingService.getGridRowsOfAllQuestions(searchCondition);
     }
 
     /**
@@ -147,8 +157,13 @@ public class TestCreatingController {
     @ResponseBody
     public GridResponseDto showAddedQuestions(@RequestBody DataTables
         dataTables,@PathVariable("id") Long testId) {
-        return testCreatingService.getGridRowsOfAddedQuestions(
-                dataTablesMapper.toSearchCondition(dataTables), testId);
+        SearchCondition searchCondition = dataTablesMapper.toSearchCondition(dataTables);
+        ManyToManyFilter filter = new ManyToManyFilter();
+        filter.setJoinClass(Test.class);
+        filter.setJoinFieldName("tests");
+        filter.getFilterMap().put("id", testId);
+        searchCondition.setManyToManyAndFilter(filter);
+        return testCreatingService.getGridRowsOfAddedQuestions(searchCondition);
     }
 
     /**

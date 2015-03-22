@@ -117,14 +117,14 @@ $(document).ready(
 						dr.questionDescription = $('#questionDescription')
 								.code().toString();
 						$.ajax({
-							url : baseDir+'/questioncreating',
+							url : location.pathname,
 							type : 'POST',
 							dataType : 'html',
 							data : JSON.stringify(dr),
 							contentType : 'application/json',
 							mimeType : 'application/json',
 							success : function(data) {
-								window.location.href = baseDir +"/tests";
+								window.location.href = baseDir +"/tests/" + data + "/edit";
 							}
 
 						});

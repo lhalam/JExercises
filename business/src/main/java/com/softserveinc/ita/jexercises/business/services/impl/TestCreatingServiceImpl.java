@@ -14,8 +14,6 @@ import com.softserveinc.ita.jexercises.persistence.dao.impl.TestDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -64,43 +62,24 @@ public class TestCreatingServiceImpl implements TestCreatingService {
 
     @Override
     public GridResponseDto<QuestionGridDto> getGridRowsOfAllQuestions(
-            SearchCondition searchCondition, Long testId) {
+            SearchCondition searchCondition) {
         GridResponseDto<QuestionGridDto> response = new GridResponseDto<>();
-        List<Long> addedQuestions = new ArrayList<>();
-        for (Question question : questionDao.findAllByTestId(testId)) {
-            addedQuestions.add(question.getId());
-        }
-        searchCondition.getNotFilterMap().put("id", addedQuestions);
-        List<Question> questionList = questionDao.findAllByCriteria(searchCondition);
         response.setDraw(searchCondition.getDraw());
         response.setRecordsFiltered(questionDao.getNumberOfFilteredRecords(searchCondition));
         response.setRecordsTotal(questionDao.getNumberOfRecords(searchCondition));
-        response.setData(questionGridMapper.toDto(questionList));
+        response.setData(questionGridMapper.toDto(questionDao.findAllByCriteria(searchCondition)));
 
         return response;
     }
 
     @Override
     public GridResponseDto<QuestionGridDto> getGridRowsOfAddedQuestions(
-            SearchCondition searchCondition, Long testId) {
+            SearchCondition searchCondition) {
         GridResponseDto<QuestionGridDto> response = new GridResponseDto<>();
-        List<Question> questions = questionDao.findAllByTestId(testId);
-        List<Long> addedQuestions = new ArrayList<>();
-        for (Question question : questions) {
-            addedQuestions.add(question.getId());
-        }
-        searchCondition.getOrFilterMap().put("id", addedQuestions);
         response.setRecordsFiltered(questionDao.getNumberOfFilteredRecords(searchCondition));
         response.setRecordsTotal(questionDao.getNumberOfRecords(searchCondition));
-        List<Question> questionList = new ArrayList<>();
-        if (!questions.isEmpty()) {
-            questionList = questionDao.findAllByCriteria(searchCondition);
-        } else {
-            response.setRecordsFiltered(0L);
-            response.setRecordsTotal(0L);
-        }
         response.setDraw(searchCondition.getDraw());
-        response.setData(questionGridMapper.toDto(questionList));
+        response.setData(questionGridMapper.toDto(questionDao.findAllByCriteria(searchCondition)));
         return response;
     }
 

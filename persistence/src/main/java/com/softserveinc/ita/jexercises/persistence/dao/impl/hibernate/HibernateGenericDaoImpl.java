@@ -1,14 +1,16 @@
 package com.softserveinc.ita.jexercises.persistence.dao.impl.hibernate;
 
 import com.mysema.query.BooleanBuilder;
+import com.mysema.query.jpa.JPASubQuery;
 import com.mysema.query.jpa.impl.JPAQuery;
 import com.mysema.query.types.OrderSpecifier;
-import com.mysema.query.types.path.NumberPath;
+import com.mysema.query.types.path.ListPath;
 import com.mysema.query.types.path.PathBuilder;
+import com.mysema.query.types.path.SimplePath;
 import com.mysema.query.types.path.StringPath;
 import com.softserveinc.ita.jexercises.common.dto.SearchCondition;
+import com.softserveinc.ita.jexercises.common.utils.ManyToManyFilter;
 import com.softserveinc.ita.jexercises.persistence.dao.GenericDao;
-import com.softserveinc.ita.jexercises.persistence.utils.Context;
 
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
@@ -16,7 +18,7 @@ import javax.persistence.PersistenceContext;
 import java.beans.Introspector;
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -95,6 +97,14 @@ public class HibernateGenericDaoImpl<T, PK extends Serializable> implements
                 * searchCondition.getPageSize())
                 .limit(searchCondition.getPageSize()).from(qObject);
 
+        if (searchCondition.getManyToManyNotInFilter() != null) {
+            manyToManyNotInFilter(jpaQuery, searchCondition);
+        }
+
+        if (searchCondition.getManyToManyAndFilter() != null) {
+            manyToManyAndFilter(jpaQuery, searchCondition);
+        }
+
         filterWithAnd(jpaQuery, searchCondition);
         filterWithNot(jpaQuery, searchCondition);
         filterWithOr(jpaQuery, searchCondition);
@@ -121,6 +131,14 @@ public class HibernateGenericDaoImpl<T, PK extends Serializable> implements
 
         jpaQuery.from(qObject);
 
+        if (searchCondition.getManyToManyNotInFilter() != null) {
+            manyToManyNotInFilter(jpaQuery, searchCondition);
+        }
+
+        if (searchCondition.getManyToManyAndFilter() != null) {
+            manyToManyAndFilter(jpaQuery, searchCondition);
+        }
+
         filterWithAnd(jpaQuery, searchCondition);
         filterWithNot(jpaQuery, searchCondition);
         filterWithOr(jpaQuery, searchCondition);
@@ -135,6 +153,14 @@ public class HibernateGenericDaoImpl<T, PK extends Serializable> implements
 
         jpaQuery.from(qObject);
 
+        if (searchCondition.getManyToManyNotInFilter() != null) {
+            manyToManyNotInFilter(jpaQuery, searchCondition);
+        }
+
+        if (searchCondition.getManyToManyAndFilter() != null) {
+            manyToManyAndFilter(jpaQuery, searchCondition);
+        }
+
         filterWithAnd(jpaQuery, searchCondition);
         filterWithNot(jpaQuery, searchCondition);
 
@@ -144,11 +170,12 @@ public class HibernateGenericDaoImpl<T, PK extends Serializable> implements
     private void filterWithAnd(JPAQuery jpaQuery,
                                SearchCondition searchCondition) {
         PathBuilder<T> qObject = getQObject();
+
         for (Map.Entry<String, Object> filter :
                 searchCondition.getAndFilterMap().entrySet()) {
-            Context<T> context = new Context<>();
-            context.load(filter.getValue().getClass().getName());
-            jpaQuery.where(context.executeStrategy(qObject, filter));
+            SimplePath filterPath = qObject.getSimple(filter.getKey(),
+                    filter.getValue().getClass());
+            jpaQuery.where(filterPath.eq(filter.getValue()));
         }
     }
 
@@ -159,16 +186,14 @@ public class HibernateGenericDaoImpl<T, PK extends Serializable> implements
 
         for (Map.Entry<String, Object> filter :
                 searchCondition.getOrFilterMap().entrySet()) {
-            if ("ArrayList".equals(filter.getValue().getClass().getSimpleName())) {
-                NumberPath filterFieldPath = qObject
-                        .getNumber(filter.getKey(), Long.class);
-                for (Long longObject : (ArrayList<Long>) filter.getValue()) {
-                    builder.or(filterFieldPath.eq(longObject));
-                }
+            if (filter.getValue().getClass().equals(String.class)) {
+                StringPath filterPath = qObject.getString(filter.getKey());
+                builder.or(filterPath.containsIgnoreCase(
+                        (String) filter.getValue()));
             } else {
-                Context<T> context = new Context<>();
-                context.load(filter.getValue().getClass().getName());
-                builder.or(context.executeStrategy(qObject, filter));
+                SimplePath filterPath = qObject.getSimple(filter.getKey(),
+                        filter.getValue().getClass());
+                builder.or(filterPath.eq(filter.getValue()));
             }
         }
         jpaQuery.where(builder);
@@ -181,19 +206,58 @@ public class HibernateGenericDaoImpl<T, PK extends Serializable> implements
 
         for (Map.Entry<String, Object> filter :
                 searchCondition.getNotFilterMap().entrySet()) {
-            if ("ArrayList".equals(filter.getValue().getClass().getSimpleName())) {
-                NumberPath filterFieldPath = qObject
-                        .getNumber(filter.getKey(), Long.class);
-                for (Long longObject : (ArrayList<Long>) filter.getValue()) {
-                    builder.andNot(filterFieldPath.eq(longObject));
-                }
-            } else {
-                Context<T> context = new Context<>();
-                context.load(filter.getValue().getClass().getName());
-                builder.andNot(context.executeStrategy(qObject, filter));
-            }
+            SimplePath filterPath = qObject.getSimple(filter.getKey(),
+                    filter.getValue().getClass());
+            builder.andNot(filterPath.eq(filter.getValue()));
         }
         jpaQuery.where(builder);
+    }
+
+    @SuppressWarnings("unchecked")
+    private void manyToManyAndFilter(JPAQuery jpaQuery,
+                                     SearchCondition searchCondition) {
+        PathBuilder<T> qObject = getQObject();
+        ManyToManyFilter filter = searchCondition.getManyToManyAndFilter();
+        Class joinClass = filter.getJoinClass();
+        PathBuilder joinQObject = new PathBuilder(joinClass,
+                joinClass.getSimpleName());
+        ListPath joinFieldPath = qObject.getList(filter.getJoinFieldName(),
+                HashSet.class);
+
+        jpaQuery.innerJoin(joinFieldPath, joinQObject);
+
+        for (Map.Entry<String, Object> filterMap :
+                filter.getFilterMap().entrySet()) {
+            SimplePath filterPath = joinQObject.getSimple(filterMap.getKey(),
+                    filterMap.getValue().getClass());
+            jpaQuery.where(filterPath.eq(filterMap.getValue()));
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    private void manyToManyNotInFilter(JPAQuery jpaQuery,
+                                       SearchCondition searchCondition) {
+        PathBuilder<T> qObject = getQObject();
+        ManyToManyFilter filter = searchCondition.getManyToManyNotInFilter();
+        Class joinClass = filter.getJoinClass();
+        PathBuilder joinQObject = new PathBuilder(joinClass,
+                joinClass.getSimpleName());
+        ListPath joinFieldPath = qObject.getList(filter.getJoinFieldName(),
+                HashSet.class);
+
+        for (Map.Entry<String, Object> filterMap :
+                filter.getFilterMap().entrySet()) {
+
+            SimplePath notInFieldPath = qObject.getSimple(
+                    filter.getNotInFieldName(), filter.getNotInFieldClass());
+            SimplePath filterPath = joinQObject.getSimple(filterMap.getKey(),
+                    filterMap.getValue().getClass());
+
+            jpaQuery.where(notInFieldPath.notIn(new JPASubQuery().from(qObject)
+                    .innerJoin(joinFieldPath, joinQObject)
+                    .where(filterPath.eq(filterMap.getValue()))
+                    .list(notInFieldPath)));
+        }
     }
 
     private PathBuilder<T> getQObject() {
