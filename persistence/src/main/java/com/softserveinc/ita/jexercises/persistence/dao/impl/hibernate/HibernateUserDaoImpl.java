@@ -1,8 +1,8 @@
 package com.softserveinc.ita.jexercises.persistence.dao.impl.hibernate;
 
-import java.util.List;
-import javax.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
+import com.mysema.query.jpa.impl.JPAQuery;
+import com.softserveinc.ita.jexercises.common.entity.QUser;
 import com.softserveinc.ita.jexercises.common.entity.User;
 import com.softserveinc.ita.jexercises.persistence.dao.impl.UserDao;
 
@@ -19,13 +19,10 @@ public class HibernateUserDaoImpl extends HibernateGenericDaoImpl<User, Long>
     @Override
     public User findByEmail(String email) {
         User user = null;
-        TypedQuery<User> query = getEntityManager().createQuery(
-                "select u from User u where u.email=:email", User.class)
-                .setParameter("email", email);
-        List<User> list = query.getResultList();
-        if (!list.isEmpty()) {
-            user = (User) list.get(0);
-        }
+        QUser qUser = QUser.user;
+        JPAQuery query = new JPAQuery(getEntityManager());
+        user = query.from(qUser).where(qUser.email.eq(email))
+                .uniqueResult(qUser);
         return user;
     }
 }
