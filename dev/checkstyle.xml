@@ -213,4 +213,7 @@
 		<property name="onCommentFormat" value="// END REUSED CLASS"/>
 		<metadata name="com.atlassw.tools.eclipse.checkstyle.comment" value="High Complexity Code Warning Suppression"/>
 	</module>
+    <module name="SuppressionFilter">
+        <property name="file" value="dev/suppressions.xml"/>
+    </module>
 </module>
