@@ -1,9 +1,13 @@
 package com.softserveinc.ita.jexercises.web.controllers;
 
+
+import javax.servlet.http.HttpServletRequest;
+
 import com.softserveinc.ita.jexercises.business.services.TestDescriptionService;
 import com.softserveinc.ita.jexercises.business.services.TestService;
 import com.softserveinc.ita.jexercises.common.dto.TestDescriptionDto;
 import com.softserveinc.ita.jexercises.web.utils.ResourceNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,12 +36,14 @@ public class TestDescriptionController {
      */
     @Autowired
     private TestService testService;
-
+    
+    
     /**
      * Gets test description form page.
      *
      * @param model  Model.
      * @param testId Test id.
+     * @param request HttpServletRequest.
      * @return Test Description page.
      * @throws ResourceNotFoundException No test with such id
      * or user does not have access to private test
@@ -45,14 +51,22 @@ public class TestDescriptionController {
     @RequestMapping(value = "/test/{id}", method = RequestMethod.GET)
     public ModelAndView showTestDescriptionForm(Model model,
                                                 @PathVariable("id")
-                                                Long testId)
+                                                Long testId,HttpServletRequest request)
             throws ResourceNotFoundException {
-        if (!testDescriptionService.checkDoesUserHavePrivateLink(testId)
+        if (!isAccessAllowed(request,testId)
                 || testService.findTestById(testId) == null) {
             throw new ResourceNotFoundException();
         } else {
             return new ModelAndView("test/testdescription");
         }
+    }
+    
+    private boolean isAccessAllowed(HttpServletRequest request,Long testId){
+        String url=(String) request.getAttribute("publicLink");
+        if(url==null){
+            return testDescriptionService.isPublicTest(testId);
+        }
+        return true;
     }
 
     /**

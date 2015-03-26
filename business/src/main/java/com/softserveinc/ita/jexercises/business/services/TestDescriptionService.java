@@ -2,6 +2,7 @@ package com.softserveinc.ita.jexercises.business.services;
 
 import com.softserveinc.ita.jexercises.common.dto.TestDescriptionDto;
 
+
 /**
  * Service that make TestDescription.
  *
@@ -16,13 +17,14 @@ public interface TestDescriptionService {
      * @return TestDescriptionDto object.
      */
     TestDescriptionDto getTestDescription(Long testId);
-
+  
+    
     /**
-     * Checks if user has private link.
-     *
-     * @param testId test id.
-     * @return true if test is public or user has link for
-     * private test or return  false if user does not have private link.
+     * Checks if test is public.
+     * 
+     * @param testId Id of test.
+     * @return True if test is public.
      */
-    boolean checkDoesUserHavePrivateLink(Long testId);
+    boolean isPublicTest( Long testId);
+
 }

@@ -10,6 +10,7 @@ import com.softserveinc.ita.jexercises.common.mapper.TestMapper;
 import com.softserveinc.ita.jexercises.persistence.dao.impl.AttemptDao;
 import com.softserveinc.ita.jexercises.persistence.dao.impl.TestDao;
 import com.softserveinc.ita.jexercises.persistence.dao.impl.UserAnswerDao;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -40,18 +41,11 @@ public class TestDescriptionServiceImpl implements TestDescriptionService {
         Test test = testDao.findById(testId);
         return testMapper.toDto(test);
     }
-
+    
     @Override
-    public boolean checkDoesUserHavePrivateLink(Long testId) {
+    public boolean isPublicTest( Long testId) {
         Test test = testDao.findById(testId);
-        User user = currentUserService.getCurrentUser();
-        Attempt attempt = attemptDao.findAttemptByTestIdAndUserId(test.getId(),
-                user.getId());
-        try {
-            return test.getIsPublic() || userAnswerDao.findAllByAttemptId(
-                    attempt.getId()).iterator().next().getAnswer() == null;
-        } catch (NullPointerException e) {
-            return false;
-        }
+        return test.getIsPublic();
     }
+
 }

@@ -78,7 +78,7 @@ public class LinkController {
     public String showPrivateTest(@PathVariable("shortCode") String shortCode,
             HttpServletRequest request) {
         Long testId = linkService.findTestByLink(shortCode);
-        testProcessService.createAttemptForPrivateTest(testId);
+        request.setAttribute("publicLink", shortCode);
         return String.format("forward:/test/%d", testId);
     }
 
