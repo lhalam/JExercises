@@ -19,6 +19,14 @@ public interface LinkService {
     void saveLink(LinkDto linkDto);
 
     /**
+     * Deletes public link.
+     * 
+     * @param testId
+     *            Test id.
+     */
+    void deleteLink(Long testId);
+
+    /**
      * Searches test by link.
      * 
      * @param shortCode

@@ -51,6 +51,17 @@ public class LinkController {
     public void savePublicLink(@RequestBody LinkDto linkDto) {
         linkService.saveLink(linkDto);
     }
+    
+    /**
+     * Deletes public link.
+     * 
+     * @param id
+     *            Test id.
+     */
+    @RequestMapping(value = "/public/link/delete/{id}", method = RequestMethod.POST)
+    public void deletePublicLink(@PathVariable Long id) {
+        linkService.deleteLink(id);
+    }
 
     /**
      * 

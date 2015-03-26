@@ -37,9 +37,9 @@ public class LinkServiceImpl implements LinkService {
         Link link = test.getLink();
         if (link == null) {
             link = new Link();
+            link.setTest(test);
         }
         link.setShortCode(linkDto.getShortCode());
-        link.setTest(test);
         test.setLink(link);
         testDao.update(test);
     }
@@ -64,6 +64,18 @@ public class LinkServiceImpl implements LinkService {
             return link.getTest().getId();
         }
         return null;
+    }
+
+    @Transactional
+    @Override
+    public void deleteLink(Long testId) {
+        Test test = testDao.findById(testId);
+        Link link = test.getLink();
+        if (link != null) {
+            linkDao.delete(link);
+            test.setLink(null);
+            testDao.update(test);
+        }
     }
 
 }

@@ -211,6 +211,8 @@ $(document).ready(function () {
                     	if(!dataTest.isPublic){
                     		linkData.testId=dataTest.testId;
                     		saveLink(linkData);
+                    	}else{
+                    		deleteLinkIfExists(dataTest.testId);
                     	}
                         window.location.href = baseDir + "/tests";
                     }
