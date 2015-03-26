@@ -47,8 +47,8 @@ public class TestDescriptionController {
                                                 @PathVariable("id")
                                                 Long testId)
             throws ResourceNotFoundException {
-        if (!testDescriptionService.checkDoesUserHavePrivateLink(testId)
-                || testService.findTestById(testId) == null) {
+        if (testService.findTestById(testId) == null ||
+                !testDescriptionService.checkDoesUserHavePrivateLink(testId)) {
             throw new ResourceNotFoundException();
         } else {
             return new ModelAndView("test/testdescription");
