@@ -37,6 +37,7 @@ public class HibernateGenericDaoImpl<T, PK extends Serializable> implements
     private static final String DESC = "desc";
     private Class<T> entityClass;
     private String entity;
+    private PathBuilder<T> qObject;
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -48,6 +49,8 @@ public class HibernateGenericDaoImpl<T, PK extends Serializable> implements
         ParameterizedType genericSuperclass = (ParameterizedType) getClass()
                 .getGenericSuperclass();
         entityClass = (Class) genericSuperclass.getActualTypeArguments()[0];
+        qObject = new PathBuilder<>(entityClass,
+                Introspector.decapitalize(getEntityName()));
     }
 
     @Override
@@ -79,35 +82,17 @@ public class HibernateGenericDaoImpl<T, PK extends Serializable> implements
 
     @Override
     public List<T> findAll() {
-        PathBuilder<T> qObject = new PathBuilder<>(entityClass,
-                Introspector.decapitalize(getEntityName()));
-
         JPAQuery jpaQuery = new JPAQuery(entityManager);
-
         return jpaQuery.from(qObject).list(qObject);
     }
 
     @Override
     public List<T> findAllByCriteria(SearchCondition searchCondition) {
-        PathBuilder<T> qObject = getQObject();
-
-        JPAQuery jpaQuery = new JPAQuery(entityManager);
-
+        JPAQuery jpaQuery = applyFilters(searchCondition);
+        filterWithOr(jpaQuery, searchCondition);
         jpaQuery.offset(searchCondition.getPageNumber()
                 * searchCondition.getPageSize())
-                .limit(searchCondition.getPageSize()).from(qObject);
-
-        if (searchCondition.getManyToManyNotInFilter() != null) {
-            manyToManyNotInFilter(jpaQuery, searchCondition);
-        }
-
-        if (searchCondition.getManyToManyAndFilter() != null) {
-            manyToManyAndFilter(jpaQuery, searchCondition);
-        }
-
-        filterWithAnd(jpaQuery, searchCondition);
-        filterWithNot(jpaQuery, searchCondition);
-        filterWithOr(jpaQuery, searchCondition);
+                .limit(searchCondition.getPageSize());
 
         for (Map.Entry<String, String> order :
                 searchCondition.getOrderByMap().entrySet()) {
@@ -120,57 +105,24 @@ public class HibernateGenericDaoImpl<T, PK extends Serializable> implements
 
             jpaQuery.orderBy(orderSpecifier);
         }
-
         return jpaQuery.list(qObject);
     }
 
     @Override
     public Long getNumberOfFilteredRecords(SearchCondition searchCondition) {
-        PathBuilder<T> qObject = getQObject();
-        JPAQuery jpaQuery = new JPAQuery(entityManager);
-
-        jpaQuery.from(qObject);
-
-        if (searchCondition.getManyToManyNotInFilter() != null) {
-            manyToManyNotInFilter(jpaQuery, searchCondition);
-        }
-
-        if (searchCondition.getManyToManyAndFilter() != null) {
-            manyToManyAndFilter(jpaQuery, searchCondition);
-        }
-
-        filterWithAnd(jpaQuery, searchCondition);
-        filterWithNot(jpaQuery, searchCondition);
+        JPAQuery jpaQuery = applyFilters(searchCondition);
         filterWithOr(jpaQuery, searchCondition);
-
         return jpaQuery.count();
     }
 
     @Override
     public Long getNumberOfRecords(SearchCondition searchCondition) {
-        PathBuilder<T> qObject = getQObject();
-        JPAQuery jpaQuery = new JPAQuery(entityManager);
-
-        jpaQuery.from(qObject);
-
-        if (searchCondition.getManyToManyNotInFilter() != null) {
-            manyToManyNotInFilter(jpaQuery, searchCondition);
-        }
-
-        if (searchCondition.getManyToManyAndFilter() != null) {
-            manyToManyAndFilter(jpaQuery, searchCondition);
-        }
-
-        filterWithAnd(jpaQuery, searchCondition);
-        filterWithNot(jpaQuery, searchCondition);
-
+        JPAQuery jpaQuery = applyFilters(searchCondition);
         return jpaQuery.count();
     }
 
     private void filterWithAnd(JPAQuery jpaQuery,
                                SearchCondition searchCondition) {
-        PathBuilder<T> qObject = getQObject();
-
         for (Map.Entry<String, Object> filter :
                 searchCondition.getAndFilterMap().entrySet()) {
             SimplePath filterPath = qObject.getSimple(filter.getKey(),
@@ -182,7 +134,6 @@ public class HibernateGenericDaoImpl<T, PK extends Serializable> implements
     private void filterWithOr(JPAQuery jpaQuery,
                               SearchCondition searchCondition) {
         BooleanBuilder builder = new BooleanBuilder();
-        PathBuilder<T> qObject = getQObject();
 
         for (Map.Entry<String, Object> filter :
                 searchCondition.getOrFilterMap().entrySet()) {
@@ -202,7 +153,6 @@ public class HibernateGenericDaoImpl<T, PK extends Serializable> implements
     private void filterWithNot(JPAQuery jpaQuery,
                                SearchCondition searchCondition) {
         BooleanBuilder builder = new BooleanBuilder();
-        PathBuilder<T> qObject = getQObject();
 
         for (Map.Entry<String, Object> filter :
                 searchCondition.getNotFilterMap().entrySet()) {
@@ -216,10 +166,9 @@ public class HibernateGenericDaoImpl<T, PK extends Serializable> implements
     @SuppressWarnings("unchecked")
     private void manyToManyAndFilter(JPAQuery jpaQuery,
                                      SearchCondition searchCondition) {
-        PathBuilder<T> qObject = getQObject();
         ManyToManyFilter filter = searchCondition.getManyToManyAndFilter();
         Class joinClass = filter.getJoinClass();
-        PathBuilder joinQObject = new PathBuilder(joinClass,
+        PathBuilder<?> joinQObject = new PathBuilder(joinClass,
                 joinClass.getSimpleName());
         ListPath joinFieldPath = qObject.getList(filter.getJoinFieldName(),
                 HashSet.class);
@@ -237,19 +186,21 @@ public class HibernateGenericDaoImpl<T, PK extends Serializable> implements
     @SuppressWarnings("unchecked")
     private void manyToManyNotInFilter(JPAQuery jpaQuery,
                                        SearchCondition searchCondition) {
-        PathBuilder<T> qObject = getQObject();
         ManyToManyFilter filter = searchCondition.getManyToManyNotInFilter();
         Class joinClass = filter.getJoinClass();
-        PathBuilder joinQObject = new PathBuilder(joinClass,
+        PathBuilder<?> joinQObject = new PathBuilder(joinClass,
                 joinClass.getSimpleName());
         ListPath joinFieldPath = qObject.getList(filter.getJoinFieldName(),
                 HashSet.class);
 
+        Map.Entry<String, Class> notInFieldMap = searchCondition
+                .getNotInFieldMap().entrySet().iterator().next();
+        SimplePath notInFieldPath = qObject.getSimple(
+                notInFieldMap.getKey(), notInFieldMap.getValue());
+
         for (Map.Entry<String, Object> filterMap :
                 filter.getFilterMap().entrySet()) {
 
-            SimplePath notInFieldPath = qObject.getSimple(
-                    filter.getNotInFieldName(), filter.getNotInFieldClass());
             SimplePath filterPath = joinQObject.getSimple(filterMap.getKey(),
                     filterMap.getValue().getClass());
 
@@ -260,9 +211,23 @@ public class HibernateGenericDaoImpl<T, PK extends Serializable> implements
         }
     }
 
-    private PathBuilder<T> getQObject() {
-        return new PathBuilder<>(entityClass,
-                Introspector.decapitalize(getEntityName()));
+    private JPAQuery applyFilters(SearchCondition searchCondition) {
+        JPAQuery jpaQuery = new JPAQuery(entityManager);
+
+        jpaQuery.from(qObject);
+
+        if (searchCondition.getManyToManyNotInFilter() != null) {
+            manyToManyNotInFilter(jpaQuery, searchCondition);
+        }
+
+        if (searchCondition.getManyToManyAndFilter() != null) {
+            manyToManyAndFilter(jpaQuery, searchCondition);
+        }
+
+        filterWithAnd(jpaQuery, searchCondition);
+        filterWithNot(jpaQuery, searchCondition);
+
+        return jpaQuery;
     }
 
     private String getEntityName() {

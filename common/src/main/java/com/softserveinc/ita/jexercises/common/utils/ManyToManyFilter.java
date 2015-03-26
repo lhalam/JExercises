@@ -12,8 +12,6 @@ public class ManyToManyFilter {
     private Class joinClass;
     private String joinFieldName;
     private Map<String, Object> filterMap = new HashMap<>();
-    private String notInFieldName;
-    private Class notInFieldClass;
 
     public Class getJoinClass() {
         return joinClass;
@@ -31,28 +29,11 @@ public class ManyToManyFilter {
         this.joinFieldName = joinFieldName;
     }
 
-
-    public String getNotInFieldName() {
-        return notInFieldName;
-    }
-
-    public void setNotInFieldName(String notInFieldName) {
-        this.notInFieldName = notInFieldName;
-    }
-
     public Map<String, Object> getFilterMap() {
         return filterMap;
     }
 
     public void setFilterMap(Map<String, Object> filterMap) {
         this.filterMap = filterMap;
-    }
-
-    public Class getNotInFieldClass() {
-        return notInFieldClass;
-    }
-
-    public void setNotInFieldClass(Class notInFieldClass) {
-        this.notInFieldClass = notInFieldClass;
     }
 }
