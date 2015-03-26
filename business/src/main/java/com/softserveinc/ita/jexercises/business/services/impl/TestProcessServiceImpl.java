@@ -66,16 +66,11 @@ public class TestProcessServiceImpl implements TestProcessService {
     public TestStartDto getInformationAboutTestQuestions(Long testId) {
         Test test = testDao.findById(testId);
         User user = currentUserService.getCurrentUser();
-        if (test.getIsPublic()) {
-            Attempt attempt = attemptMapper.toEntity(test, user);
-            attemptDao.create(attempt);
-            createUserAnswers(attempt, test.getQuestions());
-            return testStartMapper.toDto(test.getQuestions(), attempt);
-        } else {
-            Attempt attempt = attemptDao.findAttemptByTestIdAndUserId(
-                    test.getId(), user.getId());
-            return testStartMapper.toDto(test.getQuestions(), attempt);
-        }
+        Attempt attempt = attemptMapper.toEntity(test, user);
+        attemptDao.create(attempt);
+        createUserAnswers(attempt, test.getQuestions());
+        return testStartMapper.toDto(test.getQuestions(), attempt);
+        
     }
 
     @Override
@@ -107,16 +102,7 @@ public class TestProcessServiceImpl implements TestProcessService {
         checkUserAnswer(userAnswers);
     }
 
-    @Override
-    @Transactional
-    public void createAttemptForPrivateTest(Long testId) {
-        Test test = testDao.findById(testId);
-        User user = currentUserService.getCurrentUser();
-        Attempt attempt = attemptMapper.toEntity(test, user);
-        attemptDao.create(attempt);
-        createUserAnswers(attempt, questionDao.findAllByTestId(test.getId()));
-    }
-
+   
     /**
      * Creates User Answer object.
      *

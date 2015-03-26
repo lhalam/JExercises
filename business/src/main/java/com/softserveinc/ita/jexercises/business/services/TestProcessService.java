@@ -34,11 +34,5 @@ public interface TestProcessService {
      * @param questionRequestDto QuestionRequest DTO object.
      */
     void submitTest(QuestionRequestDto questionRequestDto);
-
-    /**
-     * Creates attempt and user answers for private test.
-     *
-     * @param testId Test Id.
-     */
-    void createAttemptForPrivateTest(Long testId);
+   
 }
