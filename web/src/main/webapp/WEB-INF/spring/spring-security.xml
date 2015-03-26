@@ -15,7 +15,7 @@
 		<intercept-url pattern="/user/registration" access="permitAll" />
 		<intercept-url pattern="/login" access="permitAll" />
 		<intercept-url pattern="/**" access="isAuthenticated()" />
-		<form-login login-page="/login" default-target-url="/"
+		<form-login login-page="/login" default-target-url="/tests"
 			authentication-failure-url="/login?error" />
 		<logout logout-success-url="/login?logout=true" delete-cookies="JSESSIONID" />
 		<remember-me key="uniqueAndSecret" />
