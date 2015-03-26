@@ -35,8 +35,6 @@
 						<div id="errorMessageHolder"></div>
 						<h3 class="sign-up-title">JExercises Register</h3>
 						<hr class="colorgraph">
-						<hr class="line">
-
 						<div class="form-group has-feedback">
 							<label for="firstName" class="sr-only">First Name</label> <input
 								class="form-control" placeholder="First name*"
@@ -75,15 +73,12 @@
 								class="glyphicon form-control-feedback"
 								id="matchingPasswordFeedback"></span>
 						</div>
-
-						<hr class="line">
-
+						<br/>
 						<div id="birthDate" class="form-group has-feedback col-sm-11">
 							<span id="birthDateFeedback"
 								class="glyphicon form-control-feedback nearLabel"></span><label
 								for="birthDate">Birth Date</label>
 						</div>
-						<br></br>
 						<div class="form-inline row-fluide">
 							<div class="form-group">
 								<label for="day" class="sr-only">Day</label> <select id="day"
@@ -116,8 +111,7 @@
 								</select>
 							</div>
 						</div>
-
-						<hr class="line">
+						<br/>
 						<input id="submitButton" class="btn btn-lg btn-success btn-block"
 							type="submit" value="Sign up"> <br>
 					</div>

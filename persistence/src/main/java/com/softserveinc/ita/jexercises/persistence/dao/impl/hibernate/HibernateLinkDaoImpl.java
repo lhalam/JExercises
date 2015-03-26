@@ -18,10 +18,9 @@ public class HibernateLinkDaoImpl extends HibernateGenericDaoImpl<Link, Long>
 
     @Override
     public Link findByShortCode(String shortCode) {
-        Link link = null;
         QLink qLink = QLink.link;
         JPAQuery query = new JPAQuery(getEntityManager());
-        link = query.from(qLink).where(qLink.shortCode.eq(shortCode))
+        Link link = query.from(qLink).where(qLink.shortCode.eq(shortCode))
                 .uniqueResult(qLink);
         return link;
     }
