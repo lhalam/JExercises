@@ -1,6 +1,5 @@
 package com.softserveinc.ita.jexercises.business.services.impl;
 
-import com.softserveinc.ita.jexercises.business.services.CurrentUserService;
 import com.softserveinc.ita.jexercises.business.services.UserProfileService;
 import com.softserveinc.ita.jexercises.business.services.UserService;
 import com.softserveinc.ita.jexercises.common.dto.UserProfileDto;
@@ -18,11 +17,6 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 public class UserProfileServiceImpl implements UserProfileService {
-    /**
-     * Current User Service instance.
-     */
-    @Autowired
-    private CurrentUserService currentUserService;
     /**
      * User Service instance.
      */
