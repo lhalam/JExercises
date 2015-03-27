@@ -57,6 +57,7 @@ public class TestProcessController {
     @RequestMapping(value = "/test/process/{id}", method = RequestMethod.GET)
     public ModelAndView testForm(Model model, @PathVariable("id") Long testId)
             throws ResourceNotFoundException {
+
         if (testService.findTestById(testId) == null) {
             throw new ResourceNotFoundException();
         } else {

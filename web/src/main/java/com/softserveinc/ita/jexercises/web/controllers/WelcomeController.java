@@ -22,14 +22,14 @@ public class WelcomeController {
     /**
      * Getting welcome view.
      *
-     * @return ModelAndView Welcome page.
+     * @return ModelAndView Welcome page or redirect to /tests.
      */
     @RequestMapping(value = "", method = RequestMethod.GET)
     public ModelAndView welcomeForm() {
         if (currentUserService.getCurrentUser() == null) {
             return new ModelAndView("welcome");
         } else {
-            return new ModelAndView("home");
+            return new ModelAndView("redirect:/tests");
         }
     }
 }

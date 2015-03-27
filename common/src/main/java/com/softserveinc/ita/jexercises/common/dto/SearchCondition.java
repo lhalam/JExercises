@@ -19,6 +19,7 @@ public class SearchCondition {
     private Map<String, Object> andFilterMap = new HashMap<>();
     private Map<String, Object> orFilterMap = new HashMap<>();
     private Map<String, Object> notFilterMap = new HashMap<>();
+    private Map<String, Class> notInFieldMap = new HashMap<>();
     private ManyToManyFilter manyToManyAndFilter;
     private ManyToManyFilter manyToManyNotInFilter;
 
@@ -76,6 +77,14 @@ public class SearchCondition {
 
     public void setNotFilterMap(Map<String, Object> notFilterMap) {
         this.notFilterMap = notFilterMap;
+    }
+
+    public Map<String, Class> getNotInFieldMap() {
+        return notInFieldMap;
+    }
+
+    public void setNotInFieldMap(Map<String, Class> notInFieldMap) {
+        this.notInFieldMap = notInFieldMap;
     }
 
     public ManyToManyFilter getManyToManyAndFilter() {

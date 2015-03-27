@@ -1,8 +1,0 @@
-@CHARSET "UTF-8";
-
-.banner_btn a {
-    width: 320px;
-}
-body {
-    background-image: url('./../background.jpg');
-}

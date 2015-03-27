@@ -33,6 +33,9 @@ public final class SandboxContextManager {
                 new SecurityPermission("java.lang.RuntimePermission",
                         "createClassLoader"));
         instance.addSecurityPermission(SandboxContext.AccessType.PERMIT,
+                new SecurityPermission("java.util.PropertyPermission",
+                        "line.separator", "read"));
+        instance.addSecurityPermission(SandboxContext.AccessType.PERMIT,
                 new SecurityPermission("java.lang.reflect.ReflectPermission",
                         "suppressAccessChecks"));
         instance.addClassPermission(SandboxContext.AccessType.PERMIT,

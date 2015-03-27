@@ -139,9 +139,8 @@ public class TestCreatingController {
         filter.setJoinClass(Test.class);
         filter.setJoinFieldName("tests");
         filter.getFilterMap().put("id", testId);
-        filter.setNotInFieldName("id");
-        filter.setNotInFieldClass(Long.class);
         searchCondition.setManyToManyNotInFilter(filter);
+        searchCondition.getNotInFieldMap().put("id", Long.class);
         return testCreatingService.getGridRowsOfAllQuestions(searchCondition);
     }
 
