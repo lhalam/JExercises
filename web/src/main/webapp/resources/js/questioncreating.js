@@ -16,7 +16,7 @@ var assertDto = [];
 var sibling;
 var assert;
 var table;
-function validate($element){
+function validate($element) {
 	return $element.val();
 
 }
@@ -26,20 +26,23 @@ function keypressHandler(e) {
 		sibling = $(this);
 		$(this).find("textarea").blur();
 	}
-	
 
 }
-function textAreaFocusLost(){
-	$textarea=$(this).find("textarea");
+function textAreaFocusLost() {
+	$textarea = $(this).find("textarea");
 	console.log($textarea);
-	if(validate($textarea)){
-		$(this).find("textarea").css({"background-color" : "#66FF99"});
-	}else{
-		$textarea.css({"background-color" : "transparent"});
+	if (validate($textarea)) {
+		$(this).find("textarea").css({
+			"background-color" : "#66FF99"
+		});
+	} else {
+		$textarea.css({
+			"background-color" : "transparent"
+		});
 
 	}
 
-	}
+}
 function createTextArea() {
 	return $("<textarea/>", {
 		readonly : "readonly",
@@ -53,9 +56,12 @@ function createRow() {
 	var $answer_td = $("<td/>", {
 		class : "editable sorting_1 expected-answer"
 	});
-	$input_data_td.bind("keypress", keypressHandler).bind("focusout",textAreaFocusLost);
+	$input_data_td.bind("keypress", keypressHandler).bind("focusout",
+			textAreaFocusLost);
 	$input_data_td.on("click", onTDClickHandler)
-	$answer_td.bind("keypress", keypressHandler).bind("focusout",textAreaFocusLost);;
+	$answer_td.bind("keypress", keypressHandler).bind("focusout",
+			textAreaFocusLost);
+	;
 	$answer_td.on("click", onTDClickHandler);
 	$input_data_td.append(createTextArea)
 	$answer_td.append(createTextArea)
@@ -68,36 +74,24 @@ function createRow() {
 }
 function onTDClickHandler() {
 	if (!$(this).hasClass("edit_mode")) {
-		$(this).find("textarea").removeAttr("readonly").addClass("edit_mode").css({"background-color" : "white"});
+		$(this).find("textarea").removeAttr("readonly").addClass("edit_mode")
+				.css({
+					"background-color" : "white"
+				});
 
 	}
 
 }
 $(document).ready(
 		function() {
-            var baseDir = $("#hidden-attr").attr("data-basedir");
+			var baseDir = $("#hidden-attr").attr("data-basedir");
 
-            table = $('#assert').DataTable({
+			table = $('#assert').DataTable({
 				"columnDefs" : [ {
 					"width" : "50%",
 					"targets" : 0
 				} ]
 			});
-
-			$("#save").click(function(event) {
-				var str1, str2;
-				$("td textarea").each(function(index) {
-					if (index % 2 == 0) {
-						str1 = $(this).val();
-					} else {
-						str2 = $(this).val();
-					}
-					if(index%2==1){
-						assertDto.push(new Assert(str1,str2));
-					}
-				});
-			});
-
 			$("#addRow").click(
 					function() {
 						$last_row = $('#assert tbody>tr:last');
@@ -112,6 +106,17 @@ $(document).ready(
 
 			$("#submitButton").click(
 					function(event) {
+						var str1, str2;
+						$("td textarea").each(function(index) {
+							if (index % 2 == 0) {
+								str1 = $(this).val();
+							} else {
+								str2 = $(this).val();
+							}
+							if (index % 2 == 1) {
+								assertDto.push(new Assert(str1, str2));
+							}
+						});
 						var dr = new dataRequest(assertDto);
 						dr.questionName = $('#questionName').code().toString();
 						dr.questionDescription = $('#questionDescription')
@@ -124,7 +129,8 @@ $(document).ready(
 							contentType : 'application/json',
 							mimeType : 'application/json',
 							success : function(data) {
-								window.location.href = baseDir +"/tests/" + data + "/edit";
+								window.location.href = baseDir + "/tests/"
+										+ data + "/edit";
 							}
 
 						});
