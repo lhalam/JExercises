@@ -34,5 +34,12 @@ public interface TestProcessService {
      * @param questionRequestDto QuestionRequest DTO object.
      */
     void submitTest(QuestionRequestDto questionRequestDto);
-   
+
+    /**
+     * Checks does user have attempt.
+     *
+     * @param testId Test id.
+     * @return true if attempt exists
+     */
+    boolean isAttemptExist(Long testId);
 }

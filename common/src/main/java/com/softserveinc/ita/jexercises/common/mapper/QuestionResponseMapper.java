@@ -17,13 +17,12 @@ public class QuestionResponseMapper {
     /**
      * Sets QuestionResponse DTO object.
      *
-     * @param question   Question object.
      * @param userAnswer UserAnswer object.
      * @return QuestionResponseDto DTO.
      */
-    public QuestionResponseDto toDto(Question question,
-                                     UserAnswer userAnswer) {
+    public QuestionResponseDto toDto(UserAnswer userAnswer) {
         QuestionResponseDto questionResponseDto = new QuestionResponseDto();
+        Question question=userAnswer.getQuestion();
         questionResponseDto.setQuestionDescription(question.getDescription());
         questionResponseDto.setQuestionName(question.getName());
         questionResponseDto.setUserAnswer(userAnswer.getAnswer());

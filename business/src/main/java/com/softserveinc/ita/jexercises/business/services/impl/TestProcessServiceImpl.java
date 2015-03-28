@@ -8,17 +8,11 @@ import com.softserveinc.ita.jexercises.common.dto.QuestionRequestDto;
 import com.softserveinc.ita.jexercises.common.dto.QuestionResponseDto;
 import com.softserveinc.ita.jexercises.common.dto.TestStartDto;
 import com.softserveinc.ita.jexercises.common.entity.Attempt;
-import com.softserveinc.ita.jexercises.common.entity.Question;
-import com.softserveinc.ita.jexercises.common.entity.Test;
 import com.softserveinc.ita.jexercises.common.entity.User;
 import com.softserveinc.ita.jexercises.common.entity.UserAnswer;
-import com.softserveinc.ita.jexercises.common.mapper.AttemptMapper;
 import com.softserveinc.ita.jexercises.common.mapper.QuestionResponseMapper;
 import com.softserveinc.ita.jexercises.common.mapper.TestStartMapper;
-import com.softserveinc.ita.jexercises.common.mapper.UserAnswerMapper;
 import com.softserveinc.ita.jexercises.persistence.dao.impl.AttemptDao;
-import com.softserveinc.ita.jexercises.persistence.dao.impl.QuestionDao;
-import com.softserveinc.ita.jexercises.persistence.dao.impl.TestDao;
 import com.softserveinc.ita.jexercises.persistence.dao.impl.UserAnswerDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,22 +32,10 @@ public class TestProcessServiceImpl implements TestProcessService {
     private CurrentUserService currentUserService;
 
     @Autowired
-    private TestDao testDao;
-
-    @Autowired
-    private AttemptMapper attemptMapper;
-
-    @Autowired
-    private UserAnswerMapper userAnswerMapper;
-
-    @Autowired
     private AttemptDao attemptDao;
 
     @Autowired
     private UserAnswerDao userAnswerDao;
-
-    @Autowired
-    private QuestionDao questionDao;
 
     @Autowired
     private TestStartMapper testStartMapper;
@@ -64,32 +46,19 @@ public class TestProcessServiceImpl implements TestProcessService {
     @Override
     @Transactional
     public TestStartDto getInformationAboutTestQuestions(Long testId) {
-        Test test = testDao.findById(testId);
-        User user = currentUserService.getCurrentUser();
-        Attempt attempt = attemptMapper.toEntity(test, user);
-        attemptDao.create(attempt);
-        createUserAnswers(attempt, test.getQuestions());
-        return testStartMapper.toDto(test.getQuestions(), attempt);
-        
+        return testStartMapper.toDto(findCurrentAttempt(testId));
     }
 
     @Override
     @Transactional
     public QuestionResponseDto getQuestion(
             QuestionRequestDto questionRequestDto) {
-        UserAnswer currentUserAnswer =
-                userAnswerDao.findUserAnswerByQuestionIdAndAttemptId(
-                        questionRequestDto.getCurrentQuestionId(),
-                        questionRequestDto.getAttemptId());
-        currentUserAnswer.setAnswer(questionRequestDto.getUserAnswer());
-        userAnswerDao.update(currentUserAnswer);
-        Question question = questionDao.findById(
-                questionRequestDto.getChangeQuestionId());
+        updateCurrentUserAnswer(questionRequestDto);
         UserAnswer nextUserAnswer =
                 userAnswerDao.findUserAnswerByQuestionIdAndAttemptId(
                         questionRequestDto.getChangeQuestionId(),
                         questionRequestDto.getAttemptId());
-        return questionResponseMapper.toDto(question, nextUserAnswer);
+        return questionResponseMapper.toDto(nextUserAnswer);
     }
 
     @Override
@@ -102,19 +71,16 @@ public class TestProcessServiceImpl implements TestProcessService {
         checkUserAnswer(userAnswers);
     }
 
-   
-    /**
-     * Creates User Answer object.
-     *
-     * @param attempt   Attempt object
-     * @param questions List of questions.
-     */
-    private void createUserAnswers(Attempt attempt, List<Question> questions) {
-        for (Question question : questions) {
-            UserAnswer userAnswer = userAnswerMapper.toEntity(attempt,
-                    question);
-            userAnswerDao.create(userAnswer);
+    @Override
+    public boolean isAttemptExist(Long testId) {
+        UserAnswer userAnswer;
+        try {
+            userAnswer = userAnswerDao.findAllByAttemptId(
+                    findCurrentAttempt(testId).getId()).iterator().next();
+        } catch (NullPointerException e) {
+            return false;
         }
+        return userAnswer.getAnswer() == null;
     }
 
     /**
@@ -144,12 +110,24 @@ public class TestProcessServiceImpl implements TestProcessService {
      * @param questionRequestDto Question Request DTO.
      */
     private void updateCurrentUserAnswer(QuestionRequestDto
-                                                 questionRequestDto){
+                                                 questionRequestDto) {
         UserAnswer currentUserAnswer =
                 userAnswerDao.findUserAnswerByQuestionIdAndAttemptId(
                         questionRequestDto.getCurrentQuestionId(),
                         questionRequestDto.getAttemptId());
         currentUserAnswer.setAnswer(questionRequestDto.getUserAnswer());
         userAnswerDao.update(currentUserAnswer);
+    }
+
+    /**
+     * Looks for current attempt.
+     *
+     * @param testId Test id.
+     * @return current Attempt object
+     */
+    private Attempt findCurrentAttempt(Long testId) {
+        User user = currentUserService.getCurrentUser();
+        return attemptDao.findAttemptByTestIdAndUserId(testId,
+                user.getId());
     }
 }

@@ -17,12 +17,23 @@ function sendPost() {
 
 $(document).ready(function () {
         sendPost();
-        $("#btnsub").click(
-            function () {
-                window.location.replace("/web/test/process/" + testid);
-            }
-        )
+        startTest();
     }
-)
+);
 
+function startTest() {
+    $("#btnsub").click(
+        function () {
+            $.ajax({
+                    type: "POST",
+                    url: "/web/test/" + testid + "/start",
+                    contentType: "application/json",
+                    success: function () {
+                        window.location.replace("/web/test/" + testid + "/process");
+                    }
+                }
+            );
+        }
+    )
+}
 
