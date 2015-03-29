@@ -68,7 +68,7 @@ public interface TestCreatingService {
      * @param questionId
      *                  to set question.
      */
-    void addQuestionToTest(Long questionId, Long testId);
+    void addQuestion(Long questionId, Long testId);
 
     /**
      * Removes Question to test.
@@ -78,5 +78,5 @@ public interface TestCreatingService {
      * @param questionId
      *                  to set question.
      */
-    void removeQuestionToTest(Long questionId, Long testId);
+    void removeQuestion(Long questionId, Long testId);
 }

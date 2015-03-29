@@ -176,7 +176,7 @@ public class TestCreatingController {
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @ResponseBody
     public Long addQuestionToTest(@RequestBody Long questionId, @PathVariable("id") Long testId) {
-        testCreatingService.addQuestionToTest(questionId, testId);
+        testCreatingService.addQuestion(questionId, testId);
         return testId;
     }
 
@@ -191,7 +191,7 @@ public class TestCreatingController {
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @ResponseBody
     public Long removeQuestionFromTest(@RequestBody Long questionId, @PathVariable("id") Long testId) {
-        testCreatingService.removeQuestionToTest(questionId, testId);
+        testCreatingService.removeQuestion(questionId, testId);
         return testId;
     }
 
