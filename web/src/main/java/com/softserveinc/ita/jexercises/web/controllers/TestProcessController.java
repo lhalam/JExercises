@@ -1,6 +1,5 @@
 package com.softserveinc.ita.jexercises.web.controllers;
 
-import com.softserveinc.ita.jexercises.business.services.TestDescriptionService;
 import com.softserveinc.ita.jexercises.business.services.TestProcessService;
 import com.softserveinc.ita.jexercises.business.services.TestService;
 import com.softserveinc.ita.jexercises.common.dto.QuestionRequestDto;
@@ -10,7 +9,6 @@ import com.softserveinc.ita.jexercises.common.dto.TestStartDto;
 import com.softserveinc.ita.jexercises.web.utils.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,25 +38,18 @@ public class TestProcessController {
     private TestService testService;
 
     /**
-     * Service that handles get test description process.
-     */
-    @Autowired
-    private TestDescriptionService testDescriptionService;
-
-    /**
      * Getting test process view.
      *
-     * @param model UI view model.
-     * @param testId    Test id.
+     * @param id Test id.
      * @return Test page.
      * @throws ResourceNotFoundException No test with such id
-     * or user does not have access to private test
+     *                                   or attempt is not exist.
      */
-    @RequestMapping(value = "/test/process/{id}", method = RequestMethod.GET)
-    public ModelAndView testForm(Model model, @PathVariable("id") Long testId)
+    @RequestMapping(value = "/test/{id}/process", method = RequestMethod.GET)
+    public ModelAndView testForm(@PathVariable("id") Long id)
             throws ResourceNotFoundException {
-
-        if (testService.findTestById(testId) == null) {
+        if (testService.findTestById(id) == null ||
+                !testProcessService.isAttemptExist(id)) {
             throw new ResourceNotFoundException();
         } else {
             return new ModelAndView("test/testinprocess");
@@ -68,13 +59,13 @@ public class TestProcessController {
     /**
      * Getting test process view data from Test Start DTO.
      *
-     * @param testId Test id.
+     * @param id Test id.
      * @return Test Start DTO.
      */
-    @RequestMapping(value = "/test/process/{id}", method = RequestMethod.POST)
+    @RequestMapping(value = "/test/{id}/process", method = RequestMethod.POST)
     @ResponseBody
-    public TestStartDto testForm(@PathVariable("id") Long testId) {
-        return testProcessService.getInformationAboutTestQuestions(testId);
+    public TestStartDto testInformationForm(@PathVariable("id") Long id) {
+        return testProcessService.getInformationAboutTestQuestions(id);
     }
 
     /**

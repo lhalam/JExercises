@@ -10,7 +10,6 @@ var dataRequest = {
     "changeQuestionId": 0
 };
 
-
 $(document).ready(function () {
     buildPage();
     nextRequest();
@@ -30,6 +29,11 @@ function buildPage() {
             attemptId = dataResponse.attemptId;
             questionsQuantity = dataResponse.questionQuantity;
             questionsListId = dataResponse.questionListId;
+            if (questionsQuantity == 1) {
+                $('#btnnext').hide();
+                $('#btnfinish').show();
+                $('#btnprev').hide();
+            }
             $('#question-description').html(dataResponse.questionDescription);
             $('#panel-title').html("Task " + ++currentQuestion + "/" + questionsQuantity + ": " + dataResponse.questionName);
             $('#loadingIcon').hide();

@@ -20,15 +20,16 @@ public class TestStartMapper {
     /**
      * Sets TestStart DTO object.
      *
-     * @param questions List of Question objects.
-     * @param attempt   Attempt object.
+     * @param attempt Attempt object.
      * @return TestStart DTO.
      */
-    public TestStartDto toDto(List<Question> questions, Attempt attempt) {
+    public TestStartDto toDto(Attempt attempt) {
         TestStartDto testStartDto = new TestStartDto();
         testStartDto.setAttemptId(attempt.getId());
-        testStartDto.setQuestionName(questions.get(0).getName());
-        testStartDto.setQuestionDescription(questions.get(0).getDescription());
+        List<Question> questions = attempt.getTest().getQuestions();
+        Question question = questions.iterator().next();
+        testStartDto.setQuestionName(question.getName());
+        testStartDto.setQuestionDescription(question.getDescription());
         testStartDto.setQuestionListId(createSetOfQuestionId(questions));
         testStartDto.setQuestionQuantity(questions.size());
         return testStartDto;
