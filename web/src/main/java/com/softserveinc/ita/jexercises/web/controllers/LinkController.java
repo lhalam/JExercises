@@ -86,7 +86,8 @@ public class LinkController {
         if (testId == null) {
             throw new ResourceNotFoundException();
         }
-        request.setAttribute("publicLink", shortCode);
+        request.setAttribute("publicLink",
+        	   String.format("%s/%s", request.getContextPath(),shortCode));
         return String.format("forward:/test/%d", testId);
     }
 

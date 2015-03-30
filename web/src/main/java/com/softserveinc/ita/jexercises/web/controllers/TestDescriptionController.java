@@ -89,7 +89,12 @@ public class TestDescriptionController {
      * @return true if test is public or user has access to private test.
      */
     private boolean isAccessAllowed(HttpServletRequest request, Long testId) {
-        String url = (String) request.getAttribute("publicLink");
-        return url != null || testDescriptionService.isPublicTest(testId);
-    }
+		String url = (String) request.getAttribute("publicLink");
+		String requestUrl = (String) request
+				.getAttribute("javax.servlet.forward.request_uri");
+		if (url != null && requestUrl != null) {
+			return url.equals(requestUrl);
+		}
+		return testDescriptionService.isPublicTest(testId);
+	}
 }
