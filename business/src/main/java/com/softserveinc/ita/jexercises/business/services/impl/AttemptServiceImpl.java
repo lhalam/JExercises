@@ -1,19 +1,18 @@
 package com.softserveinc.ita.jexercises.business.services.impl;
 
-import java.util.List;
-
+import com.softserveinc.ita.jexercises.business.services.AttemptService;
+import com.softserveinc.ita.jexercises.common.entity.Attempt;
+import com.softserveinc.ita.jexercises.persistence.dao.impl.AttemptDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.softserveinc.ita.jexercises.business.services.AttemptService;
-import com.softserveinc.ita.jexercises.common.entity.Attempt;
-import com.softserveinc.ita.jexercises.persistence.dao.impl.AttemptDao;
+import java.util.List;
 
 /**
  * Represents AttemptService interface implementation.
- * 
+ *
  * @author Volodymyr Lishchynskiy
  * @version 1.0
  */
@@ -62,17 +61,4 @@ public class AttemptServiceImpl implements AttemptService {
     public List<Attempt> findAllAttempts() {
         return attemptDao.findAll();
     }
-
-    @Override
-    @Transactional(propagation = Propagation.SUPPORTS)
-    public List<Attempt> findAllByUserId(Long id) {
-        return attemptDao.findAllByUserId(id);
-    }
-
-    @Override
-    @Transactional(propagation = Propagation.SUPPORTS)
-    public List<Attempt> findAllByTestId(Long id) {
-        return attemptDao.findAllByTestId(id);
-    }
-
 }

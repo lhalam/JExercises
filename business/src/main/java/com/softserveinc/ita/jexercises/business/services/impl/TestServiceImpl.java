@@ -59,9 +59,4 @@ public class TestServiceImpl implements TestService {
         return testDao.findAll();
     }
 
-    @Override
-    public List<Test> findAllTestsByQuestionId(Long questionId) {
-        return testDao.findAllByQuestionId(questionId);
-    }
-
 }

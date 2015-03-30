@@ -1,17 +1,16 @@
 package com.softserveinc.ita.jexercises.persistence.dao.impl.hibernate;
 
-import org.springframework.stereotype.Repository;
-
+import com.mysema.query.jpa.impl.JPAQuery;
+import com.softserveinc.ita.jexercises.common.entity.QUserAnswer;
 import com.softserveinc.ita.jexercises.common.entity.UserAnswer;
 import com.softserveinc.ita.jexercises.persistence.dao.impl.UserAnswerDao;
+import org.springframework.stereotype.Repository;
 
-import javax.persistence.NoResultException;
-import javax.persistence.Query;
 import java.util.List;
 
 /**
  * Represents Hibernate UserAnswer DAO implementation.
- * 
+ *
  * @author Oleg Pavlish
  * @version 1.0
  */
@@ -22,34 +21,19 @@ public class HibernateUserAnswerDaoImpl extends
     @Override
     public UserAnswer findUserAnswerByQuestionIdAndAttemptId(Long questionId,
                                                              Long attemptId) {
-        try {
-            String squerty = "select distinct ua from UserAnswer ua " +
-                    "where ua.attempt.id=:attemptId and" +
-                    " ua.question.id=:questionId";
-            Query q = getEntityManager().createQuery(squerty);
-            q.setParameter("attemptId", attemptId);
-            q.setParameter("questionId", questionId);
-            @SuppressWarnings("unchecked")
-            UserAnswer userAnswer = (UserAnswer) q.getSingleResult();
-            return userAnswer;
-        } catch (NoResultException e) {
-            return null;
-        }
+        QUserAnswer userAnswer = QUserAnswer.userAnswer;
+        JPAQuery query = new JPAQuery(getEntityManager());
+        return query.from(userAnswer).distinct().
+                where(userAnswer.attempt.id.eq(attemptId),
+                        userAnswer.question.id.eq(questionId)).
+                singleResult(userAnswer);
     }
 
     @Override
     public List<UserAnswer> findAllByAttemptId(Long attemptId) {
-        try {
-            String squerty = "select distinct ua from UserAnswer ua " +
-                    "where ua.attempt.id=:attemptId";
-            Query q = getEntityManager().createQuery(squerty);
-            q.setParameter("attemptId", attemptId);
-            @SuppressWarnings("unchecked")
-            List<UserAnswer> userAnswers =
-                    (List<UserAnswer>) q.getResultList();
-            return userAnswers;
-        } catch (NoResultException e) {
-            return null;
-        }
+        QUserAnswer userAnswer = QUserAnswer.userAnswer;
+        JPAQuery query = new JPAQuery(getEntityManager());
+        return query.from(userAnswer).
+                where(userAnswer.attempt.id.eq(attemptId)).list(userAnswer);
     }
 }

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf8"
          pageEncoding="utf8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page isErrorPage="true" %>
 
 <html>
 <head>
@@ -16,11 +17,12 @@
                 <h1>
                     Oops!</h1>
 
-                <h2> ${message}</h2>
+                <h2>Status code: ${pageContext.errorData.statusCode}</h2>
 
-                <div class="error-details">
-                    Sorry, an error has occurred, ${info}
-                </div>
+                <h2>Sorry, an error has occurred!</h2>
+
+                <h2> ${requestScope['javax.servlet.error.message']}</h2>
+
                 <div class="error-actions">
                     <a href="/web/tests" class="btn btn-primary "><span
                             class="glyphicon glyphicon-home"></span>

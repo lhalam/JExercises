@@ -57,11 +57,4 @@ public interface TestService {
      */
     List<Test> findAllTests();
 
-    /**
-     * Gets all tests by question id.
-     *
-     * @param questionId Id of question.
-     * @return Set of tests.
-     */
-    List<Test> findAllTestsByQuestionId(Long questionId);
 }

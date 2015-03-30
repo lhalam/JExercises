@@ -1,6 +1,7 @@
 package com.softserveinc.ita.jexercises.business.services.impl;
 
 import com.softserveinc.ita.jexercises.business.services.TestCreatingService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,6 +12,7 @@ import com.softserveinc.ita.jexercises.common.dto.QuestionDto;
 import com.softserveinc.ita.jexercises.common.entity.Question;
 import com.softserveinc.ita.jexercises.common.mapper.AssertMapper;
 import com.softserveinc.ita.jexercises.common.mapper.QuestionMapper;
+import com.softserveinc.ita.jexercises.persistence.dao.impl.TestDao;
 
 /**
  * Represents QuestionCreatingService implementation.
@@ -22,11 +24,16 @@ import com.softserveinc.ita.jexercises.common.mapper.QuestionMapper;
 @Service
 public class QuestionCreatingServiceImpl implements QuestionCreatingService {
     /**
-     * Service provides using dao.
+     * Service provides using Question DAO.
      */
     @Autowired
     private QuestionService questionService;
 
+    /**
+     * Service provides using Test DAO.
+     */
+    @Autowired
+    private TestDao testDao;
     /**
      * Service provides using test service.
      */
@@ -41,7 +48,8 @@ public class QuestionCreatingServiceImpl implements QuestionCreatingService {
         AssertMapper assertMapper = new AssertMapper();
         Question question;
         question = questionMapper.toEntity(questionDto);
-        testCreatingService.addQuestionToTest(questionService.createQuestion(question),testId);
+        questionService.createQuestion(question);
         question.setAsserts(assertMapper.toEntitySet(questionDto, question));
+        testDao.findById(testId).getQuestions().add(question);
     }
 }

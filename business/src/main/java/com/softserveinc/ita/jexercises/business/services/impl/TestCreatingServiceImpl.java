@@ -14,7 +14,6 @@ import com.softserveinc.ita.jexercises.persistence.dao.impl.TestDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import java.util.List;
 
 /**
  * Represents TestCreatingService interface implementation.
@@ -85,24 +84,18 @@ public class TestCreatingServiceImpl implements TestCreatingService {
 
     @Transactional
     @Override
-    public void addQuestionToTest(Long questionId, Long testId){
+    public void addQuestion(Long questionId, Long testId){
         Test test = testDao.findById(testId);
         Question question = questionDao.findById(questionId);
-        List<Question> questions = test.getQuestions();
-        questions.add(question);
-        test.setQuestions(questions);
-        testDao.update(test);
+        test.getQuestions().add(question);
     }
 
     @Transactional
     @Override
-    public void removeQuestionToTest(Long questionId, Long testId){
+    public void removeQuestion(Long questionId, Long testId){
         Test test = testDao.findById(testId);
         Question question = questionDao.findById(questionId);
-        List<Question> questions = test.getQuestions();
-        questions.remove(question);
-        test.setQuestions(questions);
-        testDao.update(test);
+        test.getQuestions().remove(question);
     }
 
     @Transactional
