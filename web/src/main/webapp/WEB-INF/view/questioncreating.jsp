@@ -74,9 +74,9 @@
 									</tr>
 								</tfoot>
 								<tbody>
-									<tr id="table_row">
-										<td class="editable"></td>
-										<td class="editable"></td>
+									<tr>
+										<td></td>
+										<td></td>
 									</tr>
 								</tbody>
 							</table>
