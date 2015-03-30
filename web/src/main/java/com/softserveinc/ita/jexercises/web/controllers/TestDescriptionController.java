@@ -4,7 +4,9 @@ import com.softserveinc.ita.jexercises.business.services.TestDescriptionService;
 import com.softserveinc.ita.jexercises.business.services.TestService;
 import com.softserveinc.ita.jexercises.common.dto.ResponseDto;
 import com.softserveinc.ita.jexercises.common.dto.TestDescriptionDto;
+import com.softserveinc.ita.jexercises.common.utils.Role;
 import com.softserveinc.ita.jexercises.web.utils.ResourceNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -95,6 +97,7 @@ public class TestDescriptionController {
 		if (url != null && requestUrl != null) {
 			return url.equals(requestUrl);
 		}
-		return testDescriptionService.isPublicTest(testId);
+		return request.isUserInRole(Role.ROLE_ADMIN.toString())
+				|| testDescriptionService.isPublicTest(testId);
 	}
 }
