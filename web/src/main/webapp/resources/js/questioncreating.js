@@ -1,6 +1,38 @@
 /**
  * 
  */
+var assertDto = [];
+var assert;
+var table;
+var focusFlag = false;
+var currentContext;
+var text;
+var rowId;
+var columnId;
+var assertValidation;
+
+function validator(element) {
+	assertValidation = true;
+	$("td").each(function(index) {
+		if ($(this).text().length == 0) {
+			assertValidation = false;
+		}
+	});
+	if (((($('#questionName').code().length) == 0) || (($(
+			'#questionDescription').code().length) == 0))
+			|| (!assertValidation)) {
+		$(element).popover({
+			trigger : 'manual',
+			content : 'Please, fill the fields',
+			placement : 'top'
+		}).popover('show');
+		setTimeout(function() {
+			$(element).popover('hide');
+		}, 2000);
+		return false;
+	}
+	return true;
+};
 var dataRequest = function(assertDTO) {
 	this.questionName = '0', this.questionDescription = '0',
 			this.assertDtoList = assertDTO
@@ -11,14 +43,6 @@ function Assert(expectedAnswer, inputData) {
 	this.inputData = inputData
 }
 
-var assertDto = [];
-var assert;
-var table;
-var focusFlag = false;
-var currentContext;
-var text;
-var rowId;
-var columnId;
 function clickOnTableCell(context) {
 	if (!focusFlag) {
 		rowId = table.cell(context).index().row;
@@ -41,56 +65,63 @@ function clickOnTableCell(context) {
 		});
 	}
 }
-$(document).ready(function() {
-	var baseDir = $("#hidden-attr").attr("data-basedir");
+$(document).ready(
+		function() {
+			var baseDir = $("#hidden-attr").attr("data-basedir");
 
-	table = $('#assert').DataTable({
-		"columnDefs" : [ {
-			"width" : "50%",
-			"targets" : 0
-		} ]
-	});
-	$('#addRow').on('click', function() {
-		table.row.add([ "", "" ]).draw();
+			table = $('#assert').DataTable({
+				"columnDefs" : [ {
+					"width" : "50%",
+					"targets" : 0
+				} ]
+			});
+			$('#addRow').on('click', function() {
+				table.row.add([ "", "" ]).draw();
 
-		$('td').on('click', function() {
-			clickOnTableCell($(this));
-		})
-	});
-	$('td').on('click', function() {
-		clickOnTableCell($(this));
+				$('td').on('click', function() {
+					clickOnTableCell($(this));
+				})
+			});
+			$('td').on('click', function() {
+				clickOnTableCell($(this));
 
-	});
-	$("#submitButton").click(function(event) {
-		var str1, str2;
-		$("td").each(function(index) {
-			if (index % 2 == 0) {
-				str1 = $(this).text();
-			} else {
-				str2 = $(this).text();
-			}
-			if (index % 2 == 1) {
-				assertDto.push(new Assert(str1, str2));
-			}
+			});
+			$("#submitButton").click(
+					function(event) {
+						if (validator($(this))) {
+							var str1, str2;
+							$("td").each(function(index) {
+								if (index % 2 == 0) {
+									str1 = $(this).text();
+								} else {
+									str2 = $(this).text();
+								}
+								if (index % 2 == 1) {
+									assertDto.push(new Assert(str1, str2));
+								}
+							});
+							var dr = new dataRequest(assertDto);
+							dr.questionName = $('#questionName').code()
+									.toString();
+							dr.questionDescription = $('#questionDescription')
+									.code().toString();
+							$.ajax({
+								url : location.pathname,
+								type : 'POST',
+								dataType : 'html',
+								data : JSON.stringify(dr),
+								contentType : 'application/json',
+								mimeType : 'application/json',
+								success : function(data) {
+									window.location.href = baseDir + "/tests/"
+											+ data + "/edit";
+								}
+
+							});
+						}
+					});
+
 		});
-		var dr = new dataRequest(assertDto);
-		dr.questionName = $('#questionName').code().toString();
-		dr.questionDescription = $('#questionDescription').code().toString();
-		$.ajax({
-			url : location.pathname,
-			type : 'POST',
-			dataType : 'html',
-			data : JSON.stringify(dr),
-			contentType : 'application/json',
-			mimeType : 'application/json',
-			success : function(data) {
-				window.location.href = baseDir + "/tests/" + data + "/edit";
-			}
-
-		});
-	});
-
-});
 $(function() {
 	$('.summernote').summernote({
 		height : 100
