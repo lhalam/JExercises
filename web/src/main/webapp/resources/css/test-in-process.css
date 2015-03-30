@@ -44,10 +44,15 @@
 .has-error {
     border: #a94442;
 }
-.pager li>.has-error-btn {
+
+.pager li > .has-error-btn {
     background-color: #ebcccc;
 }
 
 .popover.top {
     margin-top: -17px;
+}
+
+.custom-font {
+    font-family: 'Courier New', Courier, 'Lucida Sans Typewriter', 'Lucida Typewriter', monospace;
 }

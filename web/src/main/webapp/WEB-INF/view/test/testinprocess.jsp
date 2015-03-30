@@ -32,7 +32,7 @@
                             <div class="question-answer">
                                 <label for="question-answer">Answer:</label>
                             </div>
-                        <textarea class="form-control" rows="8" id="question-answer"
+                        <textarea class="form-control custom-font"  rows="8" id="question-answer"
                                   placeholder="Input answer..."></textarea>
                         </div>
                     </div>
