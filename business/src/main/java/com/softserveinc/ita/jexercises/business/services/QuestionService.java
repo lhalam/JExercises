@@ -57,13 +57,4 @@ public interface QuestionService {
      * @return Set of questions.
      */
     List<Question> findAllQuestions();
-
-    /**
-     * Gets all questions by test id.
-     *
-     * @param testId Id of test.
-     * @return Set of questions.
-     */
-    List<Question> findAllQuestionsByTestId(Long testId);
-
 }

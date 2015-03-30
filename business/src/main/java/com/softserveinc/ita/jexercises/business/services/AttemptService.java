@@ -55,21 +55,4 @@ public interface AttemptService {
      * @return List of attempts.
      */
     List<Attempt> findAllAttempts();
-
-    /**
-     * Gets all attempts by user id.
-     * 
-     * @param id User id.
-     * @return List of attempts.
-     */
-    List<Attempt> findAllByUserId(Long id);
-
-    /**
-     * Gets all attempts by test id.
-     * 
-     * @param id Test id.
-     * @return List of attempts.
-     */
-    List<Attempt> findAllByTestId(Long id);
-
 }

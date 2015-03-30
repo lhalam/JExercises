@@ -58,9 +58,4 @@ public class QuestionServiceImpl implements QuestionService {
     public List<Question> findAllQuestions() {
         return questionDao.findAll();
     }
-
-    @Override
-    public List<Question> findAllQuestionsByTestId(Long testId) {
-        return questionDao.findAllByTestId(testId);
-    }
 }
