@@ -73,14 +73,10 @@ public class TestProcessServiceImpl implements TestProcessService {
 
     @Override
     public boolean isAttemptExist(Long testId) {
-        UserAnswer userAnswer;
-        try {
-            userAnswer = userAnswerDao.findAllByAttemptId(
-                    findCurrentAttempt(testId).getId()).iterator().next();
-        } catch (NullPointerException e) {
-            return false;
-        }
-        return userAnswer.getAnswer() == null;
+        Attempt currentAttempt=findCurrentAttempt(testId);
+        return !(currentAttempt == null || userAnswerDao.
+                findAllByAttemptId(currentAttempt.getId())
+                .iterator().next().getAnswer() != null);
     }
 
     /**
