@@ -12,6 +12,7 @@
 		<class>com.softserveinc.ita.jexercises.common.entity.Question</class>
 		<class>com.softserveinc.ita.jexercises.common.entity.Assert</class>
 		<class>com.softserveinc.ita.jexercises.common.entity.UserAnswer</class>
+        <class>com.softserveinc.ita.jexercises.common.entity.SharedAnswer</class>
 		<class>com.softserveinc.ita.jexercises.common.entity.Link</class>
 		<properties>
             <property name="hibernate.format_sql" value="true"/>

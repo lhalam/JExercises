@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <bean id="userTestDataBean"
+          class="com.softserveinc.ita.jexercises.persistence.utils.FindAllByCriteriaUserTestData">
+        <property name="dataMap">
+            <map>
+                <entry value="2">
+                    <key>
+                        <bean class="com.softserveinc.ita.jexercises.common.dto.SearchCondition">
+                            <property name="pageSize" value="4"/>
+                            <property name="pageNumber" value="2"/>
+                        </bean>
+                    </key>
+                </entry>
+                <entry value="0">
+                    <key>
+                        <bean class="com.softserveinc.ita.jexercises.common.dto.SearchCondition">
+                            <property name="pageSize" value="10"/>
+                            <property name="pageNumber" value="4"/>
+                        </bean>
+                    </key>
+                </entry>
+                <entry value="5">
+                    <key>
+                        <bean class="com.softserveinc.ita.jexercises.common.dto.SearchCondition">
+                            <property name="pageSize" value="10"/>
+                            <property name="pageNumber" value="0"/>
+                            <property name="orFilterMap">
+                                <map>
+                                    <entry key="firstName" value="tom"/>
+                                    <entry key="lastName" value="ON"/>
+                                    <entry key="id">
+                                        <bean class="java.lang.Long">
+                                            <constructor-arg value="15"/>
+                                        </bean>
+                                    </entry>
+                                </map>
+                            </property>
+                        </bean>
+                    </key>
+                </entry>
+                <entry value="3">
+                    <key>
+                        <bean class="com.softserveinc.ita.jexercises.common.dto.SearchCondition">
+                            <property name="pageSize" value="10"/>
+                            <property name="pageNumber" value="0"/>
+                            <property name="orFilterMap">
+                                <map>
+                                    <entry key="email" value="mail"/>
+                                </map>
+                            </property>
+                            <property name="andFilterMap">
+                                <map>
+                                    <entry key="role">
+                                        <util:constant
+                                                static-field="com.softserveinc.ita.jexercises.common.utils.Role.ROLE_USER"/>
+                                    </entry>
+                                </map>
+                            </property>
+                        </bean>
+                    </key>
+                </entry>
+                <entry value="2">
+                    <key>
+                        <bean class="com.softserveinc.ita.jexercises.common.dto.SearchCondition">
+                            <property name="pageSize" value="10"/>
+                            <property name="pageNumber" value="0"/>
+                            <property name="notFilterMap">
+                                <map>
+                                    <entry key="firstName" value="admin"/>
+                                </map>
+                            </property>
+                            <property name="andFilterMap">
+                                <map>
+                                    <entry key="role">
+                                        <util:constant
+                                                static-field="com.softserveinc.ita.jexercises.common.utils.Role.ROLE_ADMIN"/>
+                                    </entry>
+                                </map>
+                            </property>
+                        </bean>
+                    </key>
+                </entry>
+            </map>
+        </property>
+    </bean>
+
+    <bean id="questionTestDataBean"
+          class="com.softserveinc.ita.jexercises.persistence.utils.FindAllByCriteriaQuestionTestData">
+        <property name="dataMap">
+            <map>
+                <entry value="3">
+                    <key>
+                        <bean class="com.softserveinc.ita.jexercises.common.dto.SearchCondition">
+                            <property name="pageSize" value="10"/>
+                            <property name="pageNumber" value="0"/>
+                            <property name="manyToManyAndFilter">
+                                <bean class="com.softserveinc.ita.jexercises.common.utils.ManyToManyFilter">
+                                    <property name="joinFieldName"
+                                              value="tests"/>
+                                    <property name="filterMap">
+                                        <map>
+                                            <entry key="id">
+                                                <bean class="java.lang.Long">
+                                                    <constructor-arg value="4"/>
+                                                </bean>
+                                            </entry>
+                                        </map>
+                                    </property>
+                                    <property name="joinClass"
+                                              value="com.softserveinc.ita.jexercises.common.entity.Test"/>
+                                </bean>
+                            </property>
+                        </bean>
+                    </key>
+                </entry>
+                <entry value="3">
+                    <key>
+                        <bean class="com.softserveinc.ita.jexercises.common.dto.SearchCondition">
+                            <property name="pageSize" value="10"/>
+                            <property name="pageNumber" value="0"/>
+                            <property name="manyToManyNotInFilter">
+                                <bean class="com.softserveinc.ita.jexercises.common.utils.ManyToManyFilter">
+                                    <property name="joinFieldName"
+                                              value="tests"/>
+                                    <property name="filterMap">
+                                        <map>
+                                            <entry key="id">
+                                                <bean class="java.lang.Long">
+                                                    <constructor-arg value="3"/>
+                                                </bean>
+                                            </entry>
+                                        </map>
+                                    </property>
+                                    <property name="joinClass"
+                                              value="com.softserveinc.ita.jexercises.common.entity.Test"/>
+                                </bean>
+                            </property>
+                            <property name="notInFieldMap">
+                                <map>
+                                    <entry key="id" value="java.lang.Long"/>
+                                </map>
+                            </property>
+                        </bean>
+                    </key>
+                </entry>
+            </map>
+        </property>
+    </bean>
+
+    <bean id="filteredRecordsTestDataBean"
+          class="com.softserveinc.ita.jexercises.persistence.utils.NumberOfFilteredRecordsTestData">
+        <property name="dataMap">
+            <map>
+                <entry value="4">
+                    <key>
+                        <bean class="com.softserveinc.ita.jexercises.common.dto.SearchCondition">
+                            <property name="orFilterMap">
+                                <map>
+                                    <entry key="firstName" value="s"/>
+                                    <entry key="lastName" value="s"/>
+                                </map>
+                            </property>
+                            <property name="andFilterMap">
+                                <map>
+                                    <entry key="role">
+                                        <util:constant
+                                                static-field="com.softserveinc.ita.jexercises.common.utils.Role.ROLE_USER"/>
+                                    </entry>
+                                </map>
+                            </property>
+                        </bean>
+                    </key>
+                </entry>
+                <entry value="2">
+                    <key>
+                        <bean class="com.softserveinc.ita.jexercises.common.dto.SearchCondition">
+                            <property name="orFilterMap">
+                                <map>
+                                    <entry key="email" value="mail"/>
+                                </map>
+                            </property>
+                            <property name="notFilterMap">
+                                <map>
+                                    <entry key="role">
+                                        <util:constant
+                                                static-field="com.softserveinc.ita.jexercises.common.utils.Role.ROLE_USER"/>
+                                    </entry>
+                                </map>
+                            </property>
+                        </bean>
+                    </key>
+                </entry>
+                <entry value="0">
+                    <key>
+                        <bean class="com.softserveinc.ita.jexercises.common.dto.SearchCondition">
+                            <property name="orFilterMap">
+                                <map>
+                                    <entry key="firstName" value="josh"/>
+                                    <entry key="lastName" value="josh"/>
+                                    <entry key="email" value="josh"/>
+                                </map>
+                            </property>
+                        </bean>
+                    </key>
+                </entry>
+            </map>
+        </property>
+    </bean>
+
+    <bean id="numberOfRecordsTestDataBean"
+          class="com.softserveinc.ita.jexercises.persistence.utils.NumberOfRecordsTestData">
+        <property name="dataMap">
+            <map>
+                <entry value="7">
+                    <key>
+                        <bean class="com.softserveinc.ita.jexercises.common.dto.SearchCondition">
+                            <property name="orFilterMap">
+                                <map>
+                                    <entry key="firstName" value="s"/>
+                                    <entry key="lastName" value="s"/>
+                                </map>
+                            </property>
+                            <property name="andFilterMap">
+                                <map>
+                                    <entry key="role">
+                                        <util:constant
+                                                static-field="com.softserveinc.ita.jexercises.common.utils.Role.ROLE_USER"/>
+                                    </entry>
+                                </map>
+                            </property>
+                        </bean>
+                    </key>
+                </entry>
+                <entry value="10">
+                    <key>
+                        <bean class="com.softserveinc.ita.jexercises.common.dto.SearchCondition">
+                            <property name="orFilterMap">
+                                <map>
+                                    <entry key="firstName" value="josh"/>
+                                    <entry key="lastName" value="josh"/>
+                                    <entry key="email" value="josh"/>
+                                </map>
+                            </property>
+                        </bean>
+                    </key>
+                </entry>
+                <entry value="3">
+                    <key>
+                        <bean class="com.softserveinc.ita.jexercises.common.dto.SearchCondition">
+                            <property name="orFilterMap">
+                                <map>
+                                    <entry key="email" value="mail"/>
+                                </map>
+                            </property>
+                            <property name="notFilterMap">
+                                <map>
+                                    <entry key="role">
+                                        <util:constant
+                                                static-field="com.softserveinc.ita.jexercises.common.utils.Role.ROLE_USER"/>
+                                    </entry>
+                                </map>
+                            </property>
+                        </bean>
+                    </key>
+                </entry>
+            </map>
+        </property>
+    </bean>
+</beans>
