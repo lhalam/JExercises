@@ -38,7 +38,7 @@ import java.util.Map;
 @Controller
 public class ProfileController {
 
-    private static final String DEFAULT_AVATAR_PICTURE_NAME = "no-avatar.png";
+    private static final String DEFAULT_AVATAR_PICTURE_NAME = "images/no-avatar.png";
     @Autowired
     private UserService userService;
     @Autowired

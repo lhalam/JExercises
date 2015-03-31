@@ -19,7 +19,7 @@
     <link href="${basedir}/resources/css/lib/styles.css" rel="stylesheet">
     <link rel="stylesheet" href="${basedir}/resources/css/table.css">
     <link rel="stylesheet" href="${basedir}/resources/css/lib/dataTables.bootstrap.css" type="text/css">
-    <link rel="shortcut icon" href="${basedir}/resources/ss-logo.png">
+    <link rel="shortcut icon" href="${basedir}/images/ss-logo.png">
     <script src="${basedir}/resources/js/lib/jquery-1.11.1.js" type="text/javascript"></script>
     <script src="${basedir}/resources/js/lib/bootstrap.js" type="text/javascript"></script>
     <script src="${basedir}/resources/js/lib/jquery.dataTables.min.js"></script>

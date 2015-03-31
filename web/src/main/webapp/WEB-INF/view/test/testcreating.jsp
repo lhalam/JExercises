@@ -21,7 +21,7 @@
     <link href="${basedir}/resources/css/lib/styles.css" rel="stylesheet" type="text/css">
     <link href="${basedir}/resources/css/table.css" rel="stylesheet" type="text/css">
     <link href="${basedir}/resources/css/lib/dataTables.bootstrap.css" rel="stylesheet" type="text/css">
-    <link href="${basedir}/resources/ss-logo.png" rel="shortcut icon" type="text/css">
+    <link href="${basedir}/images/ss-logo.png" rel="shortcut icon" type="text/css">
     <script src="${basedir}/resources/js/lib/bootstrap.js" type="text/javascript"></script>
     <script src="${basedir}/resources/js/lib/jquery.dataTables.min.js" type="text/javascript"></script>
     <script src="${basedir}/resources/js/lib/bootstrap.jquery.dataTable.js" type="text/javascript"></script>

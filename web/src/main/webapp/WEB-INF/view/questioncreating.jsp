@@ -27,7 +27,7 @@
 <link rel="stylesheet" href="${basedir}/resources/css/questionpage.css">
 <%@ include file="navigation.jsp"%>
 </head>
-<body background="${basedir}/resources/background.jpg">
+<body background="${basedir}/images/background.jpg">
 	<div class="row">
 		<div class="col-md-offset-1 col-md-10">
 			<form method="POST" id="questioncreatingForm"

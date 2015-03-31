@@ -1,7 +1,7 @@
 @CHARSET "UTF-8";
 
 body {
-    background-image: url('./../welcomebackground.jpg');
+    background-image: url('../images/welcomebackground.jpg');
 }
 
 .bs-docs-booticon {

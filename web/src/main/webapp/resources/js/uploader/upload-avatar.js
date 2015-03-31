@@ -1,10 +1,11 @@
 jQuery(function ($) {
+    var baseDir = $("#hidden-attr").attr("data-basedir");
     $('#cropper-preview').on('click', '.js-upload', function () {
         $('#upload-avatar').fileapi('upload');
         $('#cropper-preview').fadeOut();
     });
     $('#upload-avatar').fileapi({
-        url: '/web/post/avatar/',
+        url: baseDir + '/post/avatar/',
         accept: 'image/*',
         imageSize: { minWidth: 100, minHeight: 100 },
         imageTransform: {
