@@ -27,8 +27,8 @@ public class TestResultController {
      */
     @Autowired
     private TestResultService testResultService;
-	
-	@Autowired
+
+    @Autowired
     private AttemptService attemptService;
 
     /**
@@ -40,6 +40,8 @@ public class TestResultController {
      *            Attempt id.
      * @return ModelAndView object,in current case that actually means returning
      *         testresult.jsp
+     * @throws ResourceNotFoundException
+     *             ResourceNotFoundException.
      */
     @RequestMapping(value = "/test/result/{id}", method = RequestMethod.GET)
     public ModelAndView showTestResultPage(@PathVariable("id") Long id,

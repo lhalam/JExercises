@@ -50,10 +50,13 @@ public class AttemptGridController {
      * @param id
      *            Test id.
      * @return page with test attempts datatable.
+     * 
+     * @throws ResourceNotFoundException
+     *             ResourceNotFoundException.
      */
     @RequestMapping(value = "/attempts/{id}", method = RequestMethod.GET)
-     public ModelAndView getGridOfTestAttempts(Model model, @PathVariable("id") Long id)
-            throws ResourceNotFoundException {
+    public ModelAndView getGridOfTestAttempts(Model model,
+            @PathVariable("id") Long id) throws ResourceNotFoundException {
         Test test = testService.findTestById(id);
         if (testService.findTestById(id) == null) {
             throw new ResourceNotFoundException();
@@ -82,7 +85,7 @@ public class AttemptGridController {
                 .toSearchCondition(dataTables);
         if (currentUserService.getCurrentUser().getRole() == Role.ROLE_USER) {
             searchCondition.getAndFilterMap().put("user.id",
-			currentUserService.getCurrentUser().getId());
+                    currentUserService.getCurrentUser().getId());
             searchCondition.getNotFilterMap().put("test.isPublic", false);
         }
         searchCondition.getAndFilterMap().put("test.id", id);
