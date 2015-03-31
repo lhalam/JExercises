@@ -27,8 +27,10 @@
     margin-right: auto;
     margin-left: auto;  
 }
-.wrapper{
-	text-align: center;
+
+.DTTT {
+	text-align: right;
+  	float: right;
 }
 
 .pos {

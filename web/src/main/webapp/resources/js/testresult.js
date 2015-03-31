@@ -28,6 +28,17 @@ function sendPost() {
 			$("#okbtn").show();
 			$("#loadingIcon").hide();			
 			$("#testresult").dataTable({
+				"dom": 'T<"clear">lfrtip',
+				    "tableTools": {
+		        	"sSwfPath" : "http://cdn.datatables.net/tabletools/2.2.2/swf/copy_csv_xls_pdf.swf",
+		        	"aButtons": [		        	                
+		        	                {
+		        	                    "sExtends":    "collection",
+		        	                    "sButtonText": "Save As",
+		        	                    "aButtons":    [ "pdf", "xls" ]
+		        	                }
+		        	            ]
+		        },				
 				"bFilter" : false,
 				"data" : responseData.answers,
 				"columns" : [ {
@@ -35,16 +46,13 @@ function sendPost() {
 				}, {
 					"data" : "isCorrect"
 				}, ],				
-				"columnDefs" : [ {
-					"targets" : 1,
-					"createdCell" : function(td, cellData, rowData, row, col) {
-						if(cellData == "Correct"){
-						$(td).css('color','limegreen');
-						}else{
-							$(td).css('color','red');
-						}						
-					}
-				} ]
+				"createdRow": function( row, data, dataIndex ) {
+				    if ( data['isCorrect'] == "Correct") {
+				      $(row).addClass('success');
+				    } else{
+				    	$(row).addClass('danger');
+				    }
+				}				
 			});
 		}
 	})

@@ -19,6 +19,7 @@ import com.softserveinc.ita.jexercises.common.dto.dataTables.DataTables;
 import com.softserveinc.ita.jexercises.common.entity.Test;
 import com.softserveinc.ita.jexercises.common.mapper.DataTablesMapper;
 import com.softserveinc.ita.jexercises.common.utils.Role;
+import com.softserveinc.ita.jexercises.web.utils.ResourceNotFoundException;
 
 /**
  * Controls process of viewing test attempts DataTable.
@@ -49,12 +50,20 @@ public class AttemptGridController {
      * @param id
      *            Test id.
      * @return page with test attempts datatable.
+     * 
+     * @throws ResourceNotFoundException
+     *             ResourceNotFoundException.
      */
     @RequestMapping(value = "/attempts/{id}", method = RequestMethod.GET)
-    public ModelAndView getGridOfTestAttempts(Model model, @PathVariable Long id) {
+    public ModelAndView getGridOfTestAttempts(Model model,
+            @PathVariable("id") Long id) throws ResourceNotFoundException {
         Test test = testService.findTestById(id);
-        model.addAttribute("testName", test.getName());
-        return new ModelAndView("test/attempts");
+        if (testService.findTestById(id) == null) {
+            throw new ResourceNotFoundException();
+        } else {
+            model.addAttribute("testName", test.getName());
+            return new ModelAndView("test/attempts");
+        }
     }
 
     /**
@@ -75,7 +84,8 @@ public class AttemptGridController {
         SearchCondition searchCondition = dataTablesMapper
                 .toSearchCondition(dataTables);
         if (currentUserService.getCurrentUser().getRole() == Role.ROLE_USER) {
-            searchCondition.getAndFilterMap().put("user.id", currentUserService.getCurrentUser().getId());
+            searchCondition.getAndFilterMap().put("user.id",
+                    currentUserService.getCurrentUser().getId());
             searchCondition.getNotFilterMap().put("test.isPublic", false);
         }
         searchCondition.getAndFilterMap().put("test.id", id);

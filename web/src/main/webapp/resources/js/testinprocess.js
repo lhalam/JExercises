@@ -2,6 +2,7 @@ var currentQuestion = 0;
 var questionsQuantity;
 var questionsListId;
 var attemptId;
+var baseDir;
 
 var dataRequest = {
     "attemptId": 0,
@@ -11,6 +12,7 @@ var dataRequest = {
 };
 
 $(document).ready(function () {
+    baseDir = $("#contextRootHolder").val();
     buildPage();
     nextRequest();
     previousRequest();
@@ -65,13 +67,13 @@ function submitTest() {
             buildSubmitData();
             $.ajax({
                 type: "POST",
-                url: "/web/test/process/submit",
+                url: baseDir+"/test/process/submit",
                 dataType: 'html',
                 data: JSON.stringify(dataRequest),
                 contentType: "application/json; charset=utf-8",
                 mimeType: 'application/json',
                 success: function () {
-                    window.location.replace("/web/test/result/" + attemptId);
+                    window.location.replace(baseDir+"/test/result/" + attemptId);
                 },
                 error: function () {
                     alert("Error");
@@ -121,7 +123,7 @@ function representButton() {
 function sendRequestData() {
     $.ajax({
         type: "POST",
-        url: "/web/test/process",
+        url: baseDir+"/test/process",
         data: JSON.stringify(dataRequest),
         contentType: "application/json; charset=utf-8",
         dataType: "json",

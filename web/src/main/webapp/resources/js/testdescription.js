@@ -1,4 +1,5 @@
 var testid;
+var baseDir;
 
 function sendPost() {
     $.ajax({
@@ -16,6 +17,7 @@ function sendPost() {
 }
 
 $(document).ready(function () {
+        baseDir = $("#contextRootHolder").val();
         sendPost();
         startTest();
     }
@@ -26,10 +28,10 @@ function startTest() {
         function () {
             $.ajax({
                     type: "POST",
-                    url: "/web/test/" + testid + "/start",
+                    url: baseDir+"/test/" + testid + "/start",
                     contentType: "application/json",
                     success: function () {
-                        window.location.replace("/web/test/" + testid + "/process");
+                        window.location.replace(baseDir+"/test/" + testid + "/process");
                     }
                 }
             );
