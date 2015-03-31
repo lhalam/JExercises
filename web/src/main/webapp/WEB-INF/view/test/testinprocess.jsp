@@ -10,6 +10,7 @@
           type="text/css">
 </head>
 <body id="container">
+<input type="hidden" id="contextRootHolder" value="${basedir}" />
 <div class="container">
     <div class="row">
         <div class="col-xs-10 col-sm-10 col-md-8 col-lg-8 col-xs-offset-1 col-sm-offset-1 col-md-offset-2 col-lg-offset-2 ">

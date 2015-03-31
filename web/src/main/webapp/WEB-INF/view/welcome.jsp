@@ -21,8 +21,8 @@
                 </p>
 
                 <div class="banner_btn">
-                    <a href="/web/login" class="btn btn-default btn-lg">Log in</a>
-                    <a href="/web/user/registration" class="btn btn-default btn-lg">Sign in</a>
+                    <a href="${basedir}/login" class="btn btn-default btn-lg">Log in</a>
+                    <a href="${basedir}/user/registration" class="btn btn-default btn-lg">Sign in</a>
                 </div>
             </div>
         </div>

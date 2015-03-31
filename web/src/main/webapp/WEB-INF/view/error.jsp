@@ -24,10 +24,10 @@
                 <h2> ${requestScope['javax.servlet.error.message']}</h2>
 
                 <div class="error-actions">
-                    <a href="/web/tests" class="btn btn-primary "><span
+                    <a href="${basedir}/tests" class="btn btn-primary "><span
                             class="glyphicon glyphicon-home"></span>
                         Take Me Home </a>
-                    <a href="/web/about" class="btn btn-default "><span
+                    <a href="${basedir}/about" class="btn btn-default "><span
                             class="glyphicon glyphicon-envelope"></span> Contact Support </a>
                 </div>
             </div>
