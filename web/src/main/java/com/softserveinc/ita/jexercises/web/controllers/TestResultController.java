@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.softserveinc.ita.jexercises.business.services.AttemptService;
 import com.softserveinc.ita.jexercises.business.services.TestResultService;
 import com.softserveinc.ita.jexercises.common.dto.TestResultDto;
+import com.softserveinc.ita.jexercises.web.utils.ResourceNotFoundException;
 
 /**
  * Controls Test result page.
@@ -25,6 +27,9 @@ public class TestResultController {
      */
     @Autowired
     private TestResultService testResultService;
+	
+	@Autowired
+    private AttemptService attemptService;
 
     /**
      * Method provides mapping on "testresult" input.
@@ -38,10 +43,14 @@ public class TestResultController {
      */
     @RequestMapping(value = "/test/result/{id}", method = RequestMethod.GET)
     public ModelAndView showTestResultPage(@PathVariable("id") Long id,
-            Model model) {
-        TestResultDto resultInfo = testResultService.getTestResultInfo(id);        
-        model.addAttribute("isPublic", resultInfo.isPublic());
-        return new ModelAndView("test/testresult");
+            Model model) throws ResourceNotFoundException {
+        if (attemptService.findAttemptById(id) == null) {
+            throw new ResourceNotFoundException();
+        } else {
+            TestResultDto resultInfo = testResultService.getTestResultInfo(id);
+            model.addAttribute("isPublic", resultInfo.isPublic());
+            return new ModelAndView("test/testresult");
+        }
     }
 
     /**

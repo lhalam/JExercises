@@ -15,18 +15,23 @@
 
 <%@include file="../base.jsp"%>
 <%@include file="../navigation.jsp"%>
+<link href="${basedir}/resources/css/lib/dataTables.tableTools.css"
+	rel="stylesheet" type="text/css">	
 <link href="${basedir}/resources/css/lib/dataTables.bootstrap.css"
-	rel="stylesheet" type="text/css">
+	rel="stylesheet" type="text/css">	
 <link href="${basedir}/resources/css/testresult.css" rel="stylesheet"
 	type="text/css">
 <link href="${basedir}/resources/css/loading-icon.css" rel="stylesheet"
-	type="text/css">	
+	type="text/css">
 <script charset="utf8"
 	src="${basedir}/resources/js/lib/jquery-1.11.1.js"
 	type="text/javascript"></script>
 <script charset="utf8"
 	src="${basedir}/resources/js/lib/jquery.dataTables.min.js"
 	type="text/javascript"></script>
+<script charset="utf8"
+	src="${basedir}/resources/js/lib/dataTables.tableTools.js"
+	type="text/javascript"></script>	
 <script charset="utf8"
 	src="${basedir}/resources/js/lib/bootstrap.jquery.dataTable.js"
 	type="text/javascript"></script>
@@ -59,7 +64,7 @@
 											</tr>
 											<tr>
 												<td id="date"><strong>Date: </strong></td>
-                                            </tr>
+											</tr>
 										</tbody>
 									</table>
 									<div class="row-fluid">
@@ -85,7 +90,6 @@
 									<h4 class="wrapper" id="result"></h4>
 								</div>
 							</div>
-							<br> <br> <br>
 							<div class="row-fluid">
 								<div class="col-md-offset-1 col-md-10 wrapper">
 									<table id="testresult"
@@ -121,6 +125,7 @@
 			</form>
 		</div>
 	</div>
-	<div class="hidden-attribute" id="hidden-attr" data-basedir="${basedir}"></div>
+	<div class="hidden-attribute" id="hidden-attr"
+		data-basedir="${basedir}"></div>
 </body>
 </html>
