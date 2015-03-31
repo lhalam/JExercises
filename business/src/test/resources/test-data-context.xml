@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <bean id="AssertTrueTestDataBean" class="com.softserveinc.ita.jexercises.business.utils.SandboxTestData">
+        <property name="userAnswers">
+            <bean class="org.springframework.beans.factory.config.ListFactoryBean">
+                <property name="sourceList">
+                    <list>
+                        <value>public int calculate(int x, int y){return x+y;}</value>
+                        <value>public int divide (int a, int b){return a/b;}</value>
+                        <value>public double divide (double a, int b){return a/b;}</value>
+                        <value>public String concatString (String x, String y){return x+y;}</value>
+                        <value>public int stringLength(String string){return string.length();}</value>
+                    </list>
+                </property>
+            </bean>
+        </property>
+
+        <property name="inputData">
+            <bean class="org.springframework.beans.factory.config.ListFactoryBean">
+                <property name="sourceList">
+                    <list>
+                        <value>calculate(1,2);</value>
+                        <value>divide(10,2);</value>
+                        <value>divide(3.0,2);</value>
+                        <value>concatString("J","Exercises");</value>
+                        <value>stringLength("HelloWorld");</value>
+                    </list>
+                </property>
+            </bean>
+        </property>
+
+        <property name="expectedData">
+            <bean class="org.springframework.beans.factory.config.ListFactoryBean">
+                <property name="sourceList">
+                    <list>
+                        <value>3</value>
+                        <value>5</value>
+                        <value>1.5</value>
+                        <value>JExercises</value>
+                        <value>10</value>
+                    </list>
+                </property>
+            </bean>
+        </property>
+    </bean>
+
+    <bean id="AssertFalseTestDataBean" class="com.softserveinc.ita.jexercises.business.utils.SandboxTestData">
+        <property name="userAnswers">
+            <bean class="org.springframework.beans.factory.config.ListFactoryBean">
+                <property name="sourceList">
+                    <list>
+                        <value>public int calculate(int x, int y){return x+y;}</value>
+                    </list>
+                </property>
+            </bean>
+        </property>
+
+        <property name="inputData">
+            <bean class="org.springframework.beans.factory.config.ListFactoryBean">
+                <property name="sourceList">
+                    <list>
+                        <value>calculate(1,2);</value>
+                    </list>
+                </property>
+            </bean>
+        </property>
+
+        <property name="expectedData">
+            <bean class="org.springframework.beans.factory.config.ListFactoryBean">
+                <property name="sourceList">
+                    <list>
+                        <value>10</value>
+                    </list>
+                </property>
+            </bean>
+        </property>
+    </bean>
+
+    <bean id="ExceptionTestDataBean" class="com.softserveinc.ita.jexercises.business.utils.SandboxTestData">
+        <property name="userAnswers">
+            <bean class="org.springframework.beans.factory.config.ListFactoryBean">
+                <property name="sourceList">
+                    <list>
+                        <value>unnamedMethod (String x, String y){return x+y;}</value>
+                        <value>System.exit(-1);</value>
+                        <value>Thread.currentThread().setDaemon(true);</value>
+                        <value>public String concatString (String x, String y){return new Date();}</value>
+                    </list>
+                </property>
+            </bean>
+        </property>
+
+        <property name="inputData">
+            <bean class="org.springframework.beans.factory.config.ListFactoryBean">
+                <property name="sourceList">
+                    <list>
+                        <value>concatString("J","Exercises");</value>
+                        <value>concatString("J","Exercises");</value>
+                        <value>concatString("J","Exercises");</value>
+                        <value>concatString("J","Exercises");</value>
+                    </list>
+                </property>
+            </bean>
+        </property>
+
+        <property name="expectedData">
+            <bean class="org.springframework.beans.factory.config.ListFactoryBean">
+                <property name="sourceList">
+                    <list>
+                        <value>JExercises</value>
+                        <value>JExercises</value>
+                        <value>JExercises</value>
+                        <value>JExercises</value>
+                    </list>
+                </property>
+            </bean>
+        </property>
+    </bean>
+</beans>
