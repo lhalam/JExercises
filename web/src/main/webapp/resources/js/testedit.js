@@ -65,6 +65,7 @@ $(document).ready(function () {
             if (dataTest.isPublic) {
                 document.getElementById("public").checked = true;
             } else {
+            	linkData.shortCode=dataTest.testUrl;
                 dataTest.testUrl = 'http://' + window.location.host + baseDir + '/' + dataTest.testUrl;
                 document.getElementById("private").checked = true;
                 $('#link').removeClass('hidden');

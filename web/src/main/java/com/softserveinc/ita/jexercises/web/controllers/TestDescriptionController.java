@@ -4,7 +4,9 @@ import com.softserveinc.ita.jexercises.business.services.TestDescriptionService;
 import com.softserveinc.ita.jexercises.business.services.TestService;
 import com.softserveinc.ita.jexercises.common.dto.ResponseDto;
 import com.softserveinc.ita.jexercises.common.dto.TestDescriptionDto;
+import com.softserveinc.ita.jexercises.common.utils.Role;
 import com.softserveinc.ita.jexercises.web.utils.ResourceNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -89,7 +91,13 @@ public class TestDescriptionController {
      * @return true if test is public or user has access to private test.
      */
     private boolean isAccessAllowed(HttpServletRequest request, Long testId) {
-        String url = (String) request.getAttribute("publicLink");
-        return url != null || testDescriptionService.isPublicTest(testId);
-    }
+		String url = (String) request.getAttribute("publicLink");
+		String requestUrl = (String) request
+				.getAttribute("javax.servlet.forward.request_uri");
+		if (url != null && requestUrl != null) {
+			return url.equals(requestUrl);
+		}
+		return request.isUserInRole(Role.ROLE_ADMIN.toString())
+				|| testDescriptionService.isPublicTest(testId);
+	}
 }
