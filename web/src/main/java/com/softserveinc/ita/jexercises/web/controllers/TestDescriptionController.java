@@ -94,7 +94,7 @@ public class TestDescriptionController {
 		String url = (String) request.getAttribute("publicLink");
 		String requestUrl = (String) request
 				.getAttribute("javax.servlet.forward.request_uri");
-		if (url != null && requestUrl != null) {
+		if (url != null) {
 			return url.equals(requestUrl);
 		}
 		return request.isUserInRole(Role.ROLE_ADMIN.toString())

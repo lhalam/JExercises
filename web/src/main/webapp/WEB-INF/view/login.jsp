@@ -4,15 +4,17 @@
 <html>
 <head>
     <%@ include file="base.jsp" %>
+    <%@ include file="navigation.jsp" %>
+    <link href="${basedir}/resources/css/login.css" rel="stylesheet"
+	type="text/css">
 </head>
-<%@ include file="navigation.jsp" %>
 <body id="container">
 <div class="container">
-    <div class="row" style="margin-top: 60px;">
+    <div class="row">
         <div class="col-md-4 col-md-offset-4">
             <c:url var="loginUrl" value="j_spring_security_check"/>
             <form method="POST" action="${loginUrl}" accept-charset="UTF-8" role="form" id="loginform"
-                  class="panel panel-primary">
+                  class="panel panel-default">
 
                 <div class="container-fluid">
                     <input name="_token" type="hidden"><br/>
@@ -33,24 +35,28 @@
 							</div>
 						</c:if>
                     <fieldset>
-                        <h3 class="sign-up-title"
-                            style="color: dimgray; text-align: center">JExercises Please
+                        <h3 class="sign-up-title">JExercises Please
                             sign in</h3>
                         <hr class="colorgraph">
+                        <div class="input-group">
+                        <span class="input-group-addon glyphicon glyphicon-user" id="email-addon"></span>
                         <input class="form-control email-title" placeholder="E-mail"
-                               name="j_username" type="text"/> <input class="form-control"
-                                                                      placeholder="Password" name="j_password"
-                                                                      type="password"/>
-
-                        <div class="checkbox" style="width: 140px;">
+                               name="j_username" type="text" aria-describedby="email-addon"/>
+                        </div>
+                        <div class="input-group">
+                        <span class="input-group-addon glyphicon glyphicon-lock" id="password-addon"></span>
+                        <input class="form-control" placeholder="Password" 
+                       		   name="j_password" type="password" aria-describedby="password-addon"/>
+ 						 </div>
+                        <div class="checkbox">
                             <label><input name="_spring_security_remember_me"
                                           type="checkbox" value="true"> Remember Me</label>
                         </div>
                         <input class="btn btn-lg btn-success btn-block" type="submit"
-                               value="Login" id="btnsub"> <br>
+                               value="Sign in" id="btnsub"> <br>
 
                         <p class="text-center">
-                            <a href="forgotpassword">Forgot password?</a>
+                           <a href="${basedir}/user/registration">Don't have an account? Sign up now.</a>
                         </p>
                     </fieldset>
                 </div>

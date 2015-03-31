@@ -1,0 +1,18 @@
+@CHARSET "UTF-8";
+
+.glyphicon {
+	position: static;
+}
+
+.row {
+	margin-top: 60px;
+}
+
+.sign-up-title {
+	color: dimgray;
+	text-align: center;
+}
+
+.checkbox {
+	width: 140px;
+}
