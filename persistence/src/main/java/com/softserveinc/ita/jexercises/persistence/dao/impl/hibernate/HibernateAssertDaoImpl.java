@@ -1,9 +1,10 @@
 package com.softserveinc.ita.jexercises.persistence.dao.impl.hibernate;
 
+import java.util.List;
 import org.springframework.stereotype.Repository;
-
+import com.mysema.query.jpa.impl.JPAQuery;
 import com.softserveinc.ita.jexercises.common.entity.Assert;
-
+import com.softserveinc.ita.jexercises.common.entity.QAssert;
 import com.softserveinc.ita.jexercises.persistence.dao.impl.AssertDao;
 
 /**
@@ -16,4 +17,12 @@ import com.softserveinc.ita.jexercises.persistence.dao.impl.AssertDao;
 @Repository
 public class HibernateAssertDaoImpl extends
         HibernateGenericDaoImpl<Assert, Long> implements AssertDao {
+
+    @Override
+    public List<Assert> findByQuestionId(Long questionId) {
+        QAssert assertVar = QAssert.assert$;
+        JPAQuery query = new JPAQuery(getEntityManager());
+        return query.from(assertVar)
+                .where(assertVar.question.id.eq(questionId)).list(assertVar);
+    }
 }

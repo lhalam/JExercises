@@ -1,5 +1,6 @@
 package com.softserveinc.ita.jexercises.common.mapper;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -40,6 +41,27 @@ public class AssertMapper {
     }
 
     /**
+     * Method transforms List of Assert into List of AssertDto.
+     * 
+     * @param assertList
+     *            List of Assert.
+     * @return List of Assert DTO.
+     */
+    public List<AssertDto> toAssertList(List<Assert> assertList) {
+        AssertMapper assertMapper = new AssertMapper();
+        List<AssertDto> assertDtoList = new ArrayList<>();
+        for (Assert c : assertList) {
+            c.getExpectedAnswer();
+            c.getInputData();
+            assertDtoList.add(assertMapper.toDto(c));
+        }
+        return assertDtoList;
+
+    }
+
+    /**
+     * Method transforms AssertDto object into Assert object and sets ID of
+     * question.
      * 
      * @param assertDto
      *            AssertDto object.
@@ -56,4 +78,18 @@ public class AssertMapper {
 
     }
 
+    /**
+     * Method transforms Assert object into AssertDto object.
+     * 
+     * @param assertVar
+     *            Assert object.
+     * @return AssertDto object.
+     */
+    private AssertDto toDto(Assert assertVar) {
+        AssertDto assertDto = new AssertDto();
+        assertDto.setExpectedAnswer(assertVar.getExpectedAnswer());
+        assertDto.setInputData(assertVar.getInputData());
+        return assertDto;
+
+    }
 }

@@ -49,7 +49,7 @@ function actionButtonRemove(baseDir, id) {
 						'<span class="sr-only">Toggle Dropdown</span>'+
 					'</button>'+
 					'<ul class="dropdown-menu" role="menu">'+
-						'<li><a href="' + baseDir + '/question/edit/' + id + 
+						'<li><a href="' + baseDir +'/test/'+ dataTest.testId+'/question/edit/' + id + 
 						'"><span class="glyphicon glyphicon-pencil"></span> Edit</a></li>'+
 					'</ul>'+
 				'</div>'+	

@@ -26,4 +26,33 @@ public class QuestionMapper {
         return question;
     }
 
+    /**
+     * Transforms QuestionDto object intoQuestion object.
+     * 
+     * @param question
+     *            Question object.
+     * @param questionDto
+     *            QuestionDto object.
+     * @return Question object.
+     */
+    public Question toEntity(Question question, QuestionDto questionDto) {
+        question.setDescription(questionDto.getQuestionDescription());
+        question.setName(questionDto.getQuestionName());
+        return question;
+    }
+
+    /**
+     * Transforms Question object into QuestionDto object.
+     * 
+     * @param question
+     *            object.
+     * @return QuestionDto object.
+     */
+    public QuestionDto toDto(Question question) {
+        QuestionDto questionDto = new QuestionDto();
+        questionDto.setQuestionName(question.getName());
+        questionDto.setQuestionDescription(question.getDescription());
+        return questionDto;
+
+    }
 }

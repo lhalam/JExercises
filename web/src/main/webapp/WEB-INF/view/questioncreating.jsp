@@ -27,14 +27,14 @@
 <link rel="stylesheet" href="${basedir}/resources/css/questionpage.css">
 <%@ include file="navigation.jsp"%>
 </head>
-<body background="${basedir}/images/background.jpg">
+<body background="${basedir}/resources/background.jpg">
 	<div class="row">
 		<div class="col-md-offset-1 col-md-10">
 			<form method="POST" id="questioncreatingForm"
 				class="panel panel-default">
 				<div class="row">
 					<div class="col-md-offset-4 col-md-6">
-						<h1>Create new question</h1>
+						<h1 id='header'></h1>
 					</div>
 				</div>
 				<div class="row">
