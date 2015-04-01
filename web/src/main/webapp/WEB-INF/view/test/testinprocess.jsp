@@ -39,9 +39,9 @@
                     </div>
                     <div class="form-group">
                         <ul class="pager">
-                            <li id="btnprev"><a>&larr; Previous</a></li>
-                            <li id="btnnext"><a>Next &rarr;</a></li>
-                            <li id="btnfinish"><a>Submit</a></li>
+                            <li id="btnprev"><a href="#">&larr; Previous</a></li>
+                            <li id="btnnext"><a href="#">Next &rarr;</a></li>
+                            <li id="btnfinish"><a href="#">Submit</a></li>
                         </ul>
                     </div>
                 </div>
