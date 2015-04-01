@@ -4,7 +4,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<%@ include file="base.jsp" %>
 <c:set var="basedir" value="${pageContext.request.contextPath}" />
 <script src="http://code.jquery.com/jquery-1.11.1.min.js"
 	type="text/javascript"></script>
