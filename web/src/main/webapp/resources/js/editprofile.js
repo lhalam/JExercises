@@ -4,7 +4,7 @@ $(document).ready(function () {
     $(".userpic").css({"background-image": "url('" + postUrl + "avatar')"});
     $("#deleteAvatar").click(function () {
         $("#avatar-hidden").attr("value", "delete");
-        $(".userpic").css({"background-image": "url('" + baseDir + "/resources/no-avatar.png')"});
+        $(".userpic").css({"background-image": "url('" + baseDir + "/resources/images/no-avatar.png')"});
     });
 
     $("#editProfileForm")
@@ -50,6 +50,9 @@ $(document).ready(function () {
             },
             submitHandler: function (form) {
                 var editProfileData = {};
+                var year = $("#year").val();
+                var month = $("#month").val();
+                var day = $("#day").val();
                 editProfileData.firstName = $(
                     "#firstName").val();
                 editProfileData.lastName = $(
@@ -58,10 +61,9 @@ $(document).ready(function () {
                     "#currentPassword").val();
                 editProfileData.newPassword = $(
                     "#password").val();
-                editProfileData.birthDate = new Date(
-                    $("#year").val(), $(
-                        "#month").val(), $(
-                        "#day").val());
+                if(year) {
+                    editProfileData.birthDate = new Date(year, month, day);
+                }
                 editProfileData.avatar = $("#avatar-hidden").val();
                 editProfileData.role = $("#role").val();
 
