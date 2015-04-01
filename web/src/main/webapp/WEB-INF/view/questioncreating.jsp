@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<%@ include file="base.jsp" %>
 <c:set var="basedir" value="${pageContext.request.contextPath}" />
 <script src="http://code.jquery.com/jquery-1.11.1.min.js"
 	type="text/javascript"></script>
@@ -24,6 +25,7 @@
 <link rel="stylesheet"
 	href="http://cdn.datatables.net/1.10.5/css/jquery.dataTables.css" />
 <script src="${basedir}/resources/js/questioncreating.js"></script>
+
 <link rel="stylesheet" href="${basedir}/resources/css/questionpage.css">
 <%@ include file="navigation.jsp"%>
 </head>
