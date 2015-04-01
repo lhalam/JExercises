@@ -88,18 +88,18 @@ public class SearchConditionTest {
 
     @Test
     public void testNumberOfFilteredRecords() {
-        for (Map.Entry<SearchCondition, Long> dataMap :
+        for (Map.Entry<SearchCondition, Integer> dataMap :
                 filteredRecordsTestData.getDataMap().entrySet()) {
-            assertSame(dataMap.getValue(),
+            assertSame((long)dataMap.getValue(),
                     userDao.getNumberOfFilteredRecords(dataMap.getKey()));
         }
     }
 
     @Test
     public void testNumberOfRecords() {
-        for (Map.Entry<SearchCondition, Long> dataMap :
+        for (Map.Entry<SearchCondition, Integer> dataMap :
                 recordsTestData.getDataMap().entrySet()) {
-            assertSame(dataMap.getValue(),
+            assertSame((long)dataMap.getValue(),
                     userDao.getNumberOfRecords(dataMap.getKey()));
         }
     }

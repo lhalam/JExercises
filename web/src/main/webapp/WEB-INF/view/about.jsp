@@ -47,7 +47,7 @@
                             <ul id="information">
                                 <li>
                                     <div class="developer-information">
-                                        <img class="image" src="${basedir}/images/no-avatar.png"/>
+                                        <img class="image" src="${basedir}/resources/images/no-avatar.png"/>
 
                                         <p>Taras Vuyiv <br/> mail:<a
                                                 href=""> taras.vuyiv@gmail.com</a> <br/>phone: <a href="">093 601 82
@@ -57,7 +57,7 @@
                                 </li>
                                 <li>
                                     <div class="developer-information">
-                                        <img class="image" src="${basedir}/images/no-avatar.png"/>
+                                        <img class="image" src="${basedir}/resources/images/no-avatar.png"/>
 
                                         <p>Oksana Senchuk <br/> mail:<a
                                                 href=""> senchuk.oksana@gmail.com</a> <br/>phone: <a href="">096 747 69
@@ -67,7 +67,7 @@
                                 </li>
                                 <li>
                                     <div class="developer-information">
-                                        <img class="image" src="${basedir}/images/no-avatar.png"/>
+                                        <img class="image" src="${basedir}/resources/images/no-avatar.png"/>
 
                                         <p>Volodymur Lishchynskiy <br/> mail:<a
                                                 href=""> Lishchynskiy94@gmail.com</a> <br/>phone: <a href="">063 230 42
@@ -77,7 +77,7 @@
                                 </li>
                                 <li>
                                     <div class="developer-information">
-                                        <img class="image" src="${basedir}/images/no-avatar.png"/>
+                                        <img class="image" src="${basedir}/resources/images/no-avatar.png"/>
 
                                         <p>Volodymyr Yakymiv <br/> mail:<a
                                                 href=""> v.yakumiv@gmail.com</a> <br/>phone: <a href="">093 535 70
@@ -87,7 +87,7 @@
                                 </li>
                                 <li>
                                     <div class="developer-information">
-                                        <img class="image" src="${basedir}/images/no-avatar.png"/>
+                                        <img class="image" src="${basedir}/resources/images/no-avatar.png"/>
 
                                         <p>Dmytro Kucheryavenko<br/> mail:<a
                                                 href=""> kucheryavenko.dmtr@gmail.com</a> <br/>phone: <a href="">093 704
@@ -97,7 +97,7 @@
                                 </li>
                                 <li>
                                     <div class="developer-information">
-                                        <img class="image" src="${basedir}/images/no-avatar.png"/>
+                                        <img class="image" src="${basedir}/resources/images/no-avatar.png"/>
 
                                         <p>Ihor Demkovych <br/> mail:<a
                                                 href=""> demkovych.ihor@gmail.com</a> <br/>phone: <a href="">050 966 75
