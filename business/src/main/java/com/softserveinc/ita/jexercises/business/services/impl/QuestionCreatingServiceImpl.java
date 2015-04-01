@@ -1,7 +1,9 @@
 package com.softserveinc.ita.jexercises.business.services.impl;
 
 import java.util.List;
+import java.util.Set;
 
+import com.softserveinc.ita.jexercises.business.services.AssertService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,12 +33,17 @@ public class QuestionCreatingServiceImpl implements QuestionCreatingService {
     private QuestionService questionService;
 
     /**
-     * Service provides using Test DAO.
+     * Test DAO object.
      */
     @Autowired
     private TestDao testDao;
     /**
      * Service provides using test service.
+     */
+    @Autowired
+    private AssertService assertService;
+    /**
+     * Assert DAO object.
      */
     @Autowired
     private AssertDao assertDao;
@@ -74,7 +81,11 @@ public class QuestionCreatingServiceImpl implements QuestionCreatingService {
         AssertMapper assertMapper = new AssertMapper();
         Question question = questionService.findQuestionById(questionId);
         question = questionMapper.toEntity(question, questionDto);
-        question.setAsserts(assertMapper.toEntitySet(questionDto, question));
-        questionService.updateQuestion(question);
+        Set<Assert> asserts = assertMapper.toEntitySet(questionDto, question);
+        /* question.setAsserts(assertMapper.toEntitySet(questionDto, question)); */
+        assertService.deleteAllByQuestionId(questionId);
+        for (Assert a : asserts) {
+            assertDao.create(a);
+        }
     }
 }

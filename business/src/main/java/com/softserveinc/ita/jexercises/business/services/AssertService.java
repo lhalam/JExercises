@@ -37,6 +37,14 @@ public interface AssertService {
     void deleteAssertById(Long id);
 
     /**
+     * Delete Assert by id.
+     *
+     * @param id
+     *            Id of unnecessary assert.
+     */
+    void deleteAllByQuestionId(Long id);
+
+    /**
      * 
      * @param assertVar
      *            Modified assert.

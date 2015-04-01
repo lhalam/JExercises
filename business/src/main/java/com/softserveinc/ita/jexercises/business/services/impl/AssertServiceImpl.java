@@ -55,6 +55,12 @@ public class AssertServiceImpl implements AssertService {
     }
 
     @Override
+    @Transactional
+    public void deleteAllByQuestionId(Long questionId) {
+        assertDao.deleteAllByQuestionId(questionId);
+    }
+
+    @Override
     public Assert findAssertById(Long id) {
         return assertDao.findById(id);
     }

@@ -1,6 +1,8 @@
 package com.softserveinc.ita.jexercises.persistence.dao.impl.hibernate;
 
 import java.util.List;
+
+import com.mysema.query.jpa.impl.JPADeleteClause;
 import org.springframework.stereotype.Repository;
 import com.mysema.query.jpa.impl.JPAQuery;
 import com.softserveinc.ita.jexercises.common.entity.Assert;
@@ -24,5 +26,12 @@ public class HibernateAssertDaoImpl extends
         JPAQuery query = new JPAQuery(getEntityManager());
         return query.from(assertVar)
                 .where(assertVar.question.id.eq(questionId)).list(assertVar);
+    }
+
+    @Override
+    public void deleteAllByQuestionId(Long questionId) {
+        QAssert qAssert = QAssert.assert$;
+        new JPADeleteClause(getEntityManager(), qAssert).where(
+                qAssert.question.id.eq(questionId)).execute();
     }
 }

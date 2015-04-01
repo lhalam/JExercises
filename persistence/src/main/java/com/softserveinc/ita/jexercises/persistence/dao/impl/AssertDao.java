@@ -20,4 +20,12 @@ public interface AssertDao extends GenericDao<Assert, Long> {
      * @return List of Assert objects.
      */
     List<Assert> findByQuestionId(Long questionId);
+
+    /**
+     * Delete all asserts by ID.
+     * 
+     * @param questionId
+     *            question ID.
+     */
+    void deleteAllByQuestionId(Long questionId);
 }
