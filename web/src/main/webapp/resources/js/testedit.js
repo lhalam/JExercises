@@ -18,10 +18,6 @@ function validator(element) {
 
 function actionButtonAdd(baseDir, id) {
     return '<div class="btn-group" role="group">'+
-    			'<button type="button"' +
-    				'class="btn btn-primary btn-xs dropdown-toggle" id="add">' +
-    					'<span class="glyphicon glyphicon-plus-sign"></span> Add'+
-    				'</button>'+
         	'<div class="btn-group" role="group">'+
     	   		'<button type="button" class="btn btn-primary btn-xs '+
     	   		'dropdown-toggle" data-toggle="dropdown" aria-expanded="false">'+
@@ -31,28 +27,38 @@ function actionButtonAdd(baseDir, id) {
     	   		'<ul class="dropdown-menu" role="menu">'+
     	   			'<li><a href="' + baseDir +'/test/'+ dataTest.testId+'/question/edit/' + id + 
     	   			'"><span class="glyphicon glyphicon-pencil"></span> Edit</a></li>'+
+    	   			'<li><a id="delete">' +
+    	   	        	'<span class="glyphicon glyphicon-trash"></span>' +
+    	   	        	' Delete</a></li>' +
     	   		'</ul>'+
     	   	'</div>'+	
-    	   '</div>';
+			'<button type="button"' +
+				'class="btn btn-primary btn-xs dropdown-toggle" id="add">' +
+				'<span class="glyphicon glyphicon-plus-sign"></span> Add'+
+			'</button>'+
+          '</div>';
 }
 
 function actionButtonRemove(baseDir, id) {
-    return   '<div class="btn-group" role="group">'+
-				'<button type="button"' +
-					'class="btn btn-danger btn-xs dropdown-toggle" id="remove">' +
-					'<span class="glyphicon glyphicon-minus-sign"></span> Remove'+
-				'</button>'+
+    return '<div class="btn-group" role="group">'+
 				'<div class="btn-group" role="group">'+
-					'<button type="button" class="btn btn-danger btn-xs'+
-					' dropdown-toggle" data-toggle="dropdown" aria-expanded="false">'+
+					'<button type="button" class="btn btn-danger btn-xs '+
+						'dropdown-toggle" data-toggle="dropdown" aria-expanded="false">'+
 						'<span class="caret"></span>'+
 						'<span class="sr-only">Toggle Dropdown</span>'+
 					'</button>'+
 					'<ul class="dropdown-menu" role="menu">'+
 						'<li><a href="' + baseDir +'/test/'+ dataTest.testId+'/question/edit/' + id + 
-						'"><span class="glyphicon glyphicon-pencil"></span> Edit</a></li>'+
+							'"><span class="glyphicon glyphicon-pencil"></span> Edit</a></li>'+
+						'<li><a id="delete">' +
+							'<span class="glyphicon glyphicon-trash"></span>' +
+							' Delete</a></li>' +
 					'</ul>'+
 				'</div>'+	
+				'<button type="button"' +
+					'class="btn btn-danger btn-xs dropdown-toggle" id="remove">' +
+					'<span class="glyphicon glyphicon-minus-sign"></span> Remove'+
+				'</button>'+
 			'</div>';
 }
 
@@ -219,6 +225,37 @@ $(document).ready(function () {
             }
         }]
     });
+    
+    $('#selectedQuestionsGrid tbody').on('click', '#delete', function () {
+        var data = selectedQuestionsTable.row($(this).parents('tr')).data();
+        $.ajax({
+            type: "POST",
+            url: baseDir + "/question/delete",
+            data: JSON.stringify(data.id),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (dataResponse) {
+                allQuestionsTable.ajax.reload();
+                selectedQuestionsTable.ajax.reload();
+            }
+        });
+    });
+    
+    $('#allQuestionsGrid tbody').on('click', '#delete', function () {
+        var data = allQuestionsTable.row($(this).parents('tr')).data();
+        $.ajax({
+            type: "POST",
+            url: baseDir + "/question/delete",
+            data: JSON.stringify(data.id),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (dataResponse) {
+                allQuestionsTable.ajax.reload();
+                selectedQuestionsTable.ajax.reload();
+            }
+        });
+    });
+
 
     $('#update').on('click',
         function () {

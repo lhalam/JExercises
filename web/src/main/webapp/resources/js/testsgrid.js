@@ -36,9 +36,9 @@ function actionButton(baseDir, id, buttons) {
     if ($.inArray("DELETE", buttons) != -1) {
         buttonList += '<li><a id="delete">' +
         '<span class="glyphicon glyphicon-trash"></span>' +
-        ' Delete</a></li>' +
-        '</ul></div>';
+        ' Delete</a></li>';
     }
+    buttonList += '</ul></div>';
     return buttonList;
 }
 
