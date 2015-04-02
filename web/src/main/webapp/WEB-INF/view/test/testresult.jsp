@@ -109,7 +109,7 @@
 					<sec:authorize access="hasRole('ROLE_USER')">
 						<c:if test="${isPublic eq 'false'}">
 							<div class="row-fluid" id="private">
-								<div class=" wrapper">
+								<div class="text">
 									<h4>
 										<strong>Thank you for complete test!</strong>
 									</h4>

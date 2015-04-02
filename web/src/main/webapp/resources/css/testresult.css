@@ -33,6 +33,10 @@
   	float: right;
 }
 
+.text {
+    text-align: center;
+}
+
 .pos {
     text-align: center;
 	margin-top: 40px; 
