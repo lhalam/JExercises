@@ -40,73 +40,56 @@
                         <hr class="line"/>
                         <div class="form-group">
                             <ul class="pager">
-                                <li id="btnteam"><a>Contacts</a></li>
+                                <li id="btnteam"><a href="#">Contacts</a></li>
                             </ul>
                         </div>
                         <div class="content row">
-                            <ul id="information">
-                                <li>
-                                    <div class="developer-information">
-                                        <img class="image" src="${basedir}/resources/no-avatar.png"/>
-
-                                        <p>Taras Vuyiv <br/> mail:<a
-                                                href=""> taras.vuyiv@gmail.com</a> <br/>phone: <a href="">093 601 82
-                                            24</a>
-                                        </p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="developer-information">
-                                        <img class="image" src="${basedir}/resources/no-avatar.png"/>
-
-                                        <p>Oksana Senchuk <br/> mail:<a
-                                                href=""> senchuk.oksana@gmail.com</a> <br/>phone: <a href="">096 747 69
-                                            72</a>
-                                        </p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="developer-information">
-                                        <img class="image" src="${basedir}/resources/no-avatar.png"/>
-
-                                        <p>Volodymur Lishchynskiy <br/> mail:<a
-                                                href=""> Lishchynskiy94@gmail.com</a> <br/>phone: <a href="">063 230 42
-                                            96</a>
-                                        </p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="developer-information">
-                                        <img class="image" src="${basedir}/resources/no-avatar.png"/>
-
-                                        <p>Volodymyr Yakymiv <br/> mail:<a
-                                                href=""> v.yakumiv@gmail.com</a> <br/>phone: <a href="">093 535 70
-                                            51</a>
-                                        </p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="developer-information">
-                                        <img class="image" src="${basedir}/resources/no-avatar.png"/>
-
-                                        <p>Dmytro Kucheryavenko<br/> mail:<a
-                                                href=""> kucheryavenko.dmtr@gmail.com</a> <br/>phone: <a href="">093 704
-                                            01 68</a>
-                                        </p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="developer-information">
-                                        <img class="image" src="${basedir}/resources/Igor.jpg"/>
-
-                                        <p>Ihor Demkovych <br/> mail:<a
-                                                href=""> demkovych.ihor@gmail.com</a> <br/>phone: <a href="">050 966 75
-                                            20</a>
-                                        </p>
-
-                                    </div>
-                                </li>
-                            </ul>
+                            <table class="table" id="table">
+                                <tbody>
+                                <tr>
+                                    <td><img class="img-circle img-resize"
+                                             src="${basedir}/resources/images/no-avatar.png"/></td>
+                                    <td><p>Taras Vuyiv <br/> mail:<a
+                                            href=""> taras.vuyiv@gmail.com</a>
+                                    </p></td>
+                                </tr>
+                                <tr>
+                                    <td><img class="img-circle img-resize"
+                                             src="${basedir}/resources/images/no-avatar.png"/></td>
+                                    <td><p>Oksana Senchuk <br/> mail:<a
+                                            href=""> senchuk.oksana@gmail.com</a>
+                                    </p></td>
+                                </tr>
+                                <tr>
+                                    <td><img class="img-circle img-resize"
+                                             src="${basedir}/resources/images/no-avatar.png"/></td>
+                                    <td><p>Volodymur Lishchynskiy <br/> mail:<a
+                                            href=""> Lishchynskiy94@gmail.com</a>
+                                    </p></td>
+                                </tr>
+                                <tr>
+                                    <td><img class="img-circle img-resize"
+                                             src="${basedir}/resources/images/no-avatar.png"/></td>
+                                    <td><p>Volodymyr Yakymiv <br/> mail:<a
+                                            href=""> v.yakumiv@gmail.com</a>
+                                    </p></td>
+                                </tr>
+                                <tr>
+                                    <td><img class="img-circle img-resize"
+                                             src="${basedir}/resources/images/no-avatar.png"/></td>
+                                    <td><p>Dmytro Kucheryavenko<br/> mail:<a
+                                            href=""> kucheryavenko.dmtr@gmail.com</a>
+                                    </p></td>
+                                </tr>
+                                <tr>
+                                    <td><img class="img-circle img-resize"
+                                             src="${basedir}/resources/images/no-avatar.png"/></td>
+                                    <td><p>Ihor Demkovych <br/> mail:<a
+                                            href=""> demkovych.ihor@gmail.com</a>
+                                    </p></td>
+                                </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>

@@ -24,6 +24,7 @@
 <link rel="stylesheet"
 	href="http://cdn.datatables.net/1.10.5/css/jquery.dataTables.css" />
 <script src="${basedir}/resources/js/questioncreating.js"></script>
+
 <link rel="stylesheet" href="${basedir}/resources/css/questionpage.css">
 <%@ include file="navigation.jsp"%>
 </head>
@@ -34,7 +35,7 @@
 				class="panel panel-default">
 				<div class="row">
 					<div class="col-md-offset-4 col-md-6">
-						<h1>Create new question</h1>
+						<h1 id='header'></h1>
 					</div>
 				</div>
 				<div class="row">

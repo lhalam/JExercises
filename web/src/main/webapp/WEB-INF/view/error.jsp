@@ -24,7 +24,7 @@
                 <h2> ${requestScope['javax.servlet.error.message']}</h2>
 
                 <div class="error-actions">
-                    <a href="${basedir}/tests" class="btn btn-primary "><span
+                    <a href="${basedir}/tests" class="btn btn-default "><span
                             class="glyphicon glyphicon-home"></span>
                         Take Me Home </a>
                     <a href="${basedir}/about" class="btn btn-default "><span

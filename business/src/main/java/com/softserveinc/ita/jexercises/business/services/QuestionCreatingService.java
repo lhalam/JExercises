@@ -15,7 +15,27 @@ public interface QuestionCreatingService {
      * 
      * @param questionDto
      *            QuestionDto object.
-     * @param testId of current test.
+     * @param testId
+     *            of current test.
      */
     void createQuestionDescription(QuestionDto questionDto, Long testId);
+
+    /**
+     * Method gets question description from DB.
+     * 
+     * @param questionId
+     *            question ID.
+     * @return question ID.
+     */
+    QuestionDto getQuestionDescription(Long questionId);
+
+    /**
+     * Method updates question.
+     * 
+     * @param questionDto
+     *            QuestionDto object.
+     * @param questionId
+     *            question ID.
+     */
+    void updateQuestion(QuestionDto questionDto, Long questionId);
 }

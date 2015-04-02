@@ -24,15 +24,6 @@
     margin-top: 15px;
 }
 
-#information > li {
-    list-style: none;
-    margin-bottom: 80px;
-}
-
-.developer-information > p {
-    margin-left: 150px;
-}
-
 .image {
     float: left;
     width: 120px;
@@ -55,4 +46,11 @@
 .btn {
     margin-top: 20px;
     margin-bottom: 20px;
+}
+.table>tbody>tr>td{
+    border-top: none;
+    vertical-align: middle;
+}
+.img-resize{
+width: 80px;
 }

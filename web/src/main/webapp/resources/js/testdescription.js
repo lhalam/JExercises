@@ -8,8 +8,8 @@ function sendPost() {
             type: 'POST',
             dataType: "json",
             success: function (dataResponse) {
-                $('#test-description').append(dataResponse.description);
-                $('#panel-title').append("Test №" + dataResponse.id + ": " + dataResponse.name);
+                $('#test-description').html(dataResponse.description);
+                $('#panel-title').html("Test №" + dataResponse.id + ": " + dataResponse.name);
                 testid = dataResponse.id;
             }
         }

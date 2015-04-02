@@ -1,8 +1,8 @@
 $(document).ready(function () {
-        $('#information').hide();
+        $('#table').hide();
         $("#btnteam").click(
             function () {
-                $('#information').show();
+                $('#table').show();
                 $('#btnteam').hide();
             }
         )

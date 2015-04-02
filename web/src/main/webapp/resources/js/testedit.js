@@ -16,16 +16,44 @@ function validator(element) {
     return true;
 }
 
-function actionButtonAdd() {
-    return '<div class="btn-group btn-group-justified"><button type="button" style="width:80%;" ' +
-        'class="btn btn-primary btn-xs dropdown-toggle" aria-expanded="false" id="add">' +
-        '<span class="glyphicon glyphicon-plus-sign"></span> Add</button></div>';
+function actionButtonAdd(baseDir, id) {
+    return '<div class="btn-group" role="group">'+
+    			'<button type="button"' +
+    				'class="btn btn-primary btn-xs dropdown-toggle" id="add">' +
+    					'<span class="glyphicon glyphicon-plus-sign"></span> Add'+
+    				'</button>'+
+        	'<div class="btn-group" role="group">'+
+    	   		'<button type="button" class="btn btn-primary btn-xs '+
+    	   		'dropdown-toggle" data-toggle="dropdown" aria-expanded="false">'+
+    	   			'<span class="caret"></span>'+
+    	   			'<span class="sr-only">Toggle Dropdown</span>'+
+    	   		'</button>'+
+    	   		'<ul class="dropdown-menu" role="menu">'+
+    	   			'<li><a href="' + baseDir +'/test/'+ dataTest.testId+'/question/edit/' + id + 
+    	   			'"><span class="glyphicon glyphicon-pencil"></span> Edit</a></li>'+
+    	   		'</ul>'+
+    	   	'</div>'+	
+    	   '</div>';
 }
 
-function actionButtonRemove() {
-    return '<div class="btn-group btn-group-justified"><button type="button" style="width:80%;" ' +
-        'class="btn btn-danger btn-xs dropdown-toggle" aria-expanded="false" id="remove">' +
-        '<span class="glyphicon glyphicon-minus-sign"></span> Remove</button></div>';
+function actionButtonRemove(baseDir, id) {
+    return   '<div class="btn-group" role="group">'+
+				'<button type="button"' +
+					'class="btn btn-danger btn-xs dropdown-toggle" id="remove">' +
+					'<span class="glyphicon glyphicon-minus-sign"></span> Remove'+
+				'</button>'+
+				'<div class="btn-group" role="group">'+
+					'<button type="button" class="btn btn-danger btn-xs'+
+					' dropdown-toggle" data-toggle="dropdown" aria-expanded="false">'+
+						'<span class="caret"></span>'+
+						'<span class="sr-only">Toggle Dropdown</span>'+
+					'</button>'+
+					'<ul class="dropdown-menu" role="menu">'+
+						'<li><a href="' + baseDir +'/test/'+ dataTest.testId+'/question/edit/' + id + 
+						'"><span class="glyphicon glyphicon-pencil"></span> Edit</a></li>'+
+					'</ul>'+
+				'</div>'+	
+			'</div>';
 }
 
 $(function () {

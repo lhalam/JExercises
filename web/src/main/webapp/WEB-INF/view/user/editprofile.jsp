@@ -8,7 +8,7 @@
 <head>
     <%@ include file="../base.jsp" %>
     <%@ include file="../navigation.jsp" %>
-    <link href="${basedir}/resources/css/jquery.Jcrop.css"
+    <link href="${basedir}/resources/css/lib/jquery.Jcrop.css"
           rel="stylesheet"
           type="text/css">
     <link href="${basedir}/resources/css/editprofile.css"
