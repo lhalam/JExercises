@@ -111,7 +111,7 @@
 							<div class="row-fluid" id="private">
 								<div class="text">
 									<h4>
-										<strong>Thank you for complete test!</strong>
+										<strong>Thank you for completing a test!</strong>
 									</h4>
 								</div>
 							</div>
