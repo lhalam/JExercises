@@ -4,7 +4,7 @@ package com.softserveinc.ita.jexercises.common.dto;
  * Represents account menu DTO.
  * 
  * @author Oksana Senchuk
- * @version
+ * @version 1.0
  */
 public class AccountMenuDto {
     /**

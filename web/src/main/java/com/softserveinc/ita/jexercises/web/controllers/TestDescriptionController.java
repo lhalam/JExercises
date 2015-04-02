@@ -5,6 +5,7 @@ import com.softserveinc.ita.jexercises.business.services.TestService;
 import com.softserveinc.ita.jexercises.common.dto.ResponseDto;
 import com.softserveinc.ita.jexercises.common.dto.TestDescriptionDto;
 import com.softserveinc.ita.jexercises.common.utils.Role;
+import com.softserveinc.ita.jexercises.web.utils.AccessDeniedException;
 import com.softserveinc.ita.jexercises.web.utils.ResourceNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,19 +44,17 @@ public class TestDescriptionController {
      * @param id      Test id.
      * @param request HttpServletRequest.
      * @return Test Description page.
-     * @throws ResourceNotFoundException No test with such id or user
-     *                                   does not have access to private test
      */
     @RequestMapping(value = "/test/{id}", method = RequestMethod.GET)
     public ModelAndView showTestDescriptionForm(@PathVariable("id") Long id,
-                                                HttpServletRequest request)
-            throws ResourceNotFoundException {
-        if (testService.findTestById(id) == null ||
-                !isAccessAllowed(request, id)) {
+                                                HttpServletRequest request){
+        if (testService.findTestById(id) == null ) {
             throw new ResourceNotFoundException();
-        } else {
-            return new ModelAndView("test/testdescription");
         }
+        if(!isAccessAllowed(request, id)){
+        	 throw new AccessDeniedException();
+          }
+        return new ModelAndView("test/testdescription");
     }
 
     /**
@@ -84,11 +83,11 @@ public class TestDescriptionController {
     }
 
     /**
-     * Checks does user have access to private test or is test public.
+     * Checks does user have access to private test.
      *
      * @param request HttpServletRequest.
      * @param testId  Test id.
-     * @return true if test is public or user has access to private test.
+     * @return true if test is public, user has public link or user has role admin.
      */
     private boolean isAccessAllowed(HttpServletRequest request, Long testId) {
 		String url = (String) request.getAttribute("publicLink");

@@ -16,10 +16,10 @@ import com.softserveinc.ita.jexercises.persistence.dao.impl.UserDao;
 
 /**
  * Represents implementation of UserDetailsService used by the
- * DaoAuthenticationProvider.
+ * AuthenticationProvider.
  * 
  * @author Oksana Senchuk
- *
+ * @version 1.0
  */
 @Service("userDetailsService")
 public class UserDetailsServiceImpl implements UserDetailsService {

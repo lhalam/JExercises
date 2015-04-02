@@ -17,8 +17,7 @@ function deleteLinkIfExists(testId) {
 	var baseDir = $("#hidden-attr").attr("data-basedir");
 	$.ajax({
 		url : baseDir + "/public/link/delete/" + testId,
-		type : 'POST',
-		dataType : 'html',
-		contentType : 'application/json',
+		type : 'DELETE',
+		dataType : 'html'
 	});
 }

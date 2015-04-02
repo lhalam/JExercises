@@ -6,11 +6,11 @@ import com.softserveinc.ita.jexercises.common.dto.UserDto;
  * Service that handles user auto authentication after registration.
  * 
  * @author Oksana Senchuk
- * @version1.0
+ * @version 1.0
  */
 public interface AutoLoginService {
     /**
-     * Authenticates user.
+     * Authenticates user immediately after registration.
      * 
      * @param user
      *            Successfully registered user.

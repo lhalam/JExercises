@@ -30,8 +30,8 @@ public interface LinkService {
      * Searches test by link.
      * 
      * @param shortCode
-     *            The public url shortCode.
-     * @return Test id.
+     *            The public url short code.
+     * @return Test id or null if there is no such link.
      */
     Long findTestByLink(String shortCode);
 
