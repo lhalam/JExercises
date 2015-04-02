@@ -52,7 +52,7 @@ public class AttemptGridController {
      * @return page with test attempts datatable.
      * 
      * @throws ResourceNotFoundException
-     *             ResourceNotFoundException.
+     *             The attempts with this Test Id not found.
      */
     @RequestMapping(value = "/attempts/{id}", method = RequestMethod.GET)
     public ModelAndView getGridOfTestAttempts(Model model,

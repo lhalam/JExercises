@@ -40,6 +40,7 @@ function sendPost() {
 		        	            ]
 		        },				
 				"bFilter" : false,
+				"bSort" : false,
 				"data" : responseData.answers,
 				"columns" : [ {
 					"data" : "questionName"

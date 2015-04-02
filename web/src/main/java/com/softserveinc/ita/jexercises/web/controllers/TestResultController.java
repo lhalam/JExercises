@@ -41,7 +41,7 @@ public class TestResultController {
      * @return ModelAndView object,in current case that actually means returning
      *         testresult.jsp
      * @throws ResourceNotFoundException
-     *             ResourceNotFoundException.
+     *             User Answers for attempt with Attempt id don't exist.
      */
     @RequestMapping(value = "/test/result/{id}", method = RequestMethod.GET)
     public ModelAndView showTestResultPage(@PathVariable("id") Long id,
