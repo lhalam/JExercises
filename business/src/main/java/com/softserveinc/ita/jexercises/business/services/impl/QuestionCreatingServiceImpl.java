@@ -82,7 +82,6 @@ public class QuestionCreatingServiceImpl implements QuestionCreatingService {
         Question question = questionService.findQuestionById(questionId);
         question = questionMapper.toEntity(question, questionDto);
         Set<Assert> asserts = assertMapper.toEntitySet(questionDto, question);
-        /* question.setAsserts(assertMapper.toEntitySet(questionDto, question)); */
         assertService.deleteAllByQuestionId(questionId);
         for (Assert a : asserts) {
             assertDao.create(a);
