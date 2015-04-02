@@ -1,12 +1,13 @@
 package com.softserveinc.ita.jexercises.business.services.impl;
 
+import bsh.EvalError;
 import com.softserveinc.ita.jexercises.business.sandbox.Sandbox;
 import com.softserveinc.ita.jexercises.business.services.CurrentUserService;
 import com.softserveinc.ita.jexercises.business.services.TestProcessService;
-import com.softserveinc.ita.jexercises.business.utils.InterpreterEvalException;
 import com.softserveinc.ita.jexercises.common.dto.QuestionRequestDto;
 import com.softserveinc.ita.jexercises.common.dto.QuestionResponseDto;
 import com.softserveinc.ita.jexercises.common.dto.TestStartDto;
+import com.softserveinc.ita.jexercises.common.entity.Assert;
 import com.softserveinc.ita.jexercises.common.entity.Attempt;
 import com.softserveinc.ita.jexercises.common.entity.User;
 import com.softserveinc.ita.jexercises.common.entity.UserAnswer;
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Represent TestProcessService interface implementation.
@@ -28,6 +30,7 @@ import java.util.List;
  */
 @Service
 public class TestProcessServiceImpl implements TestProcessService {
+
     @Autowired
     private CurrentUserService currentUserService;
 
@@ -73,31 +76,48 @@ public class TestProcessServiceImpl implements TestProcessService {
 
     @Override
     public boolean isAttemptExist(Long testId) {
-        Attempt currentAttempt=findCurrentAttempt(testId);
+        Attempt currentAttempt = findCurrentAttempt(testId);
         return !(currentAttempt == null || userAnswerDao.
                 findAllByAttemptId(currentAttempt.getId())
                 .iterator().next().getAnswer() != null);
     }
 
     /**
-     * Checks user answers.
+     * Check user answer.
      *
      * @param userAnswers List of user answers.
      */
     private void checkUserAnswer(List<UserAnswer> userAnswers) {
         for (UserAnswer userAnswer : userAnswers) {
-            try {
-                if (new Sandbox().checkUserAnswer(userAnswer.getAnswer(),
-                        userAnswer.getQuestion().getAsserts())) {
-                    userAnswer.setCorrect(true);
-                } else {
-                    userAnswer.setCorrect(false);
-                }
-            } catch (InterpreterEvalException e) {
-                userAnswer.setCorrect(false);
-            }
+            userAnswer.setCorrect(runInSandbox(userAnswer.getAnswer(),
+                    userAnswer.getQuestion().getAsserts()));
             userAnswerDao.update(userAnswer);
         }
+    }
+
+    /**
+     * Runs user answer and set of asserts in sandbox.
+     *
+     * @param userAnswer user answer.
+     * @param asserts    Set of asserts.
+     * @return true if user answer is correct or false if user answer
+     * is incorrect
+     */
+    private boolean runInSandbox(String userAnswer, Set<Assert> asserts) {
+        Sandbox sandbox = new Sandbox();
+        boolean result = false;
+        for (Assert questionAssert : asserts) {
+            try {
+                if (sandbox.evalUntrustedCode(userAnswer, questionAssert)) {
+                    result = true;
+                } else {
+                    return false;
+                }
+            } catch (EvalError error) {
+                return false;
+            }
+        }
+        return result;
     }
 
     /**

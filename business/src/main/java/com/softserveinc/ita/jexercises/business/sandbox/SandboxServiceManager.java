@@ -14,7 +14,7 @@ public final class SandboxServiceManager {
     /**
      * SandboxService instance.
      */
-    private static volatile SandboxService instance;
+    private static SandboxService instance;
 
     /**
      * Private SandboxService constructor.
